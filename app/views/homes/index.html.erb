@@ -1,25 +1,12 @@
-<h1>Listing homes</h1>
+<h1>Welcome!</h1>
+<br/>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<h2>Whats new:</h2>
+<ul>
+  <li>XXX has updated XXX</li>
+  <li>YYY has created YYY</li>
+  <li></li>
+</ul>
 
-  <tbody>
-    < % @homes.each do |home| %>
-      <tr>
-        <td>< %= link_to 'Show', home %></td>
-        <td>< %= link_to 'Edit', edit_home_path(home) %></td>
-        <td>< %= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    < % end %>
-  </tbody>
-</table>
+<h2>Your stats:</h2>
 
-<br>
-
-< %= link_to 'New Home', new_home_path %>
