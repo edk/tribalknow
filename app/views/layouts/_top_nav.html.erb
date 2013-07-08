@@ -105,7 +105,7 @@
       </li>
       <li class="divider show-for-small"></li>
       <li class="has-form">
-        <% if false #current_user %>
+        <% if current_user %>
           <%= link_to "Sign Out #{current_user.name}", signout_path, {:class=>'button'} %>
         <% else %>
           <%= link_to "Sign in with GitHub", "/auth/github", {:class=>'button'} %>
