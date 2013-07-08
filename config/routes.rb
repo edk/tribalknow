@@ -1,19 +1,15 @@
 Tribalknow::Application.routes.draw do
 
-  # resources :homes
-
   resources :users
 
   resources :episodes
 
   root :to => 'homes#index'
-  # root :to => 'episodes#index'
 
+  # get "/auth/:provider" => "sessions#create"
   get "/auth/:provider/callback" => "sessions#create"
   get "/signout" => "sessions#destroy", :as => :signout
 
-  # get "welcome/index"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
