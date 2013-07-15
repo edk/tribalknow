@@ -10,5 +10,10 @@
  *
  *= require_self
  *= require_tree .
- */
  *= require foundation_and_overrides
+ */
+
+ #content {
+  a:hover { text-decoration: underline;}
+ }
+ 

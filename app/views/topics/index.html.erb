@@ -1,0 +1,31 @@
+<h1>Listing topics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>content</th>
+      <th>tags</th>
+      <th>subtopics</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @topics.each do |topic| %>
+      <tr>
+        <td><%= link_to topic.name, edit_topic_path(topic) %></td>  
+        <td><%= topic.content %></td>  
+        <td><%= topic.tags.join(', ') %></td>  
+        <td><%= topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe %></td>  
+        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
+        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Top', new_topic_path %>

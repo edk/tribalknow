@@ -2,7 +2,7 @@ Tribalknow::Application.routes.draw do
 
   resources :users
 
-  resources :episodes
+  resources :topics
 
   root :to => 'homes#index'
 

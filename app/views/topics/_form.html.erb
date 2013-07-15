@@ -1,0 +1,37 @@
+
+<%= form_for(@topic) do |f| %>
+  <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <% @topic.errors.full_messages.each do |msg| %>
+        <div data-alert class="alert-box"><%= msg %></div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class='row'>
+    <div class='large-4 columns'>
+      <%= f.label :name %>
+      <%= f.text_field :name, placeholder:'a short semantic name for your topic' %>
+    </div>
+    <div class='large-8 columns'>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='large-12 columns'>
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+  </div>
+
+  <div>
+    Optional Parent topic this may fall under:
+    <%= f.collection_select( :parent_topic, Topic.topic_select, :id, :name, {include_blank:true} ) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
