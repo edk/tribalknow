@@ -6,6 +6,9 @@ gem 'rails', '4.0.0'
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
 
+gem 'pry'
+gem 'seed_dump', :git => 'git@github.com:rroblak/seed_dump.git'
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
 end

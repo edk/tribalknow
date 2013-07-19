@@ -4,7 +4,8 @@ class CreateTopics < ActiveRecord::Migration
       t.integer :parent_topic_id
       t.string  :name
       t.string  :description
-      t.string  :tags, :array=>true, :default=>'{}'
+      t.text    :tags, :array=>true, :default=>'{}'
+      # see http://adamsanderson.github.io/railsconf_2013/?full#10 for info on the prev line
       t.text    :content
 
       t.timestamps

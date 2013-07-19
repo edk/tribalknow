@@ -14,6 +14,12 @@ GIT
       omniauth (~> 1.0)
       rack-openid (~> 1.3.1)
 
+GIT
+  remote: git@github.com:rroblak/seed_dump.git
+  revision: 95968c331d0456f91f71e6205eeca3857b1123ba
+  specs:
+    seed_dump (0.5.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,6 +50,7 @@ GEM
     arel (4.0.0)
     atomic (1.1.10)
     builder (3.1.4)
+    coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0.beta, < 5.0)
@@ -81,6 +88,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.1)
     mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
@@ -99,6 +107,10 @@ GEM
       omniauth (~> 1.0)
     pg (0.15.1)
     polyglot (0.3.3)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-openid (1.3.1)
       rack (>= 1.1.0)
@@ -142,6 +154,7 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
+    slop (3.4.5)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -182,10 +195,12 @@ DEPENDENCIES
   omniauth-github!
   omniauth-openid!
   pg
+  pry
   rails (= 4.0.0)
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0.rc2)
   sdoc
+  seed_dump!
   turbolinks
   uglifier (>= 1.3.0)
   unicorn

@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20130714220835) do
     t.integer  "parent_topic_id"
     t.string   "name"
     t.string   "description"
-    t.string   "tags",            default: [], array: true
+    t.text     "tags",            default: [], array: true
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"

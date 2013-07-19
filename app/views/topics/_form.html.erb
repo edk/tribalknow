@@ -28,7 +28,7 @@
 
   <div>
     Optional Parent topic this may fall under:
-    <%= f.collection_select( :parent_topic, Topic.topic_select, :id, :name, {include_blank:true} ) %>
+    <%= f.collection_select( :parent_topic_id, Topic.topic_select, :id, :name, {include_blank:true} ) %>
   </div>
 
   <div class="actions">

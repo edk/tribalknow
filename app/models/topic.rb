@@ -1,5 +1,10 @@
 class Topic < ActiveRecord::Base
   # Topic.where('? = ANY(tags)', 'li')
+  # Topic.where( 'tags @> ARRAY[?]', ['unix', 'bash'] )
+  
+
+  scope :any_tags, -> (tags){where('tags && ARRAY[?]', tags)}
+  scope :all_tags, -> (tags){where('tags @> ARRAY[?]', tags)}
   
   has_many   :sub_topics, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:parent_topic
   belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics
