@@ -3,6 +3,8 @@ if !ENV['GITHUB_KEY'].present? || !ENV['GITHUB_SECRET'].present?
   puts "*" * 80
   puts "ENV['GITHUB_KEY'] is NOT SET."
   puts "ENV['GITHUB_SECRET'] is NOT SET"
+  puts "use "
+  pust "$ source github.env.vars"
   puts "*" * 80
 else
   puts "GITHUB_SECRET and GITHUB_KEY set"
