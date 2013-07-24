@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20130724023918) do
     t.string   "description"
     t.text     "tags",            default: [], array: true
     t.text     "content"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

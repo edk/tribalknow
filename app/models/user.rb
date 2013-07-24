@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  model_stamper
 
   def self.create_with_omniauth(auth)
     create! do |user|

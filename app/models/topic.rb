@@ -2,6 +2,7 @@ class Topic < ActiveRecord::Base
   # Topic.where('? = ANY(tags)', 'li')
   # Topic.where( 'tags @> ARRAY[?]', ['unix', 'bash'] )
   
+  stampable
 
   scope :any_tags, -> (tags){where('tags && ARRAY[?]', tags)}
   scope :all_tags, -> (tags){where('tags @> ARRAY[?]', tags)}
