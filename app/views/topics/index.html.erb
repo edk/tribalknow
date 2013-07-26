@@ -7,6 +7,7 @@
       <th>content</th>
       <th>tags</th>
       <th>subtopics</th>
+      <th>authors</th>
       <th></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td><%= topic.content %></td>  
         <td><%= topic.tags.join(', ') %></td>  
         <td><%= topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe %></td>  
+        <td>author <br> contributors?</td>
         <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
