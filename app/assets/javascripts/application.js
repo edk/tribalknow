@@ -15,11 +15,11 @@
 //= require select2
 //= require underscore
 //= require foundation
-//= require turbolinks
-//= require jquery.turbolinks
+// require turbolinks
+// require jquery.turbolinks
 //= require_tree .
 
 $(document).foundation();
 $(function(){
-  $('select').select2();
+  $('.select2').select2();
 })
