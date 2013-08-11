@@ -10,6 +10,7 @@ gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 #gem 'userstamp', :path => '../userstamp'
 gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'rails4'
 gem 'will_paginate'
+gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
 
 # TODO
 # https://github.com/joemccann/dillinger - a client-side markdown editor, perhaps use as a base

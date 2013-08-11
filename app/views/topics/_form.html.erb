@@ -1,45 +1,33 @@
 
-<%= form_for(@topic) do |f| %>
-  <% if @topic.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
-
-      <% @topic.errors.full_messages.each do |msg| %>
-        <div data-alert class="alert-box"><%= msg %></div>
-      <% end %>
-    </div>
-  <% end %>
-
+<%= simple_form_for(@topic) do |f| %>
+  <% f.error_notification %>
 
   <div class='row'>
     <div class='large-4 columns'>
-      <%= f.label :name %>
-      <%= f.text_field :name, placeholder:'a short semantic name for your topic' %>
+      <%= f.input :name, placeholder:'A name for your topic' %>
     </div>
+    
     <div class='large-8 columns'>
-      <%= f.label :parent_topic_id, "(Optional) Parent topic:" %>
-      <%= f.collection_select( :parent_topic_id, Topic.topic_select, :id, :name, {include_blank:true}, style:'min-width:50%', class:'select2' ) %>
-    </div>
-  </div>
-
-  <div class='row'>
-    <div class='large-8 columns'>
-      <%= f.label :description %>
-      <%= f.text_field :description %>
+      <%#= f.label :parent_topic_id, "(Optional) Parent topic:" %>
+      <%= f.input :parent_topic, collection: Topic.topic_select, input_html: {style:'min-width:50%', class:'select2'} %>
     </div>
   </div>
 
   <div class='row'>
     <div class='large-8 columns'>
-      <%= f.label :tags %>
-      <%= f.select :tags, Tag.all.map {|t| [t.name, t.name]}, {}, {multiple:true, class:'select2', style:'min-width:50%'} %>
+      <%= f.input :description %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='large-8 columns'>
+      <%= f.input :tags, collection: Tag.all.map {|t| [t.name, t.name]}, input_html: {multiple:true, class:'select2', style:'min-width:50%'} %>
     </div>
   </div>
 
   <div class='row'>
     <div class='large-12 columns'>
-      <%= f.label :content %>
-      <%= f.text_area :content, style:'height:14em' %>
+      <%= f.input :content, input_html:{style:'height:14em'} %>
     </div>
   </div>
 
