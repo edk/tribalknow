@@ -1,28 +1,21 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
 gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
 
-gem 'pry'
 gem 'activerecord-session_store'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 #gem 'userstamp', :path => '../userstamp'
 gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'rails4'
+gem 'will_paginate'
 
 # TODO
 # https://github.com/joemccann/dillinger - a client-side markdown editor, perhaps use as a base
 # https://github.com/krisleech/chalk_dust - chalk dust, an activity feed
 # showterm.io,  https://github.com/chjj/tty.js https://github.com/liftoff/GateOne/ - a way to do terminal based screencasts.
 # http://www.udjamaflip.com/javascript/98-html5-video-subtitles-utilising-mozilla-s-popcorn-js popcorn.js
-
-group :development, :test do
-  gem 'seed_dump', :git => 'git@github.com:rroblak/seed_dump.git'
-  # gem 'protected_attributes' # only to get seed_dump to work
-  gem 'rspec-rails', '~> 2.0'
-end
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -59,5 +52,10 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-# Use debugger
-gem 'debugger', group: [:development, :test]
+group :development, :test do
+  gem 'pry'
+  gem 'debugger'
+  gem 'seed_dump', :git => 'git@github.com:rroblak/seed_dump.git'
+  # gem 'protected_attributes' # only to get seed_dump to work
+  gem 'rspec-rails', '~> 2.0'
+end
