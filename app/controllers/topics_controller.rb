@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topics = Topic.paginate(:page=>params[:page], :per_page=>2)
+    @topics = Topic.paginate(:page=>params[:page], :per_page=>5)
     
   end
 
