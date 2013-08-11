@@ -12,6 +12,12 @@ gem 'activerecord-session_store'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'rails4'
 
+# TODO
+# https://github.com/joemccann/dillinger - a client-side markdown editor, perhaps use as a base
+# https://github.com/krisleech/chalk_dust - chalk dust, an activity feed
+# showterm.io,  https://github.com/chjj/tty.js https://github.com/liftoff/GateOne/ - a way to do terminal based screencasts.
+# http://www.udjamaflip.com/javascript/98-html5-video-subtitles-utilising-mozilla-s-popcorn-js popcorn.js
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
 end
@@ -21,23 +27,17 @@ gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0.rc2'
-
-# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-
-gem 'zurb-foundation', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'zurb-foundation', '~> 4.0.0'
+gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
+gem 'select2-rails'
+gem 'underscore-rails'
+gem 'turbolinks' # https://github.com/rails/turbolinks
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
