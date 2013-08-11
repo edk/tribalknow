@@ -19,4 +19,6 @@
 //= require_tree .
 
 $(document).foundation();
-console.log('application.js')
+$(function(){
+  $('select').select2();
+})
