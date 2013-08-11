@@ -1,22 +1,11 @@
-<h1>Listing topics</h1>
+<h1>All topics</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>content</th>
-      <th>tags</th>
-      <th>subtopics</th>
-      <th>authors</th>
-      <th></th>
-    </tr>
-  </thead>
-
   <tbody>
     <% @topics.each do |topic| %>
       <tr>
         <td><%= link_to topic.name, edit_topic_path(topic) %></td>  
-        <td><%= topic.content %></td>  
+        <td><%= truncate topic.content, length: 80*5 %></td>  
         <td><%= topic.tags.join(', ') %></td>  
         <td><%= topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe %></td>  
         <td>author <br> contributors?</td>
