@@ -7,7 +7,6 @@ gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
 gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
 
 gem 'pry'
-gem 'seed_dump', :git => 'git@github.com:rroblak/seed_dump.git'
 gem 'activerecord-session_store'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'rails4'
@@ -19,6 +18,8 @@ gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'
 # http://www.udjamaflip.com/javascript/98-html5-video-subtitles-utilising-mozilla-s-popcorn-js popcorn.js
 
 group :development, :test do
+  gem 'seed_dump', :git => 'git@github.com:rroblak/seed_dump.git'
+  # gem 'protected_attributes' # only to get seed_dump to work
   gem 'rspec-rails', '~> 2.0'
 end
 
