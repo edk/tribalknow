@@ -4,6 +4,7 @@ class Topic < ActiveRecord::Base
   
   stampable
 
+  # http://monkeyandcrow.com/blog/tagging_with_active_record_and_postgres/
   scope :any_tags, -> (tags){where('tags && ARRAY[?]', tags)}
   scope :all_tags, -> (tags){where('tags @> ARRAY[?]', tags)}
   
@@ -14,5 +15,6 @@ class Topic < ActiveRecord::Base
   def self.topic_select
     Topic.where("parent_topic_id is NULL")
   end
+  
 end
 

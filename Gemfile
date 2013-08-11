@@ -9,6 +9,7 @@ gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
 gem 'pry'
 gem 'activerecord-session_store'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
+#gem 'userstamp', :path => '../userstamp'
 gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'rails4'
 
 # TODO

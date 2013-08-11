@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20130811191452) do
     t.datetime "updated_at"
   end
 
+  add_index "topics", ["tags"], name: "index_topics_on_tags", using: :gin
+
   create_table "users", force: true do |t|
     t.string   "login"
     t.string   "email"

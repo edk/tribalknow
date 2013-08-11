@@ -11,5 +11,6 @@ class CreateTopics < ActiveRecord::Migration
       t.userstamps
       t.timestamps
     end
+    add_index(:topics, :tags, :using => 'gin')
   end
 end
