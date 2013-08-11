@@ -16,6 +16,7 @@
 //= require underscore
 //= require foundation
 //= require turbolinks
+//= require jquery.turbolinks
 //= require_tree .
 
 $(document).foundation();

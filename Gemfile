@@ -38,6 +38,7 @@ gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for 
 gem 'select2-rails'
 gem 'underscore-rails'
 gem 'turbolinks' # https://github.com/rails/turbolinks
+gem 'jquery-turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
