@@ -18,7 +18,6 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     
-
     respond_to do |format|
       if @topic.save
         format.html { redirect_to topics_url, notice: 'Topic was successfully created.' }
@@ -31,6 +30,7 @@ class TopicsController < ApplicationController
   end
 
   def update
+    @topic.tags = params[:topic][:tags].reject{|tag| tag.blank? }
     respond_to do |format|
       if @topic.update(topic_params)
         format.html { redirect_to topics_url, notice: 'Topic was successfully updated.' }
