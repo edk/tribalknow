@@ -25,7 +25,7 @@ GIT
 
 GIT
   remote: git@github.com:kimkong/userstamp.git
-  revision: 777633aa564f8457c999ddb96afa4c5ae18d319f
+  revision: fbb35ccb5004bb04f87e01cbe9b7a5ccdd06b856
   specs:
     userstamp (2.0.2)
 
