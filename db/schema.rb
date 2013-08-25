@@ -17,11 +17,6 @@ ActiveRecord::Schema.define(version: 20130811191452) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
-  create_table "homes", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
     t.text     "data"
