@@ -15,3 +15,5 @@
 /log/*.log
 /tmp
 /app/assets/tmp/*
+
+*.swp
