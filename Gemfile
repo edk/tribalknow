@@ -57,6 +57,6 @@ group :development, :test do
   gem 'pry'
   gem 'debugger'
   gem 'seed_dump', :git => 'git@github.com:rroblak/seed_dump.git'
-  # gem 'protected_attributes' # only to get seed_dump to work
+  #gem 'protected_attributes' # only to get seed_dump to work
   gem 'rspec-rails', '~> 2.0'
 end

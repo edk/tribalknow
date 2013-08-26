@@ -11,11 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130811191452) do
+ActiveRecord::Schema.define(version: 20130825221821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "answers", force: true do |t|
+    t.text     "text"
+    t.integer  "score",      default: 0
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "homes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", force: true do |t|
+    t.integer  "topic_id"
+    t.text     "text"
+    t.text     "tags",       default: [], array: true
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["tags"], name: "index_questions_on_tags", using: :gin
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
