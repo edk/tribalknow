@@ -18,13 +18,16 @@ ActiveRecord::Schema.define(version: 20130825221821) do
   enable_extension "hstore"
 
   create_table "answers", force: true do |t|
+    t.integer  "question_id"
     t.text     "text"
-    t.integer  "score",      default: 0
+    t.integer  "score",       default: 0
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "homes", force: true do |t|
     t.datetime "created_at"
