@@ -968,7 +968,7 @@
 //
 
 // Background color for the top bar
-// $topbar-bg: #111;
+$topbar-bg: #555;
 
 // Height and margin
 // $topbar-height: 45px;
@@ -987,12 +987,12 @@
 // $topbar-link-font-size: emCalc(13px);
 
 // Style the top bar dropdown elements
-// $topbar-dropdown-bg: #333;
-// $topbar-dropdown-link-color: #fff;
-// $topbar-dropdown-toggle-size: 5px;
-// $topbar-dropdown-toggle-color: #fff;
-// $topbar-dropdown-toggle-alpha: 0.5;
-// $dropdown-label-color: #555;
+$topbar-dropdown-bg: #000;
+$topbar-dropdown-link-color: #fff;
+$topbar-dropdown-toggle-size: 5px;
+$topbar-dropdown-toggle-color: #fff;
+$topbar-dropdown-toggle-alpha: 0.9;
+$dropdown-label-color: #555;
 
 // Top menu icon styles
 // $topbar-menu-link-transform: uppercase;
