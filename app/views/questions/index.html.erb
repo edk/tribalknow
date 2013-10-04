@@ -1,0 +1,8 @@
+
+<h1>List of questions:</h1>
+
+<ul>
+  <% @questions.each do |question| %>
+  <li> <%= question.id %> <%= question.text %> <%= question.tags %> <%= link_to "Edit", edit_question_url(question) %></li>
+  <% end %>
+</ul>

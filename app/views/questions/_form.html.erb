@@ -1,0 +1,22 @@
+<%= simple_form_for(@question) do |f| %>
+  <%= f.error_notification %>
+
+  <div class='row'>
+    <div class='large-8 columns'>
+      <%= f.input :text, input_html:{style:'height:14em'} %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='large-8 columns'>
+      <%= f.input :tags do %>
+        <span id='tags'> <%= Tag.all.uniq.map {|t| t.name }.uniq.sort.to_json %></span>
+        <%= f.input :tags, as: :hidden, input_html: { class: 'select2-with-tags', style:'min-width:80%', value: f.object.tags.empty? ? '' : f.object.tags.join(',') } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

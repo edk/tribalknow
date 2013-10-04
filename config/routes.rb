@@ -1,8 +1,13 @@
 Tribalknow::Application.routes.draw do
 
   resources :users
-
   resources :topics
+
+  resources :questions, path_names: { new: 'ask' } do
+    collection do
+      get 'search'
+    end
+  end
 
   root :to => 'homes#index'
 
