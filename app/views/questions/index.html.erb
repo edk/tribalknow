@@ -3,6 +3,8 @@
 
 <ul>
   <% @questions.each do |question| %>
-  <li> <%= question.id %> <%= question.text %> <%= question.tags %> <%= link_to "Edit", edit_question_url(question) %></li>
+  <li> (<%= question.id %>) <b><%= question.title %></b> <%= question.tags.join(", ") %><br/>
+  <i><%= truncate question.text, :length=>200 %></i>
+   <%= link_to "Edit", edit_question_url(question) %></li>
   <% end %>
 </ul>
