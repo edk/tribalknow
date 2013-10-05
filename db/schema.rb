@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20130825221821) do
 
   create_table "questions", force: true do |t|
     t.integer  "topic_id"
+    t.string   "title"
     t.text     "text"
     t.text     "tags",       default: [], array: true
     t.integer  "creator_id"
