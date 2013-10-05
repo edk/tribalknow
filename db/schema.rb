@@ -59,9 +59,13 @@ ActiveRecord::Schema.define(version: 20130825221821) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
 
   create_table "topics", force: true do |t|
     t.integer  "parent_topic_id"
