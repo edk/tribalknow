@@ -23,5 +23,6 @@ class Tag < ActiveRecord::Base
   end
 
   def self.all_tags
+    Tag.all.uniq.order(:name).pluck('name')
   end  
 end

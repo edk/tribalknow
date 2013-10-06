@@ -16,7 +16,7 @@
   <div class='row'>
     <div class='large-8 columns'>
       <%= f.input :tags do %>
-        <span id='tags'> <%= Tag.all.uniq.map {|t| t.name }.uniq.sort.to_json %></span>
+        <span id='tags'> <%= Tag.all_tags.to_json %></span>
         <%= f.input :tags, as: :hidden, input_html: { class: 'select2-with-tags', style:'min-width:80%', value: f.object.tags.empty? ? '' : f.object.tags.join(',') } %>
       <% end %>
     </div>

@@ -1,0 +1,7 @@
+<h3>Searching for: <%= params[:q] %></h3>
+
+<ul>
+  <% @search.results.each do |result| %>
+    <ul><pre><%= result.inspect %></pre></ul>
+  <% end %>
+</ul>

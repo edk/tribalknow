@@ -2,6 +2,7 @@ Tribalknow::Application.routes.draw do
 
   resources :users
   resources :topics
+  resources :searches
 
   resources :questions, path_names: { new: 'ask' } do
     collection do
@@ -9,11 +10,12 @@ Tribalknow::Application.routes.draw do
     end
   end
 
-  root :to => 'homes#index'
-
   # get "/auth/:provider" => "sessions#create"
   get "/auth/:provider/callback" => "sessions#create"
   get "/signout" => "sessions#destroy", :as => :signout
+
+  get '/todo' => 'homes#todo'
+  root :to => 'homes#index'
 
 
   # Example of regular route:

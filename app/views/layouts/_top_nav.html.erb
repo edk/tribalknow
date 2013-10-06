@@ -82,8 +82,9 @@
           </li>
           -->
           <li> <%= link_to "Ask new question", new_question_url %></li>
-          <li> <%= link_to "Browse topics", topics_path %></li>
-          <li><a href="#">Questions/Answers</a></li>
+          <li> <%= link_to "Browse Topics", topics_path %></li>
+          <li> <%= link_to "Browse Questions", questions_url %></li>
+          <li><a href="#">Your Achievements</a></li>
           <li><a href="#">Your Account</a></li>
           <li class="divider"></li>
           <li><a href="#">FAQ</a></li>
@@ -91,18 +92,22 @@
         </ul>
       </li>
       <li class="divider"></li>
+
+
       <li class="has-form">
-        <form>
+        <%= form_tag searches_url, :method=>:get do %>
           <div class="row collapse">
             <div class="small-8 columns">
-              <input type="text">
+              <%= search_field_tag :q %>
             </div>
             <div class="small-4 columns">
-              <a href="#" class="alert button">Search</a>
+              <%= submit_tag 'Search', :name=>'', :class=>'button' %>
             </div>
           </div>
-        </form>
+        <% end %>
       </li>
+
+
       <li class="divider show-for-small"></li>
       <li class="has-form">
         <% if current_user %>
