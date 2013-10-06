@@ -15,6 +15,12 @@ class Topic < ActiveRecord::Base
   def self.topic_select
     Topic.where("parent_topic_id is NULL")
   end
+
+  before_save :update_tag_cache
+
+  def update_tag_cache
+    Tag.add_new_tags(self.tags) if self.tags.present?
+  end
   
 end
 

@@ -14,9 +14,9 @@ gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=
 gem 'public_activity'
 gem 'quiet_assets', :group => :development
 
-gem 'sunspot_rails'
 gem 'sunspot_solr'
-
+gem 'sunspot_rails'
+gem 'progress_bar'
 # TODO
 # https://github.com/joemccann/dillinger - a client-side markdown editor, perhaps use as a base
 # https://github.com/krisleech/chalk_dust - chalk dust, an activity feed
