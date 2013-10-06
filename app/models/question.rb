@@ -1,8 +1,8 @@
+
 class Question < ActiveRecord::Base
   stampable
 
-  scope :any_tags, -> (tags){where('tags && ARRAY[?]', tags)}
-  scope :all_tags, -> (tags){where('tags @> ARRAY[?]', tags)}
+  simple_tagging
 
   has_many :answers
 
@@ -14,10 +14,5 @@ class Question < ActiveRecord::Base
       tags.join(', ')
     end
   end
-  
-  before_save :update_tag_cache
 
-  def update_tag_cache
-    Tag.add_new_tags(self.tags) if self.tags.present?
-  end
 end
