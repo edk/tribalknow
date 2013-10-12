@@ -1,3 +1,4 @@
+# http://yehudakatz.com/2009/11/12/better-ruby-idioms/
 module SimpleTagging
   def simple_tagging
     # http://monkeyandcrow.com/blog/tagging_with_active_record_and_postgres/

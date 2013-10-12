@@ -1,10 +1,11 @@
 
 <h1>List of questions:</h1>
+Sort by [ latest | points ]<br/>
 
 <ul>
   <% @questions.each do |question| %>
   <li> (<%= question.id %>) <b><%= question.title %></b> <%= question.tags.join(", ") %><br/>
   <i><%= truncate question.text, :length=>200 %></i>
-   <%= link_to "Edit", edit_question_url(question) %></li>
+    <%= link_to "Edit", edit_question_url(question) %></li>
   <% end %>
 </ul>

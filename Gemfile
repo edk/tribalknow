@@ -17,11 +17,6 @@ gem 'quiet_assets', :group => :development
 gem 'sunspot_solr'
 gem 'sunspot_rails'
 gem 'progress_bar'
-# TODO
-# https://github.com/joemccann/dillinger - a client-side markdown editor, perhaps use as a base
-# https://github.com/krisleech/chalk_dust - chalk dust, an activity feed
-# showterm.io,  https://github.com/chjj/tty.js https://github.com/liftoff/GateOne/ - a way to do terminal based screencasts.
-# http://www.udjamaflip.com/javascript/98-html5-video-subtitles-utilising-mozilla-s-popcorn-js popcorn.js
 
 # Use postgresql as the database for Active Record
 gem 'pg'
