@@ -26,6 +26,10 @@ Tribalknow::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  # Add the fonts path
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  # Precompile additional assets
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
 
   # to make server logs go to stdout when using unicorn
   # config.logger = Logger.new(STDOUT)
