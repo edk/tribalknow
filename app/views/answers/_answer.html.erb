@@ -1,0 +1,23 @@
+
+<div class='row'>
+  <div class='small-1 columns'>[up/down vote]</div>
+  <div class='small-8 columns'>
+    <div class='row'>
+      <div class='small-12 columns'>
+        <%= answer.id %>
+        <%= render_md(answer.text) %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='small-8 columns'>
+        edit/flag/ add comment
+      </div>
+      <div class='small-4 columns'>
+        <%= answer.created_at %> <%= answer.creator.name %>
+      </div>
+    </div>
+  </div>
+  <div class='small-2 columns'></div>
+</div>
+<br/>
+<br/>

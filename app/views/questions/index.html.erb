@@ -4,7 +4,11 @@ Sort by [ latest | points ]<br/>
 
 <ul>
   <% @questions.each do |question| %>
-  <li> (<%= question.id %>) <b><%= question.title %></b> <%= question.tags.join(", ") %><br/>
+  <li> (<%= question.id %>) 
+    <%= link_to question_url(question) do %>
+      <b><%= question.title %></b>
+    <% end %>
+    <%= question.tags.join(", ") %><br/>
   <i><%= truncate question.text, :length=>200 %></i>
     <%= link_to "Edit", edit_question_url(question) %></li>
   <% end %>

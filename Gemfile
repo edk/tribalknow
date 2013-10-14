@@ -12,6 +12,7 @@ gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'
 gem 'will_paginate'
 gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
 gem 'public_activity'
+gem 'redcarpet'
 gem 'quiet_assets', :group => :development
 
 gem 'sunspot_solr'

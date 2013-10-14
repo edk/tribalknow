@@ -60,10 +60,12 @@ function MDM( inputElement ) {
 
     $(inputElement).blur( function(){
       if (!_self.click_on_control) {
-        $(controlsElement).removeClass( "focus" );
-        $(previewElement).removeClass( "focus" );
-        $(controlsElement).addClass( "blur" );
-        $(previewElement).addClass( "blur" );
+        _.delay(function(){
+          $(controlsElement).removeClass( "focus" );
+          $(previewElement).removeClass( "focus" );
+          $(controlsElement).addClass( "blur" );
+          $(previewElement).addClass( "blur" );
+        },5000)
       }
     });
   };

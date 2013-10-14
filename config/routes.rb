@@ -8,6 +8,7 @@ Tribalknow::Application.routes.draw do
     collection do
       get 'search'
     end
+    resources :answers, path_names: { new: 'new' }
   end
 
   # get "/auth/:provider" => "sessions#create"
