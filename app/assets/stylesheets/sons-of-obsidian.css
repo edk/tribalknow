@@ -1,0 +1,93 @@
+/*
+ * Derived from einaros's Sons of Obsidian theme at
+ * http://studiostyl.es/schemes/son-of-obsidian by
+ * Alex Ford of CodeTunnel:
+ * http://CodeTunnel.com/blog/post/71/google-code-prettify-obsidian-theme
+ */
+
+/*code .str {color: #EC7600; }*/
+/*code .kwd {color: #93C763; }*/
+/*code .com {color: #66747B; }*/
+/*code .typ {color: #678CB1; }*/
+/*code .lit {color: #FACD22; }*/
+/*code .pun {color: #F1F2F3; }*/
+/*code .pln {color: #F1F2F3; }*/
+/*code .tag {color: #8AC763; }*/
+/*code .atn {color: #E0E2E4; }*/
+/*code .atv {color: #EC7600; }*/
+/*code .dec {color: purple; }*/
+/*pre {border: 1px solid #888; background: #222; width:150%; font-size: 80%;}*/
+/*code.prettyprint {border: 0px solid #888; background: #222; }*/
+/*ol.linenums {*/
+    /*margin-top: 0;*/
+    /*margin-bottom: 0;*/
+/*}*/
+/*.prettyprint {*/
+    /*background: #222;*/
+/*}*/
+/*li.L0, li.L1, li.L2, li.L3, li.L4, li.L5, li.L6, li.L7, li.L8, li.L9 {*/
+    /*color: #555;*/
+    /*list-style-type: decimal;*/
+/*}*/
+/*li.L1, li.L3, li.L5, li.L7, li.L9 {*/
+    /*background: #111;*/
+/*}*/
+/*@media print*/
+/*{*/
+    /*.str {color: #060; }*/
+    /*.kwd {*/
+        /*color: #006;*/
+        /*font-weight: bold;*/
+    /*}*/
+    /*.com {*/
+        /*color: #600;*/
+        /*font-style: italic;*/
+    /*}*/
+    /*.typ {*/
+        /*color: #404;*/
+        /*font-weight: bold;*/
+    /*}*/
+    /*.lit {color: #044; }*/
+    /*.pun {color: #440; }*/
+    /*.pln {color: #000; }*/
+    /*.tag {color: #006;*/
+        /*font-weight: bold;*/
+    /*}*/
+    /*.atn {color: #404; }*/
+    /*.atv {color: #060; }*/
+/*}*/
+
+/* desert scheme ported from vim to google prettify */
+code.prettyprint { display: inline-block; background-color: #333; font-size: 80%; font-weight: lighter;}
+code .nocode { background-color: none; color: #222 }
+code .str { color: #ffa0a0 } /* string  - pink */
+code .kwd { color: #f0e68c; font-weight: bold }
+code .com { color: #87ceeb } /* comment - skyblue */
+code .typ { color: #98fb98 } /* type    - lightgreen */
+code .lit { color: #cd5c5c } /* literal - darkred */
+code .pun { color: #fff }    /* punctuation */
+code .pln { color: #fff }    /* plaintext */
+code .tag { color: #f0e68c; font-weight: bold } /* html/xml tag    - lightyellow */
+code .atn { color: #bdb76b; font-weight: bold } /* attribute name  - khaki */
+code .atv { color: #ffa0a0 } /* attribute value - pink */
+code .dec { color: #98fb98 } /* decimal         - lightgreen */
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE } /* IE indents via margin-left */
+li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
+/* Alternate shading for lines */
+li.L1,li.L3,li.L5,li.L7,li.L9 { }
+
+@media print {
+  pre.prettyprint { background-color: none }
+  pre .str, code .str { color: #060 }
+  pre .kwd, code .kwd { color: #006; font-weight: bold }
+  pre .com, code .com { color: #600; font-style: italic }
+  pre .typ, code .typ { color: #404; font-weight: bold }
+  pre .lit, code .lit { color: #044 }
+  pre .pun, code .pun { color: #440 }
+  pre .pln, code .pln { color: #000 }
+  pre .tag, code .tag { color: #006; font-weight: bold }
+  pre .atn, code .atn { color: #404 }
+  pre .atv, code .atv { color: #060 }
+}

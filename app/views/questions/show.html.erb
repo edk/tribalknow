@@ -1,6 +1,6 @@
 
-<div class='row'>
-  <div class='small-8 columns'> <h3><%= @question.title %></h3></div>
+<div class='row for_header'>
+  <div class='small-8 columns'><h1 class='title'><%= @question.title %></h1></div>
   <div class='small-3 small-offset-1 columns'>
     <div class="row">
       <%= @question.tags.join(", ") %>
@@ -13,6 +13,8 @@
     </div>
   </div>
 </div>
+
+<div class="row"><div class='columns'>&nbsp;</div></div>
 
 <div class='row'>
   <div class='small-9 columns'>

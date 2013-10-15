@@ -18,3 +18,36 @@
   a:hover { text-decoration: underline;}
  }
  
+h1.title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+div.for_header {
+  top: 0px;
+  margin:0px;
+  margin-bottom: 10px;
+  border-width: 2px;
+  border-bottom-width:2px;
+  border-bottom-color: black;
+  border-bottom-style: dotted;
+  width: 70%;
+}
+
+pre {
+/*  white-space: normal;
+  word-wrap: break-word;*/
+  background-color: #EEEEEE;
+  font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  margin-bottom: 10px;
+  max-height: 600px;
+  overflow: auto;
+  padding: 5px;
+  width: auto;
+}
+
+code {
+  background-color: #EEEEEE;
+  font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  padding: 9px;
+}
+
