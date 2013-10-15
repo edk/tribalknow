@@ -41,13 +41,15 @@ pre {
   margin-bottom: 10px;
   max-height: 600px;
   overflow: auto;
-  padding: 5px;
   width: auto;
 }
 
 code {
   background-color: #EEEEEE;
   font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
-  padding: 9px;
+  padding: 1px;
 }
 
+pre code {
+  padding: 9px;
+}
