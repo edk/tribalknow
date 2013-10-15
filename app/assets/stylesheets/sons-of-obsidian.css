@@ -58,13 +58,14 @@
 /*}*/
 
 /* desert scheme ported from vim to google prettify */
-code.prettyprint { display: inline-block; background-color: #333; font-size: 80%; font-weight: lighter;}
+/*pre code { back}*/
+code.prettyprint { display: inline-block; background-color: #ccc; font-size: 80%; font-weight: lighter; color: #111;}
 code .nocode { background-color: none; color: #222 }
 code .str { color: #ffa0a0 } /* string  - pink */
 code .kwd { color: #f0e68c; font-weight: bold }
 code .com { color: #87ceeb } /* comment - skyblue */
 code .typ { color: #98fb98 } /* type    - lightgreen */
-code .lit { color: #cd5c5c } /* literal - darkred */
+code .lit { color: #eee } /* literal - darkred */
 code .pun { color: #fff }    /* punctuation */
 code .pln { color: #fff }    /* plaintext */
 code .tag { color: #f0e68c; font-weight: bold } /* html/xml tag    - lightyellow */
