@@ -58,8 +58,8 @@
 /*}*/
 
 /* desert scheme ported from vim to google prettify */
-/*pre code { back}*/
-code.prettyprint { display: inline-block; background-color: #ccc; font-size: 80%; font-weight: lighter; color: #111;}
+pre { background-color: #444; }
+code.prettyprint { display: inline-block; background-color: #444; font-size: 80%; font-weight: lighter; color: #111;}
 code .nocode { background-color: none; color: #222 }
 code .str { color: #ffa0a0 } /* string  - pink */
 code .kwd { color: #f0e68c; font-weight: bold }
