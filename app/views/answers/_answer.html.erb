@@ -1,6 +1,6 @@
 
 <div class='row'>
-  <div class='small-1 columns'>up<br/>down</div>
+  <div class='small-1 columns'>up<br/>down<br/>star</div>
   <div class='small-8 columns'>
     <div class='row'>
       <div class='small-12 columns'>
@@ -12,11 +12,16 @@
         edit/flag/ add comment
       </div>
       <div class='small-4 columns'>
-        <%= answer.created_at %> <%= answer.creator.name %>
+        <%= answered_by(answer) %>
       </div>
     </div>
   </div>
   <div class='small-2 columns'></div>
 </div>
+
 <br/>
-<br/>
+<div class='row'>
+  <div class='small-1 columns'></div>
+  <div class='small-9 columns'> <hr/> </div>
+  <div class='small-2 columns'></div>
+</div>

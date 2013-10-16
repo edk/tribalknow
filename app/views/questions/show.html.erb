@@ -8,8 +8,7 @@
     </div>
     <div class="row">
       <%# TODO make this nicer, show avatar and clean this up %>
-      <%= @question.creator.try(:name) %>
-      <%= @question.created_at %>
+      <%= asked_by(@question) %>
     </div>
   </div>
 </div>

@@ -57,6 +57,29 @@
     /*.atv {color: #060; }*/
 /*}*/
 
+
+pre {
+/*  white-space: normal;
+  word-wrap: break-word;*/
+  background-color: #EEEEEE;
+  font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  margin-bottom: 10px;
+  max-height: 600px;
+  overflow: auto;
+  width: auto;
+}
+
+code {
+  background-color: #EEEEEE;
+  font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  padding: 1px 5px;
+}
+
+pre code {
+  padding: 9px;
+}
+
+
 /* desert scheme ported from vim to google prettify */
 pre { background-color: #444; }
 code.prettyprint { display: inline-block; background-color: #444; font-size: 80%; font-weight: lighter; color: #111;}

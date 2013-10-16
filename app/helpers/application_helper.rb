@@ -6,5 +6,10 @@ module ApplicationHelper
         :no_intra_emphasis=>true, :tables=>true)
     markdown.render(text).html_safe
   end
-
+  def asked_by obj
+    render :partial=>'/shared/asked_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
+  end
+  def answered_by obj
+    render :partial=>'/shared/answered_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
+  end
 end
