@@ -1,11 +1,22 @@
 
 <div class='row for_header'>
-  <div class='small-8 columns'><h1 class='title'><%= @question.title %></h1></div>
-  <div class='small-3 small-offset-1 columns'>
-    <div class="row">
-      <%= @question.tags.join(", ") %>
-      <%# TODO make tags links to question list for that tag %>
+  <div class='small-8 columns'>
+    <div class='row'>
+      <div class='small-12 columns'>
+        <h1 class='title'><%= @question.title %></h1>
+      </div>
     </div>
+    <div class="row">
+      <div class='small-12 columns'>
+        <% if !@question.tags.empty? %>
+          Tags:
+          <%= @question.tags.join(", ") %>
+          <%# TODO make tags links to question list for that tag %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class='small-3 small-offset-1 columns'>
     <div class="row">
       <%# TODO make this nicer, show avatar and clean this up %>
       <%= asked_by(@question) %>
