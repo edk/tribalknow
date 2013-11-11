@@ -67,6 +67,7 @@ pre {
   max-height: 600px;
   overflow: auto;
   width: auto;
+  color: #eee;
 }
 
 code {

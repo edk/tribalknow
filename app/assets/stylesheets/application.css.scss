@@ -9,14 +9,19 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ //= require foundation_and_overrides
  *= require select2
  *= require_tree .
  *= require foundation_and_overrides
  */
 
- #content {
+@import "foundation/variables";
+@import "foundation/components/global";
+@import "foundation/components/panels";
+
+#content {
   a:hover { text-decoration: underline;}
- }
+}
  
 h1.title {
   font-size: 1.5em;
@@ -33,4 +38,8 @@ div.for_header {
   width: 70%;
 }
 
-
+.who_panel {
+  $panel-border-style: dashed;
+  $panel-border-size: 1px;
+  @include panel(#d9d9d9, 5px);
+}

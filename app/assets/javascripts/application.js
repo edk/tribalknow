@@ -23,3 +23,5 @@ $(document).foundation();
 $(function(){
   $('.select2').select2();
 })
+
+$(function(){ $(document).foundation(); });

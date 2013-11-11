@@ -114,7 +114,6 @@ GEM
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
-    kgio (2.8.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -155,6 +154,8 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
+    puma (2.6.0)
+      rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -176,7 +177,6 @@ GEM
       activesupport (= 4.0.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.11.0)
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -195,7 +195,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     ruby-openid (2.2.3)
-    sass (3.2.9)
+    sass (3.2.12)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
@@ -235,12 +235,8 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     underscore-rails (1.5.1)
-    unicorn (4.6.3)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     will_paginate (3.0.4)
-    zurb-foundation (4.0.9)
+    zurb-foundation (4.3.2)
       sass (>= 3.2.0)
 
 PLATFORMS
@@ -259,6 +255,7 @@ DEPENDENCIES
   progress_bar
   pry
   public_activity
+  puma
   quiet_assets
   rails (= 4.0.0)
   redcarpet
@@ -272,7 +269,6 @@ DEPENDENCIES
   sunspot_solr
   uglifier (>= 1.3.0)
   underscore-rails
-  unicorn
   userstamp!
   will_paginate
-  zurb-foundation (~> 4.0.0)
+  zurb-foundation

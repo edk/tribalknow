@@ -11,6 +11,7 @@
         <% if !@question.tags.empty? %>
           Tags:
           <%= @question.tags.join(", ") %>
+          <br/><br/>
           <%# TODO make tags links to question list for that tag %>
         <% end %>
       </div>
