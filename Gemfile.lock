@@ -38,12 +38,6 @@ GIT
       actionpack (>= 4.0.0.rc1, < 4.1)
       activemodel (>= 4.0.0.rc1, < 4.1)
 
-GIT
-  remote: git@github.com:rroblak/seed_dump.git
-  revision: 5516818a69e68b4a54431b6f55691073e3949446
-  specs:
-    seed_dump (0.6.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -203,6 +197,9 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
+    seed_dump (2.0.0)
+      activerecord
+      activesupport
     select2-rails (3.4.7)
       sass-rails
       thor (~> 0.14)
@@ -262,7 +259,7 @@ DEPENDENCIES
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0.rc2)
   sdoc
-  seed_dump!
+  seed_dump
   select2-rails
   simple_form!
   sunspot_rails
