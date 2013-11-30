@@ -17,3 +17,5 @@
 /app/assets/tmp/*
 
 *.swp
+
+config/database.yml
