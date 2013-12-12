@@ -1,4 +1,4 @@
-require 'debugger'
+# require 'debugger'
 
 set :application, 'tribalknow'
 # set :repo_url, 'git@github.com:edk/tribalknow.git'
@@ -10,7 +10,7 @@ set :branch, 'master'
 set :deploy_to, '/home/deploy/tribalknow'
 set :scm, :git
 
-set :format, :pretty
+#set :format, :pretty
 set :log_level, :debug
 # set :pty, true
 
@@ -79,6 +79,28 @@ namespace :deploy do
   # * will also need tasks to manage and rebuild indexes
 
   after :finishing, 'deploy:cleanup'
+
+  before 'deploy:migrate', :create_db_if_needed => [:set_rails_env] do
+    on roles(:db) do
+      need_to_create_and_seed = nil
+      as :postgres do
+        rv=capture :psql, '-tAc', "\\\"SELECT 1 FROM pg_database WHERE datname = 'tribalknow_production'\\\""
+        info "XXXX rv = #{rv.inspect}"
+        need_to_create_and_seed=true if rv.strip == ""
+      end
+      if need_to_create_and_seed
+        within release_path do
+          with rails_env: fetch(:rails_env) do
+            info "XXXXXXXXXXXXXXXXX creating db"
+            execute :rake, "db:create"
+            info "XXXXXXXXXXXXXXXXX loading schema and seeding"
+            execute :rake, "db:schema:load"
+            execute :rake, "db:seed"
+          end
+        end
+      end
+    end
+  end
 
   before 'deploy:starting', :pre_setup do
     on roles(:db) do |host|
