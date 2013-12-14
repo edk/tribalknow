@@ -15,8 +15,7 @@
 //= require select2
 //= require underscore
 //= require foundation
-// require turbolinks
-// require jquery.turbolinks
+//= require google-code-prettify/prettify
 //= require_tree .
 
 $(document).foundation();
