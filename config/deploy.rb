@@ -103,12 +103,15 @@ namespace :deploy do
     on roles(:db) do |host|
       homedir   = '/home/deploy'
       basedir   = File.join(homedir, 'tribalknow') # host.deploy_to
+      
       configdir = File.join(basedir, "shared", "config")
-      puts "XXXXXXX basedir = #{basedir} configdir = #{configdir}"
       execute :mkdir, '-p', configdir
       execute :cp, "#{homedir}/database.yml", "#{configdir}/"
+      
+      configdir = File.join(basedir, "shared", "config", "initializers")
+      execute :mkdir, '-p', configdir
+      execute :cp, "#{homedir}/secret_token.rb", "#{configdir}/"
       # TODO make the mkdir/cp conditional
-      # TODO create the db if necessary
     end
   end
 end
