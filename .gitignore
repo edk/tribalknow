@@ -19,3 +19,5 @@
 *.swp
 
 config/database.yml
+
+solr/data
