@@ -36,8 +36,8 @@ Topic.create([
 
 
 User.create([
-  { :login => nil, :email => nil, :name => "Ed K", :provider => "github", :uid => "54091", :created_at => "2013-07-24 02:57:33", :updated_at => "2013-07-24 02:57:33" },
-  { :login => nil, :email => nil, :name => "Ed K", :provider => "github", :uid => "54091", :created_at => "2013-07-24 02:57:33", :updated_at => "2013-07-24 02:57:33" }
+  # { :login => nil, :email => nil, :name => "Ed K", :provider => "github", :uid => "54091", :created_at => "2013-07-24 02:57:33", :updated_at => "2013-07-24 02:57:33" },
+  # { :email => 'eddyhkim@gmail.com', :name => "Ed K", :created_at => "2013-07-24 02:57:33", :updated_at => "2013-07-24 02:57:33" }
 ])
 
 

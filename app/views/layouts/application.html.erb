@@ -18,6 +18,28 @@
 
   <body>
     <%= render 'layouts/top_nav' %>
+    <% if flash.keys.present? %>
+      <br/>
+      <div class="row">
+      <div class="large-2 columns"></div>
+      <div class="large-12 columns">
+        <%# success warning info %>
+        <% if notice %>
+          <div class="alert-box success radius"><%= notice %>
+            <a href="#" class="close">&times;</a>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div data-alert class="alert-box info radius">
+            <%= alert %>
+            <a href="#" class="close">&times;</a>
+          </div>
+        <% end %>
+        </div>
+      <div class="large-2 columns"></div>
+      </div>
+    <% end %>
+    <%#= flash.keys.inspect if flash.keys.present? %>
 
     <div class="row">
       <div class="large-12 columns" id="content">

@@ -31,6 +31,9 @@ Tribalknow::Application.configure do
   # Precompile additional assets
   config.assets.precompile += %w( .svg .eot .woff .ttf )
 
+  # recommended by devise generator
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
   # to make server logs go to stdout when using unicorn
   # config.logger = Logger.new(STDOUT)
   # config.logger.level = Logger.const_get(

@@ -1,6 +1,7 @@
 Tribalknow::Application.routes.draw do
 
-  resources :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   resources :topics
   resources :searches
 
@@ -10,10 +11,6 @@ Tribalknow::Application.routes.draw do
     end
     resources :answers, path_names: { new: 'new' }
   end
-
-  # get "/auth/:provider" => "sessions#create"
-  get "/auth/:provider/callback" => "sessions#create"
-  get "/signout" => "sessions#destroy", :as => :signout
 
   get '/todo' => 'homes#todo'
   root :to => 'homes#index'

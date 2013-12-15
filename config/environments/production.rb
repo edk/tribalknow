@@ -82,4 +82,7 @@ Tribalknow::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # recommended by devise generator
+  config.action_mailer.default_url_options = { :host => 'tribalknownow.com' }
 end

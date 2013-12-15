@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0'
-gem 'puma'
+#gem 'puma'
 
-gem 'omniauth-github', :git => 'git://github.com/intridea/omniauth-github.git'
-gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
+gem 'devise'
+gem 'omniauth-github'
 
 gem 'activerecord-session_store'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
@@ -61,7 +61,7 @@ end
 
 group :development, :test do
   gem 'pry'
-  gem 'debugger'
+  gem 'byebug'
   gem 'seed_dump'
   #gem 'protected_attributes' # only to get seed_dump to work
   gem 'rspec-rails', '~> 2.0'
