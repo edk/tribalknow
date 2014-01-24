@@ -13,3 +13,5 @@ module ApplicationHelper
     render :partial=>'/shared/answered_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
   end
 end
+
+

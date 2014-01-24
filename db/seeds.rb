@@ -7,7 +7,10 @@ Tenant.create([
 ])
 
 Answer.create([
-  { :question_id => nil, :text => nil, :score => 0, :creator_id => nil, :updater_id => nil, :created_at => nil, :updated_at => nil }
+  { :question_id => 1, :text => "This is the answer you're looking for", :score => 0, :creator_id => nil, :updater_id => nil, :created_at => nil, :updated_at => nil },
+  { :question_id => 1, :text => "This is not the answer you're looking for", :score => 0, :creator_id => nil, :updater_id => nil, :created_at => nil, :updated_at => nil },
+  { :question_id => 1, :text => "This will be the answer you're looking for", :score => 0, :creator_id => nil, :updater_id => nil, :created_at => nil, :updated_at => nil },
+  { :question_id => 2, :text => "This is the answer you're looking for", :score => 0, :creator_id => nil, :updater_id => nil, :created_at => nil, :updated_at => nil }
 ])
 
 
