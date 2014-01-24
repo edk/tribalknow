@@ -1,7 +1,42 @@
 <h3>Searching for: <%= params[:q] %></h3>
 
-<ul>
-  <% @search.results.each do |result| %>
-    <ul><pre><%= result.inspect %></pre></ul>
-  <% end %>
-</ul>
+
+<div class='row'>
+  <div class='small-8 columns'>
+    <ul>
+      <% @search.results.each do |result| %>
+        <li>
+        <div class='row search_results'>
+          <div class='small-2 columns'>
+            <% result %> need to report the # of answers.  not in schema yet
+          </div>
+          <div class='small-10 columns'>
+            <h3> <%= result.title %> </h5>
+            <div class="text"><%= raw result.text %> </div>
+            <div class='row'>
+            <div class='small-8 columns'>
+              <div class="tags"> 
+                <% result.tags.each do |t| %>
+                  <%= "<a href=''> <span class='label radius'> #{t}</span> </a>".html_safe %>
+                <% end %>
+              </div>
+            </div>
+            <div class='small-4 columns text-right'>
+              asked <%= l(result.updated_at, format: :civilian) %>
+              <%= result.creator.try(:name) %>
+            </div>
+            </div>
+          </div>
+          <div class='small-2 columns'>
+          </div>
+        </div> 
+        </li>
+      <% end %>
+    </ul>
+  </div> 
+  <div class='small-4 columns'>
+    What else should we put in here?
+  </div> 
+</div> 
+
+#<Question id: 2, topic_id: nil, title: "who am i", text: "I am the muffin man.", tags: ["jelly donuts", "cream puffs", "poufs"], creator_id: nil, updater_id: nil, created_at: "2014-01-24 02:19:10", updated_at: "2014-01-24 02:19:10">
