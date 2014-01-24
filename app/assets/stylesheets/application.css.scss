@@ -8,16 +8,12 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- //= require foundation_and_overrides
  *= require select2
- *= require_tree .
- *= require foundation_and_overrides
  */
 
-@import "foundation/variables";
-@import "foundation/components/global";
-@import "foundation/components/panels";
+@import 'foundation-icons';
+@import 'foundation-social-web-icons';
+@import 'foundation_and_overrides';
 
 #content {
   a:hover { text-decoration: underline;}
@@ -38,8 +34,8 @@ div.for_header {
   width: 70%;
 }
 
-.who_panel {
-  $panel-border-style: dashed;
-  $panel-border-size: 1px;
-  @include panel(#d9d9d9, 5px);
-}
+// .who_panel {
+//   $panel-border-style: dashed;
+//   $panel-border-size: 1px;
+//   @include panel(#d9d9d9, 5px);
+// }

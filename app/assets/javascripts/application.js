@@ -18,7 +18,7 @@
 //= require google-code-prettify/prettify
 //= require_tree .
 
-$(document).foundation();
+// $(document).foundation();
 $(function(){
   $('.select2').select2();
 })

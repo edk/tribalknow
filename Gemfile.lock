@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/jclusso/foundation-social-web-icons-rails.git
+  revision: a23b267e42178bd3bd5b5e9860c55c71bbfdb6ee
+  specs:
+    foundation-social-web-icons-rails (1.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
+
+GIT
   remote: git@github.com:airblade/paper_trail.git
   revision: c441a5de2d61042126bb042c3c18012fca3af32b
   branch: rails4
@@ -96,6 +104,12 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     fattr (2.2.1)
+    foundation-icons-sass-rails (3.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
+    foundation-rails (5.0.3.1)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
     hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
@@ -245,8 +259,6 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.4)
-    zurb-foundation (4.3.2)
-      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
@@ -260,6 +272,9 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.0.0)
   devise
+  foundation-icons-sass-rails
+  foundation-rails
+  foundation-social-web-icons-rails!
   jbuilder (~> 1.2)
   jquery-rails
   omniauth-github
@@ -283,4 +298,3 @@ DEPENDENCIES
   underscore-rails
   userstamp!
   will_paginate
-  zurb-foundation
