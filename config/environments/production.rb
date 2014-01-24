@@ -85,4 +85,7 @@ Tribalknow::Application.configure do
 
   # recommended by devise generator
   config.action_mailer.default_url_options = { :host => 'tribalknownow.com' }
+  
+  config.assets.precompile += %w( vendor/modernizr.js )
+
 end

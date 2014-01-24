@@ -1,5 +1,5 @@
 <h3>Searching for: <%= params[:q] %></h3>
-
+<% byebug %>
 
 <div class='row'>
   <div class='small-8 columns'>
@@ -11,7 +11,7 @@
             <% result %> need to report the # of answers.  not in schema yet
           </div>
           <div class='small-10 columns'>
-            <h3> <%= result.title %> </h5>
+            <h3> <%= result.try(:title) %> </h5>
             <div class="text"><%= raw result.text %> </div>
             <div class='row'>
             <div class='small-8 columns'>

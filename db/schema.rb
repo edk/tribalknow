@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130825221821) do
+ActiveRecord::Schema.define(version: 20140124184120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20130825221821) do
 
   create_table "tags", force: true do |t|
     t.string   "name"
+    t.text     "description"
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.datetime "created_at"
@@ -61,6 +62,17 @@ ActiveRecord::Schema.define(version: 20130825221821) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+
+  create_table "tenants", force: true do |t|
+    t.string   "name"
+    t.string   "subdomain"
+    t.string   "domain"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tenants", ["domain"], name: "index_tenants_on_domain", using: :btree
+  add_index "tenants", ["subdomain"], name: "index_tenants_on_subdomain", using: :btree
 
   create_table "topics", force: true do |t|
     t.integer  "parent_topic_id"
@@ -81,6 +93,7 @@ ActiveRecord::Schema.define(version: 20130825221821) do
     t.string   "uid"
     t.string   "name"
     t.string   "avatar_url"
+    t.integer  "tenant_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

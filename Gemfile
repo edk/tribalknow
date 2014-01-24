@@ -5,7 +5,7 @@ gem 'rails', '~> 4.0'
 
 gem 'devise'
 gem 'omniauth-github'
-
+gem 'haml-rails'
 gem 'activerecord-session_store'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 #gem 'userstamp', :path => '../userstamp'

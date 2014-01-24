@@ -7,6 +7,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :avatar_url
       
+      t.references :tenant
+
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""
       t.string :encrypted_password, :null => false, :default => ""

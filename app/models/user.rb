@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :validatable,
          :omniauthable, :omniauth_providers => [:github]
 
+  belongs_to :tenant
+
   def from_external_auth?
     if %w[provider uid name].all? {|attr| self.send(attr).present? }
       return true

@@ -1,86 +1,19 @@
-<nav class='top-bar'>
-  <ul class='title-area'>
-    <li class='name'>
-      <h1><a href="/">TribalKnowNow</a></h1>
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/"><%= current_tenant.name %> : TribalK<span style:'color:red;'>Now</span></a></h1>
     </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
   </ul>
 
   <section class="top-bar-section">
-    <!-- Left Nav Section -->
-
-    <!--
-    <ul class="left">
-      <li class="divider"></li>
-      <li class="active"><a href="#">Main Item 1</a></li>
-      <li class="divider"></li>
-      <li><a href="#">Main Item 2</a></li>
-      <li class="divider"></li>
-      <li class="has-dropdown"><a href="#">Main Item 3</a>
-
-        <ul class="dropdown">
-          <li class="has-dropdown"><a href="#">Dropdown Level 1a</a>
-
-            <ul class="dropdown">
-              <li><label>Dropdown Level 2 Label</label></li>
-              <li><a href="#">Dropdown Level 2a</a></li>
-              <li><a href="#">Dropdown Level 2b</a></li>
-              <li class="has-dropdown"><a href="#">Dropdown Level 2c</a>
-
-                <ul class="dropdown">
-                  <li><label>Dropdown Level 3 Label</label></li>
-                  <li><a href="#">Dropdown Level 3a</a></li>
-                  <li><a href="#">Dropdown Level 3b</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Dropdown Level 3c</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown Level 2d</a></li>
-              <li><a href="#">Dropdown Level 2e</a></li>
-              <li><a href="#">Dropdown Level 2f</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Dropdown Level 1b</a></li>
-          <li><a href="#">Dropdown Level 1c</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Dropdown Level 1d</a></li>
-          <li><a href="#">Dropdown Level 1e</a></li>
-          <li><a href="#">Dropdown Level 1f</a></li>
-          <li class="divider"></li>
-          <li><a href="#">See all &rarr;</a></li>
-        </ul>
-      </li>
-      <li class="divider"></li>
-    </ul>
-    -->
-
     <!-- Right Nav Section -->
     <ul class="right">
+      <li class="active"><a href="#">Yadda Yadoo</a></li>
       <li class="divider hide-for-small"></li>
-      <li class="has-dropdown"><a href="#">Features</a>
-
+      <li class="has-dropdown">
+        <a href="#">Features</a>
         <ul class="dropdown">
-          <!---
-          <li><label>Dropdown Level 1 Label</label></li>
-          <li class="has-dropdown"><a href="#" class="">Topics</a>
-
-            <ul class="dropdown">
-              <li><a href="#">Dropdown Level 2a</a></li>
-              <li><a href="#">Dropdown Level 2b</a></li>
-              <li class="has-dropdown"><a href="#">Dropdown Level 2c</a>
-
-                <ul class="dropdown">
-                  <li><a href="#">Dropdown Level 3a</a></li>
-                  <li><a href="#">Dropdown Level 3b</a></li>
-                  <li><a href="#">Dropdown Level 3c</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown Level 2d</a></li>
-              <li><a href="#">Dropdown Level 2e</a></li>
-              <li><a href="#">Dropdown Level 2f</a></li>
-            </ul>
-          </li>
-          -->
           <li> <%= link_to "Ask new question", new_question_url %></li>
           <li> <%= link_to "Browse Topics", topics_path %></li>
           <li> <%= link_to "Browse Questions", questions_url %></li>
@@ -118,6 +51,12 @@
       </li>
     </ul>
 
+    </ul>
+
+    <!-- Left Nav Section 
+    <ul class="left">
+      <li><a href="#">Left Nav Button</a></li>
+    </ul> -->
   </section>
 </nav>
 
