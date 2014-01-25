@@ -6,6 +6,8 @@ class Topic < ActiveRecord::Base
   belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics
   validates  :name, presence: true, length: { minimum: 3 }
 
+  default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+
   searchable do
     text :name, :description, :content
     text :tags do

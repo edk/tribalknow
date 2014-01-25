@@ -7,6 +7,7 @@ class CreateTopics < ActiveRecord::Migration
       t.text    :tags, :array=>true, :default=>'{}'
       # see http://adamsanderson.github.io/railsconf_2013/?full#10 for info on the prev line
       t.text    :content
+      t.references :tenant
 
       t.userstamps
       t.timestamps

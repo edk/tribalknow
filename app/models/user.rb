@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   belongs_to :tenant
 
+  default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+
   def from_external_auth?
     if %w[provider uid name].all? {|attr| self.send(attr).present? }
       return true

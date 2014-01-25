@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140124184120) do
     t.integer  "question_id"
     t.text     "text"
     t.integer  "score",       default: 0
+    t.integer  "tenant_id"
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.datetime "created_at"
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 20140124184120) do
     t.string   "title"
     t.text     "text"
     t.text     "tags",       default: [], array: true
+    t.integer  "tenant_id"
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.datetime "created_at"
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140124184120) do
   create_table "tags", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.integer  "tenant_id"
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.datetime "created_at"
