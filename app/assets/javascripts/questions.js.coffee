@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $('#question_text').mdmagick();
+  # $('#question_text').ckeditor();
   if $('#tags').length > 0
     all_tags = JSON.parse($('#tags').html())
     if all_tags && all_tags.length > 0

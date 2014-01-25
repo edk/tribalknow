@@ -6,8 +6,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :uid
       t.string :name
       t.string :avatar_url
+
+      t.boolean :admin
       
-      t.references :tenant
+      t.references :tenant, index: true
 
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""

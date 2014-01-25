@@ -16,11 +16,14 @@
 //= require underscore
 //= require foundation
 //= require google-code-prettify/prettify
+//= require ckeditor-jquery
 //= require_tree .
 
 $(document).foundation();
 
 $(function(){
   $('.select2').select2();
+  $('.ckeditor').ckeditor({
+  })
 })
 

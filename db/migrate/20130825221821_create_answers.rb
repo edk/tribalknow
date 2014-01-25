@@ -4,7 +4,7 @@ class CreateAnswers < ActiveRecord::Migration
       t.integer  :question_id
       t.text     :text
       t.integer  :score, :default=>0
-      t.references :tenant
+      t.references :tenant, index: true
 
       t.userstamps
       t.timestamps

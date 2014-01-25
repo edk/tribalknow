@@ -5,7 +5,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.string :title
       t.text :text
       t.text :tags, :array=>true, :default=>'{}'
-      t.references :tenant
+      t.references :tenant, index: true
 
       t.userstamps
       t.timestamps

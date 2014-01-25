@@ -4,8 +4,11 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:github]
 
   belongs_to :tenant
-
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+
+  has_many :topics, foreign_key: :creator_id
+  has_many :questions, foreign_key: :creator_id
+  has_many :answers, foreign_key: :creator_id
 
   def from_external_auth?
     if %w[provider uid name].all? {|attr| self.send(attr).present? }
@@ -16,6 +19,9 @@ class User < ActiveRecord::Base
 
   def password_required?
     super if !from_external_auth?
+  end
+
+  def admin?
   end
 
   # def password_match?

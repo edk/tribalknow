@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140124184120) do
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["tenant_id"], name: "index_answers_on_tenant_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.integer  "topic_id"
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140124184120) do
   end
 
   add_index "questions", ["tags"], name: "index_questions_on_tags", using: :gin
+  add_index "questions", ["tenant_id"], name: "index_questions_on_tenant_id", using: :btree
 
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
@@ -65,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140124184120) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", using: :btree
+  add_index "tags", ["tenant_id"], name: "index_tags_on_tenant_id", using: :btree
 
   create_table "tenants", force: true do |t|
     t.string   "name"
@@ -83,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140124184120) do
     t.string   "description"
     t.text     "tags",            default: [], array: true
     t.text     "content"
+    t.integer  "tenant_id"
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.datetime "created_at"
@@ -90,12 +94,14 @@ ActiveRecord::Schema.define(version: 20140124184120) do
   end
 
   add_index "topics", ["tags"], name: "index_topics_on_tags", using: :gin
+  add_index "topics", ["tenant_id"], name: "index_topics_on_tenant_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
     t.string   "avatar_url"
+    t.boolean  "admin"
     t.integer  "tenant_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

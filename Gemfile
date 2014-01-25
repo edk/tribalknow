@@ -1,37 +1,39 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0'
+gem 'activerecord-session_store'
+gem 'haml-rails'
+gem 'jbuilder', '~> 1.2'
+gem 'quiet_assets', :group => :development
 #gem 'puma'
+
+gem 'sass-rails', '~> 4.0.0.rc2'
+gem 'uglifier', '>= 1.3.0'
+
+gem 'pg'
 
 gem 'devise'
 gem 'omniauth-github'
-gem 'haml-rails'
-gem 'activerecord-session_store'
-gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
+gem "pundit"
+
 #gem 'userstamp', :path => '../userstamp'
+gem 'ckeditor_rails'
 gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'rails4'
-gem 'will_paginate'
-gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
 gem 'public_activity'
 gem 'redcarpet'
-gem 'quiet_assets', :group => :development
+gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
+gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
+gem 'will_paginate'
 
 gem 'sunspot_solr'
 gem 'sunspot_rails'
 gem 'progress_bar'
 
-# Use postgresql as the database for Active Record
-gem 'pg'
-
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc2'
-gem 'uglifier', '>= 1.3.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 gem 'coffee-rails', '~> 4.0.0'
-# gem 'zurb-foundation'#, '~> 4.0.0'
 
 gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
@@ -39,8 +41,6 @@ gem 'underscore-rails'
 # gem 'turbolinks' # https://github.com/rails/turbolinks
 # gem 'jquery-turbolinks'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -54,6 +54,7 @@ gem 'foundation-rails'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage
 gem 'foundation-icons-sass-rails'
 gem 'foundation-social-web-icons-rails', git: "git://github.com/jclusso/foundation-social-web-icons-rails.git"
+
 
 group :development do
   gem 'capistrano', '~> 3.0'
