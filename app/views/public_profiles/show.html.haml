@@ -2,17 +2,25 @@ public profile
 / # => User(id: integer, provider: string, uid: string, name: string, avatar_url: string, admin: boolean, tenant_id: integer, email: string, encrypted_password: string, reset_password_token: string, reset_password_sent_at: datetime, 
 / #  remember_created_at: datetime, sign_in_count: integer, current_sign_in_at: datetime, last_sign_in_at: datetime, current_sign_in_ip: string, last_sign_in_ip: string, confirmation_token: string, 
 / # confirmed_at: datetime, confirmation_sent_at: datetime, unconfirmed_email: string, created_at: datetime, updated_at: datetime) 
+.row
+  .large-8.columns
+    %h2= @public_profile.name
+    =# @public_profile.avatar
+    = @public_profile.email
+    = @public_profile.last_sign_in_at
 
-= @public_profile.name
-= @public_profile.email
-= @public_profile.last_sign_in_at
+.row
+  .large-8.columns
+    %h3 topics
+    = @public_profile.topics.count
 
-topics
-= @public_profile.topics.count
+.row
+  .large-8.columns
+    Questions
+    = @public_profile.questions.count
 
-Questions
-= @public_profile.questions.count
-
-Answers
-= @public_profile.answers.count
+.row
+  .large-8.columns
+    Answers
+    = @public_profile.answers.count
 

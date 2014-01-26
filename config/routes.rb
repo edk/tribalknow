@@ -6,6 +6,7 @@ Tribalknow::Application.routes.draw do
   resources :topics
   resources :tenants
   resources :public_profiles, only:[:index, :show]
+  resources :activities
   
   resources :questions, path_names: { new: 'ask' } do
     collection do
