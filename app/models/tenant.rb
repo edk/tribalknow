@@ -11,7 +11,10 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.default_tenant
-    Tenant.find_by subdomain:"coupa"
+    def_tenant = Tenant.find_by subdomain:"coupa"
+    unless def_tenant
+      Tenant.create!(:name=>'coupa', :subdomain=>'coupa')
+    end
   end
 end
 

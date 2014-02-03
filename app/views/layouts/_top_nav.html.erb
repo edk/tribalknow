@@ -7,10 +7,11 @@
   </ul>
 
   <section class="top-bar-section">
-    <!-- Right Nav Section -->
+  <!-- Right Nav Section -->
     <ul class="right">
-      <li class="active"><a href="#">Yadda Yadoo</a></li>
       <li class="divider hide-for-small"></li>
+
+      <% if user_signed_in? %>
       <li class="has-dropdown">
         <a href="#">Features</a>
         <ul class="dropdown">
@@ -26,7 +27,6 @@
       </li>
       <li class="divider"></li>
 
-
       <li class="has-form">
         <%= form_tag searches_url, :method=>:get do %>
           <div class="row collapse">
@@ -38,7 +38,8 @@
             </div>
           </div>
         <% end %>
-      </li>
+        </li>
+      <% end %>
 
 
       <li class="divider show-for-small"></li>

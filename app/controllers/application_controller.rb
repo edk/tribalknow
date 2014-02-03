@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  before_filter :authenticate_user!
   protect_from_forgery with: :exception
+
+  before_filter :authenticate_user!
   include Userstamp
   around_filter :scope_current_tenant
   include PublicActivity::StoreController
@@ -17,7 +18,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_tenant
 
   def scope_current_tenant
-    Tenant.current_id = current_tenant.id
+    Tenant.current_id = current_tenant.try(:id)
     yield  # == running the action
   ensure
     Tenant.current_id = nil
