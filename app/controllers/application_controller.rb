@@ -11,15 +11,15 @@ class ApplicationController < ActionController::Base
 
   private
   def current_tenant
-    current_tenant ||= Tenant.find_by domain: request.domain
+    # current_tenant ||= Tenant.find_by domain: request.domain
     current_tenant ||= Tenant.find_by subdomain: request.subdomain
-    current_tenant ||= Tenant.default_tenant
+    # current_tenant ||= Tenant.default_tenant
   end
   helper_method :current_tenant
 
   def scope_current_tenant
     Tenant.current_id = current_tenant.try(:id)
-    yield  # == running the action
+    yield
   ensure
     Tenant.current_id = nil
   end
