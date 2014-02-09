@@ -11,21 +11,17 @@ class ApplicationController < ActionController::Base
 
   private
   def current_tenant
-    # current_tenant ||= Tenant.find_by domain: request.domain
     current_tenant ||= Tenant.find_by subdomain: request.subdomain
-    # current_tenant ||= Tenant.default_tenant
   end
   helper_method :current_tenant
 
   def scope_current_tenant
     Tenant.current_id = current_tenant.try(:id)
 
-    if current_tenant.nil?
+    if current_tenant.nil? && !request.subdomain.blank?
       flash[:notice] = "Unknown subdomain #{request.subdomain}"
-      if !request.subdomain.blank?
-        canonical_landing = "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
-        redirect_to canonical_landing
-      end
+      canonical_landing = "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
+      redirect_to canonical_landing
       return
     end
 
