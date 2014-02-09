@@ -4,7 +4,7 @@
 .row
   .columns.small-8
     %h2 Welcome #{current_user.name}!
-    %p Last logged in at #{current_user.last_sign_in_at} from #{current_user.last_sign_in_ip}
+    %p Last logged in at #{current_user.last_sign_in_at} (#{time_ago_in_words(current_user.last_sign_in_at)} ago) from #{current_user.last_sign_in_ip}
     %p Got a #{link_to "question? Ask here!", new_question_url}
     .row
       .collumns.small-12
@@ -30,10 +30,9 @@
           %h3 TODO list
           %ul
             %li require approval by admin
-            %li empoyeees
-            %li icons
-            %li company logo
-            %li basic company info
+            %li user avatars
+            %li icons?
+            %li company logo upload?
 
   .columns.small-4
     .panel
