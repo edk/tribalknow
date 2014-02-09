@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   model_stamper
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :validatable,
+  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :validatable, :trackable,
          :omniauthable, :omniauth_providers => [:github]
 
   belongs_to :tenant

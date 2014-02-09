@@ -1,0 +1,10 @@
+
+.panel
+  - if activity && activity.owner
+    %a{ :href=>"#"}
+      #{activity.owner.name}
+    %a{ :href=> question_path(activity.trackable) }
+      asked a #{activity.trackable_type} about
+      %q <i>#{activity.trackable.title}</i>
+    #{time_ago_in_words activity.created_at} ago
+  =# activity.inspect

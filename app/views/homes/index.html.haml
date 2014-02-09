@@ -1,0 +1,42 @@
+.row
+  &nbsp;
+
+.row
+  .columns.small-8
+    %h2 Welcome #{current_user.name}!
+    %p Last logged in at #{current_user.last_sign_in_at} from #{current_user.last_sign_in_ip}
+    %p Got a #{link_to "question? Ask here!", new_question_url}
+    .row
+      .collumns.small-12
+        .panel.callout
+          %h3 Site news you can use
+    - if current_user.admin?
+      .row
+        .collumns.small-12
+          .panel.callout
+            %h3 Links to admin functions
+    .row
+      .columns.small-6
+        .panel
+          %h3 Your Stats
+          %ul
+            %li how many q's
+            %li how many a's
+            %li how many topics created, updated/contributed to
+
+          = link_to 'TODO list', '/todo'
+      .columns.small-6
+        .panel
+          %h3 TODO list
+          %ul
+            %li require approval by admin
+            %li empoyeees
+            %li icons
+            %li company logo
+            %li basic company info
+
+  .columns.small-4
+    .panel
+      %h3 Recent Activity
+      = render_activity(@activities)
+
