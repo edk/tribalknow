@@ -19,6 +19,16 @@ class ApplicationController < ActionController::Base
 
   def scope_current_tenant
     Tenant.current_id = current_tenant.try(:id)
+
+    if current_tenant.nil?
+      flash[:notice] = "Unknown subdomain #{request.subdomain}"
+      if request.subdomain
+        canonical_landing = "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
+        redirect_to canonical_landing
+      end
+      return
+    end
+
     yield
   ensure
     Tenant.current_id = nil
