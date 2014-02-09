@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
     if current_tenant.nil?
       flash[:notice] = "Unknown subdomain #{request.subdomain}"
-      if request.subdomain
+      if !request.subdomain.blank?
         canonical_landing = "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
         redirect_to canonical_landing
       end
