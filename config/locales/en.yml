@@ -50,5 +50,7 @@ en:
         multi_page_html: "Displaying %{plural} <b class='range'>%{from}&nbsp;-&nbsp;%{to}</b> of <b class='total'>%{total}</b> in total"
   
   admin_mailer:
+    user_account_rejected:
+      subject: "Sorry, your account request was rejected."
     new_user_waiting_for_approval:
       subject: "New user signed up, awaiting approval."

@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20140209185531) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "approved",               default: false
-    t.boolean  "active",                 default: true
+    t.boolean  "active",                 default: false
   end
 
   add_index "users", ["approved"], name: "index_users_on_approved", using: :btree

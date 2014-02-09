@@ -12,6 +12,12 @@ module ApplicationHelper
   def answered_by obj
     render :partial=>'/shared/answered_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
   end
+
+  # foundation icon generate
+  def f_icon name, options={}
+    css_class = ["fi-#{name}", options[:class]].join(" ")
+    content_tag(:i, nil, options.merge(:class=>css_class))
+  end
 end
 
 

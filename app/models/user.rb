@@ -66,11 +66,15 @@ class User < ActiveRecord::Base
     self.email.to_s.split('@').first
   end
 
+  def confirmation_required?
+    false
+  end
+
   def active_for_authentication?
     if tenant && tenant.new_user_restriction?
-      super && approved?
+      super && approved? && (confirmed? || confirmation_period_valid?)
     else
-      super
+      super && approved? && (confirmed? || confirmation_period_valid?)
     end
   end
 

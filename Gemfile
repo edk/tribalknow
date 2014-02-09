@@ -7,11 +7,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'quiet_assets', :group => :development
 #gem 'puma'
 
-gem 'sass-rails', '~> 4.0.0.rc2'
-gem 'uglifier', '>= 1.3.0'
-
 gem 'pg'
-
 gem 'devise'
 gem 'omniauth-github'
 gem "pundit"
@@ -29,32 +25,22 @@ gem 'sunspot_solr'
 gem 'sunspot_rails'
 gem 'progress_bar'
 
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-gem 'coffee-rails', '~> 4.0.0'
-
 gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
 gem 'underscore-rails'
-# gem 'turbolinks' # https://github.com/rails/turbolinks
-# gem 'jquery-turbolinks'
 
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
+gem 'coffee-rails', '~> 4.0.0'
 gem 'foundation-rails'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage
 gem 'foundation-icons-sass-rails'
 gem 'foundation-social-web-icons-rails', git: "git://github.com/jclusso/foundation-social-web-icons-rails.git"
-
+gem 'sass-rails', '~> 4.0.0.rc2'
+gem 'uglifier', '>= 1.3.0'
 
 group :development do
   gem 'capistrano', '~> 3.0'
@@ -69,4 +55,9 @@ group :development, :test do
   gem 'seed_dump'
   #gem 'protected_attributes' # only to get seed_dump to work
   gem 'rspec-rails', '~> 2.0'
+end
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
