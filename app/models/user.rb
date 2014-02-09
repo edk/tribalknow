@@ -10,6 +10,13 @@ class User < ActiveRecord::Base
   has_many :questions, foreign_key: :creator_id
   has_many :answers, foreign_key: :creator_id
 
+  scope :admins, -> { where(:admin=>true) }
+
+  after_create :send_admin_email
+  def send_admin_email
+    AdminMailer.new_user_waiting_for_approval(self).deliver
+  end
+
   def from_external_auth?
     if %w[provider uid name].all? {|attr| self.send(attr).present? }
       return true
@@ -21,8 +28,6 @@ class User < ActiveRecord::Base
     super if !from_external_auth?
   end
 
-  def admin?
-  end
 
   # def password_match?
   #   self.errors[:password] << "can't be blank" if password.blank?
@@ -53,6 +58,32 @@ class User < ActiveRecord::Base
   def name
     # use email for now, or github login when available
     self.email.to_s.split('@').first
+  end
+
+  def active_for_authentication?
+    if tenant && tenant.new_user_restriction?
+      super && approved?
+    else
+      super
+    end
+  end
+
+  def inactive_message
+    if tenant && tenant.new_user_restriction?
+      approved? ? super : :not_approved
+    else
+      super
+    end
+  end
+
+  def self.send_reset_password_instructions(attributes={})
+    recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+    if !recoverable.approved?
+      recoverable.errors[:base] << I18n.t("devise.failure.not_approved")
+    elsif recoverable.persisted?
+      recoverable.send_reset_password_instructions
+    end
+    recoverable
   end
 
 end

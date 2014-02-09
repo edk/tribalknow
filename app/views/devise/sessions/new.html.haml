@@ -7,8 +7,16 @@
         = f.input :password, :required => false
         = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
       .form-actions
-        = f.button :submit, "Sign in"
-    = render "devise/shared/links"
+        .row
+          .small-6.columns
+            = f.button :submit, "Sign in"
+          .small-6.columns
+            = link_to "Login with GitHub", user_omniauth_authorize_path(:github), {:class=>'button'}
   .small-6.columns
     %h2 Sign Up
     = link_to "create new TKN for your company TODO", new_tenant_path
+
+.row
+  .small-12.columns
+    = render "devise/shared/links"
+

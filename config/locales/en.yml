@@ -48,3 +48,7 @@ en:
 
         multi_page: "Displaying %{plural} %{from} - %{to} of %{total} in total"
         multi_page_html: "Displaying %{plural} <b class='range'>%{from}&nbsp;-&nbsp;%{to}</b> of <b class='total'>%{total}</b> in total"
+  
+  admin_mailer:
+    new_user_waiting_for_approval:
+      subject: "New user signed up, awaiting approval."
