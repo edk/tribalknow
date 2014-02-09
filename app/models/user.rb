@@ -11,6 +11,12 @@ class User < ActiveRecord::Base
   has_many :answers, foreign_key: :creator_id
 
   scope :admins, -> { where(:admin=>true) }
+  scope :active, -> { where(:active=>true) }
+
+  scope :with_tenant, -> (tenant) { where(:tenant_id => tenant.id) }
+  def using_tenant &block
+    self.class.where(:tenant_id=>tenant_id).instance_eval &block
+  end
 
   after_create :send_admin_email
   def send_admin_email

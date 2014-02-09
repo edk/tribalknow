@@ -6,6 +6,7 @@ class AdminMailer < ActionMailer::Base
   #   en.admin_mailer.new_user_waiting_for_approval.subject
   #
   def new_user_waiting_for_approval user
-    mail to: "eddyhkim@gmail.com"
+    users = User.active.with_tenant(user.tenant).where(:admin=>true)
+    mail to: users.map(&:email)
   end
 end
