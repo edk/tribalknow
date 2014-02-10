@@ -15,7 +15,7 @@ set :log_level, :debug
 # set :pty, true
 
 set :linked_files, %w{config/database.yml config/initializers/secret_token.rb}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system solr/data}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/sphinx}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 5
@@ -29,6 +29,28 @@ namespace :deploy do
     end
   end
 
+  desc "rebuild sphinx index"
+  task :reindex do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "ts:index"
+        end
+      end
+    end
+  end
+  desc "start searchd"
+  task :searchd_start do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "ts:restart"
+        end
+      end
+    end
+  end
+
+  desc 'send out notification on deploy. set DEPLOY_NOTIFY=email@somewhere.com for this to work.'
   task :notify do
     current_revision = fetch :current_revision
     previous_revision = fetch :previous_revision
@@ -99,6 +121,8 @@ namespace :deploy do
 
   after :finishing, 'deploy:cleanup'
   after :finishing, 'deploy:notify'
+  after :finishing, 'deploy:reindex'
+  after :finishing, 'deploy:searchd_start'
 
   before 'deploy:migrate', :create_db_if_needed => [:set_rails_env] do
     on roles(:db) do
