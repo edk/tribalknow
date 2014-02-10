@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     self.attributes["name"].presence || self.email.to_s.split('@').first
   end
 
+  def to_s
+    name
+  end
+
   def confirmation_required?
     false
   end

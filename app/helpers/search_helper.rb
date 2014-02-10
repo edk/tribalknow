@@ -3,6 +3,7 @@ module SearchHelper
 
   def render_search_results search
     results = ""
+    debugger
     search.results.each do |result|
       results += render_topic(result)    if result.is_a?(Topic)
       results += "<br>"

@@ -1,0 +1,13 @@
+
+.row
+  .column.small-7
+    %h3
+      Searching for:
+      %q #{params[:q]}
+.row
+  .column.small-10
+    = render :partial => 'results', :collection => @results
+.row
+  .column.small-8
+  .column.small-4
+    = will_paginate @results
