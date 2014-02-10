@@ -8,6 +8,7 @@ require 'capistrano/deploy'
 require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/rvm'
+require 'mail'
 
 # Includes tasks from other gems included in your Gemfile
 #   https://github.com/capistrano/rails/tree/master/assets

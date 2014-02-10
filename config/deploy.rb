@@ -29,6 +29,27 @@ namespace :deploy do
     end
   end
 
+  task :notify do
+    current_revision = fetch :current_revision
+    previous_revision = fetch :previous_revision
+    log = ""
+    on roles(:web) do
+      within release_path do
+        log = capture("cd #{repo_path} && git --no-pager log --pretty=\"format:%h - %s (%ar) <%an>\" #{previous_revision}..#{current_revision}")
+      end
+    end
+    if ENV["DEPLOY_NOTIFY"]
+      Mail.deliver do
+        from    "deploy@tribalknownow.com"
+        to      ENV["DEPLOY_NOTIFY"].split(',')
+        subject "Deploy Notification #{current_revision} (#{fetch :stage})"
+        body    "Current Revision #{current_revision}\nPrevious Revision: #{previous_revision}\n\n#{log}"
+      end
+    else
+      puts "WARNING:  DEPLOY_NOTIFY not set. export DEPLOY_NOTIFY='someone@somewhere' to enable deployment notifications"
+    end
+  end
+
   # after :restart, :clear_cache do
   #   on roles(:web), in: :groups, limit: 3, wait: 10 do
   #     # within release_path do
@@ -77,6 +98,7 @@ namespace :deploy do
   # * will also need tasks to manage and rebuild indexes
 
   after :finishing, 'deploy:cleanup'
+  after :finishing, 'deploy:notify'
 
   before 'deploy:migrate', :create_db_if_needed => [:set_rails_env] do
     on roles(:db) do
