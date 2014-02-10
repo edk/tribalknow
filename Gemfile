@@ -21,9 +21,8 @@ gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'will_paginate'
 
-# gem 'sunspot_solr'
-# gem 'sunspot_rails'
-# gem 'progress_bar'
+gem 'thinking-sphinx', '~> 3.1'
+gem 'mysql2' # uhhhh, i'm using postgres, but ts has a dependency on mysql2.  wtf
 
 gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'

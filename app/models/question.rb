@@ -11,11 +11,4 @@ class Question < ActiveRecord::Base
     
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
-  # searchable do
-  #   text :title, :text
-  #   text :tags do
-  #     tags.join(', ')
-  #   end
-  # end
-
 end

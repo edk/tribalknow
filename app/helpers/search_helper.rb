@@ -3,10 +3,6 @@ module SearchHelper
 
   def render_search_results search
     results = ""
-    # results += "<div class='row'>"
-    # results += "<div class='small-8 columns'>"
-    # results += "<ul>"
-
     search.results.each do |result|
       results += render_topic(result)    if result.is_a?(Topic)
       results += "<br>"

@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
 
   def name
     # use email for now, or github login when available
-    self.email.to_s.split('@').first
+    self.attributes["name"].presence || self.email.to_s.split('@').first
   end
 
   def confirmation_required?

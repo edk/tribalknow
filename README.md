@@ -13,8 +13,10 @@
 
 * clone repo, `bundle install`
 
-* `bundle exec rake sunspot:solr:run` to start the search engine.  You'll need Java(tm) installed for this work.
+* install sphinx.  using brew:
+`brew install  sphinx --mysql --pgsql` to install searchd that knows how to talk to postgress and mysql
 
+If you want to use the github omniauth provider (optional, not required):
 * set two environment variables, the client app id ID
 export GITHUB_KEY=your_key
 
