@@ -14,6 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /log/*.log*
+log/*.pid
 /tmp
 /app/assets/tmp/*
 
@@ -24,3 +25,4 @@ config/database.yml
 solr/data
 solr/pids
 .DS_Store
+db/sphinx
