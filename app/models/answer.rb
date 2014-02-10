@@ -3,7 +3,7 @@ class Answer < ActiveRecord::Base
   validates  :text, presence: true, length: { minimum: 3 }
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
-  searchable do
-    text :text
-  end
+  # searchable do
+  #   text :text
+  # end
 end

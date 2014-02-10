@@ -8,12 +8,12 @@ class Topic < ActiveRecord::Base
 
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
-  searchable do
-    text :name, :description, :content
-    text :tags do
-      tags.join(', ')
-    end
-  end
+  # searchable do
+  #   text :name, :description, :content
+  #   text :tags do
+  #     tags.join(', ')
+  #   end
+  # end
 
   def self.topic_select
     Topic.where("parent_topic_id is NULL")

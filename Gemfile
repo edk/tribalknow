@@ -21,9 +21,9 @@ gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'will_paginate'
 
-gem 'sunspot_solr'
-gem 'sunspot_rails'
-gem 'progress_bar'
+# gem 'sunspot_solr'
+# gem 'sunspot_rails'
+# gem 'progress_bar'
 
 gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
