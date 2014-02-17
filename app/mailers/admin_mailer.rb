@@ -7,8 +7,11 @@ class AdminMailer < ActionMailer::Base
   #
   def new_user_waiting_for_approval user
     users = User.active.with_tenant(user.tenant).where(:admin=>true)
-    raise "no admin users found" if users.empty?
-    mail to: users.map(&:email)
+    if users.empty? && User.active.with_tenant(user.tenant).count != 0
+      raise "no admin users found"
+    end
+
+    mail to: users.map(&:email) unless users.empty?
   end
 
   def user_account_rejected user

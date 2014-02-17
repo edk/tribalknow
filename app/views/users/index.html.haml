@@ -1,0 +1,28 @@
+.row
+  &nbsp;
+
+.row
+  .columns.small-12
+    %table
+      %thead
+        %th id
+        %th uid
+        %th provider
+        %th avatar
+        %th name
+        %th email
+        %th tenant_id
+        %th sign in count
+        %th created at
+        %th admin?
+        %th approved
+        %th active
+      %tfoot
+        %tr
+          %td{:colspan=>15}= will_paginate @users
+      %tbody
+        - @users.each do |user|
+          %tr
+            - (%w[id uid provider ] + [ Proc.new {|u| image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(u.email.strip.downcase)}") } ] + %w[name email tenant_id sign_in_count created_at admin? approved active]).each do |field|
+              %td= field.respond_to?(:call) ? field.call(user) : user.send(field)
+

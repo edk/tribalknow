@@ -11,12 +11,7 @@
         .panel.callout
           %h3 Site news you can use
     - if current_user.admin?
-      .row
-        .collumns.small-12
-          .panel.callout
-            %h3 Links to admin functions
-            %ul
-              %li= link_to "Approve new users.", approve_users_path
+      = render :partial=>'admin_panel'
     .row
       .columns.small-6
         .panel
