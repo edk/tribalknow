@@ -2,19 +2,19 @@
   <%= f.error_notification %>
 
   <div class='row'>
-    <div class='large-8 columns'>
+    <div class='large-10 columns'>
       <%= f.input :title %>
     </div>
   </div>
 
   <div class='row'>
-    <div class='large-8 columns'>
-      <%= f.text_area :text, input_html:{style:'height:14em'}, class:'ckeditor' %>
+    <div class='large-10 columns'>
+      <%= f.text_area :text, input_html:{style:'height:18em'}, class:'ckeditor' %>
     </div>
   </div>
 
   <div class='row'>
-    <div class='large-8 columns'>
+    <div class='large-10 columns'>
       <%= f.input :tags do %>
         <span id='tags' style='display:none;'> <%= Tag.all_tags.to_json %></span>
         <%= f.input :tags, as: :hidden, input_html: { class: 'select2-with-tags', style:'min-width:80%', value: f.object.tags.empty? ? '' : f.object.tags.join(',') } %>

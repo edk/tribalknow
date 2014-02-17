@@ -6,6 +6,9 @@ module ApplicationHelper
         :no_intra_emphasis=>true, :tables=>true)
     markdown.render(text).html_safe
   end
+  def render_gravatar user, options = {}
+    image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}")
+  end
   def asked_by obj
     render :partial=>'/shared/asked_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
   end

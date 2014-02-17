@@ -4,7 +4,7 @@
     <% if question.answers.empty? %>
       <h3><%= "No answers yet, be the first to add yours!" %></h3>
     <% else %>
-      <h3><%= "Add your answer!" %></h3>
+      <h3><%= "Add your answer..." %></h3>
     <% end %>
   </div>
 </div>
@@ -14,10 +14,10 @@
   <div class='row'>
     <div class='small-10 columns'>
       <div class='row'>
-        <div class='small-12 columns'> <%= f.text_area :text, class: 'mdm-input' %> </div>
+        <div class='small-12 columns'> <%= f.text_area :text, class: 'ckeditor' %> </div>
       </div>
       <div class='row'>
-        <div class='small-8 columns'> <%= f.submit 'Submit answer' %> </div>
+        <div class='small-8 columns'> <%= f.submit 'Submit answer', :class => 'button' %> </div>
       </div>
     </div>
   </div>

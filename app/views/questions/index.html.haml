@@ -1,0 +1,16 @@
+
+.row
+  .columns.small-8
+    %h2 List of questions:
+  .columns.small-4
+    Sort by [ latest | points ]<br/>
+
+- @questions.each do |question|
+  .row
+    .columns.small-8
+      .panel
+        = link_to question_url(question) do
+          %b= question.title
+        = question.tags.join(", ")
+        %i= truncate( question.text.html_safe, :length=>200, :escape=>false)
+        = link_to "Edit", edit_question_url(question)
