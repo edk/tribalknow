@@ -26,3 +26,6 @@ solr/data
 solr/pids
 .DS_Store
 db/sphinx
+env.load
+config/local_config.rb
+config/development.sphinx.conf
