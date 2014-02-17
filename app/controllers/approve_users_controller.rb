@@ -1,10 +1,12 @@
 class ApproveUsersController < ApplicationController
   def index
     @users = User.where(:approved=>false)
+    authorize @users
   end
 
   def approve
     user = User.find(params[:id]) # default scope shoudl still restrict to current tenant
+    authorize user, :update?
     user.approved = true
     user.active = true
     user.save!
@@ -15,6 +17,7 @@ class ApproveUsersController < ApplicationController
 
   def reject
     user = User.find(params[:id]) # default scope shoudl still restrict to current tenant
+    authorize user, :update?
     if user # actually find should throw if not found.
       AdminMailer.user_account_rejected(user).deliver
       user.destroy!
