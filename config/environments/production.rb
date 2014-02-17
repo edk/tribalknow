@@ -89,3 +89,5 @@ Tribalknow::Application.configure do
   config.assets.precompile += %w( vendor/modernizr.js )
 
 end
+
+require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))

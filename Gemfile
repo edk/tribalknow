@@ -27,7 +27,7 @@ gem 'mysql2' # uhhhh, i'm using postgres, but ts has a dependency on mysql2.  wt
 gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
 gem 'underscore-rails'
-
+gem 'exception_notification'
 
 
 # Use ActiveModel has_secure_password
