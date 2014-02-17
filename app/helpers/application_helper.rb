@@ -7,7 +7,8 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
   def render_gravatar user, options = {}
-    image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}")
+    opt_string = "?s=#{options[:size]}" if options[:size]
+    image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}#{opt_string}")
   end
 
   def asked_by obj
@@ -25,7 +26,7 @@ module ApplicationHelper
       options.delete(:color)
     end
     if options[:size]
-      options[:style] = [ "size:#{options[:size]}", options[:style] ].join(";").strip
+      options[:style] = [ "font-size:#{options[:size]}", options[:style] ].join(";").strip
       options.delete(:size)
     end
     content_tag(:i, nil, options.merge(:class=>css_class))

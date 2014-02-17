@@ -19,11 +19,13 @@
 //= require ckeditor-jquery
 //= require_tree .
 
-$(document).foundation();
 
 $(function(){
+  $(document).foundation();
   $('.select2').select2();
-  $('.ckeditor').ckeditor({
-  })
-})
+  $('.ckeditor').ckeditor({});
+  $(document.body).on("click", ".close", function(el){
+    $(el).remove();
+  });
+});
 

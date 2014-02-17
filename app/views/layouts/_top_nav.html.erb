@@ -1,8 +1,13 @@
 <nav class="top-bar" data-topbar>
   <ul class="title-area">
     <li class="name">
-      <h1><a href="/"><%= [current_tenant && current_tenant.name, "TribalK<span style:'color:red;'>Now</span>"].join(':').html_safe %></a></h1>
+      <h1>
+        <a href="/">
+          <%= [current_tenant && current_tenant.name, "TribalK<span style:'color:red;'>Now</span>"].join(':').html_safe %>
+        </a>
+      </h1>
     </li>
+
     <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
   </ul>
 
@@ -12,6 +17,13 @@
       <li class="divider hide-for-small"></li>
 
       <% if user_signed_in? %>
+
+        <ul class="right">
+          <%= current_user && link_to(account_path) do %>
+            <%= render_gravatar(current_user, :size=>43) %>
+          <% end %>
+        </ul>
+
       <li class="has-dropdown">
         <a href="#">Features</a>
         <ul class="dropdown">
@@ -20,6 +32,11 @@
           <li> <%= link_to "Browse Questions", questions_url %></li>
           <li><a href="#">Your Achievements</a></li>
           <li><a href="#">Your Account</a></li>
+          <% if current_user.admin? %>
+            <li class="divider"></li>
+            <li><%= link_to "Approve new users", approve_users_path %></li>
+            <li><%= link_to "Admin users", users_path %></li>
+          <% end %>
           <li class="divider"></li>
           <li><a href="#">FAQ</a></li>
           <li><a href="#">About TribalKnow &rarr;</a></li>

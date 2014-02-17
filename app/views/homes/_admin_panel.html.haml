@@ -1,7 +1,9 @@
-.row
+.row{:'data-alert'=>''}
   .collumns.small-12
     .panel.callout
+      %a{:href=>"#", :class=>"close"}
       %h3 Links to admin functions
       %ul
         %li= link_to "Approve new users.", approve_users_path
         %li= link_to "Admin users", users_path
+

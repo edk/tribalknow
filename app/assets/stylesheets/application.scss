@@ -39,3 +39,9 @@ div.for_header {
 //   $panel-border-size: 1px;
 //   @include panel(#d9d9d9, 5px);
 // }
+.close {
+  float: right;
+  &:after {
+    content: "\00d7";
+  }
+}
