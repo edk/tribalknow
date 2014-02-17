@@ -9,6 +9,7 @@ module ApplicationHelper
   def render_gravatar user, options = {}
     image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}")
   end
+
   def asked_by obj
     render :partial=>'/shared/asked_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
   end
@@ -18,7 +19,15 @@ module ApplicationHelper
 
   # foundation icon generate
   def f_icon name, options={}
-    css_class = ["fi-#{name}", options[:class]].join(" ")
+    css_class = ["fi-#{name}", options[:class]].join(" ").strip
+    if options[:color]
+      options[:style] = [ "color:#{options[:color]}", options[:style] ].join(";").strip
+      options.delete(:color)
+    end
+    if options[:size]
+      options[:style] = [ "size:#{options[:size]}", options[:style] ].join(";").strip
+      options.delete(:size)
+    end
     content_tag(:i, nil, options.merge(:class=>css_class))
   end
 end
