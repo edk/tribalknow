@@ -137,6 +137,8 @@ GEM
     json (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
+    ledermann-rails-settings (2.2.1)
+      activerecord (>= 3.1)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -287,6 +289,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
+  ledermann-rails-settings
   mysql2
   omniauth-github
   paper_trail!

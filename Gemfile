@@ -28,7 +28,7 @@ gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for 
 gem 'select2-rails'
 gem 'underscore-rails'
 gem 'exception_notification'
-
+gem 'ledermann-rails-settings', :require => 'rails-settings'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
