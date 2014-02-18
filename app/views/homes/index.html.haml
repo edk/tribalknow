@@ -37,7 +37,8 @@
             %li= link_to 'TODO list', '/todo'
 
   .columns.small-4
-    .panel
-      %h3 Recent Activity
-      = render_activity(@activities)
+    - if @activities && @activities.size > 0
+      .panel
+        %h3 Recent Activity
+        = render_activity(@activities)
 
