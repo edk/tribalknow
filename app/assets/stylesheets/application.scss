@@ -58,11 +58,14 @@ div.for_header {
   .created_at {
     text-align:right;
     padding: 8px;
+    font-size: .75em;
+    color: #999;
   }
   h2.title {
+    text-shadow: 1px 2px 2px rgba(255,255,255,0.3);
     font-weight: bold;
     font-size: 1.5em;
-    background-color: #222;
+    background-color: #444;
     color: #EEE;
     padding: 17px;
     width:100%;
