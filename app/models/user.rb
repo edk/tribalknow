@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   model_stamper
+
+  has_settings :preference
+
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :validatable, :trackable,
          :omniauthable, :omniauth_providers => [:github]
 

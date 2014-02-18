@@ -11,7 +11,7 @@
       .columns.small-6
         .panel
           %p #{f_icon("puzzle", :size=>"1.5em")} Got a #{link_to "question? Ask here!", new_question_url}
-          %p #{f_icon("page-multiple", :size=>"1.5em")} Want to see a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
+          %p #{f_icon("page-multiple", :size=>"1.5em")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
 
     = render :partial=>"site_news"
     - if current_user.admin?

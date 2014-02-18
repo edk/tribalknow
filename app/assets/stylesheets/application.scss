@@ -34,11 +34,42 @@ div.for_header {
   width: 70%;
 }
 
+#footer {
+  margin-top:5em;
+  margin-bottom: 1em;
+}
+
 // .who_panel {
 //   $panel-border-style: dashed;
 //   $panel-border-size: 1px;
 //   @include panel(#d9d9d9, 5px);
 // }
+
+.titled-panel {
+  // @include panel();
+  margin: 0;
+  border: 1px solid gray;
+  .content {
+    padding: 1em 1em 0em 1em;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .created_at {
+    text-align:right;
+    padding: 8px;
+  }
+  h2.title {
+    font-weight: bold;
+    font-size: 1.5em;
+    background-color: #222;
+    color: #EEE;
+    padding: 17px;
+    width:100%;
+    margin:0px;
+  }
+}
+
 .close {
   float: right;
   &:after {

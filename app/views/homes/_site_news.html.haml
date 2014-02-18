@@ -1,5 +1,14 @@
-.row{:'data-alert'=>''}
-  .collumns.small-12
-    .panel.callout
-      %a{:href=>"#", :class=>"close"}
-      %h3 Site news you can use
+- unless (last_seen = current_user.settings(:preference).site_news) && (SiteNews.latest.last && SiteNews.latest.last.created_at < last_seen)
+  .row{:'data-alert'=>'', :'data-href'=>settings_path('site_news')}
+    .columns.small-12
+      .panel.callout
+        %a{:href=>"#", :class=>"close"}
+        %h3 Site news:
+
+        - SiteNews.latest.each do |item|
+          .titled-panel
+            %h2.title
+              = item.title
+            .content
+              %p= item.text
+            .created_at Created at #{item.created_at}
