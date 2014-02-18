@@ -14,4 +14,7 @@ class HomesController < ApplicationController
   def todo
   end
 
+  def about
+  end
+
 end

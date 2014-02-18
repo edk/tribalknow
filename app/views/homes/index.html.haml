@@ -3,38 +3,29 @@
 
 .row
   .columns.small-8
+    = render :partial=>"site_news"
+    = render :partial=>'admin_panel' if current_user.admin?
     .row
       .columns.small-6
         .panel
           %h2 Welcome #{current_user.name}!
           %p Last logged in at #{current_user.last_sign_in_at} (#{time_ago_in_words(current_user.last_sign_in_at)} ago) from #{current_user.last_sign_in_ip}
-      .columns.small-6
-        .panel
-          %p #{f_icon("puzzle", :size=>"1.5em")} Got a #{link_to "question? Ask here!", new_question_url}
-          %p #{f_icon("page-multiple", :size=>"1.5em")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
-
-    = render :partial=>"site_news"
-    - if current_user.admin?
-      = render :partial=>'admin_panel'
-
-    .row
-      .columns.small-6
-        .panel
           %h3 Your Stats
           %ul
             %li how many q's
             %li how many a's
             %li how many topics created, updated/contributed to
-
       .columns.small-6
         .panel
-          %h3 TODO list
-          %ul
-            %li require approval by admin
-            %li user avatars
-            %li icons?
-            %li company logo upload?
-            %li= link_to 'TODO list', '/todo'
+          %p #{f_icon("puzzle", :size=>"1.5em")} Got a #{link_to "question? Ask here!", new_question_url}
+          %p #{f_icon("page-multiple", :size=>"1.5em")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
+
+
+    .row
+      .columns.small-12
+        .panel
+          %h3 de Finibus Bonorum et Malorum
+          %p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
 
   .columns.small-4
     - if @activities && @activities.size > 0

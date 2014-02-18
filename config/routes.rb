@@ -24,6 +24,7 @@ Tribalknow::Application.routes.draw do
   end
 
   get '/todo' => 'homes#todo'
+  get '/about' => 'homes#about'
   root :to => 'homes#index'
 
 

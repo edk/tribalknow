@@ -1,9 +1,9 @@
 - unless SiteNews.count == 0  || (last_seen = current_user.settings(:preference).site_news) && (SiteNews.latest.last && SiteNews.latest.last.created_at < last_seen)
   .row{:'data-alert'=>'', :'data-href'=>settings_path('site_news')}
     .columns.small-12
-      .panel.callout
+      .panel.callout.radius
         %a{:href=>"#", :class=>"close"}
-        %h3 Site news:
+        %h3{:style=>'font-family: monospace'} Site news:
 
         - SiteNews.latest.each do |item|
           .titled-panel
