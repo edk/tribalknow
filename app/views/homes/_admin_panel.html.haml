@@ -1,6 +1,6 @@
 - unless current_user.settings(:preference).admin_panel == 'closed'
   .row{:'data-alert'=>'', :'data-href'=>settings_path('admin_panel', :value=>'closed')}
-    .collumns.small-12
+    .columns.small-12
       .panel.callout
         %a{:href=>"#", :class=>"close"}
         %h3 Links to admin functions
