@@ -1,4 +1,4 @@
-- unless (last_seen = current_user.settings(:preference).site_news) && (SiteNews.latest.last && SiteNews.latest.last.created_at < last_seen)
+- unless SiteNews.count == 0  || (last_seen = current_user.settings(:preference).site_news) && (SiteNews.latest.last && SiteNews.latest.last.created_at < last_seen)
   .row{:'data-alert'=>'', :'data-href'=>settings_path('site_news')}
     .columns.small-12
       .panel.callout
