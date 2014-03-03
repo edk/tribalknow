@@ -8,8 +8,14 @@ module ApplicationHelper
   end
 
   def render_gravatar user, options = {}
-    opt_string = "?s=#{options[:size]}" if options[:size]
-    image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}#{opt_string}")
+    if user
+      opt_string = "?s=#{options[:size]}" if options[:size]
+      image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}#{opt_string}")
+    else
+      size = "40x40"
+      size = "#{options[:size]}x#{options[:size]}" if options[:size]
+      image_tag("#{request.protocol}placehold.it/#{size}")
+    end
   end
 
   def asked_by obj
