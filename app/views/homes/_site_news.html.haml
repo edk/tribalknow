@@ -10,5 +10,5 @@
             %h2.title
               = item.title
             .content
-              %p= item.text
+              %p= item.text.html_safe
             .created_at Posted by #{item.creator.try(:name) || "unknown"} at #{item.created_at}
