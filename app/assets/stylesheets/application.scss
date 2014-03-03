@@ -18,20 +18,23 @@
 #content {
   a:hover { text-decoration: underline;}
 }
- 
+
+.alert-box {
+  margin-top: 2em;
+}
+
 h1.title {
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: bold;
 }
-div.for_header {
-  top: 0px;
-  margin:0px;
+
+.row.for_header {
   margin-bottom: 10px;
+  margin-top: 2em;
   border-width: 2px;
-  border-bottom-width:2px;
+  border-bottom-width:1px;
   border-bottom-color: black;
-  border-bottom-style: dotted;
-  width: 70%;
+  border-bottom-style: solid;
 }
 
 #footer {
@@ -78,4 +81,8 @@ div.for_header {
   &:after {
     content: "\00d7";
   }
+}
+
+div.tags {
+  display: inline;
 }

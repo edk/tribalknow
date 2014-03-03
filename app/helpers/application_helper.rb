@@ -6,6 +6,7 @@ module ApplicationHelper
         :no_intra_emphasis=>true, :tables=>true)
     markdown.render(text).html_safe
   end
+
   def render_gravatar user, options = {}
     opt_string = "?s=#{options[:size]}" if options[:size]
     image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}#{opt_string}")
@@ -14,8 +15,13 @@ module ApplicationHelper
   def asked_by obj
     render :partial=>'/shared/asked_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
   end
+
   def answered_by obj
     render :partial=>'/shared/answered_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
+  end
+
+  def render_tags
+    
   end
 
   # foundation icon generate

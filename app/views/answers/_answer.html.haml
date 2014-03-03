@@ -1,0 +1,16 @@
+.row
+  .small-12.columns
+    = answer.text.html_safe
+.row
+  .small-8.columns
+    edit/flag/ add comment
+  .small-4.columns
+    = answered_by(answer)
+  .small-2.columns
+  .small-1.columns= render :partial=>'/shared/votes'
+%br/
+.row
+  .small-1.columns
+  .small-9.columns
+    %hr/
+  .small-2.columns

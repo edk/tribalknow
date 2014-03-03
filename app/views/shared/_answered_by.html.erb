@@ -1,3 +1,6 @@
-<div class='who_panel'>
-  <%= user && user.name %> answered <%= l(at, format: :short) %>
+<div class='who_panel' style="position:relative">
+  <span><%= render_gravatar(user) %></span>
+  <span style="position:absolute">
+    <%= user && user.name %> answered<br/> on <%= l(at, format: :short) %>
+  </span>
 </div>
