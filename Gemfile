@@ -14,7 +14,7 @@ gem "pundit"
 
 #gem 'userstamp', :path => '../userstamp'
 gem 'ckeditor_rails'
-gem 'paper_trail', :git => 'git@github.com:airblade/paper_trail.git', :branch=>'rails4'
+gem 'paper_trail', '~> 3.0.0'
 gem 'public_activity'
 gem 'redcarpet'
 gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
