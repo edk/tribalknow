@@ -1,17 +1,16 @@
 
 .row.for_header
   .columns.large-10
-    %h1.title= @question.title
+    %h1.title#question_title{:contenteditable=>'true'}= @question.title
   .columns.large-2
 
 .row.answer
-  .columns.large-11
+  .columns.large-11#question_body{:contenteditable=>'true'}
     = @question.text.html_safe
   .columns.large-1
     = f_icon "like"
     = "/"
     = f_icon "dislike"
-
 .row{:style=>'margin-top:15px;'}
   .columns.large-6
     %span.has-tip{:'data-tooltip'=>'', :title=>'click to edit tags'}= link_to "Tags:", "javascript:alert('TODO: need tag editing here')"
