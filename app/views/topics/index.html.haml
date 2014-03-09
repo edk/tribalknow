@@ -11,7 +11,7 @@
       = topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe
       how many subtopics are contained here?
       
-      = link_to "#{topic.creator.try(:name)}", public_profile_path(topic.creator)
+      = link_to "#{topic.creator.name}", public_profile_path(topic.creator) if topic && topic.creator
       %br 
       = link_to "number", "#", title:"contributors?"
       = link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' }
