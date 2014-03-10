@@ -83,6 +83,22 @@ h1.title {
   }
 }
 
-div.tags {
+div.tags_editor {
   display: inline;
+}
+
+a.taglink {
+  $padding: 0.25rem;
+  $bg: $primary-color;
+  $radius: .5rem;
+  $full-width: false;
+  $disabled: false;
+  $is-input: false;
+  @include button($padding, $bg, $radius, $full-width, $disabled, $is-input);
+  font-size: 75%;
+}
+
+.question_title {
+  font-weight: bold;
+  font-size: 1.75em;
 }

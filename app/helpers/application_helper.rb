@@ -18,6 +18,27 @@ module ApplicationHelper
     end
   end
 
+  def render_tag_links tags, options={}
+    tags.map do |tag|
+      link_to tag, questions_path(:tag=>tag), :class=>'taglink'
+    end.join(' ').html_safe
+  end
+
+  def smart_display(obj, options={})
+    case obj
+    when Time, DateTime
+      if (obj+1.day).future?  # very recent
+        l(obj, :format=>:short)
+      elsif (DateTime.now - 8.months) < obj  # medium.  show month, day
+        l(obj, :format=>:monthday)
+      else # really old, show year
+        l(obj, :format=>:onlydate)
+      end
+    else
+      obj
+    end
+  end
+
   def asked_by obj
     render :partial=>'/shared/asked_by', :locals=>{:user=>obj.creator, :at => obj.created_at }
   end

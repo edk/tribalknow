@@ -27,6 +27,7 @@ en:
       monthonly: "%b"
       dayonly: "%d"
       onlytime: "%l:%M%p"
+      onlydate: "%b %d, %Y"
     am: "am"
     pm: "pm"
 

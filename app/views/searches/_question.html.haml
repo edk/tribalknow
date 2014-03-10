@@ -1,16 +1,19 @@
 .row
   .columns.small-8
-    %p #{truncate result.text, :length=>180, :separator=>' '}
-  .columns.small-4
-    %h5
-      %b #{result.class.to_s.underscore.capitalize}: #{result.title}
+    .question_title
+      = link_to "#{result.class.to_s.underscore.capitalize}: #{result.title}", question_path(result)
 .row
+  .columns.small-12
+    = truncate(result.text.html_safe, :length=>180, :separator=>' ')
+.row
+  .columns.small-6
+    = render_tag_links result.tags
   .columns.small-2
-    Written by #{result.creator.to_s}
-  .columns.small-4
-    %p tags: #{result.tags.join(", ")}
-  .columns.small-3
-    = result.created_at
-  .columns.small-3
-    = result.updated_at
+    /Written by #{result.creator.to_s}
+  .columns.small-2.right
+    %div{:style=>'font-size:0.8em; color:#999;'}Asked:<br/>
+    %div{:style=>'font-size:0.9em;'}= smart_display result.created_at
+  .columns.small-2.right
+    %div{:style=>'font-size:0.8em; color:#999;'}Last updated:<br/>
+    %div{:style=>'font-size:0.9em;'}= smart_display(result.updated_at)
 

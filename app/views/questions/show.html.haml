@@ -14,10 +14,11 @@
 .row{:style=>'margin-top:15px;'}
   .columns.large-6
     %span.has-tip{:'data-tooltip'=>'', :title=>'click to edit tags'}= link_to "Tags:", "javascript:alert('TODO: need tag editing here')"
-    .tags
+    .tags_editor
       - if @question.tags.present?
-        - @question.tags.each do |tag|
-          = link_to tag, questions_path(:tag=>tag), :class=>"tiny button radius round"
+        -# @question.tags.each do |tag|
+        =# link_to tag, questions_path(:tag=>tag), :class=>"tiny button radius round"
+        = render_tag_links(@question.tags)
   .columns.large-2
     = link_to "Edit this question", "javascript:alert('TODO: inline editing')"
   .columns.large-4
