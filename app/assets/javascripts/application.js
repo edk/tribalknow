@@ -17,14 +17,12 @@
 //= require foundation
 //= require foundation/foundation.tooltip
 //= require google-code-prettify/prettify
-//= require ckeditor-jquery
 //= require_tree .
 
 
 $(function(){
   $(document).foundation();
   $('.select2').select2();
-  $('.ckeditor').ckeditor({});
   
   $(document.body).on("click", ".close", function(ev){
     var panel = $(this).parents('[data-alert]');

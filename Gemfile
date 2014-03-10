@@ -13,7 +13,6 @@ gem 'omniauth-github'
 gem "pundit"
 
 #gem 'userstamp', :path => '../userstamp'
-gem 'ckeditor_rails'
 gem 'paper_trail', '~> 3.0.0'
 gem 'public_activity'
 gem 'redcarpet'

@@ -72,8 +72,6 @@ GEM
     capistrano-rvm (0.1.0)
       capistrano (~> 3.0)
       sshkit (~> 1.2.0)
-    ckeditor_rails (4.3.1)
-      railties (>= 3.0)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -273,7 +271,6 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
-  ckeditor_rails
   coffee-rails (~> 4.0.0)
   devise
   exception_notification
