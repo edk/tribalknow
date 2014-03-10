@@ -1,5 +1,6 @@
 <% content_for(:post_body_js) do %>
   <%= javascript_include_tag "mdedit" %>
+  <%= javascript_include_tag "questions.js" %>
 <% end %>
 <% content_for(:head_stylesheet) do %>
   <%= stylesheet_link_tag "mdedit" %>
@@ -15,7 +16,7 @@
   </div>
 
   <div class='row'>
-    <div class='large-12 columns'>
+    <div class='large-10 columns'>
       <div id="in">
         <%= f.text_area :text, input_html:{style:'height:18em'}, class:'' %>
       </div>
