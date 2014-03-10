@@ -16,8 +16,9 @@
 //= require underscore
 //= require foundation
 //= require foundation/foundation.tooltip
-//= require google-code-prettify/prettify
-//= require_tree .
+
+// require google-code-prettify/prettify
+// require_tree .
 
 
 $(function(){

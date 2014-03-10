@@ -12,7 +12,9 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title= content_for?(:title) ? yield(:title) : "TribalKnowNow"
     = javascript_include_tag "vendor/modernizr"
+    = yield(:head_js)
     = stylesheet_link_tag    "application"
+    = yield(:head_stylesheet)
     = csrf_meta_tags
   %body
     = render 'layouts/top_nav'
@@ -20,11 +22,11 @@
       .row
         .large-12.columns
           - if notice
-            .alert-box.success.radius{"data-alert" => ""}
+            .alert-box.success.radius{"data-alert"=>""}
               = notice
               %a.close{:href => "#"}
           - if alert
-            .alert-box.info.radius{"data-alert" => ""}
+            .alert-box.info.radius{"data-alert"=>""}
               = alert
               %a.close{:href => "#"}
     .row#content
@@ -35,3 +37,4 @@
     /      .columns.text-center
     /        TribalKnowNow Copyright 2014
     = javascript_include_tag "application"
+    = yield(:post_body_js)
