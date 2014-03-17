@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require select2
+ *= require mdedit
  *
  */
 
@@ -42,12 +43,6 @@ h1.title {
   margin-top:5em;
   margin-bottom: 1em;
 }
-
-// .who_panel {
-//   $panel-border-style: dashed;
-//   $panel-border-size: 1px;
-//   @include panel(#d9d9d9, 5px);
-// }
 
 .titled-panel {
   // @include panel();

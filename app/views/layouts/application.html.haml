@@ -31,10 +31,10 @@
               %a.close{:href => "#"}
     .row#content
       = yield
-    /
-    /  .row#footer
-    /    .row
-    /      .columns.text-center
-    /        TribalKnowNow Copyright 2014
+    
+    .row#footer
+      .row
+        .columns.text-center
+          TribalKnowNow Copyright 2014
     = javascript_include_tag "application"
     = yield(:post_body_js)

@@ -112,6 +112,8 @@ GEM
       railties (>= 4.0.1)
     hashie (2.0.5)
     hike (1.2.3)
+    html_truncator (0.4.0)
+      nokogiri (~> 1.5)
     httpauth (0.2.0)
     i18n (0.6.9)
     innertube (1.1.0)
@@ -134,6 +136,7 @@ GEM
     method_source (0.8.1)
     middleware (0.1.0)
     mime-types (1.25.1)
+    mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
     multipart-post (1.2.0)
@@ -141,6 +144,8 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -278,6 +283,7 @@ DEPENDENCIES
   foundation-rails
   foundation-social-web-icons-rails!
   haml-rails
+  html_truncator
   jbuilder (~> 1.2)
   jquery-rails
   ledermann-rails-settings

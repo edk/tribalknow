@@ -1,7 +1,7 @@
 
-.row
+.row{:style=>'padding-top: 0.6em; padding-bottom: 0.35em;'}
   .columns.small-8
-    %h2 Questions:
+    %h3 #{image_tag '739-question@2x.png', :size=>'38x38'} Questions:
   .columns.small-4
     / Sort by [ latest | points ]<br/>
 
@@ -13,11 +13,16 @@
           .panel
             .question_title
               = link_to "#{question.title}", question_path(question)
-            = truncate( question.text.html_safe, :length=>200, :escape=>false)
+            = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 25)
             %div
-              = "#{question.answers.count} answers"
+              = link_to(question_path(question)) do
+                = question.answers.count == 0 ? "No answers yet" : "#{question.answers.count} answers"
             .tags{:style=>'margin-top:0.8em;margin-bottom:-1.25em;'}
               = render_tag_links question.tags
+    .row
+      .columns
+        = will_paginate @questions
+
   .columns.small-4
     .panel
       .h2 Popular questions

@@ -12,7 +12,7 @@
 //= require md-editor/rawdeflate.js
 
 
-$(function(){
+var setup_md_code_mirror = function() {
   var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
   navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;
   window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
@@ -32,22 +32,14 @@ $(function(){
 
   function update(e){
     var val = e.getValue();
-
     setOutput(val);
-
-    clearTimeout(hashto);
-    // hashto = setTimeout(updateHash, 1000);
   }
 
   function setOutput(val){
-    val = val.replace(/<equation>((.*?\n)*?.*?)<\/equation>/ig, function(a, b){
-      return '<img src="http://latex.codecogs.com/png.latex?' + encodeURIComponent(b) + '" />';
-    });
-
-    document.getElementById('out').innerHTML = marked(val);
+    $('#out').html(marked(val));
   }
 
-  var editor = CodeMirror.fromTextArea($('#question_text')[0], {
+  var editor = CodeMirror.fromTextArea($('#in textarea')[0], {
     mode: 'gfm',
     lineNumbers: true,
     matchBrackets: true,
@@ -92,33 +84,21 @@ $(function(){
     }
   }
 
-  document.addEventListener('keydown', function(e){
-    if(e.keyCode == 83 && (e.ctrlKey || e.metaKey)){
-      e.preventDefault();
-      save();
-      return false;
-    }
-  })
+  // document.addEventListener('keydown', function(e){
+  //   if(e.keyCode == 83 && (e.ctrlKey || e.metaKey)){
+  //     e.preventDefault();
+  //     save();
+  //     return false;
+  //   }
+  // })
 
-  var hashto;
+  update(editor);
+  // editor.focus();
 
-  function updateHash(){
-    window.location.hash = btoa(RawDeflate.deflate(unescape(encodeURIComponent(editor.getValue()))))
+};
+
+$(function(){
+  if ($('#in').length>0 && $('#out').length>0) {
+    setup_md_code_mirror();
   }
-
-  if(window.location.hash){
-    var h = window.location.hash.replace(/^#/, '');
-    if(h.slice(0,5) == 'view:'){
-      setOutput(decodeURIComponent(escape(RawDeflate.inflate(atob(h.slice(5))))));
-      document.body.className = 'view';
-    }else{
-      editor.setValue(decodeURIComponent(escape(RawDeflate.inflate(atob(h)))))
-      update(editor);
-      editor.focus();
-    }
-  }else{
-    update(editor);
-    editor.focus();
-  }
-
 });

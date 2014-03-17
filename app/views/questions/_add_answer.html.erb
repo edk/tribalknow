@@ -12,12 +12,14 @@
 <br/>
 <%= simple_form_for [question, Answer.new], :url=>question_answers_path(question) do |f| %>
   <div class='row'>
-    <div class='small-10 columns'>
-      <div class='row'>
-        <div class='small-12 columns'> <%= f.text_area :text, class: '' %> </div>
+    <div class='large-10 columns'>
+      <div class='row' id="in">
+        <%= f.text_area :text, class: '' %>
+      </div>
+      <div id="out">
       </div>
       <div class='row'>
-        <div class='small-8 columns'> <%= f.submit 'Submit answer', :class => 'button' %> </div>
+        <div class='large-8 columns'> <%= f.submit 'Submit answer', :class => 'button' %> </div>
       </div>
     </div>
   </div>

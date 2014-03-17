@@ -16,6 +16,7 @@
 //= require underscore
 //= require foundation
 //= require foundation/foundation.tooltip
+//= require "mdedit"
 
 // require google-code-prettify/prettify
 // require_tree .

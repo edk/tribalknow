@@ -1,9 +1,5 @@
 <% content_for(:post_body_js) do %>
-  <%= javascript_include_tag "mdedit" %>
   <%= javascript_include_tag "questions.js" %>
-<% end %>
-<% content_for(:head_stylesheet) do %>
-  <%= stylesheet_link_tag "mdedit" %>
 <% end %>
 
 <%= simple_form_for(@question) do |f| %>

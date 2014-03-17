@@ -6,11 +6,9 @@
 
 .row.answer
   .columns.large-11#question_body{:contenteditable=>'true'}
-    = @question.text.html_safe
+    = render_md @question.text
   .columns.large-1
-    = f_icon "like"
-    = "/"
-    = f_icon "dislike"
+    #{f_icon "like"} / #{f_icon "dislike"}
 .row{:style=>'margin-top:15px;'}
   .columns.large-6
     %span.has-tip{:'data-tooltip'=>'', :title=>'click to edit tags'}= link_to "Tags:", "javascript:alert('TODO: need tag editing here')"
@@ -25,7 +23,8 @@
     = asked_by(@question)
 
 %h4
-  %b #{@question.answers.size} answers:
+  %b #{pluralize @question.answers.size, "answer"}:
+
 %hr
 = render @question.answers
 = render :partial=>'add_answer', :locals=>{:question=>@question}

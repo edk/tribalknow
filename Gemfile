@@ -16,6 +16,7 @@ gem "pundit"
 gem 'paper_trail', '~> 3.0.0'
 gem 'public_activity'
 gem 'redcarpet'
+gem 'html_truncator'
 gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'will_paginate'
