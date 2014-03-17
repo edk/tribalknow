@@ -12,7 +12,7 @@
 //= require md-editor/rawdeflate.js
 
 
-var setup_md_code_mirror = function() {
+var setup_code_mirror = function() {
   var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
   navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;
   window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
@@ -99,6 +99,6 @@ var setup_md_code_mirror = function() {
 
 $(function(){
   if ($('#in').length>0 && $('#out').length>0) {
-    setup_md_code_mirror();
+    setup_code_mirror();
   }
 });

@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   has_paper_trail
 
   # TODO add to_param and associated magic to make urls to questions nicer than the ids currently in use
-  has_many   :answers
+  has_many   :answers, :dependent => :destroy
   belongs_to :user
   validates  :title, :text, presence: true, length: { minimum: 3 }
 

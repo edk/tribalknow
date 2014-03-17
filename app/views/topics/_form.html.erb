@@ -8,7 +8,6 @@
     </div>
     
     <div class='large-8 columns'>
-      <%#= f.label :parent_topic_id, "(Optional) Parent topic:" %>
       <%= f.input :parent_topic, collection: Topic.topic_select, input_html: {style:'min-width:50%', class:'select2'} %>
     </div>
   </div>
@@ -26,8 +25,13 @@
   </div>
 
   <div class='row'>
+    <br/>
     <div class='large-12 columns'>
-      <%= f.input :content, input_html:{style:'height:14em'} %>
+      <div id='in' style="height: 25em; min-height:25em;">
+        <%= f.text_area :content %>
+      </div>
+      <div id='out' style="min-height: 20em;">
+      </div>
     </div>
   </div>
 
@@ -35,4 +39,12 @@
     <%= yield :form_nav %>
     <%= f.submit "Save", :class => 'button' %>
   </div>
+<% end %>
+
+<% content_for :post_body_js do %>
+  <%= javascript_tag do %>
+    $(function() {
+      $('.CodeMirror').css({'height': '25em'});
+    });
+  <% end %>
 <% end %>
