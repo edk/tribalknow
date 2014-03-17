@@ -3,7 +3,7 @@
     .columns.small-12
       .panel.callout.radius
         %a{:href=>"#", :class=>"close"}
-        %h3{:style=>'font-family: monospace'} Site news:
+        %h3{:style=>'font-family: monospace'} #{image_tag "844-trumpet-selected@2x.png", :size=>'24x24'} Site news:
 
         - SiteNews.latest.each do |item|
           .titled-panel
