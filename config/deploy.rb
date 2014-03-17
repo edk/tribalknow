@@ -61,11 +61,15 @@ namespace :deploy do
       end
     end
     if ENV["DEPLOY_NOTIFY"]
-      Mail.deliver do
-        from    "deploy@tribalknownow.com"
-        to      ENV["DEPLOY_NOTIFY"].split(',')
-        subject "Deploy Notification #{current_revision} (#{fetch :stage})"
-        body    "Current Revision #{current_revision}\nPrevious Revision: #{previous_revision}\n\n#{log}"
+      begin
+        Mail.deliver do
+          from    "deploy@tribalknownow.com"
+          to      ENV["DEPLOY_NOTIFY"].split(',')
+          subject "Deploy Notification #{current_revision} (#{fetch :stage})"
+          body    "Current Revision #{current_revision}\nPrevious Revision: #{previous_revision}\n\n#{log}"
+        end
+      rescue
+        puts "Unable to send deploy email. #{$!}"
       end
     else
       puts "WARNING:  DEPLOY_NOTIFY not set. export DEPLOY_NOTIFY='someone@somewhere' to enable deployment notifications"
