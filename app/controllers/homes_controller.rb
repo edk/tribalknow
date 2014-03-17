@@ -4,7 +4,7 @@ class HomesController < ApplicationController
   def index
     if current_user && Tenant.current_id
       # @activities = PublicActivity::Activity.all
-      @activities = PublicActivity::Activity.order("created_at DESC").limit(20)
+      @activities = PublicActivity::Activity.order("created_at DESC").limit(10)
     else
       render :action => 'public_index'
       return
