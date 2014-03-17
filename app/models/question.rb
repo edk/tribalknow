@@ -2,6 +2,7 @@
 class Question < ActiveRecord::Base
   stampable
   simple_tagging
+  has_paper_trail
 
   # TODO add to_param and associated magic to make urls to questions nicer than the ids currently in use
   has_many   :answers
