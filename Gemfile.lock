@@ -103,6 +103,8 @@ GEM
     foundation-rails (5.0.3.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
+    friendly_id (5.0.3)
+      activerecord (>= 4.0.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -282,6 +284,7 @@ DEPENDENCIES
   foundation-icons-sass-rails
   foundation-rails
   foundation-social-web-icons-rails!
+  friendly_id
   haml-rails
   html_truncator
   jbuilder (~> 1.2)

@@ -61,10 +61,8 @@ var setup_code_mirror = function() {
     theReader.readAsText(theFile);
   }, false);
 
-  function save(){
-    var code = editor.getValue();
-    var blob = new Blob([code], { type: 'text/plain' });
-    saveBlob(blob);
+  function save(e){
+    $(e.target).parents('form').submit();
   }
 
   function saveBlob(blob){
@@ -84,13 +82,13 @@ var setup_code_mirror = function() {
     }
   }
 
-  // document.addEventListener('keydown', function(e){
-  //   if(e.keyCode == 83 && (e.ctrlKey || e.metaKey)){
-  //     e.preventDefault();
-  //     save();
-  //     return false;
-  //   }
-  // })
+  document.addEventListener('keydown', function(e){
+    if(e.keyCode == 83 && (e.ctrlKey || e.metaKey)){
+      e.preventDefault();
+      save(e);
+      return false;
+    }
+  })
 
   update(editor);
   // editor.focus();

@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = Question.friendly.find(params[:id])
   end
 
   def new
@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find(params[:id])
+    @question = Question.friendly.find(params[:id])
   end
 
   def create
@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    @question = Question.find(params[:id])
+    @question = Question.friendly.find(params[:id])
 
     respond_to do |format|
       if @question.update(question_params)

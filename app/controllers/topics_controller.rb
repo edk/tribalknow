@@ -1,12 +1,13 @@
 class TopicsController < ApplicationController
-  before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topics = Topic.paginate(:page=>params[:page], :per_page=>5)
-    
+    @topics = Topic.order(:name).paginate(:page=>params[:page], :per_page=> 3*5 )
+    session[:return_to] = topics_path
   end
 
   def show
+    @topic = Topic.friendly.find(params[:id])
+    session[:return_to] = topic_path(@topic)
   end
 
   def new
@@ -14,6 +15,8 @@ class TopicsController < ApplicationController
   end
 
   def edit
+    @topic = Topic.friendly.find(params[:id])
+    session[:return_to] ||= request.referer
   end
 
   def create
@@ -30,10 +33,13 @@ class TopicsController < ApplicationController
   end
 
   def update
+    @topic = Topic.friendly.find(params[:id])
+    redir_to = session.delete(:return_to) || topics_path
+
     @topic.tags = params[:topic][:tags].reject{|tag| tag.blank? }
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to topics_url, notice: 'Topic was successfully updated.' }
+        format.html { redirect_to redir_to, notice: 'Topic was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -43,6 +49,8 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    @topic = Topic.friendly.find(params[:id])
+
     @topic.destroy
     respond_to do |format|
       format.html { redirect_to topics_url }
@@ -51,13 +59,8 @@ class TopicsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def topic_params
-      params[:topic].permit(:name, :description, :content, :parent_topic_id, :tags => [] )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def topic_params
+    params[:topic].permit(:name, :description, :content, :parent_topic_id, :tags => [] )
+  end
 end

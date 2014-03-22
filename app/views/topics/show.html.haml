@@ -1,0 +1,32 @@
+.row
+  .columns.large-10
+    .row
+      .columns.large-12
+        %h2= @topic.name
+    .row
+      .columns.large-12
+        = @topic.description
+    .row.topic_content
+      .columns.large-12
+        = render_md @topic.content
+  .columns.large-2
+    .row_spacer
+
+    .row
+      .columsn.large-12
+        = link_to "#{f_icon('pencil', :size=>'2em;')} Edit Topic".html_safe, edit_topic_path(@topic)
+        .row_spacer
+
+    .row
+      .panel
+        .panel_title Sub-topics
+
+    .row
+      .panel
+        .panel_title Tags
+
+    .row
+      .panel
+        .panel_title Questions
+
+

@@ -4,6 +4,9 @@ class Question < ActiveRecord::Base
   simple_tagging
   has_paper_trail
 
+  extend FriendlyId
+  friendly_id :title, :use => [:slugged, :finders]
+
   # TODO add to_param and associated magic to make urls to questions nicer than the ids currently in use
   has_many   :answers, :dependent => :destroy
   belongs_to :user

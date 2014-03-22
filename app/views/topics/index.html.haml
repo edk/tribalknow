@@ -1,38 +1,33 @@
-%h2 All topics
+%h2 Encylopedia Galactica
 
+%br
 %ul.small-block-grid-3
   - @topics.each do |topic|
     %li
-      .left= image_tag "http://placehold.it/100x100&text=[icon]"
+      .left{:style=>'padding-right:5px'}= link_to image_tag("http://placehold.it/100x100&text=[icon]"), topic_path(topic)
 
-      = link_to topic.name, edit_topic_path(topic)
-      = truncate topic.content, length: 80*5
-      = topic.tags.join(', ')
-      = topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe
-      how many subtopics are contained here?
+      %div
+        %h4{:style=>'display:inline;'}= link_to topic.name, topic_path(topic)
+        = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, method: :delete, data: { confirm: 'Are you sure?' } if current_user && current_user.admin?
+
+      %p
+        - if topic.description.present?
+          = truncate topic.description, length: 80*5
+        - else
+          = link_to edit_topic_path(topic) do
+            No description
+            %span (Add one!)
+
+      = render_tag_links topic.tags
+
+      - if topic.sub_topics.present?
+        .subtopics
+          = "(#{topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe})"
       
       = link_to "#{topic.creator.name}", public_profile_path(topic.creator) if topic && topic.creator
-      %br 
-      = link_to "number", "#", title:"contributors?"
-      = link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' }
+      
 
-/ %table
-/   %tbody
-/     - @topics.each do |topic|
-/       %tr
-/         %td= link_to topic.name, edit_topic_path(topic)
-/         %td= truncate topic.content, length: 80*5
-/         %td= topic.tags.join(', ')
-/         %td= topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe
-/         %td
-/           = link_to "#{topic.creator.name}", public_profile_path(topic.creator)
-/           %br 
-/           = link_to "number", "#", title:"contributors?"
-/         %td= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
-= will_paginate @users
+= will_paginate @topics
 %br/
 = link_to 'Create new Topic', new_topic_path
-%p if you're an admin, or the owner of a resource (topic) then you can edit and delete them
-%p logged in users can edit anything (wiki)
-%p guest users can see public topics, but cannot edit anything and may not see private topics.

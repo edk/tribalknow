@@ -2,6 +2,9 @@ class Topic < ActiveRecord::Base
   stampable
   simple_tagging
   has_paper_trail
+  
+  extend FriendlyId
+  friendly_id :name, :use => :slugged
 
   has_many   :sub_topics, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:parent_topic
   belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics
