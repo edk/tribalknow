@@ -1,0 +1,9 @@
+
+.panel
+  - if activity && activity.owner
+    %a{ :href=>"#"}
+      #{activity.owner.name}
+    %a{ :href=> topic_path(activity.trackable) }
+      created a #{activity.trackable_type} about
+      %q <i>#{activity.trackable.name}</i>
+    #{time_ago_in_words activity.created_at} ago
