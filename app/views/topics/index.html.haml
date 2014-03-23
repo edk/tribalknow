@@ -1,14 +1,14 @@
 .row
   %h2 Encylopedia Galactica
 
-  %br
+  %br{:style=>'padding:3em;'}
   %ul.small-block-grid-3
     - @topics.each do |topic|
       %li.topic_index_element
-        .left{:style=>'padding-right:5px'}= link_to image_tag("http://placehold.it/100x100&text=[icon]"), topic_path(topic)
+        .left.topic_icon= link_to image_tag("http://placehold.it/100x100&text=[icon]"), topic_path(topic)
 
-        %div
-          %h4{:style=>'display:inline;'}= link_to topic.name, topic_path(topic)
+        .title
+          = link_to topic.name, topic_path(topic)
           = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if current_user && current_user.admin?
 
         %p

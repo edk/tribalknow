@@ -1,17 +1,23 @@
 
-= simple_form_for(@topic, :html=>{:id=>'primary_form'}) do |f|
+= simple_form_for(@topic) do |f|
   - f.error_notification
   .row
-    .large-4.columns
-      = f.input :name, placeholder:'A name for your topic'
-    .large-8.columns
-      = f.input :parent_topic_id, collection: Topic.topic_select, :selected=>@topic.parent_topic_id, :include_blank=>true, :hint=>'Leave blank to make a root topic', input_html: {style:'min-width:50%', class:'select2'}
+    .column.large-7
+      .row
+        .large-6.columns
+          = f.input :name, placeholder:'A name for your topic'
+        .large-6.columns
+          = f.input :parent_topic_id, collection: Topic.topic_select, :selected=>@topic.parent_topic_id, :include_blank=>true, :hint=>'Leave blank to make a root topic', input_html: {style:'min-width:50%', class:'select2'}
+      .row
+        .large-10.columns
+          = f.input :description
+    .column.large-5
+      .row
+        .columns.large-12{:style=>'border:1px solid green;'}
+          XXX
   .row
     .large-8.columns
-      = f.input :description
-  .row
-    .large-8.columns
-      = f.input :tags, collection: Tag.all.map {|t| [t.name, t.name]}, input_html: {multiple:true, class:'select2', style:'min-width:50%'}
+      = f.input :tags, collection: Tag.all.map {|t| [t.name, t.name]}, input_html: {multiple:true, class:'select2', style:'min-width:50%; height:36px;'}
   .row
     %br/
     .large-12.columns
