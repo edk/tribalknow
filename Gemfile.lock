@@ -278,7 +278,6 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
-  coderay
   coffee-rails (~> 4.0.0)
   devise
   exception_notification

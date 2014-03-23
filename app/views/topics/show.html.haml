@@ -1,13 +1,13 @@
-.row
-  .columns.large-10
+.row<
+  .columns.large-10<
     .row
       .columns.large-12
         %h2= @topic.name
     .row
       .columns.large-12
         %i= @topic.description
-    .row.topic_content
-      .columns.large-12
+    .row.topic_content<
+      .columns.large-12<
         = render_md @topic.content
   .columns.large-2
 

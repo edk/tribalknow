@@ -36,7 +36,13 @@ $(function(){
   });
 
   if (hljs) {
-    hljs.initHighlightingOnLoad();
+    $('pre code').each(function(i,e){
+      var lang = $(e).parent('pre').attr('lang');
+      if (hljs.LANGUAGES[lang]) {
+        var code = $(e).html();
+        $(e).html(_.unescape(hljs.highlight(lang, code).value));
+      }
+    });
   }
 });
 
