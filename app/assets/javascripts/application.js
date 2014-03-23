@@ -34,5 +34,9 @@ $(function(){
     $(ev).remove();
     ev.preventDefault();
   });
+
+  if (hljs) {
+    hljs.initHighlightingOnLoad();
+  }
 });
 

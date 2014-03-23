@@ -105,6 +105,7 @@ GEM
       sass (>= 3.2.0)
     friendly_id (5.0.3)
       activerecord (>= 4.0.0)
+    github-markdown (0.6.5)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -201,7 +202,6 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    redcarpet (3.0.0)
     riddle (1.5.10)
     rspec-core (2.14.4)
     rspec-expectations (2.14.0)
@@ -278,6 +278,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
+  coderay
   coffee-rails (~> 4.0.0)
   devise
   exception_notification
@@ -285,6 +286,7 @@ DEPENDENCIES
   foundation-rails
   foundation-social-web-icons-rails!
   friendly_id
+  github-markdown
   haml-rails
   html_truncator
   jbuilder (~> 1.2)
@@ -299,7 +301,6 @@ DEPENDENCIES
   pundit
   quiet_assets
   rails (~> 4.0)
-  redcarpet
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0.rc2)
   sdoc

@@ -5,22 +5,23 @@
         %h2= @topic.name
     .row
       .columns.large-12
-        = @topic.description
+        %i= @topic.description
     .row.topic_content
       .columns.large-12
         = render_md @topic.content
   .columns.large-2
-    .row_spacer
 
     .row
       .columsn.large-12
-        = link_to "#{f_icon('pencil', :size=>'2em;')} Edit Topic".html_safe, edit_topic_path(@topic)
-        .row_spacer
+        = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
 
     .row
       .panel
         .panel_title Sub-topics
-
+        - @topic.sub_topics.each do |sub|
+          %div= link_to sub.name, topic_path(sub)
+        .row_divider
+        %p{:style=>'font-size:0.75em; padding-top:1em; text-align:right;'}= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
     .row
       .panel
         .panel_title Tags

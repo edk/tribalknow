@@ -5,7 +5,7 @@
     .large-4.columns
       = f.input :name, placeholder:'A name for your topic'
     .large-8.columns
-      = f.input :parent_topic, collection: Topic.topic_select, :hint=>'Leave blank to make a root topic', input_html: {style:'min-width:50%', class:'select2'}
+      = f.input :parent_topic_id, collection: Topic.topic_select, :selected=>@topic.parent_topic_id, :hint=>'Leave blank to make a root topic', input_html: {style:'min-width:50%', class:'select2'}
   .row
     .large-8.columns
       = f.input :description
@@ -20,7 +20,8 @@
       #out{style: "min-height: 20em;"}
   .actions
     = yield :form_nav
-    = f.submit "Save", :class => 'button'
+    = f.submit "Save", :class => 'button has-tip', :title=>'Tip: CMD-s saves when in the editor!', :data=>{:tooltip=>""}
+
 - content_for :post_body_js do
   = javascript_tag do
     $(function() {

@@ -1,4 +1,7 @@
-%h1 New topic
+- if @topic.parent_topic_id
+  %h1 New topic (sub-topic of #{@topic.parent_topic.name})
+- else
+  %h1 New topic
 
 = render 'form'
 

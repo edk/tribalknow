@@ -29,3 +29,6 @@ module Tribalknow
 
   end
 end
+
+Haml::Template.options[:ugly] = true
+

@@ -15,8 +15,11 @@ gem "pundit"
 #gem 'userstamp', :path => '../userstamp'
 gem 'paper_trail', '~> 3.0.0'
 gem 'public_activity'
-gem 'redcarpet'
+
+# gem 'redcarpet'
+gem 'github-markdown'
 gem 'html_truncator'
+
 gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'will_paginate'

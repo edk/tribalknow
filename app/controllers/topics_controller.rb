@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
 
   def index
-    @topics = Topic.order(:name).paginate(:page=>params[:page], :per_page=> 3*5 )
+    @topics = Topic.order(:name).where(:parent_topic_id=>nil).paginate(:page=>params[:page], :per_page=> 3*5 )
     session[:return_to] = topics_path
   end
 
@@ -12,6 +12,7 @@ class TopicsController < ApplicationController
 
   def new
     @topic = Topic.new
+    @topic.parent_topic_id = Topic.find_by_id(params[:parent_topic_id]).id if params[:parent_topic_id].present?
   end
 
   def edit

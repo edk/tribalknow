@@ -1,33 +1,36 @@
-%h2 Encylopedia Galactica
+.row
+  %h2 Encylopedia Galactica
 
-%br
-%ul.small-block-grid-3
-  - @topics.each do |topic|
-    %li
-      .left{:style=>'padding-right:5px'}= link_to image_tag("http://placehold.it/100x100&text=[icon]"), topic_path(topic)
+  %br
+  %ul.small-block-grid-3
+    - @topics.each do |topic|
+      %li
+        .left{:style=>'padding-right:5px'}= link_to image_tag("http://placehold.it/100x100&text=[icon]"), topic_path(topic)
 
-      %div
-        %h4{:style=>'display:inline;'}= link_to topic.name, topic_path(topic)
-        = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, method: :delete, data: { confirm: 'Are you sure?' } if current_user && current_user.admin?
+        %div
+          %h4{:style=>'display:inline;'}= link_to topic.name, topic_path(topic)
+          = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, method: :delete, data: { confirm: 'Are you sure?' } if current_user && current_user.admin?
 
-      %p
-        - if topic.description.present?
-          = truncate topic.description, length: 80*5
-        - else
-          = link_to edit_topic_path(topic) do
-            No description
-            %span (Add one!)
+        %p
+          - if topic.description.present?
+            = truncate topic.description, length: 80*5
+          - else
+            = link_to edit_topic_path(topic) do
+              No description
+              %span (Add one!)
 
-      = render_tag_links topic.tags
+        = render_tag_links topic.tags
 
-      - if topic.sub_topics.present?
-        .subtopics
-          = "(#{topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ').html_safe})"
-      
-      = link_to "#{topic.creator.name}", public_profile_path(topic.creator) if topic && topic.creator
-      
+        - if topic.sub_topics.present?
+          .subtopics
+            = raw "(#{topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ')})"
+        
+        = link_to "#{topic.creator.name}", public_profile_path(topic.creator) if topic && topic.creator
+        
+.row_spacer
+.row
+  .columns.large-8
+    = will_paginate @topics
+  .columns.large-4.center
+    = link_to 'Create new Topic', new_topic_path, :class=>'button tiny'
 
-%br/
-= will_paginate @topics
-%br/
-= link_to 'Create new Topic', new_topic_path
