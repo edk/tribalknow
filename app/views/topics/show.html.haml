@@ -21,7 +21,7 @@
         - @topic.sub_topics.each do |sub|
           %div= link_to sub.name, topic_path(sub)
         .row_divider
-        %p{:style=>'font-size:0.75em; padding-top:1em; text-align:right;'}= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
+        %p{:style=>'font-size:0.75em; padding-top:1.75rem; text-align:right; margin-bottom:-14px;'}= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
     .row
       .panel
         .panel_title Links/files

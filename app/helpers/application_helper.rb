@@ -6,7 +6,7 @@ module ApplicationHelper
     #     :fenced_code_blocks=>true, :disable_indented_code_blocks=>true, :underline=>true, :footnotes=>true,
     #     :no_intra_emphasis=>true, :tables=>true)
     # markdown.render(text).html_safe
-    GitHub::Markdown.render_gfm(text).html_safe
+    GitHub::Markdown.render_gfm(sanitize(text)).html_safe
   end
 
   def render_gravatar user, options = {}

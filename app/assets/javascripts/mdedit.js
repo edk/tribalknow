@@ -36,7 +36,10 @@ var setup_code_mirror = function() {
   }
 
   function setOutput(val){
-    $('#out').html(marked(val));
+    var text = marked(val).replace(/&#39;/g,"'");
+    text = text.replace(/<script>/gi,'&lt;script>');
+    text = text.replace(/<\/script>/gi,'&lt;/script>');
+    $('#out').html(text);
   }
 
   var editor = CodeMirror.fromTextArea($('#in textarea')[0], {
