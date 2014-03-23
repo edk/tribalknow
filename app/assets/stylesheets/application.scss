@@ -13,6 +13,7 @@
  *
  */
 
+
 @import 'foundation-icons';
 @import 'foundation-social-web-icons';
 @import 'foundation_and_overrides';
@@ -108,8 +109,21 @@ a.taglink {
   font-size: 1.5em;
   border-bottom: 1px solid silver;
 }
+
 .topic_content {
   padding-top: 1.5em;
+}
+
+.topic_index_element .delete_topic {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: visibility 0.2s linear, opacity 0.2s linear;
+  -moz-transition: visibility 0.2s linear, opacity 0.2s linear;
+  -o-transition: visibility 0.2s linear, opacity 0.2s linear;
+}
+.topic_index_element:hover .delete_topic {
+  visibility: visible;
+  opacity: 1;
 }
 
 .center {
