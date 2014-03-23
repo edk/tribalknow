@@ -1,1 +1,21 @@
-- raise "implement me"
+
+.row
+  .columns.small-12
+    %h4
+      = link_to question_path(result.question) do
+        In response to: #{result.question.title}
+.row
+  .columns.small-12
+    = raw HTML_Truncator.truncate(render_md(result.text), 25)
+.row
+  .columns.small-6
+    = render_tag_links(result.tags) if result.respond_to?(:tags)
+  .columns.small-2
+    /Written by #{result.creator.to_s}
+  .columns.small-2.right
+    %div{:style=>'font-size:0.8em; color:#999;'}Asked:<br/>
+    %div{:style=>'font-size:0.9em;'}= smart_display result.created_at
+  .columns.small-2.right
+    %div{:style=>'font-size:0.8em; color:#999;'}Last updated:<br/>
+    %div{:style=>'font-size:0.9em;'}= smart_display(result.updated_at)
+
