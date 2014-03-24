@@ -1,5 +1,5 @@
 
-<div class="columns large-12 drop_target square" data-url="<%= topic_topic_files_path(@topic) %>">
+<div class="columns large-12 drop_target square" data-url="<%= topic_topic_files_path(@topic) if @topic.id %>">
 
   <div class="instructions">
     Drop images and files below, or <span style="text-decoration:underline;">click here</span>.<br/>

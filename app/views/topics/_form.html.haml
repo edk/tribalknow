@@ -32,7 +32,7 @@
     $(function() {
     $('.CodeMirror').css({'height': '25em'});
     var url=$('.drop_target').attr('data-url');
-    $('.drop_target').dropzone({
+    var dz_element = $('.drop_target').dropzone({
     url: url,
     clickable: ".instructions",
     autoProcessQueue: true, // When set to false you have to call myDropzone.processQueue() yourself in order to upload the dropped files. See below for more information on handling queues.
@@ -43,4 +43,12 @@
     //previewTemplate: //is a string that contains the template used for each dropped image. Change it to fulfill your needs but make sure to properly provide all elements.
     headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
     });
+    var dz = Dropzone.forElement(dz_element.get(0));
+    dz.on('complete', function(file, a, b){
+    console.log("complete", file, this, a, b)
     });
+    dz.on('uploadprogress', function(file, a, b){
+    console.log("uploadprogress", file, this, a, b)
+    });
+    });
+
