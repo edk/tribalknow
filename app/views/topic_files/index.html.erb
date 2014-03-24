@@ -11,3 +11,18 @@
   </div>
 
 </div>
+
+<% content_for :post_body_js do %>
+  <%= javascript_tag do %>
+    $(function() {
+      $('.dz-preview img').on("click", function(){
+        var url  = $(this).attr('data-orig');
+        var name = $(this).attr('data-filename');
+        if (window.code_mirror) {
+          var md_image = "!["+ name +"]("+url+")";
+          window.code_mirror.replaceSelection(md_image)
+        }
+      })
+    });
+  <% end %>
+<% end %>

@@ -3,6 +3,6 @@
   <div class="dz-details">
     <div class="dz-filename"><%= preview.asset_file_name %><span data-dz-name></span></div>
     <div class="dz-size" data-dz-size><%= preview.asset_file_size %></div>
-    <img data-dz-thumbnail src="<%= preview.asset.url(:thumb) %>" />
+    <img data-dz-thumbnail src="<%= preview.asset.url(:thumb) %>" data-orig="<%= preview.asset.url %>" data-filename="<%= preview.asset_file_name %>"/>
   </div>
 </div>

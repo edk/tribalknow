@@ -52,6 +52,7 @@ var setup_code_mirror = function() {
     theme: 'default',
     onChange: update
   });
+  window.code_mirror = editor;
 
   document.addEventListener('drop', function(e){
     e.preventDefault();
