@@ -16,11 +16,13 @@
 //= require underscore
 //= require foundation
 //= require foundation/foundation.tooltip
-//= require "mdedit"
+//= require mdedit
+//= require dropzone
 
 // require google-code-prettify/prettify
 // require_tree .
 
+Dropzone.autoDiscover = false;
 
 $(function(){
   $(document).foundation();

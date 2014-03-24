@@ -6,7 +6,11 @@ Tribalknow::Application.routes.draw do
   resources :users
   resource  :account
   resources :searches
-  resources :topics
+
+  resources :topics do
+    resources :topic_files
+  end
+
   resources :tenants
   resources :public_profiles, only:[:index, :show]
   resources :activities

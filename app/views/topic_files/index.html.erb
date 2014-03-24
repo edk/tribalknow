@@ -1,0 +1,13 @@
+
+<div class="columns large-12 drop_target square" data-url="<%= topic_topic_files_path(@topic) %>">
+
+  <div class="instructions">
+    Drop images and files below, or <span style="text-decoration:underline;">click here</span>.<br/>
+    <span style="font-size:0.8rem;">Clicking on an image below will insert the link into the editor</span>
+  </div>
+  
+  <div class="file_list">
+    <%= render :partial=>"/topic_files/preview", :collection => @topic.topic_files %>
+  </div>
+
+</div>

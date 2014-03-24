@@ -72,6 +72,10 @@ GEM
     capistrano-rvm (0.1.0)
       capistrano (~> 3.0)
       sshkit (~> 1.2.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.3)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -168,6 +172,11 @@ GEM
     paper_trail (3.0.0)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pg (0.16.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -294,6 +303,7 @@ DEPENDENCIES
   mysql2
   omniauth-github
   paper_trail (~> 3.0.0)
+  paperclip
   pg
   pry
   public_activity
