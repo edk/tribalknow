@@ -10,7 +10,7 @@
           = f.input :parent_topic_id, collection: Topic.topic_select, :selected=>@topic.parent_topic_id, :include_blank=>true, :hint=>'Leave blank to make a root topic', input_html: {style:'min-width:100%;', class:'select2'}
       .row
         .large-12.columns
-          = f.input :description
+          = f.input :description, placeholder: 'A short description'
       .row
         .large-12.columns
           = f.input :tags do

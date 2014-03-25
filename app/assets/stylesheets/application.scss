@@ -123,6 +123,7 @@ a.taglink {
 .topic_index_element {
   p {
     padding-top: 0.45rem;
+    margin-bottom: 0.7rem;
     line-height: 0.9rem;
   }
   .topic_icon {
@@ -133,6 +134,14 @@ a.taglink {
     font-size:1.5rem;
     font-weight:110%;
     line-height:0.9rem
+  }
+  .taglist {
+    float: right;
+    width: 66%;
+    a {
+      margin-bottom: 0.2rem;
+      padding-top: 0.4rem;
+    }
   }
 }
 
