@@ -2,7 +2,8 @@
   .columns.large-10<
     .row
       .columns.large-12
-        %h2= @topic.name
+        %h1{:style=>'border-bottom: 1px solid silver; font-size: 275%;'}
+          %b= @topic.name
     .row
       .columns.large-12
         %i= @topic.description
@@ -32,5 +33,8 @@
     .row
       .panel
         .panel_title Questions
+    .row
+      .panel
+        .panel_title Contributors / history
 
 

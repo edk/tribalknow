@@ -1,6 +1,7 @@
 // Hacked and used https://github.com/jbt/markdown-editor which uses the lovely WTFPL
 // http://codemirror.net/
 // Another option might be to check out http://jrmoran.com/playground/markdown-live-editor/
+// http://sofish.github.io/pen/
 //= require md-editor/marked.js
 //= require md-editor/highlight.pack.js
 //= require md-editor/codemirror/lib/codemirror.js
@@ -42,6 +43,7 @@ var setup_code_mirror = function() {
     // we should call the rails sanitize method on save to remove the blacklisted entities and prevent them from getting into the db.
     // Then, only the person entering the code is exposed, if they bypass this naive filter.  Later, when we display to another user who goes to edit should be safe.
     $('#out').html(text);
+    // $('#out').animate({scrollTop:$('#out').height()}, 300); // need to figure out a way to scroll to the proper position in all cases
   }
 
   var editor = CodeMirror.fromTextArea($('#in textarea')[0], {
