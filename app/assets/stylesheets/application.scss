@@ -93,11 +93,13 @@ div.tags_editor {
 a.taglink {
   $padding: 0.25rem;
   $bg: $primary-color;
-  $radius: .5rem;
+  $radius: .7rem;
   $full-width: false;
   $disabled: false;
   $is-input: false;
   @include button($padding, $bg, $radius, $full-width, $disabled, $is-input);
+  margin-bottom: 0.2rem;
+  padding-top: 0.4rem;
   font-size: 75%;
 }
 
@@ -138,10 +140,6 @@ a.taglink {
   .taglist {
     float: right;
     width: 66%;
-    a {
-      margin-bottom: 0.2rem;
-      padding-top: 0.4rem;
-    }
   }
 }
 
