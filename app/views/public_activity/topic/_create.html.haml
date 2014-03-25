@@ -1,6 +1,6 @@
 
-.panel
-  - if activity && activity.owner
+- if activity && activity.owner && activity.trackable
+  .panel
     %a{ :href=>"#"}
       #{activity.owner.name}
     %a{ :href=> topic_path(activity.trackable) }
