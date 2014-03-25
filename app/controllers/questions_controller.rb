@@ -53,8 +53,8 @@ class QuestionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-        # Never trust parameters from the scary internet, only allow the white list through.
+  # Use callbacks to share common setup or constraints between actions.
+  # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
     params[:question][:tags] = Tag.add_new_tags(params[:question][:tags].split(',').flatten)
     params[:question].permit(:title, :text, :topic_id, :tags => [] )

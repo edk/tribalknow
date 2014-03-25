@@ -13,7 +13,10 @@
           = f.input :description
       .row
         .large-12.columns
-          = f.input :tags, collection: Tag.all.map {|t| [t.name, t.name]}, input_html: {multiple:true, class:'select2', style:'min-width:100%; height:36px;'}
+          = f.input :tags do
+            %span{:id=>'tags', :style=>'display:none;'}= Tag.all_tags.to_json
+            = f.input :tags, :as=>:hidden, input_html: {class:'select2-with-tags', style:'min-width:100%; height:36px;', value: f.object.tags.empty? ? '' : f.object.tags.join(',')}
+            =# f.input :tags, collection: Tag.all.map {|t| [t.name, t.name]}, input_html: {multiple:true, class:'select2-with-tags', style:'min-width:100%; height:36px;'}
     .column.large-5
       .row
         = render :file=>'/topic_files/index'
@@ -32,6 +35,7 @@
     $(function() {
     $('.CodeMirror').css({'height': '25em'});
     var url=$('.drop_target').attr('data-url');
+    if (url) {
     var dz_element = $('.drop_target').dropzone({
     url: url,
     clickable: ".instructions",
@@ -50,5 +54,6 @@
     dz.on('uploadprogress', function(file, a, b){
     console.log("uploadprogress", file, this, a, b)
     });
+    }
     });
 

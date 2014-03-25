@@ -27,7 +27,8 @@
         .panel_title Links/files
     .row
       .panel
-        .panel_title Tags
+        .panel_title{:style=>'margin-bottom:8px;'} Tags
+        = render_tag_links @topic.tags
     .row
       .panel
         .panel_title Questions

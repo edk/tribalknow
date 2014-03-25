@@ -62,6 +62,7 @@ class TopicsController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def topic_params
+    params[:topic][:tags] = Tag.add_new_tags(params[:topic][:tags].split(',').flatten)
     params[:topic].permit(:name, :description, :content, :parent_topic_id, :tags => [] )
   end
 end

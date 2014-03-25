@@ -27,6 +27,12 @@ Dropzone.autoDiscover = false;
 $(function(){
   $(document).foundation();
   $('.select2').select2();
+  if ($('#tags').length > 0) {
+    var all_tags = JSON.parse($('#tags').html());
+    if (all_tags && all_tags.length > 0) {
+      $('.select2-with-tags').select2({tags:all_tags });
+    }
+  }
   
   $(document.body).on("click", ".close", function(ev){
     var panel = $(this).parents('[data-alert]');
