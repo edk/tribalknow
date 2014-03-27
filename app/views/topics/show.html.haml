@@ -22,7 +22,7 @@
         - @topic.sub_topics.each do |sub|
           %div= link_to sub.name, topic_path(sub)
         .row_divider
-        %p{:style=>'font-size:0.75em; padding-top:1.75rem; text-align:right; margin-bottom:-14px;'}= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
+        .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
     .row
       .panel
         .panel_title Links/files
@@ -37,6 +37,8 @@
     .row
       .panel
         .panel_title Questions
+        .row_divider
+        .panel_offset_link= link_to "Ask Question", new_question_path(:tag=>@topic.name)
     .row
       .panel
         .panel_title Contributors / history
