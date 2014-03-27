@@ -7,10 +7,7 @@ class ApproveUsersController < ApplicationController
   def approve
     user = User.find(params[:id]) # default scope shoudl still restrict to current tenant
     authorize user, :update?
-    user.approved = true
-    user.active = true
-    user.save!
-    user.send_confirmation_instructions
+    user.approve_and_activate_send_email!
     flash[:notice] = "Successfully approved user."
     redirect_to :action=>'index'
   end

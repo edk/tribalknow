@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     if requires_admin_approval?
       AdminMailer.new_user_waiting_for_approval(self).deliver
     else
-      approve_and_activate_send_email
+      approve_and_activate_send_email!
     end
   end
 
@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     self.tenant && self.tenant.email_domain_requires_approval?(self.email)
   end
 
-  def approve_and_activate_send_email
+  def approve_and_activate_send_email!
     self.update_columns(approved: true, active: true)
     self.send_confirmation_instructions
   end
