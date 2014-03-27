@@ -38,7 +38,7 @@
       .panel
         .panel_title Questions
         .row_divider
-        .panel_offset_link= link_to "Ask Question", new_question_path(:tag=>@topic.name)
+        .panel_offset_link= link_to "Ask Question", new_question_path(:topic_id=>@topic.id)
     .row
       .panel
         .panel_title Contributors / history

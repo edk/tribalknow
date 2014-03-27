@@ -11,6 +11,7 @@ class Question < ActiveRecord::Base
   has_many   :answers, :dependent => :destroy
   belongs_to :user
   validates  :title, :text, presence: true, length: { minimum: 3 }
+  belongs_to :topic
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user } 

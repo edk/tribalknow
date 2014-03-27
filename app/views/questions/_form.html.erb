@@ -20,7 +20,13 @@
       </div>
     </div>
   </div>
-
+  <% if @question.topic %>
+    <div class='row'>
+      <div class='large-10 columns'>
+        <%= text_field_tag :topic, "For topic: #{@question.topic.name}", :readonly=>'', :disabled=>'' %>
+      </div>
+    </div>
+  <% end %>
   <div class='row'>
     <div class='large-10 columns'>
       <%= f.input :tags do %>

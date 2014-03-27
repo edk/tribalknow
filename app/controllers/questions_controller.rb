@@ -9,6 +9,9 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    if params[:topic_id].present?
+      @question.topic = Topic.find_by_id(params[:topic_id])
+    end
   end
 
   def edit
