@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323201622) do
+ActiveRecord::Schema.define(version: 20140327144127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20140323201622) do
     t.datetime "updated_at"
     t.boolean  "new_user_restriction",      default: false
     t.string   "self_serve_allowed_domain"
+    t.string   "safe_domains"
   end
 
   add_index "tenants", ["domain"], name: "index_tenants_on_domain", using: :btree

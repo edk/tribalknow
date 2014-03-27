@@ -23,7 +23,20 @@ class User < ActiveRecord::Base
 
   after_create :send_admin_email
   def send_admin_email
-    AdminMailer.new_user_waiting_for_approval(self).deliver
+    if requires_admin_approval?
+      AdminMailer.new_user_waiting_for_approval(self).deliver
+    else
+      approve_and_activate_send_email
+    end
+  end
+
+  def requires_admin_approval?
+    self.tenant && self.tenant.email_domain_requires_approval?(self.email)
+  end
+
+  def approve_and_activate_send_email
+    self.update_columns(approved: true, active: true)
+    self.send_confirmation_instructions
   end
 
   def from_external_auth?

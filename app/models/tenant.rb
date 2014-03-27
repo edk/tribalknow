@@ -16,6 +16,16 @@ class Tenant < ActiveRecord::Base
       Tenant.create!(:name=>'coupa', :subdomain=>'coupa')
     end
   end
+
+  def email_domain_requires_approval? email
+    if self.safe_domains.present?
+      domains = self.safe_domains.split(',')
+      !domains.any? { |domain| email =~ /.*@#{domain}/ }
+    else
+      true
+    end
+  end
+
 end
 
 
