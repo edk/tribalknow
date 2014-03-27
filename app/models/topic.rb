@@ -10,6 +10,7 @@ class Topic < ActiveRecord::Base
   belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics
   validates  :name, presence: true, length: { minimum: 3 }
   has_many   :topic_files
+  has_many   :questions
   # has_many   :links
   # has_many   :contributors
 

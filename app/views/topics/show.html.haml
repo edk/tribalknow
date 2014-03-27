@@ -37,6 +37,8 @@
     .row
       .panel
         .panel_title Questions
+        - @topic.questions.each do |question|
+          %p= question.title
         .row_divider
         .panel_offset_link= link_to "Ask Question", new_question_path(:topic_id=>@topic.id)
     .row
