@@ -9,7 +9,7 @@
       .form-actions
         .row
           .large-6.columns
-            = f.button :submit, "Sign in"
+            = f.button :submit, "Sign in", :class=>'button'
           .large-6.columns
             = link_to "Login with GitHub", user_omniauth_authorize_path(:github), {:class=>'button'}
   /.large-6.columns
