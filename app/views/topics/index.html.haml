@@ -1,5 +1,5 @@
 .row
-  %h2 Encylopedia Galactica
+  %h2= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"
 
   %br{:style=>'padding:3em;'}
   %ul.small-block-grid-3

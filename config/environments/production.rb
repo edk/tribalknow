@@ -1,4 +1,4 @@
-Tribalknow::Application.configure do
+# Tribalknow::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -46,7 +46,7 @@ Tribalknow::Application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  # config.log_tags = [ :subdomain, :uuid ]
+  config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
@@ -85,7 +85,7 @@ Tribalknow::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   config.assets.precompile += %w( mdedit.js mdedit.css )
-  config.assets.precompile += %w( vendor/modernizr.js )
+  config.assets.precompile += %w( vendor/modernizr.js questions.js )
 
 end
 
