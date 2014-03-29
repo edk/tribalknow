@@ -2,10 +2,10 @@
   %h2= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"
 
   %br{:style=>'padding:3em;'}
-  %ul.small-block-grid-3
+  %ul.large-block-grid-3.medium-block-grid-2.small-block-grid-1
     - @topics.each do |topic|
       %li.topic_index_element
-        .left.topic_icon= link_to image_tag("http://placehold.it/100x100&text=[icon]"), topic_path(topic)
+        .left.topic_icon{:id=>"topic_icon_#{topic.id}"}= link_to image_tag("blank-icon-100x100.gif"), topic_path(topic)
 
         .title
           = link_to topic.name, topic_path(topic)

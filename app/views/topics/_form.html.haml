@@ -4,9 +4,9 @@
   .row
     .column.large-7
       .row
-        .large-6.columns
+        .columns.large-6
           = f.input :name, placeholder:'A name for your topic'
-        .large-6.columns
+        .columns.large-6
           = f.input :parent_topic_id, collection: Topic.topic_select, :selected=>@topic.parent_topic_id, :include_blank=>true, :hint=>'Leave blank to make a root topic', input_html: {style:'min-width:100%;', class:'select2'}
       .row
         .large-12.columns
