@@ -10,6 +10,20 @@ class TopicsController < ApplicationController
     session[:return_to] = topic_path(@topic)
   end
 
+  def set_icon
+    topic = Topic.friendly.find(params[:id])
+    topic.icon = params[:file]
+    respond_to do |format|
+      format.json {
+        if topic.save
+          render :status=>:ok, :json => { :url => topic.icon.url(:thumb) }
+        else
+          render :status=>:unprocessable_entity, :json => {:error=>topic.errors}
+        end
+      }
+    end
+  end
+
   def new
     @topic = Topic.new
     @topic.parent_topic_id = Topic.find_by_id(params[:parent_topic_id]).id if params[:parent_topic_id].present?

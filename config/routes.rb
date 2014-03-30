@@ -9,6 +9,9 @@ Tribalknow::Application.routes.draw do
 
   resources :topics do
     resources :topic_files
+    member do
+      post :set_icon
+    end
   end
 
   resources :tenants

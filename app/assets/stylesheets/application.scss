@@ -134,7 +134,11 @@ a.taglink {
   }
   .topic_icon {
     padding-right:5px;
-
+    width: 100px;
+    height: 100px;
+  }
+  .topic_icon.hover {
+    border: 5px dashed #333;
   }
   .title {
     font-size:1.5rem;
