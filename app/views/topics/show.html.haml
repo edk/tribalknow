@@ -1,48 +1,39 @@
 .row<
-  .columns.large-10<
-    .row
-      .columns.large-12
-        %h1{:style=>'border-bottom: 1px solid silver; font-size: 275%;'}
-          %b= @topic.name
-    .row
-      .columns.large-12
-        %i= @topic.description
-    .row.topic_content<
-      .columns.large-12<
-        = render_md @topic.content
-  .columns.large-2
+  .columns.large-9<
+    = render "topic_breadcrumb"
+  .columns.large-3
+    = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
 
-    .row
-      .columsn.large-12
-        = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
 
-    .row
-      .panel
-        .panel_title Sub-topics
-        - @topic.sub_topics.each do |sub|
-          %div= link_to sub.name, topic_path(sub)
-        .row_divider
-        .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
-    .row
-      .panel
-        .panel_title Links/files
-    .row
-      .panel
-        .panel_title Quizzes
-        How well do you know the topic?
-    .row
-      .panel
-        .panel_title{:style=>'margin-bottom:8px;'} Tags
-        = render_tag_links @topic.tags
-    .row
-      .panel
-        .panel_title Questions
-        - @topic.questions.each do |question|
-          %p= question.title
-        .row_divider
-        .panel_offset_link= link_to "Ask Question", new_question_path(:topic_id=>@topic.id)
-    .row
-      .panel
-        .panel_title Contributors / history
+  .columns.large-9<
+    %h1{:style=>'border-bottom: 1px solid silver; font-size: 275%;'}
+      %b= @topic.name
+    %i= @topic.description
+    .topic_content<
+      = render_md @topic.content
+  
+  .columns.large-3
+    .panel
+      .panel_title Sub-topics
+      - @topic.sub_topics.each do |sub|
+        %div= link_to sub.name, topic_path(sub)
+      .row_divider
+      .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
+    .panel
+      .panel_title Links/files
+    .panel
+      .panel_title Quizzes
+      How well do you know the topic?
+    .panel
+      .panel_title{:style=>'margin-bottom:8px;'} Tags
+      = render_tag_links @topic.tags
+    .panel
+      .panel_title Questions
+      - @topic.questions.each do |question|
+        %p= question.title
+      .row_divider
+      .panel_offset_link= link_to "Ask Question", new_question_path(:topic_id=>@topic.id)
+    .panel
+      .panel_title Contributors / history
 
 

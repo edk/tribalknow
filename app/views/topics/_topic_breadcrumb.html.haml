@@ -1,0 +1,5 @@
+%ul.breadcrumbs
+  %li= link_to "Topics", topics_path
+  - @topic.hierarchy.each do |topic|
+    %li= link_to topic.name, topic_path(topic)
+  %li.current= @topic.name

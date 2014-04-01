@@ -19,8 +19,18 @@ class Topic < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user } 
 
+  def hierarchy
+    harray, current = [], self
+
+    while current = current.parent_topic 
+      harray << current
+    end
+    harray.reverse
+  end
+
   def self.topic_select
-    Topic.where("parent_topic_id is NULL")
+    # Topic.where("parent_topic_id is NULL") can't show only roots if we have more than 1 level of nesting
+    Topic.order("name ASC")
   end
 
 end
