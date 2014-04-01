@@ -1,13 +1,27 @@
 class TopicsController < ApplicationController
 
   def index
-    @topics = Topic.order(:name).where(:parent_topic_id=>nil).paginate(:page=>params[:page], :per_page=> 3*5 )
+    @topics = Topic.order(:name).where(:parent_topic_id=>nil).paginate(:page=>params[:page], :per_page=> 3*9 )  # 3 per row, 9 rows
     session[:return_to] = topics_path
   end
 
   def show
     @topic = Topic.friendly.find(params[:id])
     session[:return_to] = topic_path(@topic)
+  end
+
+  def set_icon
+    topic = Topic.friendly.find(params[:id])
+    topic.icon = params[:file]
+    respond_to do |format|
+      format.json {
+        if topic.save
+          render :status=>:ok, :json => { :url => topic.icon.url(:thumb) }
+        else
+          render :status=>:unprocessable_entity, :json => {:error=>topic.errors}
+        end
+      }
+    end
   end
 
   def new

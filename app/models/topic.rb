@@ -14,6 +14,9 @@ class Topic < ActiveRecord::Base
   # has_many   :links
   # has_many   :contributors
 
+  has_attached_file :icon, :styles => { :thumb => "100x100#" }, :default_url => "blank-icon-100x100.gif" #/images/:style/missing.png"
+  validates_attachment_content_type :icon, :content_type => /\Aimage\/.*\Z/
+
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
   include PublicActivity::Model

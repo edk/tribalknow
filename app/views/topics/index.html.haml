@@ -1,3 +1,6 @@
+- content_for(:post_body_js) do
+  = javascript_include_tag "topics.js"
+
 .row
   %h2= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"
 
@@ -5,7 +8,7 @@
   %ul.large-block-grid-3.medium-block-grid-2.small-block-grid-1
     - @topics.each do |topic|
       %li.topic_index_element
-        .left.topic_icon{:id=>"topic_icon_#{topic.id}"}= link_to image_tag("blank-icon-100x100.gif"), topic_path(topic)
+        .left.icon_drop_target.topic_icon{:id=>"topic_icon_#{topic.id}", :url=>set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb)), topic_path(topic)
 
         .title
           = link_to topic.name, topic_path(topic)

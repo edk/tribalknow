@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327144127) do
+ActiveRecord::Schema.define(version: 20140329214751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 20140327144127) do
     t.integer  "parent_topic_id"
     t.string   "name"
     t.string   "description"
-    t.text     "tags",            default: [], array: true
+    t.text     "tags",              default: [], array: true
     t.text     "content"
     t.integer  "tenant_id"
     t.integer  "creator_id"
@@ -162,6 +162,10 @@ ActiveRecord::Schema.define(version: 20140327144127) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   add_index "topics", ["slug"], name: "index_topics_on_slug", unique: true, using: :btree
