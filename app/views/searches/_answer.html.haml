@@ -1,21 +1,23 @@
 
 .row
-  .columns.small-12
-    %h4
+  .columns.large-8
+    .search_result_title
       = link_to question_path(result.question) do
-        In response to: #{result.question.title}
-.row
-  .columns.small-12
-    = raw HTML_Truncator.truncate(render_md(result.text), 25)
-.row
-  .columns.small-6
-    = render_tag_links(result.tags) if result.respond_to?(:tags)
-  .columns.small-2
-    /Written by #{result.creator.to_s}
-  .columns.small-2.right
-    %div{:style=>'font-size:0.8em; color:#999;'}Asked:<br/>
-    %div{:style=>'font-size:0.9em;'}= smart_display result.created_at
-  .columns.small-2.right
-    %div{:style=>'font-size:0.8em; color:#999;'}Last updated:<br/>
-    %div{:style=>'font-size:0.9em;'}= smart_display(result.updated_at)
+        Answer to: #{result.question.title}
+    - if content=result.excerpts.text.presence
+      = raw content
+    - else
+      = raw HTML_Truncator.truncate(render_md(result.text), 25)
+  .columns.large-4
+    .row
+      .columns.large-6.right
+        %p
+          %div.small_light_title Last updated:<br/>
+          %div.small= smart_display(result.updated_at)
+      .columns.large-6.right
+        %p
+          %div.small_light_title Asked:<br/>
+          %div.small= smart_display result.created_at
+    .row
+      = render_tag_links result.tags if result.respond_to?(:tags)
 

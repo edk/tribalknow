@@ -1,18 +1,23 @@
 .row
-  .columns.small-8
-    %p description: #{result.description}
-    %p #{truncate result.content, :length=>180, :separator=>' '}
-  .columns.small-4
-    %h5
-      %b #{result.class.to_s.underscore.capitalize}: #{result.name}
--# Additional meta-data about topics needed.  how many subtopics, how many stars, etc
-.row
-  .columns.small-2
-    Written by #{result.creator.to_s}
-  .columns.small-4
-    %p tags: #{result.tags.join(", ")}
-  .columns.small-3
-    = result.created_at
-  .columns.small-3
-    = result.updated_at
+  .columns.large-8
+    = link_to topic_path(result) do
+      .search_result_title
+        %b Topic:
+        #{result.name} - #{result.description}
+      - if (content = result.excerpts.content).present?
+        %p #{content.html_safe}
+      - else
+        %p #{truncate result.content, :length=>180, :separator=>' '}
+
+  .columns.large-4
+    %p
+      .small_light_title Last updated at
+      .small #{smart_display(result.updated_at)}
+    %p #{render_tag_links result.tags}
+
+/-# Additional meta-data about topics needed.  how many subtopics, how many stars, etc
+/.row
+/  .columns.large-2
+/    /Written by #{result.creator.to_s}
+/  .columns.large-4
 

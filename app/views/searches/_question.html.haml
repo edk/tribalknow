@@ -1,19 +1,22 @@
 .row
-  .columns.small-8
-    .question_title
+  .columns.large-8
+    .search_result_title
       = link_to "#{result.class.to_s.underscore.capitalize}: #{result.title}", question_path(result)
-.row
-  .columns.small-12
     = truncate(result.text.html_safe, :length=>180, :separator=>' ')
+  .columns.large-4
+    .row
+      .columns.large-6.right
+        %p
+          %div.small_light_title Last updated:<br/>
+          %div.small= smart_display(result.updated_at)
+      .columns.large-6.right
+        %p
+          %div.small_light_title Asked:<br/>
+          %div.small= smart_display result.created_at
+    .row
+      = render_tag_links result.tags
 .row
-  .columns.small-6
-    = render_tag_links result.tags
-  .columns.small-2
-    /Written by #{result.creator.to_s}
-  .columns.small-2.right
-    %div{:style=>'font-size:0.8em; color:#999;'}Asked:<br/>
-    %div{:style=>'font-size:0.9em;'}= smart_display result.created_at
-  .columns.small-2.right
-    %div{:style=>'font-size:0.8em; color:#999;'}Last updated:<br/>
-    %div{:style=>'font-size:0.9em;'}= smart_display(result.updated_at)
+  .columns.large-8
+    - if result.answers.size > 0
+      Has #{pluralize(result.answers.size, 'answer')}.
 

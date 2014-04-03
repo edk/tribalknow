@@ -103,9 +103,17 @@ a.taglink {
   font-size: 75%;
 }
 
-.question_title {
+.search_result_title {
   font-weight: bold;
   font-size: 1.75em;
+}
+
+.small_light_title {
+  font-size:0.8em;
+  color: #999;
+}
+.small {
+  font-size:0.8em;
 }
 
 .row_spacer {
@@ -212,4 +220,9 @@ a.button {
     color: red;
     display:none;
   }
+}
+
+span.match {
+  font-weight: bold;
+  font-style: italic;
 }
