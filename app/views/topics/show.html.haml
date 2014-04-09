@@ -11,7 +11,7 @@
     %i= @topic.description
     .topic_content<
       = render_md @topic.content
-  
+
   .columns.large-3
     .panel
       .panel_title Sub-topics
@@ -30,10 +30,8 @@
     .panel
       .panel_title Questions
       - @topic.questions.each do |question|
-        %p= question.title
+        %p= link_to question.title, question_path(question)
       .row_divider
-      .panel_offset_link= link_to "Ask Question", new_question_path(:topic_id=>@topic.id)
+      .panel_offset_link= link_to "Ask Related Question", new_question_path(:topic_id=>@topic.id)
     .panel
       .panel_title Contributors / history
-
-
