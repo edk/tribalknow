@@ -2,7 +2,7 @@ class Topic < ActiveRecord::Base
   stampable
   simple_tagging
   has_paper_trail
-  
+
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
@@ -20,12 +20,12 @@ class Topic < ActiveRecord::Base
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller && controller.current_user } 
+  tracked owner: ->(controller, model) { controller && controller.current_user }
 
   def hierarchy
     harray, current = [], self
 
-    while current = current.parent_topic 
+    while current = current.parent_topic
       harray << current
     end
     harray.reverse
@@ -36,5 +36,7 @@ class Topic < ActiveRecord::Base
     Topic.order("name ASC")
   end
 
+  def to_s
+    name
+  end
 end
-

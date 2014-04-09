@@ -1,0 +1,13 @@
+
+- activities.each do |activity|
+  .panel
+    = "#{activity[0].split(':').first}: " # 2nd is the id of the topic
+    = activity[1].first[:obj].trackable.to_s
+    - act = activity[1].map {|a| { a[:key].split('.').last => a[:owner].name } }
+    - act = act.inject({}) {|m,o| m[o.keys.first] ||= []; m[o.keys.first] << o.values.first; m}
+    - if act["create"]
+      %p= "Created by #{act["create"].join(', ')}"
+    - if act["update"]
+      %p= "Updated by #{act["update"].join(', ')}"
+    - if act["delete"]
+      %p= "Deleted by #{act["delete"].join(', ')}"

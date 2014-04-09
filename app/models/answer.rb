@@ -7,5 +7,9 @@ class Answer < ActiveRecord::Base
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller && controller.current_user } 
+  tracked owner: ->(controller, model) { controller && controller.current_user }
+
+  def to_s
+    question && question.title
+  end
 end

@@ -14,8 +14,11 @@ class Question < ActiveRecord::Base
   belongs_to :topic
 
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller && controller.current_user } 
-    
+  tracked owner: ->(controller, model) { controller && controller.current_user }
+
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
+  def to_s
+    title
+  end
 end
