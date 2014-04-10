@@ -3,7 +3,7 @@
 
 <p>There is a new user awaiting your approval.</p>
 
-<p>You can view pending requests at: <%= link_to(approve_users_url, approve_users_url) %></p>
+<p>You can view pending requests at: <%= link_to(approve_users_url, approve_users_url, :subdomain => @resource.tenant.subdomain) %></p>
 
 <p>
 Thanks,

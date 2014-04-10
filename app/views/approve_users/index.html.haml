@@ -12,6 +12,7 @@
       %th approve
       %th active?
       %th Reject
+      %th Reject without email
   %tbody
     - if @users.empty?
       %tr
@@ -30,3 +31,5 @@
             = user.active? ? f_icon('check') : f_icon('x')
           %td
             = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_approve_user_path(user), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user?"}, :method=>:post}
+          %td
+            = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_approve_user_path(user, :skip_notification=>1), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user without email notification?"}, :method=>:post}
