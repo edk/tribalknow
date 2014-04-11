@@ -21,6 +21,9 @@ class Topic < ActiveRecord::Base
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
+  
+  scope :created_by, ->(user) { where(:creator_id => user.id) }
+  scope :updated_by, ->(user) { where(:updater_id => user.id) }
 
   def hierarchy
     harray, current = [], self

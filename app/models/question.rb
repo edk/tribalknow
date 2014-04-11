@@ -17,6 +17,8 @@ class Question < ActiveRecord::Base
   tracked owner: ->(controller, model) { controller && controller.current_user }
 
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+  
+  scope :asked_by, ->(user) { where(:creator_id => user.id ) }
 
   def to_s
     title

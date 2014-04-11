@@ -8,6 +8,8 @@ class Answer < ActiveRecord::Base
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
+  
+  scope :answered_by, ->(user) { where(:creator_id => user.id) }
 
   def to_s
     question && question.title

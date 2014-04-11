@@ -17,9 +17,21 @@
           / %p Last logged in at #{current_user.last_sign_in_at} (#{time_ago_in_words(current_user.last_sign_in_at)} ago) from #{current_user.last_sign_in_ip}
           %h3 Your Stats
           %ul
-            %li how many q's
-            %li how many a's
-            %li how many topics created, updated/contributed to
+            %li
+              - if n_asked = Question.asked_by(current_user).size
+                = pluralize n_asked, 'question'
+                asked all-time.
+              - else
+                = link_to "No questions asked yet.", new_question_path
+            %li
+              - if n_answered = Answer.answered_by(current_user).size
+                = pluralize n_asked, 'answer'
+                asked all-time.
+              - else
+                = link_to "No answers yet."
+            %li
+              %div Created #{pluralize Topic.created_by(current_user).size, "topic"}
+              %div Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
       .columns.large-6
         .panel
           %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}
