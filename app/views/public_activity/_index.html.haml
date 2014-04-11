@@ -1,13 +1,26 @@
 
 - activities.each do |activity|
+  :ruby
+    trackable = activity[1].first[:obj].trackable
+    str = case trackable
+          when Topic
+            link_to trackable.to_s, topic_path(trackable)
+          when Question
+            link_to trackable.to_s, question_path(trackable)
+          when Answer
+            link_to trackable.to_s, question_path(trackable.question)
+          end
+  - next if trackable.nil?
   .panel
-    = "#{activity[0].split(':').first}: " # 2nd is the id of the topic
-    = activity[1].first[:obj].trackable.to_s
+    = "#{trackable.class.to_s}: " # 2nd is the id of the topic
+    = str
+            
     - act = activity[1].map {|a| { a[:key].split('.').last => a[:owner].name } }
     - act = act.inject({}) {|m,o| m[o.keys.first] ||= []; m[o.keys.first] << o.values.first; m}
-    - if act["create"]
-      %p= "Created by #{act["create"].join(', ')}"
     - if act["update"]
-      %p= "Updated by #{act["update"].join(', ')}"
+      %div= "Updated by #{act["update"].uniq.join(', ')}"
+    - elsif act["create"]
+      %div= "Created by #{act["create"].uniq.join(', ')}"
     - if act["delete"]
-      %p= "Deleted by #{act["delete"].join(', ')}"
+      %div= "Deleted by #{act["delete"].uniq.join(', ')}"
+    = trackable && "#{time_ago_in_words trackable.updated_at} ago"
