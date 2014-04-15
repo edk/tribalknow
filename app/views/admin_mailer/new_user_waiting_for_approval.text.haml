@@ -3,7 +3,7 @@ Hi Admin,
 
 There is a new user awaiting your approval.
 
-You can view pending requests at: #{approve_users_url(:subdomain => @resource.tenant.subdomain)}
+You can view pending requests at: #{approve_users_url(:subdomain => @resource.tenant.subdomain) rescue $!}
 
 Thanks,
 The system.
