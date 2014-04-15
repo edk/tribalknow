@@ -20,18 +20,21 @@
             %li
               - if n_asked = Question.asked_by(current_user).size
                 = pluralize n_asked, 'question'
-                asked all-time.
+                asked.
               - else
                 = link_to "No questions asked yet.", new_question_path
             %li
               - if n_answered = Answer.answered_by(current_user).size
                 = pluralize n_asked, 'answer'
-                asked all-time.
+                asked.
               - else
                 = link_to "No answers yet."
-            %li
-              %div Created #{pluralize Topic.created_by(current_user).size, "topic"}
-              %div Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
+            - if Topic.created_by(current_user).size > 0
+              %li
+                Created #{pluralize Topic.created_by(current_user).size, "topic"}
+            - if Topic.updated_by(current_user).size > 0
+              %li
+                Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
       .columns.large-6
         .panel
           %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}
