@@ -6,6 +6,7 @@ gem 'haml-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'quiet_assets', :group => :development
 #gem 'puma'
+gem 'google-analytics-rails'
 
 gem 'pg'
 gem 'devise'

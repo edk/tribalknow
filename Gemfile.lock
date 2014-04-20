@@ -110,6 +110,7 @@ GEM
     friendly_id (5.0.3)
       activerecord (>= 4.0.0)
     github-markdown (0.6.5)
+    google-analytics-rails (0.0.5)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -295,6 +296,7 @@ DEPENDENCIES
   foundation-social-web-icons-rails!
   friendly_id
   github-markdown
+  google-analytics-rails
   haml-rails
   html_truncator
   jbuilder (~> 1.2)
