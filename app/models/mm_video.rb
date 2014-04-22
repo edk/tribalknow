@@ -1,0 +1,2 @@
+class MMVideo < MultimediaClip
+end

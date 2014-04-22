@@ -1,0 +1,3 @@
+
+class MMAnimation < MultimediaClip
+end

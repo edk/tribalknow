@@ -1,0 +1,35 @@
+- content_for(:post_body_js) do
+  = javascript_include_tag "multimedia.js"
+
+
+.row
+  All multimedia
+  
+  %br{:style=>'padding:3em;'}
+  %ul.large-block-grid-3.medium-block-grid-2.small-block-grid-1
+    - @multimedia.each do |multimedia|
+      %li.mm_index_element
+        .left.icon_drop_target.topic_icon{:id=>"topic_icon_#{multimedia.id}", :url=>set_icon_topic_path(multimedia)}= link_to image_tag(multimedia.icon.url(:thumb)), topic_path(multimedia)
+
+        .title
+          = link_to multimedia.name, topic_path(multimedia)
+          = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, multimedia, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if current_user && current_user.admin?
+
+        %p
+          - if multimedia.description.present?
+            = truncate multimedia.description, length: 80*5
+          - else
+            = link_to edit_topic_path(multimedia) do
+              No description
+              %span (Add one!)
+
+        - if multimedia.sub_topics.present?
+          .subtopics
+            = raw "(#{multimedia.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ')})"
+        
+  .row_spacer
+  .row
+  .columns.large-8
+    = will_paginate @multimedia
+  .columns.large-4.center
+    = link_to 'Create new Topic', new_topic_path, :class=>'button tiny'

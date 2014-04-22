@@ -1,0 +1,2 @@
+class MMTerminal < MultimediaClip
+end
