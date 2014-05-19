@@ -3,4 +3,4 @@
     = render_md answer.text
   .small-3.columns
     = answered_by(answer)
-  .small-1.columns= render :partial=>'/shared/votes'
+  .small-1.columns= render :partial=>'/shared/votes', :locals=>{:type=>'answer', :object=>answer}

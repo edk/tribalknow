@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   stampable
   simple_tagging
   has_paper_trail
+  acts_as_votable
 
   extend FriendlyId
   friendly_id :title, :use => [:slugged, :finders]

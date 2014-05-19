@@ -8,7 +8,7 @@
   .columns.large-11#question_body{:contenteditable=>'true'}
     = render_md @question.text
   .columns.large-1
-    #{f_icon "like"} / #{f_icon "dislike"}
+    = render :partial=>'/shared/votes', :locals=>{:type=>'question', :object=>@question}
 .row{:style=>'margin-top:15px;'}
   .columns.large-6
     %span.has-tip{:'data-tooltip'=>'', :title=>'click to edit tags'}= link_to "Tags:", "javascript:alert('TODO: need tag editing here')"
@@ -28,4 +28,3 @@
 %hr
 = render @question.answers
 = render :partial=>'add_answer', :locals=>{:question=>@question}
-

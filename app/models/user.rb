@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   model_stamper
+  acts_as_voter
 
   has_settings :preference
 

@@ -11,6 +11,9 @@
       .row
         .columns.small-12
           .panel
+            - if question.get_upvotes.size > 0
+              .votebox
+                = "+ #{question.get_upvotes.size}"
             .question_title
               = link_to "#{question.title}", question_path(question)
             = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 25)
@@ -28,4 +31,3 @@
       .h2 Popular questions
     .panel
       .h2 Popular tags
-

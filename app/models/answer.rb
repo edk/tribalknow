@@ -1,6 +1,7 @@
 class Answer < ActiveRecord::Base
   stampable
   has_paper_trail
+  acts_as_votable
 
   belongs_to :question
   validates  :text, presence: true, length: { minimum: 3 }

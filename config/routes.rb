@@ -29,6 +29,8 @@ Tribalknow::Application.routes.draw do
     end
     resources :answers, path_names: { new: 'new' }
   end
+  
+  post '/votes' => 'votes#create'
 
   get '/todo' => 'homes#todo'
   get '/about' => 'homes#about'

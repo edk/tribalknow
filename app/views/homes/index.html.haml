@@ -35,6 +35,12 @@
             - if Topic.updated_by(current_user).size > 0
               %li
                 Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
+            - if (count = current_user.votes.up.size) > 0
+              %li
+                = "#{count} total upvotes"
+            - if (count = current_user.votes.down.size) > 0
+              %li
+                = "#{count} total downvotes"
       .columns.large-6
         .panel
           %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}

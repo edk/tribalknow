@@ -16,6 +16,7 @@ gem 'paperclip'
 
 gem 'paper_trail', '~> 3.0.0'
 gem 'public_activity'
+gem 'acts_as_votable'
 
 gem 'github-markdown'
 gem 'html_truncator'
