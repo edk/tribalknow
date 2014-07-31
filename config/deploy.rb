@@ -131,10 +131,10 @@ namespace :deploy do
   before 'deploy:migrate', :create_db_if_needed => [:set_rails_env] do
     on roles(:db) do
       need_to_create_and_seed = nil
-      as :postgres do
-        rv=capture :psql, '-tAc', "\\\"SELECT 1 FROM pg_database WHERE datname = 'tribalknow_production'\\\""
-        need_to_create_and_seed=true if rv.strip == ""
-      end
+      #as :postgres do
+        #rv=capture :psql, '-tAc', "\\\"SELECT 1 FROM pg_database WHERE datname = 'tribalknow_production'\\\""
+        #need_to_create_and_seed=true if rv.strip == ""
+      #end
       if need_to_create_and_seed
         within release_path do
           with rails_env: fetch(:rails_env) do

@@ -8,7 +8,7 @@ gem 'quiet_assets', :group => :development
 #gem 'puma'
 gem 'google-analytics-rails'
 
-gem 'pg'
+gem 'mysql2'
 gem 'devise'
 gem 'omniauth-github'
 gem "pundit"
@@ -27,7 +27,6 @@ gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'will_paginate'
 
 gem 'thinking-sphinx', '~> 3.1'
-gem 'mysql2' # uhhhh, i'm using postgres, but ts has a dependency on mysql2.  wtf
 
 gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
