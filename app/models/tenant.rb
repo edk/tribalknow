@@ -20,10 +20,19 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.default_tenant
-    def_tenant = Tenant.find_by subdomain:"coupa"
-    unless def_tenant
-      Tenant.create!(:name=>'coupa', :subdomain=>'coupa')
-    end
+    def_tenant = Tenant.where(:default=>true).first
+  end
+
+  def self.multi_tenant?
+    Tenant.where(:default=>true).none?
+  end
+
+  def self.default_title
+    current.try(:site_title).presence || "TribalKnowNow"
+  end
+
+  def self.default_footer
+    current.try(:footer).presence || "TribalKnowNow Copyright #{Date.today.year}"
   end
 
   def email_domain_requires_approval? email

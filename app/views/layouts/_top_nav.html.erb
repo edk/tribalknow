@@ -3,7 +3,7 @@
     <li class="name">
       <h1>
         <a href="/">
-          <%= [current_tenant && current_tenant.name, "TribalK<span style='color:blue;'>Now</span>"].join(':').html_safe %>
+          <%= [current_tenant && current_tenant.name, "<b style='color:#008CBA'>#{Tenant.default_title}</b>"].join(' ').html_safe %>
         </a>
       </h1>
     </li>

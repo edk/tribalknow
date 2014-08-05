@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
 
   private
   def current_tenant
-    current_tenant ||= Tenant.find_by subdomain: request.subdomain
+    if Tenant.multi_tenant?
+      current_tenant ||= Tenant.find_by subdomain: request.subdomain
+    else
+      current_tenant ||= Tenant.default_tenant
+    end
   end
   helper_method :current_tenant
 
