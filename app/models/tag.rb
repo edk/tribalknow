@@ -1,6 +1,4 @@
-# this tag class is more like a cache of tags in the sysem.
-# the tag usres don't actually reference any rows here since we are using postgress arrays to store the tags
-# could potentially add a column to scope the tags later if needed
+
 class Tag < ActiveRecord::Base
   validates :name, uniqueness:{scope: :tenant_id}, length: { minimum: 1 }
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }

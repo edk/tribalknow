@@ -1,6 +1,6 @@
 class Topic < ActiveRecord::Base
   stampable
-  simple_tagging
+  acts_as_taggable
   has_paper_trail
 
   extend FriendlyId

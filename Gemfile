@@ -14,6 +14,7 @@ gem 'omniauth-github'
 gem "pundit"
 gem 'paperclip'
 
+gem 'acts-as-taggable-on'
 gem 'paper_trail', '~> 3.0.0'
 gem 'public_activity'
 gem 'acts_as_votable'

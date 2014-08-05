@@ -1,6 +1,11 @@
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.order(:id => :desc).paginate(:page=>params[:page])
+    query = Question.order(:id => :desc)
+
+    if params[:tag].present?
+      query = query.tagged_with(params[:tag])
+    end
+    @questions = query.paginate(:page=>params[:page])
   end
 
   def show

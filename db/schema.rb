@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805211215) do
+ActiveRecord::Schema.define(version: 20140805222122) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -104,7 +104,33 @@ ActiveRecord::Schema.define(version: 20140805211215) do
 
   add_index "site_news", ["tenant_id", "created_at"], name: "tenant_id", using: :btree
 
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
   create_table "tags", force: true do |t|
+    t.string   "name"
+    t.integer  "tenant_id"
+    t.string   "description"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name", "tenant_id"], name: "index_tags_on_name_and_tenant_id", unique: true, using: :btree
+
+  create_table "tags_original", force: true do |t|
     t.string    "name"
     t.text      "description"
     t.integer   "tenant_id"
@@ -114,8 +140,8 @@ ActiveRecord::Schema.define(version: 20140805211215) do
     t.timestamp "updated_at",  null: false
   end
 
-  add_index "tags", ["name"], name: "name", using: :btree
-  add_index "tags", ["tenant_id"], name: "tenant_id", using: :btree
+  add_index "tags_original", ["name"], name: "name", using: :btree
+  add_index "tags_original", ["tenant_id"], name: "tenant_id", using: :btree
 
   create_table "tenants", force: true do |t|
     t.string    "name"

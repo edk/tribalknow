@@ -1,7 +1,7 @@
 
 class Question < ActiveRecord::Base
   stampable
-  simple_tagging
+  acts_as_taggable
   has_paper_trail
   acts_as_votable
 
@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
 
-  default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+  default_scope { where(tenant_id:Tenant.current_id) if Tenant.current_id }
   
   scope :asked_by, ->(user) { where(:creator_id => user.id ) }
 
