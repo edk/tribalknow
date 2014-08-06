@@ -4,12 +4,10 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :topic_id
       t.string :title
       t.text :text
-      t.text :tags, :array=>true, :default=>'{}'
       t.references :tenant, index: true
 
       t.userstamps
       t.timestamps
     end
-    add_index(:questions, :tags, :using => 'gin')
   end
 end
