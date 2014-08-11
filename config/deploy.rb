@@ -5,7 +5,6 @@ set :application, 'tribalknow'
 set :repo_url, 'https://github.com/edk/tribalknow.git'
 
 set :branch, 'master'
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 set :deploy_to, '/home/deploy/tribalknow'
 set :scm, :git
@@ -14,8 +13,8 @@ set :format, :pretty
 set :log_level, :debug
 # set :pty, true
 
-set :linked_files, %w{config/database.yml config/initializers/secret_token.rb config/local_config.rb}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/sphinx}
+set :linked_files, %w{config/database.yml config/initializers/secret_token.rb config/local_config.rb config/docs_config.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/sphinx public/assets}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 5
@@ -119,14 +118,19 @@ namespace :deploy do
   task :db_setup_cold => [:schema_load, :seed] do
   end
 
-  #TODO:
-  # * will probably need some sort of task to configure the production solr configuration for a fresh install
-  # * will also need tasks to manage and rebuild indexes
+  desc "Additional post deploy tasks"
+  task :addl_deploy_work do
+    on roles(:web) do
+      execute :ln, '-nfs', "/home/deploy/docs", release_path.join("docs")
+    end
+  end
 
+  after :finishing, 'deploy:addl_deploy_work'
   after :finishing, 'deploy:cleanup'
   after :finishing, 'deploy:notify'
   after :finishing, 'deploy:reindex'
   after :finishing, 'deploy:searchd_start'
+  after :finishing, 'deploy:restart'
 
   before 'deploy:migrate', :create_db_if_needed => [:set_rails_env] do
     on roles(:db) do
