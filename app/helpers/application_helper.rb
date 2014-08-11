@@ -61,6 +61,37 @@ module ApplicationHelper
     end
     content_tag(:i, nil, options.merge(:class=>css_class))
   end
+
+  def in_place_edit_panel note, path
+    title = content_tag(:h3, best_in_place(note, :title,{ :as=>:input, :raw=>true }))
+
+    edit_content_id = dom_id(note, :content)
+    content = best_in_place(note, :content, {:as=>:textarea, :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
+    edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon', :size=>'1.5em')
+
+    content_tag(:div, "#{title} #{content} &nbsp;#{edit_icon}".html_safe, :class=>'panel')
+  end
+
+  # display a series of panels per controller/action
+  def local_notes options = {}
+    # if user is creator or admin, add link to admin
+    allow_admin = options[:disable_admin] && current_user && !current_user.admin?
+    path = "#{controller_name}/#{action_name}"
+
+    notes = Note.where(:path=>path)
+    str = notes.map do |note|
+      in_place_edit_panel(note, path)
+    end.join.html_safe
+
+    str << content_tag(:div, link_to("Add New Note", notes_path(:path=>path), :method=>:post, :remote=>true), :class=>'panel', :id=>"add_#{path.gsub(/\//,'_')}")# if allow_admin
+
+    str
+  end
+
+  # like local_notes but private?
+  def private_notes
+    
+  end
 end
 
 

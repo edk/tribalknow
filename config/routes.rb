@@ -22,6 +22,10 @@ Tribalknow::Application.routes.draw do
       post :approve, :reject
     end
   end
+
+  resources :notes
+  resources :docs
+  get "/docs/*path" => "docs#show"
   
   resources :questions, path_names: { new: 'ask' } do
     collection do

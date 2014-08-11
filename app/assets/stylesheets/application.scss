@@ -251,3 +251,67 @@ a.vote.voted {
   padding: 0.25em;
   border: 1px solid;
 }
+
+// DEFAULT OPTIONS
+$defaultDuration: .3s;
+$primaryColour: #e1e1e1;
+$secondaryColour: #666;
+$shadowColour: rgba(0, 0, 0, .6);
+// Browser Prefixes
+$webkit: true;
+$moz: false;
+$ms: false;
+$o: false;
+// prefix declarations
+@mixin prefixed($property, $value) {
+  @if $webkit == true {
+    -webkit-#{$property}: #{$value};
+  }
+  @if $moz == true {
+    -moz-#{$property}: #{$value};
+  }
+  @if $ms == true {
+    -ms-#{$property}: #{$value};
+  }
+  @if $o == true {
+    -o-#{$property}: #{$value};
+  }
+  #{$property}: #{$value};
+}
+/* Glow */
+@mixin glow {
+  display: inline-block;
+  @include prefixed(transition-duration, $defaultDuration);
+  @include prefixed(transition-property, box-shadow);
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0 0 8px $shadowColour;
+  }
+}
+.glow {
+  @include glow();
+}
+.doc_group {
+  background-color: #CCC;
+  padding: 1em;
+  .panel {
+    padding: 2em;
+    width: 100%;
+  }
+}
+
+i.edit_icon {
+  opacity: 0;
+  transition: 2s linear;
+}
+.best_in_place:hover + i, i.edit_icon:hover {
+  opacity: 1;
+  transition: 0.5s;
+  visibility: visible;
+  display: inline;
+}
+i.edit_icon:hover {
+  cursor: default;
+  color: #3E3;
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805222122) do
+ActiveRecord::Schema.define(version: 20140811003439) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -46,6 +46,21 @@ ActiveRecord::Schema.define(version: 20140805222122) do
   add_index "answers", ["question_id"], name: "question_id", using: :btree
   add_index "answers", ["tenant_id"], name: "tenant_id", using: :btree
 
+  create_table "docs", force: true do |t|
+    t.string   "doc_group_id"
+    t.string   "name"
+    t.string   "type"
+    t.string   "description"
+    t.string   "path"
+    t.string   "basepath"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "docs", ["basepath"], name: "index_docs_on_basepath", using: :btree
+  add_index "docs", ["doc_group_id"], name: "index_docs_on_doc_group_id", using: :btree
+
   create_table "friendly_id_slugs", force: true do |t|
     t.string    "slug",                      null: false
     t.integer   "sluggable_id",              null: false
@@ -58,11 +73,22 @@ ActiveRecord::Schema.define(version: 20140805222122) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "sluggable_type", using: :btree
 
+  create_table "notes", force: true do |t|
+    t.string   "path"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["path"], name: "index_notes_on_path", using: :btree
+
   create_table "questions", force: true do |t|
     t.integer   "topic_id"
     t.string    "title"
     t.text      "text"
-    t.text      "tags"
     t.integer   "tenant_id"
     t.integer   "creator_id"
     t.integer   "updater_id"
@@ -120,7 +146,6 @@ ActiveRecord::Schema.define(version: 20140805222122) do
   create_table "tags", force: true do |t|
     t.string   "name"
     t.integer  "tenant_id"
-    t.string   "description"
     t.integer  "creator_id"
     t.integer  "updater_id"
     t.datetime "created_at"
@@ -146,7 +171,7 @@ ActiveRecord::Schema.define(version: 20140805222122) do
   create_table "tenants", force: true do |t|
     t.string    "name"
     t.string    "subdomain"
-    t.string    "domain"
+    t.string    "fqdn"
     t.timestamp "created_at",                                null: false
     t.timestamp "updated_at",                                null: false
     t.boolean   "new_user_restriction",      default: false
@@ -158,7 +183,7 @@ ActiveRecord::Schema.define(version: 20140805222122) do
     t.text      "footer"
   end
 
-  add_index "tenants", ["domain"], name: "domain", using: :btree
+  add_index "tenants", ["fqdn"], name: "domain", using: :btree
   add_index "tenants", ["subdomain"], name: "subdomain", using: :btree
 
   create_table "topic_files", force: true do |t|
@@ -175,7 +200,6 @@ ActiveRecord::Schema.define(version: 20140805222122) do
     t.integer   "parent_topic_id"
     t.string    "name"
     t.string    "description"
-    t.text      "tags"
     t.text      "content"
     t.integer   "tenant_id"
     t.integer   "creator_id"

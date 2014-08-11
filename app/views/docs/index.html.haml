@@ -1,0 +1,20 @@
+
+.row
+  %h2 Auto-Generated Documentation
+%br
+%br
+.row
+  .columns.small-8
+    - @all_docs.each do |doc_group|
+      .row
+        .columns.small-12.doc_group
+          .row
+            .columns.small-6
+              %h3.columns.small-6= doc_group.name
+          .row
+            - doc_group.docs.each do |doc|
+              .columns.small-6
+                .panel.glow
+                  = link_to doc.to_s, doc.basepath
+  .columns.small-4<
+    = local_notes

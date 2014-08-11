@@ -1,0 +1,2 @@
+var insert_point = $('#add_<%= @path.gsub(/\//,'_') %>');
+insert_point.before("<%= escape_javascript(in_place_edit_panel(@note, @path)) %>").best_in_place();

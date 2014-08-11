@@ -18,6 +18,7 @@
 //= require foundation/foundation.tooltip
 //= require mdedit
 //= require dropzone
+//= require best_in_place
 
 // require google-code-prettify/prettify
 // require_tree .
@@ -52,5 +53,15 @@ $(function(){
       }
     });
   }
+
+  // clicking on the glowing panel gives us a bigger click target
+  $('.glow').on('click', function(e){
+    var link = $(this).find('a').get(0);
+    if (e.target == link) return false
+    window.location = $(link).attr('href');
+    return false;
+  });
+
+  $('.best_in_place').best_in_place();
 });
 

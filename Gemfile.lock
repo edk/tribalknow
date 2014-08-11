@@ -7,6 +7,14 @@ GIT
       sass-rails (>= 3.1.1)
 
 GIT
+  remote: git@github.com:edk/best_in_place.git
+  revision: dff839b2f9a134bbf87f144e8ed6ddb24b9b1e41
+  specs:
+    best_in_place (3.0.0.alpha)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
+GIT
   remote: git@github.com:kimkong/userstamp.git
   revision: fbb35ccb5004bb04f87e01cbe9b7a5ccdd06b856
   specs:
@@ -301,7 +309,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.40)
+    tzinfo (0.3.41)
     uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -317,6 +325,7 @@ DEPENDENCIES
   activerecord-session_store
   acts-as-taggable-on
   acts_as_votable
+  best_in_place!
   byebug
   capistrano (~> 3.0)
   capistrano-bundler
