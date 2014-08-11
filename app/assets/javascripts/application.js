@@ -57,7 +57,7 @@ $(function(){
   // clicking on the glowing panel gives us a bigger click target
   $('.glow').on('click', function(e){
     var link = $(this).find('a').get(0);
-    if (e.target == link) return false
+    if (e.target == link) return true;
     window.location = $(link).attr('href');
     return false;
   });
