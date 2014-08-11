@@ -67,7 +67,7 @@ module ApplicationHelper
 
     edit_content_id = dom_id(note, :content)
     content = best_in_place(note, :content, {:as=>:textarea, :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
-    edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon', :size=>'1.5em')
+    edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon')
 
     content_tag(:div, "#{title} #{content} &nbsp;#{edit_icon}".html_safe, :class=>'panel')
   end
