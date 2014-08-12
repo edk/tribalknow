@@ -11,40 +11,10 @@
         = local_notes :fixed=>true, :default_title=>"Dev Central", :disable_admin=>true
 
     .row
-      .columns.large-6
-        .panel
-          %h2 Welcome #{current_user.name}!
-          / %p Last logged in at #{current_user.last_sign_in_at} (#{time_ago_in_words(current_user.last_sign_in_at)} ago) from #{current_user.last_sign_in_ip}
-          %h3 Your Stats
-          %ul
-            %li
-              - if n_asked = Question.asked_by(current_user).size
-                = pluralize n_asked, 'question'
-                asked.
-              - else
-                = link_to "No questions asked yet.", new_question_path
-            %li
-              - if n_answered = Answer.answered_by(current_user).size
-                = pluralize n_asked, 'answer'
-                asked.
-              - else
-                = link_to "No answers yet."
-            - if Topic.created_by(current_user).size > 0
-              %li
-                Created #{pluralize Topic.created_by(current_user).size, "topic"}
-            - if Topic.updated_by(current_user).size > 0
-              %li
-                Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
-            - if (count = current_user.votes.up.size) > 0
-              %li
-                = "#{count} total upvotes"
-            - if (count = current_user.votes.down.size) > 0
-              %li
-                = "#{count} total downvotes"
-      .columns.large-6
-        .panel
-          %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}
-          %p #{image_tag("787-browser-windows-selected@2x.png", :size=>"25x25")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
+      /.columns.large-6
+      /  .panel
+      /    %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}
+      /    %p #{image_tag("787-browser-windows-selected@2x.png", :size=>"25x25")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
 
     .row
       .columns.large-12
@@ -59,9 +29,37 @@
       %h3 #{image_tag "832-stack-1-selected@2x.png", :size=>'24x24'} Popular Questions
     .panel
       %h3 #{f_icon('link', :style=>'font-size:1.2em')} Top links
-
     .panel
       %h3 Top users
+    .panel
+      %h2 Welcome #{current_user.name}!
+      / %p Last logged in at #{current_user.last_sign_in_at} (#{time_ago_in_words(current_user.last_sign_in_at)} ago) from #{current_user.last_sign_in_ip}
+      %h3 Your Stats
+      %ul
+        %li
+          - if n_asked = Question.asked_by(current_user).size
+            = pluralize n_asked, 'question'
+            asked.
+          - else
+            = link_to "No questions asked yet.", new_question_path
+        %li
+          - if n_answered = Answer.answered_by(current_user).size
+            = pluralize n_asked, 'answer'
+            asked.
+          - else
+            = link_to "No answers yet."
+        - if Topic.created_by(current_user).size > 0
+          %li
+            Created #{pluralize Topic.created_by(current_user).size, "topic"}
+        - if Topic.updated_by(current_user).size > 0
+          %li
+            Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
+        - if (count = current_user.votes.up.size) > 0
+          %li
+            = "#{count} total upvotes"
+        - if (count = current_user.votes.down.size) > 0
+          %li
+            = "#{count} total downvotes"
 
     - if @collapsed_activities && @collapsed_activities.size > 0
       .panel
