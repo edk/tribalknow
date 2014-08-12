@@ -41,4 +41,4 @@ Tribalknow::Application.configure do
   # )
 end
 
-# require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))
+require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))

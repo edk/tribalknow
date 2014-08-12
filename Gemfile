@@ -13,6 +13,7 @@ gem 'devise'
 gem 'omniauth-github'
 gem "pundit"
 gem 'paperclip'
+gem 'aws-sdk'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
