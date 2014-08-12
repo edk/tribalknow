@@ -1,6 +1,6 @@
 class Tenant < ActiveRecord::Base
   validates :name, presence: true
-  validates :domain, uniqueness: true, allow_nil:true
+  validates :fqdn, uniqueness: true, allow_nil:true
   validates :subdomain, uniqueness: true, allow_nil:true
   has_settings do |s|
     s.key :topic, :defaults=>{:heading=>'All topics'}

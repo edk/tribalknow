@@ -11,7 +11,8 @@ class AdminMailer < ActionMailer::Base
       raise "no admin users found"
     end
 
-    mail to: users.map(&:email) unless users.empty?
+    @user = user
+    mail(to: users.map(&:email), :from=>"system@#{Tenant.current.fqdn}") unless users.empty?
   end
 
   def user_account_rejected user

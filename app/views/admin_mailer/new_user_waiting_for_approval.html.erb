@@ -1,9 +1,16 @@
 
 <p>Hi Admin,</p>
 
-<p>There is a new user awaiting your approval.</p>
+<p>There is a new user, <%= @user.email %>, awaiting your approval.</p>
 
-<p>You can view pending requests at: <%= link_to(approve_users_url, approve_users_url, :subdomain => @resource.tenant.subdomain) rescue $! %></p>
+<%
+  params = if @resource
+    {:subdomain => @resource.tenant.subdomain} 
+  else
+    {}
+  end
+%>
+<p>You can view pending requests at: <%= approve_users_url(params) rescue $! %></p>
 
 <p>
 Thanks,

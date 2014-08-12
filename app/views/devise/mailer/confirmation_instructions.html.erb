@@ -1,6 +1,6 @@
-<p>Welcome to tribalknownow, <%= @email %>!</p>
+<p>Welcome to <%= @resource.try(:tenant).present? ? @resource.tenant.name : "TribalKnowNow" %>, <%= @email %>!</p>
 
-<p>This is a site to ask and answer company specfic questions, and to have an editable organized wiki-like documentation.</p>
+<p>This is a site for company specific Q&A, and to have an editable organized wiki-like documentation.</p>
 
 <p>You can confirm your account email through the link below:</p>
 

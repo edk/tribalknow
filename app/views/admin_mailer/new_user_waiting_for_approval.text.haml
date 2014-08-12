@@ -1,9 +1,16 @@
 
 Hi Admin,
 
-There is a new user awaiting your approval.
+There is a new user, #{@user.email}, awaiting your approval.
 
-You can view pending requests at: #{approve_users_url(:subdomain => @resource.tenant.subdomain) rescue $!}
+:ruby
+  if @resource
+    params = {:subdomain => @resource.tenant.subdomain} 
+  else
+    params = {}
+  end
+  ""
+You can view pending requests at: #{approve_users_url(params) rescue "#{$!} #{$@}"}
 
 Thanks,
 The system.

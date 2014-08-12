@@ -1,3 +1,2 @@
 
-<p>Sorry, your request for a tribalknownow account has been rejected.</p>
-
+<p>Sorry, your request for a <%= @resource.try(:tenant).present? ? @resource.tenant.name : "TribalKnowNow" %> account has been rejected.</p>
