@@ -3,5 +3,5 @@
 <p>This is a site for company specific Q&A, and to have an editable organized wiki-like documentation.</p>
 
 <p>You can confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token, :subdomain => @resource.tenant.subdomain ) %></p>
+<% host_params = @resource.tenant.try(:fqdn) ? {} : {:subdomain => @resource.tenant.subdomain} %>
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, {:confirmation_token => @token}.merge(host_params) ) %></p>

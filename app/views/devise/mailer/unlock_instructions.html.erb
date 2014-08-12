@@ -4,4 +4,5 @@
 
 <p>Click the link below to unlock your account:</p>
 
-<p><%= link_to 'Unlock my account', unlock_url(@resource, :unlock_token => @token, :subdomain => @resource.tenant.subdomain) %></p>
+<% host_params = @resource.tenant.try(:fqdn) ? {} : {:subdomain => @resource.tenant.subdomain} %>
+<p><%= link_to 'Unlock my account', unlock_url(@resource, {:unlock_token => @token}.merge(host_params)) %></p>
