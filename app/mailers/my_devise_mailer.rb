@@ -1,4 +1,4 @@
 class MyDeviseMailer < Devise::Mailer
-  default :from => { Tenant.current.try(:fqdn) ? "system@#{Tenant.current.try(:fqdn)}" : "system@tribalknownow.com" }
+  default :from => lambda { Tenant.current.try(:fqdn) ? "system@#{Tenant.current.try(:fqdn)}" : "system@tribalknownow.com" }
 
 end
