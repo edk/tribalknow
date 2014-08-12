@@ -75,15 +75,20 @@ module ApplicationHelper
   # display a series of panels per controller/action
   def local_notes options = {}
     # if user is creator or admin, add link to admin
-    allow_admin = options[:disable_admin] && current_user && !current_user.admin?
+    allow_admin = !options[:disable_admin] && current_user && !current_user.admin?
     path = "#{controller_name}/#{action_name}"
 
     notes = Note.where(:path=>path)
+
+    if notes.empty? && options[:fixed]
+      notes = [Note.create!(:path=>path, :title => options[:default_title])]
+    end
+
     str = notes.map do |note|
       in_place_edit_panel(note, path)
     end.join.html_safe
 
-    str << content_tag(:div, link_to("Add New Note", notes_path(:path=>path), :method=>:post, :remote=>true), :class=>'panel', :id=>"add_#{path.gsub(/\//,'_')}")# if allow_admin
+    str << content_tag(:div, link_to("Add New Note", notes_path(:path=>path), :method=>:post, :remote=>true), :class=>'panel', :id=>"add_#{path.gsub(/\//,'_')}") if allow_admin
 
     str
   end
