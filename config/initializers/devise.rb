@@ -13,7 +13,7 @@ Devise.setup do |config|
   config.mailer_sender = 'signup@tribalknownow.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'MyDeviseMailer'
 
   # ==> ORM configuration
   require 'devise/orm/active_record'
