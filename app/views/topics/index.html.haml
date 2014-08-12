@@ -21,15 +21,9 @@
             = link_to edit_topic_path(topic) do
               No description
               %span (Add one!)
-
-        /.taglist
-        /  = render_tag_links topic.tags
-
         - if topic.sub_topics.present?
           .subtopics
-            = raw "(#{topic.sub_topics.map { |t| link_to t.name, edit_topic_path(t) }.join(', ')})"
-        
-        =# link_to "#{topic.creator.name}", public_profile_path(topic.creator) if topic && topic.creator
+            = "#{pluralize topic.sub_topics.count, 'subtopic'}"
         
 .row_spacer
 .row
