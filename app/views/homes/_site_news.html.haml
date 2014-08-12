@@ -8,7 +8,7 @@
         - SiteNews.latest.each do |item|
           .titled-panel
             %h2.title
-              = item.title
+              = item.title.to_s.html_safe
             .content
               %p= item.text.html_safe
             .created_at
