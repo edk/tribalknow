@@ -1,5 +1,5 @@
 
-ThinkingSphinx::Index.define :topic, :with => :active_record do
+ThinkingSphinx::Index.define :topic, :with => :active_record, :delta => true do
   # fields
   indexes name, :sortable => true
   indexes description

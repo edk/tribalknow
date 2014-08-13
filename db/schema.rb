@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811003439) do
+ActiveRecord::Schema.define(version: 20140813224527) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -39,8 +39,9 @@ ActiveRecord::Schema.define(version: 20140811003439) do
     t.integer   "tenant_id"
     t.integer   "creator_id"
     t.integer   "updater_id"
-    t.timestamp "created_at",              null: false
-    t.timestamp "updated_at",              null: false
+    t.timestamp "created_at",                 null: false
+    t.timestamp "updated_at",                 null: false
+    t.boolean   "delta",       default: true, null: false
   end
 
   add_index "answers", ["question_id"], name: "question_id", using: :btree
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 20140811003439) do
     t.integer  "updater_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "delta",      default: true, null: false
   end
 
   add_index "notes", ["path"], name: "index_notes_on_path", using: :btree
@@ -92,9 +94,10 @@ ActiveRecord::Schema.define(version: 20140811003439) do
     t.integer   "tenant_id"
     t.integer   "creator_id"
     t.integer   "updater_id"
-    t.timestamp "created_at", null: false
-    t.timestamp "updated_at", null: false
+    t.timestamp "created_at",                null: false
+    t.timestamp "updated_at",                null: false
     t.string    "slug"
+    t.boolean   "delta",      default: true, null: false
   end
 
   add_index "questions", ["tenant_id"], name: "tenant_id", using: :btree
@@ -204,13 +207,14 @@ ActiveRecord::Schema.define(version: 20140811003439) do
     t.integer   "tenant_id"
     t.integer   "creator_id"
     t.integer   "updater_id"
-    t.timestamp "created_at",        null: false
-    t.timestamp "updated_at",        null: false
+    t.timestamp "created_at",                       null: false
+    t.timestamp "updated_at",                       null: false
     t.string    "slug"
     t.string    "icon_file_name"
     t.string    "icon_content_type"
     t.integer   "icon_file_size"
-    t.timestamp "icon_updated_at",   null: false
+    t.timestamp "icon_updated_at",                  null: false
+    t.boolean   "delta",             default: true, null: false
   end
 
   add_index "topics", ["tenant_id"], name: "tenant_id", using: :btree

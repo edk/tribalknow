@@ -1,9 +1,8 @@
 
-ThinkingSphinx::Index.define :question, :with => :active_record do
+ThinkingSphinx::Index.define :question, :with => :active_record, :delta => true do
   # fields
   indexes title, :sortable => true
   indexes text
-  indexes tags
   indexes creator.name, :as=>:creator_name, :sortable => true
 
   # attributes
