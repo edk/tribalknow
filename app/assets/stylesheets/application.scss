@@ -120,6 +120,10 @@ a.taglink {
   padding-top:2em;
 }
 
+.panel {
+  line-height: 1.3em;
+}
+
 .panel_offset_link {
   font-size:0.75em; padding-top:1.75rem; text-align:right; margin-bottom:-14px;
 }
@@ -138,7 +142,10 @@ a.taglink {
   p {
     padding-top: 0.45rem;
     margin-bottom: 0.7rem;
-    line-height: 0.9rem;
+    line-height: 1.2rem;
+  }
+  .subtopics {
+    font-size: 0.6em;
   }
   .topic_icon {
     padding-right:5px;
@@ -150,8 +157,8 @@ a.taglink {
   }
   .title {
     font-size:1.5rem;
-    font-weight:110%;
-    line-height:0.9rem
+    font-weight: 500;
+    line-height: 1.5rem;
   }
   .taglist {
     float: right;
@@ -169,9 +176,6 @@ a.taglink {
 .topic_index_element:hover .delete_topic {
   visibility: visible;
   opacity: 1;
-}
-.topic_index_element .subtopics {
-  font-size: .5em;
 }
 .center {
   text-align: center
