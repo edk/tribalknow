@@ -18,7 +18,6 @@
           = f.input :tags do
             %span{:id=>'tags', :style=>'display:none;'}= Tag.all_tags.to_json
             = f.input :tags, :as=>:hidden, input_html: {class:'select2-with-tags', style:'min-width:100%; height:36px;', value: f.object.tags.empty? ? '' : f.object.tags.join(',')}
-            =# f.input :tags, collection: Tag.all.map {|t| [t.name, t.name]}, input_html: {multiple:true, class:'select2-with-tags', style:'min-width:100%; height:36px;'}
     .column.large-5
       .row
         = render :file=>'/topic_files/index'
