@@ -321,3 +321,12 @@ i.edit_icon:hover {
   cursor: default;
   color: #3E3;
 }
+
+.top-bar-section .dropdown li:not(.has-form) a:not(.button):hover {
+  color: #FFFF01;
+  transition: 0.5s;
+}
+.top-bar-section ul li > a.highlight:hover {
+  color: #FFFF01;
+  transition: 0.5s;
+}
