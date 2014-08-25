@@ -51,7 +51,6 @@ class TopicsController < ApplicationController
     @topic = Topic.friendly.find(params[:id])
     redir_to = session.delete(:return_to) || topics_path
 
-    @topic.tags = Array(params[:topic][:tags]).reject{|tag| tag.blank? }
     respond_to do |format|
       if @topic.update(topic_params)
         format.html { redirect_to redir_to, notice: 'Topic was successfully updated.' }
