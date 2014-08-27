@@ -59,3 +59,5 @@ Coupa Software, for allowing and encouraging me to do this side-project as open-
 Pull requests gladly accepted!
 
 ### License
+
+MIT-LICENSE
