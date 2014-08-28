@@ -16,7 +16,15 @@ $.widget "custom.catcomplete", $.ui.autocomplete,
 
 $ ->
   $("#q").catcomplete
-    source: "/autocomplete"
+    source: (request, response) ->
+      $.ajax
+        url: "/searches"
+        dataType: "json"
+        data:
+          q: request.term
+        success: (data) ->
+          response data.slice(0, 25)
+          return
     delay: 0
     select: (event, ui) ->
       $(event.target).val ui.item.title
