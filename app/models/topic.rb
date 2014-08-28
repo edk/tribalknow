@@ -14,6 +14,8 @@ class Topic < ActiveRecord::Base
   # has_many   :links
   # has_many   :contributors
 
+  alias_attribute :title, :description
+
   has_attached_file :icon, :styles => { :thumb => "100x100#" }, :default_url => "blank-icon-100x100.gif" #/images/:style/missing.png"
   validates_attachment_content_type :icon, :content_type => /\Aimage\/.*\Z/
 
@@ -42,4 +44,5 @@ class Topic < ActiveRecord::Base
   def to_s
     name
   end
+
 end

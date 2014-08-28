@@ -1,14 +1,7 @@
 
 ## What's this?
 
-* Is it a wiki?
-* Is it a Q&A site?
-* Is it a screencast authoring tool?
-
-### Yes!
-
-
-Explore new ways to spread tribal knowledge of a software project within a group.
+This is a tool to explore new ways to spread tribal knowledge of a software project within a group.
 
 Screencasting with accompanying text, articles,  question and answer, categorized information and gamification.
 
@@ -37,14 +30,13 @@ are badly needed.
 
 ### Setup
 
-* install postgress
-  You'll need to set a password for the postgres user you intend to use.
+* install mysql
 
 * clone repo, then `bundle install`
 
 * install sphinx.  using brew:
 
-`brew install  sphinx --mysql --pgsql` to install searchd that knows how to talk to postgress and mysql
+`brew install  sphinx --mysql` to install searchd
 
 If you want to use the github omniauth provider (optional, not required):
 * set two environment variables, the client app id ID
@@ -67,3 +59,5 @@ Coupa Software, for allowing and encouraging me to do this side-project as open-
 Pull requests gladly accepted!
 
 ### License
+
+MIT-LICENSE
