@@ -6,9 +6,6 @@ Tribalknow::Application.routes.draw do
   resources :users
   resource  :account
   resources :searches
-  #autocomplete
-  get '/autocomplete' => 'searches#autocomplete'
-
 
   resources :topics do
     resources :topic_files
