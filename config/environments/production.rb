@@ -85,7 +85,7 @@ Tribalknow::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   config.assets.precompile += %w( mdedit.js mdedit.css )
-  config.assets.precompile += %w( vendor/modernizr.js questions.js topics.js )
+  config.assets.precompile += %w( vendor/modernizr.js questions.js topics.js autocomplete.js )
 
 end
 
