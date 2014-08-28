@@ -18,6 +18,7 @@
     = csrf_meta_tags
     = analytics_init if Rails.env.production?
   %body
+    = javascript_include_tag "application"
     = render 'layouts/top_nav'
     - if flash.keys.present?
       .row
@@ -40,5 +41,4 @@
             = Tenant.default_footer.html_safe
           - else
             "TribalKnowNow Copyright 2014"
-    = javascript_include_tag "application"
     = yield(:post_body_js)

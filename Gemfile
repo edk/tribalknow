@@ -35,6 +35,7 @@ gem 'select2-rails'
 gem 'underscore-rails'
 gem 'exception_notification'
 gem 'ledermann-rails-settings', :require => 'rails-settings'
+gem 'jquery-ui-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

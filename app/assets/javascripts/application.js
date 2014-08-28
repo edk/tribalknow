@@ -19,6 +19,7 @@
 //= require mdedit
 //= require dropzone
 //= require best_in_place
+//= require jquery-ui
 
 // require google-code-prettify/prettify
 // require_tree .
