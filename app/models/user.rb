@@ -70,9 +70,14 @@ class User < ActiveRecord::Base
         user.provider, user.uid, user.avatar_url = auth.provider, auth.uid, auth.info.image
         user.save(:validate=>false)
       else
+        fields = {:provider=>auth.provider, :uid=>auth.uid, :name=>auth.info.nickname, :email=>auth.info.email}
         # create from scratch
-        user = User.create!(:provider=>auth.provider, :uid=>auth.uid, :name=>auth.info.nickname,
-                            :email=>auth.info.email)
+        if auth.info.email.blank?
+          # no email?  That's unfortunate.  Let's ask them what it is.
+          session[:from_omniauth] = fields
+        else
+          user = User.create!(fields)
+        end
       end
     end
     user

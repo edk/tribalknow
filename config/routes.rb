@@ -7,6 +7,9 @@ Tribalknow::Application.routes.draw do
   resource  :account
   resources :searches
 
+  get "registration/complete"
+  post 'registration/complete', :to => 'registration#update', :as=>'update_registration'
+
   resources :topics do
     resources :topic_files
     member do

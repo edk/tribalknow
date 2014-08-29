@@ -1,0 +1,16 @@
+
+.row
+  .large-8.columns
+    %p Hi #{session[:from_omniauth][:name]},
+    %p The authentication method was unable to find an email for your OAuth provider, <b>#{session[:from_omniauth][:provider].capitalize rescue "Error, unknown provider"}</b>.
+
+    %p Please enter your email to complete the signup process.  After an admin activates your account, you will receive a email with a confirmation link to follow.
+
+.row
+  .large-6.columns
+    = simple_form_for(@user, :url=>update_registration_path, :html=>{:method=>:post}) do |f|
+      = f.error_notification
+      = f.input :email
+      %br
+      .right
+        = f.submit "Finish signup", :class=>'button'
