@@ -12,6 +12,8 @@ class Answer < ActiveRecord::Base
   
   scope :answered_by, ->(user) { where(:creator_id => user.id) }
 
+  alias_attribute :title, :text
+
   def to_s
     question && question.title
   end
