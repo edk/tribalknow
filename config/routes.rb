@@ -4,7 +4,9 @@ Tribalknow::Application.routes.draw do
 
   post 'settings/:id', :to => 'settings#update', :as=>'settings'
   resources :users
-  resource  :account
+  resource  :account do
+    post :avatar
+  end
   resources :searches
 
   get "registration/complete"

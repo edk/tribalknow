@@ -21,21 +21,21 @@
       <% if user_signed_in? %>
 
         <ul class="right">
-          <%= current_user && link_to(account_path) do %>
-            <%= render_gravatar(current_user, :size=>43) %>
+          <%= current_user && link_to(account_path, :class=>'nav_avatar') do %>
+            <%= render_avatar(current_user, :size=>43) %>
           <% end %>
         </ul>
 
-      <li> <%= link_to "Docs", docs_url, :class=>'highlight' %></li>
-      <li> <%= link_to "Questions", questions_url, :class=>'highlight' %></li>
+      <li> <%= link_to "Docs", docs_path, :class=>'highlight' %></li>
+      <li> <%= link_to "Questions", questions_path, :class=>'highlight' %></li>
       <li> <%= link_to "Topics", topics_path, :class=>'highlight' %></li>
 
       <li class="has-dropdown">
         <a href="#" class="highlight">Do Things</a>
         <ul class="dropdown">
-          <li> <%= link_to "Ask new question", new_question_url, :class=>'highlight' %></li>
+          <li> <%= link_to "Ask new question", new_question_path, :class=>'highlight' %></li>
           <li><a href="#" class="highlight">Your Achievements (todo)</a></li>
-          <li><a href="#" class="highlight">Your Account (todo)</a></li>
+          <li><%= link_to "Your Account", account_path, :class=>'highlight'%></li>
           <% if current_user.admin? %>
             <li class="divider"></li>
             <li><%= link_to "Approve new users", approve_users_path, :class=>'highlight' %></li>
@@ -49,7 +49,7 @@
       <li class="divider"></li>
 
       <li class="has-form">
-        <%= form_tag searches_url, :method=>:get do %>
+        <%= form_tag searches_path, :method=>:get do %>
           <div class="row collapse">
             <div class="small-8 columns">
               <%= search_field_tag :q %>
@@ -67,7 +67,7 @@
       <% if current_tenant %>
       <li class="has-form">
         <% if user_signed_in? %>
-          <%= link_to "Sign Out #{current_user.name}", destroy_user_session_path, {:method=>:delete, :class=>'button'} %>
+          <%= link_to "Sign Out", destroy_user_session_path, {:method=>:delete, :class=>'button'} %>
         <% else %>
           <%= link_to "Sign in/Sign up", new_user_session_path, {:class=>'button'} %>
         <% end %>
@@ -77,10 +77,6 @@
 
     </ul>
 
-    <!-- Left Nav Section 
-    <ul class="left">
-      <li><a href="#">Left Nav Button</a></li>
-    </ul> -->
   </section>
 </nav>
 

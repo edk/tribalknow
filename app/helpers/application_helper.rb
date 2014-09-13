@@ -4,10 +4,30 @@ module ApplicationHelper
     GitHub::Markdown.render_gfm(sanitize(text)).html_safe
   end
 
+  def render_avatar user, options = {}
+    return unless user
+
+    if user.avatar?
+      opts = if options[:size]
+        size = options[:size].to_s =~ /x/ ? options[:size] : "#{options[:size]}x#{options[:size]}"
+        { :size => size }
+      else
+        {}
+      end
+      image_tag user.avatar.url(:thumb), opts
+    else
+      render_gravatar user, options
+    end
+  end
+
+  def gravitar_url user, opt_string = ""
+    "#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}#{opt_string}"
+  end
+
   def render_gravatar user, options = {}
     if user
       opt_string = "?s=#{options[:size]}" if options[:size]
-      image_tag("#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.strip.downcase)}#{opt_string}")
+      image_tag(gravitar_url(user, opt_string), :alt=>"Your avatar")
     else
       size = "40x40"
       size = "#{options[:size]}x#{options[:size]}" if options[:size]

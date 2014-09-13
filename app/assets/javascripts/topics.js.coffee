@@ -15,7 +15,7 @@ $ ->
     headers: 
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
 
-  if $('.drop_target').length >0 && url = $('.drop_target').attr('data-url')
+  if $('.drop_target').length > 0 && url = $('.drop_target').attr('data-url')
     opts.url = url
     dz_element = $('.drop_target').dropzone opts
 
@@ -27,7 +27,9 @@ $ ->
       console.log('uploadprogress dropzone')
   else if $('.icon_drop_target').length > 0
     $('.icon_drop_target').each (index, elem) ->
-      if $(elem).attr('url')
+      $elem = $(elem)
+      if $elem.attr('url') && !$elem.attr("has-dropzone")
+        $elem.attr("has-dropzone", true) # to avoid double initializing
         opt2 = _.clone(opts)
         opt2.clickable = null
         opt2.url = $(elem).attr('url')

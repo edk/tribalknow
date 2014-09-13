@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   belongs_to :tenant
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
+  has_attached_file :avatar, :styles => { :thumb => "80x80#" }, :default_url => "blank-icon-80x80.gif"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
   has_many :topics, foreign_key: :creator_id
   has_many :questions, foreign_key: :creator_id
   has_many :answers, foreign_key: :creator_id
@@ -31,6 +34,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  before_save :normalize_hipchat
+
+  def normalize_hipchat
+    if hipchat_mention_name.present? && hipchat_mention_name !~ /^@/
+      hipchat_mention_name = "@#{hipchat_mention_name}"
+    end
+  end
+
   def requires_admin_approval?
     self.tenant && self.tenant.email_domain_requires_approval?(self.email)
   end
@@ -47,8 +58,11 @@ class User < ActiveRecord::Base
     false
   end
 
+  # All this extra machinery is to allow github authentication without a password,
+  # but optionally allow it, and require passwords if the user is not externally authenticated.
+  attr_accessor :changing_password
   def password_required?
-    super if !from_external_auth?
+    super if !from_external_auth? || changing_password
   end
 
 

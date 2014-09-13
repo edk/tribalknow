@@ -1,0 +1,43 @@
+
+.drop_target {
+  height:16em;
+  overflow:scroll;
+  width: 98.5%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  .instructions {
+    cursor: pointer;
+    background:#838383;
+    color:#EEE;
+    padding:10px;
+    margin-left:-8px;
+    margin-right:-10px;
+  }
+}
+.dz-preview {
+  width: 45%;
+  display: inline-block;
+  border: 1px solid #DDD;
+  padding: 4px;
+  margin: 4px;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+  }
+  .dz-filename span {
+    font-size: 0.7em;
+    text-overflow: ellipsis;
+  }
+  .dz-size {
+    font-size: 0.7em;
+  }
+  .dz-success-mark {
+    color: green;
+    display:none;
+  }
+  .dz-error-mark {
+    color: red;
+    display:none;
+  }
+}

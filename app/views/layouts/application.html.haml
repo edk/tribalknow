@@ -18,7 +18,7 @@
     = csrf_meta_tags
     = analytics_init if Rails.env.production?
   %body
-    = javascript_include_tag "application"
+    = javascript_include_tag "application", params[:controller]
     = render 'layouts/top_nav'
     - if flash.keys.present?
       .row
@@ -31,7 +31,7 @@
             .alert-box.info.radius{"data-alert"=>""}
               = alert
               %a.close{:href => "#"}
-    .row#content{:style=>'padding-top:0.75em;'}
+    .row#content{:style=>'padding-top:1.0em;'}
       = yield
     
     .row#footer
