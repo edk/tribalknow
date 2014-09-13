@@ -24,7 +24,6 @@ gem 'acts_as_votable'
 gem 'github-markdown'
 gem 'html_truncator'
 
-gem 'simple_form', :git => 'git@github.com:plataformatec/simple_form.git', :tag=>'v3.0.0.rc'
 gem 'will_paginate'
 gem 'best_in_place', :git=> 'git@github.com:edk/best_in_place.git'
 
@@ -42,6 +41,7 @@ gem 'jquery-ui-rails'
 gem 'friendly_id'
 
 gem 'coffee-rails', '~> 4.0.0'
+gem 'simple_form'
 gem 'foundation-rails'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage
 gem 'foundation-icons-sass-rails'
