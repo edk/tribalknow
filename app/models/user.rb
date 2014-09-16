@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
   has_many :questions, foreign_key: :creator_id
   has_many :answers, foreign_key: :creator_id
 
+  has_many :user_notifications, -> { where read: false }
+  has_many :notifications, :through=>:user_notifications
+
   scope :admins, -> { where(:admin=>true) }
   scope :active, -> { where(:active=>true) }
 

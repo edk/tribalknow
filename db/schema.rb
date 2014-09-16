@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140913060521) do
+ActiveRecord::Schema.define(version: 20140916172321) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(version: 20140913060521) do
   end
 
   add_index "notes", ["path"], name: "index_notes_on_path", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "questions", force: true do |t|
     t.integer   "topic_id"
@@ -218,6 +225,14 @@ ActiveRecord::Schema.define(version: 20140913060521) do
   end
 
   add_index "topics", ["tenant_id"], name: "tenant_id", using: :btree
+
+  create_table "user_notifications", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_id"
+    t.boolean  "read",            default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string    "provider"
