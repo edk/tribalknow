@@ -1,0 +1,26 @@
+- content_for(:post_body_js) do
+  = javascript_include_tag "questions.js"
+= simple_form_for(@question) do |f|
+  = f.error_notification
+  .row
+    .large-10.columns
+      = f.input :title
+  .row
+    .large-10.columns
+      #in
+        = f.text_area :text, input_html:{style:'height:18em'}
+      #out
+  - if @question.topic
+    .row
+      .large-10.columns
+        = text_field_tag :topic, "For topic: #{@question.topic.name}", :readonly=>''
+        = f.hidden_field :topic_id, :value=>@question.topic.try(:id)
+  .row
+    .large-10.columns
+      = f.input :tags do
+        %span#tags{:style => "display:none;"}
+          = Tag.all_tags.to_json
+        = f.input :tags, as: :hidden, input_html: { class: 'select2-with-tags', style:'min-width:80%', value: f.object.tags.empty? ? '' : f.object.tags.join(',') }
+  %hr/
+  .actions
+    = f.submit 'Submit Question', :class => 'button'

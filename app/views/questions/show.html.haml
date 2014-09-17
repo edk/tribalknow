@@ -22,9 +22,10 @@
   .columns.large-4
     = asked_by(@question)
 
-%h4
+%h4{:style=>"padding-top:1.5em;"}
   %b #{pluralize @question.answers.size, "answer"}:
 
 %hr
-= render @question.answers
+= render :partial => @question.answers, :spacer_template=>'answer_spacer' if @question && @question.answers.present?
+
 = render :partial=>'add_answer', :locals=>{:question=>@question}

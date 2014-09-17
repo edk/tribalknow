@@ -1,0 +1,16 @@
+.row
+  .small-8.columns
+    - if question.answers.empty?
+      %h3= "No answers yet, be the first to add yours!"
+    - else
+      %h3= "Add your answer..."
+%br/
+= simple_form_for [question, Answer.new], :url=>question_answers_path(question) do |f|
+  .row
+    .large-10.columns
+      #in.row
+        = f.text_area :text, class: ''
+      #out
+      .row
+        .large-8.columns
+          = f.submit 'Submit answer', :class => 'button'
