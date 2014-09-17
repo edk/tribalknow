@@ -1,32 +1,33 @@
 
 .row{:style=>'padding-top: 0.6em; padding-bottom: 0.35em;'}
-  .columns.small-8
+  .columns.large-8
     %h3 #{image_tag '739-question@2x.png', :size=>'38x38'} Questions:
-  .columns.small-4
+  .columns.large-4
     / Sort by [ latest | points ]<br/>
 
 .row
-  .columns.small-8
+  .columns.large-8
     - @questions.each do |question|
       .row
-        .columns.small-12
-          .panel
+        .columns.large-12
+          .panel.question_panel
             - if question.get_upvotes.size > 0
               .votebox
                 = "+ #{question.get_upvotes.size}"
             .question_title
               = link_to "#{question.title}", question_path(question)
-            = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 25)
-            %div
+            .question_answer
+              = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 25)
+            .question_answer_links
               = link_to(question_path(question)) do
-                = question.answers.count == 0 ? "No answers yet" : "#{question.answers.count} answers"
+                = question.answers.count == 0 ? "No answers yet" : "#{question.answers.count} #{"answer".pluralize question.answers.count}"
             .tags{:style=>'margin-top:0.8em;margin-bottom:-1.25em;'}
               = render_tag_links question.tags
     .row
       .columns
         = will_paginate @questions
 
-  .columns.small-4
+  .columns.large-4
     .panel
       .h2= link_to "#{f_icon('arrow-left')} Ask a new question".html_safe, new_question_path
     .panel
