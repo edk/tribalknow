@@ -20,7 +20,7 @@
             = f.input :tags, :as=>:hidden, input_html: {class:'select2-with-tags', style:'min-width:100%; height:36px;', value: f.object.tags.empty? ? '' : f.object.tags.join(',')}
     .column.large-5
       .row
-        = render :file=>'/topic_files/index'
+        = render :file=>'/topic_files/index' unless @topic.new_record?
   .row
     %br/
     .large-12.columns
