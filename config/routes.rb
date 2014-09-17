@@ -3,7 +3,18 @@ Tribalknow::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   post 'settings/:id', :to => 'settings#update', :as=>'settings'
-  resources :users
+  
+  namespace :admin do
+    resources :home
+    resources :users
+    resources :config
+    resources :approve_users, :only => [ :index ] do
+      member do
+        post :approve, :reject
+      end
+    end
+  end
+
   resource  :account do
     post :avatar
   end
@@ -22,11 +33,6 @@ Tribalknow::Application.routes.draw do
   resources :tenants
   resources :public_profiles, only:[:index, :show]
   resources :activities
-  resources :approve_users, :only => [ :index ] do
-    member do
-      post :approve, :reject
-    end
-  end
 
   resources :notes
   resources :docs

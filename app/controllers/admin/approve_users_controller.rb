@@ -1,4 +1,4 @@
-class ApproveUsersController < ApplicationController
+class Admin::ApproveUsersController < ApplicationController
   def index
     @users = User.where(:approved=>false)
     authorize @users
