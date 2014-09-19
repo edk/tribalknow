@@ -235,3 +235,10 @@ div.who_panel {
     line-height: 0.9em;
   }
 }
+
+// whoo hoo, round avatars
+.avatar {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
