@@ -1,0 +1,6 @@
+
+= simple_form_for [:admin, @app_config], :url=>admin_config_index_url, :html=>{:method=>:post, :remote=>true, :id=>'app_config_form'} do |f|
+  = f.error_notification
+  = f.input :key
+  = f.input :value
+  = f.submit :class=>'button'

@@ -1,3 +1,34 @@
 = render :template=>'layouts/admin_sub_nav'
 
-in index
+.row
+  %h3 Configuration:
+
+.row
+  .columns.large-10
+    %table
+      %thead
+        %th Key
+        %th Value
+        %th= link_to "Add new", '#', :"data-reveal-id"=>'config_modal', :class=>'button tiny', :style=>'margin-bottom:0;padding: 5px 10px;'
+      %tfoot
+        %tr
+          %td
+          %td{:colspan=>2}= will_paginate @app_configs
+      %tbody
+        - if @app_configs.empty?
+          %tr
+            %td{:colspan=>5} Nothing to show!
+        - @app_configs.each do |config|
+          %tr
+            %td= best_in_place config, :key, :url => admin_config_path(config)
+            %td= best_in_place config, :value, :url => admin_config_path(config)
+            %td= link_to f_icon('x', :style=>'color:red;'), admin_config_path(config), :method=>:delete, :remote=>true, :title=>'Delete', :confirm=>"Are you sure you want to delete '#{config.key}'?"
+
+
+#config_modal.reveal-modal{"data-reveal" => ""}
+  - @app_config ||= AppConfig.new
+  %h2 Add new App Config
+  = render :partial=>'config_modal'
+  %a.close-reveal-modal ×
+
+

@@ -19,6 +19,8 @@
 //= require mdedit
 //= require dropzone
 //= require best_in_place
+//= require jquery.purr
+//= require best_in_place.purr
 //= require jquery-ui
 //= require autocomplete
 
@@ -65,5 +67,9 @@ $(function(){
   });
 
   $('.best_in_place').best_in_place();
+
+  $(document).on('opened.fndtn.reveal', '[data-reveal]', function(){
+    $(".reveal-modal.open").find("input").filter(":visible:first").focus();
+  })
 });
 

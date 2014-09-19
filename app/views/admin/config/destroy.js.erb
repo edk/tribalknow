@@ -1,0 +1,5 @@
+<% if @rv %>
+  window.location.reload()
+<% else %>
+  alert('<%= @app_config.full_messages %>')
+<% end %>

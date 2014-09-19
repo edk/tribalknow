@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916172321) do
+ActiveRecord::Schema.define(version: 20140917210613) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 20140916172321) do
 
   add_index "answers", ["question_id"], name: "question_id", using: :btree
   add_index "answers", ["tenant_id"], name: "tenant_id", using: :btree
+
+  create_table "app_configs", force: true do |t|
+    t.integer  "tenant_id"
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "app_configs", ["key"], name: "index_app_configs_on_key", using: :btree
+  add_index "app_configs", ["tenant_id"], name: "index_app_configs_on_tenant_id", using: :btree
 
   create_table "docs", force: true do |t|
     t.string   "doc_group_id"

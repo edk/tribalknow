@@ -1,0 +1,8 @@
+
+
+<% if @app_config.valid? %>
+  window.location.reload();
+<% else %>
+  $('#app_config_form').html("<%= escape_javascript render(:partial => 'config_modal') %>");
+<% end %>
+
