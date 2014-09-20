@@ -25,6 +25,9 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+
+    NotifyHipchat.call(type: :create, object: @question, user: current_user) if params[:notify][:notify] == '1'
+
     respond_to do |format|
       if @question.save
         format.html { redirect_to questions_url, notice: 'question was successfully created.' }
@@ -50,22 +53,12 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # DELETE /homes/1
-  # DELETE /homes/1.json
-  def destroy
-    # @home.destroy
-    # respond_to do |format|
-    #   format.html { redirect_to homes_url }
-    #   format.json { head :no_content }
-    # end
-  end
-
   private
   # Use callbacks to share common setup or constraints between actions.
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
     params[:question][:tag_list] = params[:question].delete(:tags)
-    params[:question].permit(:title, :text, :topic_id, :tag_list)
+    params[:question].permit(:title, :text, :topic_id, :tag_list, :notify)
   end
 
 end

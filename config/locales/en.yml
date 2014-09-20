@@ -7,6 +7,7 @@ en:
       localdate: "%m-%d-%Y"
       short: "%b %d"
       long: "%B %d, %Y"
+      medium: "%b %d, %Y"
       moyr: "%b %Y"
       modayr: "%b %d, %Y"
       civilian: "%a %B %d"

@@ -14,12 +14,15 @@ gem 'omniauth-github'
 gem "pundit"
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'hipchat'
+gem 'certified'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
 gem 'paper_trail', '~> 3.0.0'
 gem 'public_activity'
 gem 'acts_as_votable'
+gem "interactor-rails", "~> 2.0"
 
 gem 'github-markdown'
 gem 'html_truncator'

@@ -2,6 +2,7 @@ class Topic < ActiveRecord::Base
   stampable
   acts_as_taggable
   has_paper_trail
+  include EventMessage
 
   extend FriendlyId
   friendly_id :name, :use => :slugged

@@ -2,6 +2,7 @@ class Answer < ActiveRecord::Base
   stampable
   has_paper_trail
   acts_as_votable
+  include EventMessage
 
   belongs_to :question
   validates  :text, presence: true, length: { minimum: 3 }
@@ -17,4 +18,9 @@ class Answer < ActiveRecord::Base
   def to_s
     question && question.title
   end
+
+  def class_as_verb
+    "answered"
+  end
+
 end

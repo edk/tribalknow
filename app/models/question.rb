@@ -4,6 +4,7 @@ class Question < ActiveRecord::Base
   acts_as_taggable
   has_paper_trail
   acts_as_votable
+  include EventMessage
 
   extend FriendlyId
   friendly_id :title, :use => [:slugged, :finders]
@@ -23,5 +24,9 @@ class Question < ActiveRecord::Base
 
   def to_s
     title
+  end
+
+  def class_as_verb
+    "asked"
   end
 end

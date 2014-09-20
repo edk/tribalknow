@@ -22,7 +22,7 @@
           %tr
             %td= best_in_place config, :key, :url => admin_config_path(config)
             %td= best_in_place config, :value, :url => admin_config_path(config)
-            %td= link_to f_icon('x', :style=>'color:red;'), admin_config_path(config), :method=>:delete, :remote=>true, :title=>'Delete', :confirm=>"Are you sure you want to delete '#{config.key}'?"
+            %td= link_to f_icon('x', :style=>'color:red;'), admin_config_path(config), :method=>:delete, :remote=>true, :title=>'Delete', :data=>{:confirm=>"Are you sure you want to delete '#{config.key}'?"}
 
 
 #config_modal.reveal-modal{"data-reveal" => ""}

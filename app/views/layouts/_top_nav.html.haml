@@ -11,7 +11,7 @@
     %ul.right
       %li.divider.hide-for-small
       - if user_signed_in?
-        %ul.right
+        %ul.navbar_avatar.right
           = current_user && link_to(account_path, :class=>'nav_avatar') do
             = render_avatar(current_user, :size=>43)
         %li= link_to "Docs", docs_path, :class=>'highlight'
