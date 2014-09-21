@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    NotifyHipchat.call(type: :create, object: @question, user: current_user) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user) if params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @question.save
@@ -42,6 +42,7 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.friendly.find(params[:id])
 
+    NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user) if params[:notify][:notify] == '1'
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to root_url, notice: 'Question was successfully updated.' }

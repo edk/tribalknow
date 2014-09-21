@@ -7,7 +7,15 @@ class NotifyHipchat
     return unless hipchat_configured?
 
     msg = context.object.event_message context.user, context.type
-    hipchat_client[AppConfig['hipchat_room_id']].send(AppConfig['hipchat_from_user'], msg)
+    send_message msg
+  end
+
+  def send_message msg
+    if !Rails.env.production?
+      puts "\n Would have sent Hipchat message: #{msg}"
+    else
+      hipchat_client[AppConfig['hipchat_room_id']].send(AppConfig['hipchat_from_user'], msg)
+    end
   end
 
   def hipchat_client

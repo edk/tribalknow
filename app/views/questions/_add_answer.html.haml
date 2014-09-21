@@ -12,5 +12,9 @@
         = f.text_area :text, class: ''
       #out
       .row
-        .large-8.columns
-          = f.submit 'Submit answer', :class => 'button'
+        .columns.large-4
+          = f.submit 'Submit answer', :class => 'button expand'
+        .columns.large-4
+          = simple_fields_for :notify do |ff|
+            = ff.input :notify, :label=>'Post to hipchat', :as=>:boolean
+        .columns.large-4

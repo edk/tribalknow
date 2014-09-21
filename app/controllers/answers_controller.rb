@@ -7,18 +7,9 @@ class AnswersController < ApplicationController
     @answers = Answer.all
   end
 
-  # GET /answers/1
-  # GET /answers/1.json
-  def show
-  end
-
   # GET /answers/new
   def new
     @answer = Answer.new
-  end
-
-  # GET /answers/1/edit
-  def edit
   end
 
   # POST /answers
@@ -26,6 +17,8 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
+
+    NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @answer.save
@@ -43,6 +36,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
+        NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify][:notify] == '1'
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
         format.json { head :no_content }
       else
@@ -56,6 +50,9 @@ class AnswersController < ApplicationController
   # DELETE /answers/1.json
   def destroy
     @answer.destroy
+    
+    NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify][:notify] == '1'
+
     respond_to do |format|
       format.html { redirect_to answers_url }
       format.json { head :no_content }

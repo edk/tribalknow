@@ -28,6 +28,11 @@
         = f.text_area :content
       #out{style: "min-height: 20em;"}
   .actions
-    = yield :form_nav
-    = f.submit "Save", :class => 'button has-tip', :title=>'Tip: CMD-s saves when in the editor!', :data=>{:tooltip=>""}
+    .row
+      .columns.large-4
+        = f.submit "Save", :class => 'button expand has-tip', :style=>"color: #EEE", :title=>'Tip: CMD-s saves when in the editor!', :data=>{:tooltip=>""}
+      .columns.large-4
+        = simple_fields_for :notify do |ff|
+          = ff.input :notify, :label=>'Post to hipchat', :as=>:boolean
+      .columns.large-4
 

@@ -36,6 +36,9 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
+
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify][:notify] == '1'
+
     respond_to do |format|
       if @topic.save
         format.html { redirect_to topics_url, notice: 'Topic was successfully created.' }
@@ -51,6 +54,8 @@ class TopicsController < ApplicationController
     @topic = Topic.friendly.find(params[:id])
     redir_to = session.delete(:return_to) || topics_path
 
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify][:notify] == '1'
+
     respond_to do |format|
       if @topic.update(topic_params)
         format.html { redirect_to redir_to, notice: 'Topic was successfully updated.' }
@@ -64,6 +69,8 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.friendly.find(params[:id])
+
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify][:notify] == '1'
 
     @topic.destroy
     respond_to do |format|
