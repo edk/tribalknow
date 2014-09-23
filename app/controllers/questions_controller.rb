@@ -42,14 +42,15 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.friendly.find(params[:id])
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user) if params[:notify] && params[:notify][:notify] == '1'
+
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to root_url, notice: 'Question was successfully updated.' }
-        format.json { head :no_content }
+        format.json {respond_with_bip(@question) }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@question) }
       end
     end
   end

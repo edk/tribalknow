@@ -82,6 +82,18 @@ module ApplicationHelper
     content_tag(:i, nil, options.merge(:class=>css_class))
   end
 
+  def best_in_place_with_edit_icon obj, method, opts = {}
+    # this is a wip.  started using it but wasn't happy with it, so i need to circle back later
+    edit_content_id = dom_id(obj, method)
+
+    addl_options = { :activator => "##{edit_content_id}" }
+
+    rv = best_in_place obj, method, opts.merge(addl_options)
+    rv << f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon', :style=>'font-size: 0.75em;')
+
+    rv.html_safe
+  end
+
   def in_place_edit_panel note, path
     title = content_tag(:h3, best_in_place(note, :title,{ :as=>:input, :raw=>true }))
 

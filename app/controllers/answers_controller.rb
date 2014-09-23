@@ -36,12 +36,12 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify][:notify] == '1'
+        NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify] && params[:notify][:notify] == '1'
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
-        format.json { head :no_content }
+        format.json { respond_with_bip(@answer) }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@answer) }
       end
     end
   end

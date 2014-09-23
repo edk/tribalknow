@@ -54,7 +54,7 @@ class TopicsController < ApplicationController
     @topic = Topic.friendly.find(params[:id])
     redir_to = session.delete(:return_to) || topics_path
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify] && params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @topic.update(topic_params)

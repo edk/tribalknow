@@ -11,10 +11,10 @@ class NotifyHipchat
   end
 
   def send_message msg
-    if !Rails.env.production?
-      puts "\n Would have sent Hipchat message: #{msg}"
-    else
+    if Rails.env.production?
       hipchat_client[AppConfig['hipchat_room_id']].send(AppConfig['hipchat_from_user'], msg)
+    else
+      puts "\n Would have sent Hipchat message: #{msg}"
     end
   end
 

@@ -1,12 +1,12 @@
 
 .row.for_header
   .columns.large-10
-    %h1.title#question_title{:contenteditable=>'true'}= @question.title
+    %h1.title#question_title= best_in_place @question, :title
   .columns.large-2
 
 .row.answer
-  .columns.large-11#question_body{:contenteditable=>'true'}
-    = render_md @question.text
+  .columns.large-11#question_body
+    = find_and_preserve best_in_place(@question, :text, {:as=>:textarea, :raw=>true, :display_with=>lambda{ |content| render_md(content.to_s) }})
   .columns.large-1
     = render :partial=>'/shared/votes', :locals=>{:type=>'question', :object=>@question}
 .row{:style=>'margin-top:15px;'}
@@ -18,7 +18,6 @@
         =# link_to tag, questions_path(:tag=>tag), :class=>"tiny button radius round"
         = render_tag_links(@question.tags)
   .columns.large-2
-    = link_to "Edit this question", "javascript:alert('TODO: inline editing')"
   .columns.large-4
     = asked_by(@question)
 
