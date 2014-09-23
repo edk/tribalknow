@@ -7,7 +7,12 @@ class NotifyHipchat
     return unless hipchat_configured?
 
     msg = context.object.event_message context.user, context.type
-    send_message msg
+    begin
+      send_message msg
+    rescue
+      Rails.logger.error("There was a failure sending the notification to hipchat")
+      # TODO: add a background job system to retry in the future.
+    end
   end
 
   def send_message msg
