@@ -28,10 +28,10 @@
           %td
           %td= user.created_at
           %td
-            = link_to f_icon('check', :style=>'color:green;font-size:2em'), approve_approve_user_path(user), {:title=>'click to approve this user', :method=>:post}
+            = link_to f_icon('check', :style=>'color:green;font-size:2em'), approve_admin_approve_user_path(user), {:title=>'click to approve this user', :method=>:post}
           %td
             = user.active? ? f_icon('check') : f_icon('x')
           %td
-            = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_approve_user_path(user), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user?"}, :method=>:post}
+            = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_admin_approve_user_path(user), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user?"}, :method=>:post}
           %td
-            = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_approve_user_path(user, :skip_notification=>1), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user without email notification?"}, :method=>:post}
+            = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_admin_approve_user_path(user, :skip_notification=>1), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user without email notification?"}, :method=>:post}
