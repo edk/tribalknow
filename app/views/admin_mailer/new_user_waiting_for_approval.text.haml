@@ -10,7 +10,7 @@ There is a new user, #{@user.email}, awaiting your approval.
     params = {}
   end
   ""
-You can view pending requests at: #{approve_users_url(params) rescue "#{$!} #{$@}"}
+You can view pending requests at: #{admin_approve_users_url(params) rescue "#{$!} #{$@}"}
 
 Thanks,
 The system.
