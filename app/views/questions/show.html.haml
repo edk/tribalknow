@@ -6,7 +6,7 @@
 
 .row.answer
   .columns.large-11#question_body
-    = find_and_preserve best_in_place_if(false, @question, :text, {:as=>:textarea, :raw=>true, :display_with=>lambda{ |content| render_md(content.to_s) }})
+    = find_and_preserve best_in_place(@question, :text, {:as=>:textarea, :raw=>true, :display_with=>lambda{ |content| render_md(content.to_s) }})
   .columns.large-1
     = render :partial=>'/shared/votes', :locals=>{:type=>'question', :object=>@question}
 .row{:style=>'margin-top:15px;'}

@@ -9,6 +9,5 @@ $ ->
     if (stripped_url.length > 1)
       anchor_value = stripped_url[1]
     
-    if anchor_value.length > 0
-      # $("##{focus}").css({ 'background-color': 'yellow' })
+    if anchor_value && anchor_value.length > 0
       $("##{anchor_value}").highlight()
