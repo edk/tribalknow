@@ -25,8 +25,19 @@
   .columns.large-4
     .panel
       %h3 #{image_tag "794-chart-selected@2x.png", :size=>'24x24'} Popular Topics
-    .panel
-      %h3 #{image_tag "832-stack-1-selected@2x.png", :size=>'24x24'} Popular Questions
+
+    - if @popular_questions.present?
+      .panel
+        %h3 #{image_tag "832-stack-1-selected@2x.png", :size=>'24x24'} Popular Questions
+        %ul.popular_questions
+          - @popular_questions.each do |q|
+            %li
+              %span.votes
+                = q.vote_count
+                %i.fi-like
+              %span.title
+                = link_to q.title, q
+
     .panel
       %h3 #{f_icon('link', :style=>'font-size:1.2em')} Top links
     .panel

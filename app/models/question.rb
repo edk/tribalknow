@@ -22,6 +22,10 @@ class Question < ActiveRecord::Base
   
   scope :asked_by, ->(user) { where(:creator_id => user.id ) }
 
+  scope :popular, ->(limit=10) {
+    joins(:votes_for).where('votes.vote_flag' => '1').group(:votable_id).select("questions.*, count(votes.id) as vote_count").order("vote_count desc, votable_id desc").limit(limit)
+  }
+
   def to_s
     title
   end

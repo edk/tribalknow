@@ -242,3 +242,18 @@ div.who_panel {
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
+
+.popular_questions{
+  list-style: none;
+  margin-left: 0;
+  li{
+    margin-bottom: .5em;
+  }
+  .votes{
+    white-space: nowrap;
+    padding-right: .5em;
+  }
+  .votes, .title{
+    display: table-cell;
+  }
+}
