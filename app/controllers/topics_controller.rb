@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @topic.save
@@ -54,7 +54,7 @@ class TopicsController < ApplicationController
     @topic = Topic.friendly.find(params[:id])
     redir_to = session.delete(:return_to) || topics_path
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify] && params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify] && params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @topic.update(topic_params)
@@ -70,7 +70,7 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.friendly.find(params[:id])
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify][:notify] == '1'
 
     @topic.destroy
     respond_to do |format|

@@ -23,7 +23,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer])) if params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @answer.save
@@ -41,7 +41,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify] && params[:notify][:notify] == '1'
+        NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer])) if params[:notify] && params[:notify][:notify] == '1'
         format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
         format.json { respond_with_bip(@answer) }
       else
@@ -56,7 +56,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     
-    NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer])) if params[:notify][:notify] == '1'
 
     respond_to do |format|
       format.html { redirect_to answers_url }
