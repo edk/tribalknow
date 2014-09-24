@@ -1,4 +1,5 @@
-.row
+
+.row{:id=>"answer_#{answer.id}"}
   .small-8.columns
     = find_and_preserve best_in_place(answer, :text, {:as=>:textarea, :raw=>true, :display_with=>lambda { |content| render_md(answer.text)}, :url=>question_answer_url(answer.question, answer) } )
   .small-3.columns

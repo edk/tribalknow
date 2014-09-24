@@ -12,6 +12,11 @@ class AnswersController < ApplicationController
     @answer = Answer.new
   end
 
+  def show
+    @answer = Answer.find(params[:id])
+    redirect_to question_url(@answer.question, :anchor=>"answer_#{@answer.id}")
+  end
+
   # POST /answers
   # POST /answers.json
   def create

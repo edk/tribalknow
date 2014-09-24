@@ -47,7 +47,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to root_url, notice: 'Question was successfully updated.' }
-        format.json {respond_with_bip(@question) }
+        format.json { respond_with_bip(@question) }
       else
         format.html { render action: 'edit' }
         format.json { respond_with_bip(@question) }

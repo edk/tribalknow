@@ -3,9 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  post_changed_text_to_server = (e) ->
-    this_id = $(this).attr('id')
-    console.log('here', this_id)
-    console.log('data= ', data)
-
-  $('[contenteditable=true]').on 'blur', post_changed_text_to_server
+  $ () ->
+    anchor_value
+    stripped_url = document.location.toString().split("#")
+    if (stripped_url.length > 1)
+      anchor_value = stripped_url[1]
+    
+    if anchor_value.length > 0
+      # $("##{focus}").css({ 'background-color': 'yellow' })
+      $("##{anchor_value}").highlight()
