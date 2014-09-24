@@ -26,10 +26,9 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question)) if params[:notify][:notify] == '1'
-
     respond_to do |format|
       if @question.save
+        NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question)) if params[:notify][:notify] == '1'
         format.html { redirect_to questions_url, notice: 'question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
       else
