@@ -3,7 +3,16 @@
 
 This is a tool to explore new ways to spread tribal knowledge of a software project within a group.
 
-Screencasting with accompanying text, articles,  question and answer, categorized information and gamification.
+Features:
+  * Q&A - think a private StackOverflow
+  * Topics - A structured wiki
+  * Integration - Hipchat
+
+Upcoming features:
+  * File uploads - with players/viewers for appropriate types, like video
+  * Google integration (?)
+  * badges for topic experts
+  * Hubot integration
 
 ### Motivation
 
