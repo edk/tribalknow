@@ -212,7 +212,7 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paper_trail (3.0.3)
+    paper_trail (3.0.5)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
     paperclip (4.2.0)
@@ -362,7 +362,7 @@ DEPENDENCIES
   ledermann-rails-settings
   mysql2
   omniauth-github
-  paper_trail (~> 3.0.0)
+  paper_trail (~> 3.0.5)
   paperclip
   pry
   public_activity
