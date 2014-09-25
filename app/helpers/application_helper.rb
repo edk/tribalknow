@@ -89,7 +89,7 @@ module ApplicationHelper
     addl_options = { :activator => "##{edit_content_id}" }
 
     rv = best_in_place obj, method, opts.merge(addl_options)
-    rv << f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon', :style=>'font-size: 0.75em;')
+    rv << f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon_right')
 
     rv.html_safe
   end

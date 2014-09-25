@@ -7,18 +7,40 @@ i.edit_icon {
   display: inline;
 }
 
-.best_in_place:hover + i, i.edit_icon:hover {
+.best_in_place:hover + i.edit_icon, i.edit_icon:hover {
   opacity: 1;
   transition: 0.5s;
   visibility: visible;
-  display: inline;
   padding-left: 0.25em;
 }
 
 i.edit_icon:hover {
   cursor: default;
   color: #3E3;
-  display: inline;
 }
 
 
+i.edit_icon_right {
+  opacity: 0;
+  transition: 1s linear;
+  display: inline;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.best_in_place:hover + i.edit_icon_right, i.edit_icon_right:hover {
+  opacity: 1;
+  transition: 0.5s;
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-left: 0.25em;
+}
+i.edit_icon_right:hover {
+  cursor: default;
+  color: #3E3;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
