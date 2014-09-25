@@ -8,16 +8,16 @@ $ ->
 
   opts =
     clickable: ".instructions",
-    autoProcessQueue: true, #When set to false you have to call myDropzone.processQueue() yourself in order to upload the dropped files. See below for more information on handling queues.
-    #thumbnailWidth, thumbnailHeight, addRemoveLinks:
-    #previewsContainer: , # defines where to display the file previews – if null the Dropzone element is used. Can be a plain HTMLElement or a CSS selector. The element should have the dropzone-previews class so the previews are displayed properly
-    #previewTemplate: #is a string that contains the template used for each dropped image. Change it to fulfill your needs but make sure to properly provide all elements.
+    autoProcessQueue: true,
     headers: 
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
 
-  if $('.drop_target').length > 0 && url = $('.drop_target').attr('data-url')
+  if $('.drop_target').length > 0  && (url = $('.drop_target').attr('data-url'))
     opts.url = url
-    dz_element = $('.drop_target').dropzone opts
+    drop_targets = $('.drop_target')
+    return if drop_targets.data("has_dropzone")
+    drop_targets.data("has_dropzone", 1)
+    dz_element = drop_targets.dropzone opts
 
     dz = Dropzone.forElement(dz_element.get(0))
 
@@ -25,6 +25,7 @@ $ ->
       console.log('complete dropzone')
     dz.on 'uploadprogress', (file, a, b) ->
       console.log('uploadprogress dropzone')
+      
   else if $('.icon_drop_target').length > 0
     $('.icon_drop_target').each (index, elem) ->
       $elem = $(elem)
