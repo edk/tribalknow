@@ -3,6 +3,23 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
+  code_field = $('#in textarea:visible')
+  code_field.on "keyup", () ->
+    code_field.addClass("codeMirrorDirty")
+
+  # $('#in textarea:visible').parents('form').find('input[type=submit]').on ""
+  code_field.parents('form').on "submit", () ->
+    code_field.removeClass('codeMirrorDirty');
+    true
+
+  unloadPage = (e) ->
+    if ($('#in textarea.codeMirrorDirty:visible').length > 0)
+      return 'You have unsaved changes on this page.  Do you want to leave?'
+    else
+      return null
+
+  window.onbeforeunload = unloadPage
+
   # make the standard code mirror div bigger than normal
   $('.CodeMirror').css({'height': '25em'})
 
@@ -25,7 +42,7 @@ $ ->
       console.log('complete dropzone')
     dz.on 'uploadprogress', (file, a, b) ->
       console.log('uploadprogress dropzone')
-      
+
   else if $('.icon_drop_target').length > 0
     $('.icon_drop_target').each (index, elem) ->
       $elem = $(elem)
@@ -41,7 +58,4 @@ $ ->
         dz.on "success", (file, resp) ->
           url = resp.url
           $(this.element).find('img').attr({src: url})
-
-
-
 
