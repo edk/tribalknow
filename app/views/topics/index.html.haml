@@ -1,5 +1,4 @@
-- content_for(:post_body_js) do
-  = javascript_include_tag "topics.js"
+- set_title "Q: All topics"
 
 .row
   %h2= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"
