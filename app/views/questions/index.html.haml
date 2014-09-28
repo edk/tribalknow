@@ -30,8 +30,8 @@
                   = link_to(question_path(question)) do
                     = question.answers.count == 0 ? "No answers yet" : "#{question.answers.count} #{"answer".pluralize question.answers.count}"
                 %span.answering_avatars
-                  - question.answers.each do |ans|
-                    = render_avatar( ans.creator, :size=>'28x28' )
+                  - question.uniq_answerers.each do |user|
+                    = render_avatar( user, :size=>'28x28' )
               .columns.large-5.text-right
                 .question_last_updated
                   Last updated<br/>
