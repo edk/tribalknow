@@ -122,6 +122,7 @@ namespace :deploy do
   task :addl_deploy_work do
     on roles(:web) do
       execute :ln, '-nfs', "/home/deploy/docs", release_path.join("docs")
+      execute :cp, "/home/deploy/favicon.ico", release_path.join("public/favicon.ico")
     end
   end
 
