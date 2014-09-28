@@ -19,10 +19,4 @@ class HomesController < ApplicationController
     end
   end
 
-  def todo
-  end
-
-  def about
-  end
-
 end
