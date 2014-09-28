@@ -1,23 +1,28 @@
 
 .row
-  .columns.large-8
-    .search_result_title
-      = link_to question_path(result.question) do
-        Answer to: #{result.question.title}
-    - if content=result.excerpts.text.presence
-      = raw content
-    - else
-      = raw HTML_Truncator.truncate(render_md(result.text), 25)
-  .columns.large-4
+
+  .columns.large-9
     .row
-      .columns.large-6.right
-        %p
-          %div.small_light_title Last updated:<br/>
-          %div.small= smart_display(result.updated_at)
-      .columns.large-6.right
-        %p
-          %div.small_light_title Asked:<br/>
-          %div.small= smart_display result.created_at
+      .columns.large-12
+        .search_result_title
+          = link_to question_path(result.question) do
+            Answer to: #{result.question.title}
+
+      .columns.large-12      
+        - if content=result.excerpts.text.presence
+          = raw content
+        - else
+          = raw HTML_Truncator.truncate(render_md(result.text), 100)
+
+  .columns.large-3
+    .row
+      .columns.large-12.right
+        %div.small_light_title Answered by #{render_avatar(result.creator, size: :small)}<br/>
+        %div.small= smart_display result.created_at
+      .columns.large-12.right
+        %br/
+        %div.small_light_title Last updated:<br/>
+        %div.small= smart_display(result.updated_at)
     .row
       = render_tag_links result.tags if result.respond_to?(:tags)
 

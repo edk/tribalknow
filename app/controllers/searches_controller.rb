@@ -16,10 +16,15 @@ class SearchesController < ApplicationController
   private
   def get_sphinx_search_results(term)
     ThinkingSphinx.search term,
-                          :excerpts => { :limit=>255, :around=>20 },
+                          :excerpts => { :limit=>255, :around=>50 },
                           :classes => [Question, Answer, Topic, Note],
-                          :with=>{ :tenant_id => Tenant.current_id }
+                          :with=>{ :tenant_id => Tenant.current_id },
+                          :per_page => per_page, :page=>params[:page]
 
+  end
+
+  def per_page
+    25
   end
 
   def resource_url(resource)

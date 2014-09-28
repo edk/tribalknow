@@ -1,15 +1,18 @@
 .row
-  .columns.large-8
-    = link_to topic_path(result) do
-      .search_result_title
-        %b Topic:
-        #{result.name} - #{result.description}
-      - if (content = result.excerpts.content).present?
-        %p #{content.html_safe}
-      - else
-        %p #{truncate result.content, :length=>180, :separator=>' '}
 
-  .columns.large-4
+  .columns.large-9
+    .row
+      .columns.large-12
+        = link_to topic_path(result) do
+          .search_result_title
+            %b Topic:
+            #{result.name} - #{result.description}
+        - if (content = result.excerpts.content).present?
+          %p #{content.html_safe}
+        - else
+          %p #{truncate result.content, :length=>180, :separator=>' '}
+
+  .columns.large-3.right
     %p
       .small_light_title Last updated at
       .small #{smart_display(result.updated_at)}

@@ -14,7 +14,13 @@ module ApplicationHelper
 
     if user.avatar?
       opts = if options[:size]
-        size = options[:size].to_s =~ /x/ ? options[:size] : "#{options[:size]}x#{options[:size]}"
+        size = if options[:size] == :small
+          "28x28"
+        elsif options[:size].to_s =~ /x/
+          options[:size]
+        else
+          "#{options[:size]}x#{options[:size]}"
+        end
         { :size => size }
       else
         {}
@@ -30,8 +36,16 @@ module ApplicationHelper
   end
 
   def render_gravatar user, options = {}
+    size = if options[:size] == :small
+        "28x28"
+      elsif options[:size]
+        options[:size]
+      else
+        nil
+    end
+
     if user
-      opt_string = "?s=#{options[:size]}" if options[:size]
+      opt_string = "?s=#{size}" if size
       image_tag(gravitar_url(user, opt_string), :alt=>"Your avatar", :class=>'avatar')
     else
       size = "40x40"

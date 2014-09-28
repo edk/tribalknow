@@ -1,22 +1,30 @@
 .row
-  .columns.large-8
-    .search_result_title
-      = link_to "#{result.class.to_s.underscore.capitalize}: #{result.title}", question_path(result)
-    = truncate(result.text.html_safe, :length=>180, :separator=>' ')
-  .columns.large-4
+
+  .columns.large-9
     .row
-      .columns.large-6.right
-        %p
-          %div.small_light_title Last updated:<br/>
-          %div.small= smart_display(result.updated_at)
-      .columns.large-6.right
-        %p
-          %div.small_light_title Asked:<br/>
-          %div.small= smart_display result.created_at
+      .columns.large-12
+        .search_result_title
+          = link_to "#{result.class.to_s.underscore.capitalize}: #{result.title}", question_path(result)
+
+      .columns.large-12
+        = truncate(result.text.to_s.html_safe, :length=>250, :separator=>' ')
+
+      .columns.large-12
+        - if result.answers.size > 0
+          %br/
+          #{pluralize(result.answers.size, 'answer')} from
+          - result.uniq_answerers.each do |user|
+            = render_avatar(user, :size=>:small)
+
+  .columns.large-3.right
+    .row
+      .columns.large-12.right
+        %div.small_light_title #{render_avatar(result.creator, size: :small)} asked:<br/>
+        %div.small= smart_display result.created_at
+      .columns.large-12.right
+        %br/
+        %div.small_light_title Last updated:<br/>
+        %div.small= smart_display(result.updated_at)
     .row
       = render_tag_links result.tags
-.row
-  .columns.large-8
-    - if result.answers.size > 0
-      Has #{pluralize(result.answers.size, 'answer')}.
 
