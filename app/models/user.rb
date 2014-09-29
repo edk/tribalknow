@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
 
   has_settings :preference
 
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :validatable, :trackable,
+  devise :database_authenticatable, :registerable, :recoverable, :validatable, :trackable,
          :omniauthable, :omniauth_providers => [:github]
+         #, :confirmable
 
   belongs_to :tenant
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
@@ -51,7 +52,11 @@ class User < ActiveRecord::Base
 
   def approve_and_activate_send_email!
     self.update_columns(approved: true, active: true)
-    self.send_confirmation_instructions
+    if self.respond_to?(:send_confirmation_instructions)
+      send_confirmation_instructions
+    else
+      AdminMailer.you_are_approved(self).deliver
+    end
   end
 
   def from_external_auth?

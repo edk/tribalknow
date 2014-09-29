@@ -18,4 +18,11 @@ class AdminMailer < ActionMailer::Base
   def user_account_rejected user
     mail to: user.email
   end
+
+  def you_are_approved user
+    @user = user
+    @tenant = user.tenant
+    mail to: @user.email
+  end
+
 end

@@ -1,0 +1,7 @@
+
+Hi <%= @user.name %>,
+<%- site_url = url_for("https://#{@tenant.fqdn}/") %>
+Your account on <%= link_to site_url, site_url %> has been approved.
+
+Thanks,
+<%= @tenant.site_title || @tenant.name %>
