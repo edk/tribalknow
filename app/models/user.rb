@@ -5,8 +5,7 @@ class User < ActiveRecord::Base
   has_settings :preference
 
   devise :database_authenticatable, :registerable, :recoverable, :validatable, :trackable,
-         :omniauthable, :omniauth_providers => [:github]
-         #, :confirmable
+         :confirmable, :omniauthable, :omniauth_providers => [:github]
 
   belongs_to :tenant
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
