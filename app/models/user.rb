@@ -120,9 +120,9 @@ class User < ActiveRecord::Base
 
   def active_for_authentication?
     if tenant && tenant.new_user_restriction?
-      super && approved? && (confirmed? || confirmation_period_valid?)
+      super && approved? && (respond_to?(:confirmed?) && (confirmed? || confirmation_period_valid?))
     else
-      super && approved? && (confirmed? || confirmation_period_valid?)
+      super && approved? && (respond_to?(:confirmed?) && (confirmed? || confirmation_period_valid?))
     end
   end
 
