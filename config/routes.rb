@@ -39,10 +39,17 @@ Tribalknow::Application.routes.draw do
   get "/docs/*path" => "docs#show"
   
   resources :questions, path_names: { new: 'ask' } do
+    member do
+      post :notify
+    end
     collection do
       get 'search'
     end
-    resources :answers, path_names: { new: 'new' }
+    resources :answers, path_names: { new: 'new' } do
+      member do
+        post :notify
+      end
+    end
   end
   
   post '/votes' => 'votes#create'

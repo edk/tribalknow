@@ -4,7 +4,7 @@ class NotifyHipchat
   include Interactor
 
   def call
-    return unless hipchat_configured?
+    return unless self.class.hipchat_configured?
 
     msg = context.object.event_message context.user, context.type, context.url
     begin
@@ -29,7 +29,7 @@ class NotifyHipchat
   end
 
 
-  def hipchat_configured?
+  def self.hipchat_configured?
     AppConfig.where('key'=>%w[hipchat_api_key hipchat_room_id hipchat_from_user]).count == 3
   end
 end

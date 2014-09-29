@@ -17,16 +17,32 @@ class AnswersController < ApplicationController
     redirect_to question_url(@answer.question, :anchor=>"answer_#{@answer.id}")
   end
 
-  # POST /answers
-  # POST /answers.json
+  def notify
+    @answer = Answer.find(params[:id])
+    NotifyHipchat.call(type: :create, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer]))
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
 
     respond_to do |format|
       if @answer.save
-        NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer])) if params[:notify][:notify] == '1'
-        format.html { redirect_to @question, notice: 'Answer was successfully created.' }
+        note = 'Answer was successfully created.'
+
+        if params[:notify][:notify] == '1'
+          NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer]))
+        else
+          if NotifyHipchat.hipchat_configured?
+            note += view_context.link_to "  Post to Hipchat?", notify_question_answer_path(@question, @answer), :remote=>true, :method=>:post
+          end
+        end
+
+        format.html { redirect_to @question, notice: note }
         format.json { render action: 'show', status: :created, location: @question }
       else
         format.html { render action: 'new' }

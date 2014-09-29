@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.friendly.find(params[:id])
+    flash[:notice] = "asldfj alsdjf laskdjf"
   end
 
   def new
@@ -23,13 +24,30 @@ class QuestionsController < ApplicationController
     @question = Question.friendly.find(params[:id])
   end
 
+  def notify
+    @question = Question.find(params[:id])
+    NotifyHipchat.call(type: :create, object: @question, user: current_user, url: polymorphic_url(@question))
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def create
     @question = Question.new(question_params)
 
     respond_to do |format|
       if @question.save
-        NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question)) if params[:notify][:notify] == '1'
-        format.html { redirect_to questions_url, notice: 'question was successfully created.' }
+        note = 'Question was successfully created.'
+        if params[:notify][:notify] == '1'
+          NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question))
+        else
+          if NotifyHipchat.hipchat_configured?
+            note += view_context.link_to "  Post to Hipchat?", notify_question_path(@question), :remote=>true, :method=>:post
+          end
+        end
+
+        format.html { redirect_to @question, notice: note }
         format.json { render action: 'show', status: :created, location: @question }
       else
         format.html { render action: 'new' }
