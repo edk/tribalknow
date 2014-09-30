@@ -10,7 +10,6 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.friendly.find(params[:id])
-    flash[:notice] = "asldfj alsdjf laskdjf"
   end
 
   def new
