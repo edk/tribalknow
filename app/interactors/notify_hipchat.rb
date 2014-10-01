@@ -6,7 +6,7 @@ class NotifyHipchat
   def call
     return unless self.class.hipchat_configured?
 
-    msg = context.object.event_message context.user, context.type, context.url
+    msg = context.object.event_message context.user, context.type, context.url, !!context.verb_override
     begin
       send_message msg
     rescue

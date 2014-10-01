@@ -1,7 +1,7 @@
 
 module EventMessage
 
-  def event_message user = nil, context = :create, url = nil
+  def event_message user = nil, context = :create, url = nil, again = nil
     classname = self.class.to_s.downcase
     verb = self.respond_to?(:class_as_verb) && self.class_as_verb || "created #{classname}"
 
@@ -13,9 +13,15 @@ module EventMessage
       self.to_s
     end
 
+    again = if again
+      "Wants to know more about: "
+    else
+      ""
+    end
+
     case context
       when :create
-        "#{user} #{verb}: #{topic}"
+        "#{again}#{user} #{verb}: #{topic}"
       when :update
         "#{user} updated the #{classname}: #{topic}"
       when :destroy

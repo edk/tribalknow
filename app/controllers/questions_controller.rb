@@ -25,7 +25,8 @@ class QuestionsController < ApplicationController
 
   def notify
     @question = Question.find(params[:id])
-    NotifyHipchat.call(type: :create, object: @question, user: current_user, url: polymorphic_url(@question))
+
+    NotifyHipchat.call(type: :create, object: @question, user: current_user, url: polymorphic_url(@question), verb_override: params[:ping].present?)
 
     respond_to do |format|
       format.js
