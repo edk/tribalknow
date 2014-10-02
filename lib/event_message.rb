@@ -13,15 +13,16 @@ module EventMessage
       self.to_s
     end
 
-    again = if again
-      "Wants to know more about: "
+    if again
+      again = "#{user} wants to know more about"
+      user  = verb = ""
     else
-      ""
+      again = ""
     end
 
     case context
       when :create
-        "#{again}#{user} #{verb}: #{topic}"
+        "#{[again, user, verb].join(" ")}: #{topic}"
       when :update
         "#{user} updated the #{classname}: #{topic}"
       when :destroy
