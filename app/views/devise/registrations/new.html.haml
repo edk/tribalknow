@@ -1,0 +1,20 @@
+
+%h2 Sign up for an account
+.row{:'data-equalizer'=>''}
+  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    .columns.large-6{:'data-equalizer-watch'=>''}
+      = f.error_notification
+      .form-inputs
+        = f.input :email, :required => true, :autofocus => true
+        = f.input :password, :required => true
+        = f.input :password_confirmation, :required => true
+      .row
+        .columns.large-8.push-6
+          = f.button :submit, "Sign up for an account"
+    .columns.large-2{:'data-equalizer-watch'=>''}
+      .xy_center OR
+    .columns.large-4{:'data-equalizer-watch'=>''}
+      .y_center= link_to "Sign up with GitHub", user_omniauth_authorize_path(:github), {:class=>'button'}
+
+.row
+  = render "devise/shared/links"

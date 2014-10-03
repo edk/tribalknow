@@ -1,21 +1,19 @@
-.row
-  .large-6.columns
-    %h2 Sign in
-    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .row{:'data-equalizer'=>''}
+    .large-6.columns{:'data-equalizer-watch'=>''}
+      %h2 Login
       .form-inputs
         = f.input :email, :required => false, :autofocus => true
         = f.input :password, :required => false
         = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-      .form-actions
-        .row
-          .large-6.columns
-            = f.button :submit, "Sign in", :class=>'button'
-          .large-6.columns
-            = link_to "Login with GitHub", user_omniauth_authorize_path(:github), {:class=>'button'}
-  /.large-6.columns
-  /  %h2 Sign Up
-  /  = link_to "create new TKN for your company TODO", new_tenant_path
-
+      .row
+        .large-4.columns.push-9
+          = f.button :submit, "Login", :class=>'button'
+    .large-2.columns{:'data-equalizer-watch'=>''}
+      .xy_center OR
+    .large-4.columns{:'data-equalizer-watch'=>''}
+      .y_center= link_to "Login with GitHub", user_omniauth_authorize_path(:github), {:class=>'button expand',:style=>'padding-left:5em;padding-right:5em;'}
 .row
   .large-12.columns
     = render "devise/shared/links"
