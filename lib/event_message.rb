@@ -14,7 +14,8 @@ module EventMessage
     end
 
     if again
-      again = "#{user} wants to know more about"
+      again = ["#{user} wants to know more about", "Can anyone answer", "Does anyone know"].sample
+      question = "?"
       user  = verb = ""
     else
       again = ""
@@ -22,7 +23,7 @@ module EventMessage
 
     case context
       when :create
-        "#{[again, user, verb].join(" ")}: #{topic}"
+        "#{[again, user, verb].join(" ").strip}: #{topic}#{question}"
       when :update
         "#{user} updated the #{classname}: #{topic}"
       when :destroy
