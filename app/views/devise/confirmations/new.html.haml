@@ -1,0 +1,11 @@
+
+%h2 Resend confirmation instructions
+= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+  .row{:'data-equalizer'=>''}
+    = f.error_notification
+    = f.full_error :confirmation_token
+    .columns.large-6{:'data-equalizer-watch'=>''}
+      = f.input :email, :required => true, :autofocus => true
+    .columns.large-6{:'data-equalizer-watch'=>''}
+      = f.button :submit, "Resend confirmation instructions", :style=>'margin-top:1em;', :class=>"expand"
+= render "devise/shared/links"
