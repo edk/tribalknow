@@ -1,6 +1,6 @@
 class NotePolicy < Struct.new(:user, :note)
   def permitted_attributes
-    if user.admin? || user.owner_of?(note)
+    if user.admin? || note.try(:creator) == user
       [:title, :content]
     end
   end
