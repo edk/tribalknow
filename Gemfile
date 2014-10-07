@@ -18,7 +18,7 @@ gem 'hipchat'
 gem 'certified'
 
 gem 'acts-as-taggable-on'
-gem 'userstamp', :git => 'git@github.com:kimkong/userstamp.git'
+gem 'userstamp', github:'kimkong/userstamp'
 gem 'paper_trail', '~> 3.0.5'
 gem 'public_activity'
 gem 'acts_as_votable'
@@ -28,7 +28,7 @@ gem 'github-markdown'
 gem 'html_truncator'
 
 gem 'will_paginate'
-gem 'best_in_place', :git=> 'git@github.com:edk/best_in_place.git'
+gem 'best_in_place', github: 'edk/best_in_place'
 
 gem 'thinking-sphinx', '~> 3.1'
 
@@ -48,7 +48,7 @@ gem 'simple_form'
 gem 'foundation-rails'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage
 gem 'foundation-icons-sass-rails'
-gem 'foundation-social-web-icons-rails', git: "git://github.com/jclusso/foundation-social-web-icons-rails.git"
+gem 'foundation-social-web-icons-rails', github: "jclusso/foundation-social-web-icons-rails"
 gem 'sass-rails', '~> 4.0.0.rc2'
 gem 'uglifier', '>= 1.3.0'
 

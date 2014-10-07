@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/edk/best_in_place.git
+  revision: e5736320e7a5905cdaaa075d3ac8eba3962f3d30
+  specs:
+    best_in_place (3.0.0.alpha)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
+GIT
   remote: git://github.com/jclusso/foundation-social-web-icons-rails.git
   revision: a23b267e42178bd3bd5b5e9860c55c71bbfdb6ee
   specs:
@@ -7,15 +15,7 @@ GIT
       sass-rails (>= 3.1.1)
 
 GIT
-  remote: git@github.com:edk/best_in_place.git
-  revision: dff839b2f9a134bbf87f144e8ed6ddb24b9b1e41
-  specs:
-    best_in_place (3.0.0.alpha)
-      actionpack (>= 3.2)
-      railties (>= 3.2)
-
-GIT
-  remote: git@github.com:kimkong/userstamp.git
+  remote: git://github.com/kimkong/userstamp.git
   revision: fbb35ccb5004bb04f87e01cbe9b7a5ccdd06b856
   specs:
     userstamp (2.0.2)
