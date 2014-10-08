@@ -20,7 +20,8 @@
       .row
         = render :file=>'/topic_files/index' unless @topic.new_record?
   .row
-    %br/
+    .large-4.columns.markdown_tip.right
+      = link_to "We use Github flavored markdown.", "https://guides.github.com/features/mastering-markdown/", target: "_blank"
     .large-12.columns
       #in{style: "height: 25em; min-height:25em;"}
         = f.text_area :content
