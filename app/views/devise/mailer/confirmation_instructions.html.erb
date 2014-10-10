@@ -1,7 +1,9 @@
 <p>Welcome to <%= @resource.try(:tenant).present? ? @resource.tenant.name : "TribalKnowNow" %>, <%= @email %>!</p>
 
-<p>This is a site for company specific Q&A, and to have an editable organized wiki-like documentation.</p>
+<p>This is a site for company specific Q&A and an organized, searchable wiki.</p>
 
-<p>You can confirm your account email through the link below:</p>
-<% host_params = @resource.tenant.try(:fqdn) ? {} : {:subdomain => @resource.tenant.subdomain} %>
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, {:confirmation_token => @token}.merge(host_params) ) %></p>
+<p>You won't be able to login until you confirm your account email through the link below:</p>
+<% host_params = @resource.tenant.try(:fqdn) ? {:protcol=>'https', :host=>@resource.tenant.fqdn} : {:protcol=>'https', :subdomain => @resource.tenant.subdomain} %>
+<%- confirm = confirmation_url(@resource, {:confirmation_token => @token}.merge(host_params) ) %>
+<p><%= link_to "Confirm my account:", confirm %></p>
+<p><%= link_to "#{confirm}", confirm %></p>
