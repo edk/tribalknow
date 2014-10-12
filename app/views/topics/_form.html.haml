@@ -1,6 +1,6 @@
 
 = simple_form_for(@topic) do |f|
-  - f.error_notification
+  = f.error_notification
   .row
     .column.large-7
       .row
@@ -31,7 +31,6 @@
       .columns.large-4
         = f.submit "Save", :class => 'button expand has-tip', :style=>"color: #EEE", :title=>'Tip: CMD-s saves when in the editor!', :data=>{:tooltip=>""}
       .columns.large-4
-        = simple_fields_for :notify do |ff|
-          = ff.input :notify, :label=>'Post to hipchat', :as=>:boolean
+          = post_to_hipchat_checkbox
       .columns.large-4
 

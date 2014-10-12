@@ -15,6 +15,5 @@
         .columns.large-4
           = f.submit 'Submit answer', :class => 'button expand'
         .columns.large-4
-          = simple_fields_for :notify do |ff|
-            = ff.input :notify, :label=>'Post to hipchat', :as=>:boolean
+          = post_to_hipchat_checkbox
         .columns.large-4
