@@ -38,7 +38,7 @@ Question.create!([
 
 
 Tenant.create!([
-  { :name => "Coupa", :subdomain => "coupa", :fqdn => "coupa.tribalknownow.com", :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-09 10:16:06", :new_user_restriction => true, :self_serve_allowed_domain => nil },
+  { :name => "Coupa", :subdomain => "coupa", :fqdn => "coupa.tribalknownow.com", :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-09 10:16:06", :new_user_restriction => true, :self_serve_allowed_domain => nil. :default => true },
   { :name => "Dynawebworks", :subdomain => "dww", :fqdn => "dww.tribalknownow.com", :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-03 14:17:07", :new_user_restriction => false, :self_serve_allowed_domain => nil }
 ])
 
@@ -56,7 +56,7 @@ Topic.create!([
 
 
 
-user = User.new(:provider => "github", :uid => "54091", :name => "admin", :avatar_url => nil, :admin => true, :tenant_id => 1, :email => "admin@localhost", :encrypted_password => "$2a$10$vcFhlNa/7zgCm3ZqJV8rPeMNN4w3RyBIA2kaeMZujpVLJoaeoJJ8u", :reset_password_sent_at => 1.day.ago, :remember_created_at => 1.day.ago, :current_sign_in_at => Time.now, :last_sign_in_at => 1.day.ago, :last_sign_in_ip => "127.0.0.1", :confirmed_at => 1.day.ago, :sign_in_count => 0, :confirmed_at => "2014-02-09 10:17:33", :confirmation_sent_at => "2014-02-09 10:16:50", :created_at => "2014-02-03 14:17:38", :updated_at => "2014-02-09 18:34:19", :approved => true, :active => true)
+user = User.new(:provider => "github", :uid => "54091", :name => "admin", :avatar_url => nil, :admin => true, :tenant_id => 1, :email => "admin@localhost", :encrypted_password => "$2a$10$XetLgakqx9akzQtLt6bH8OggpTlA1y6LL08hUwKLtXkKXxKVdNBta", :reset_password_sent_at => 1.day.ago, :remember_created_at => 1.day.ago, :current_sign_in_at => Time.now, :last_sign_in_at => 1.day.ago, :last_sign_in_ip => "127.0.0.1", :confirmed_at => 1.day.ago, :sign_in_count => 0, :confirmed_at => "2014-02-09 10:17:33", :confirmation_sent_at => "2014-02-09 10:16:50", :created_at => "2014-02-03 14:17:38", :updated_at => "2014-02-09 18:34:19", :approved => true, :active => true)
 # password is admin
 user.instance_eval do
   def send_admin_email
