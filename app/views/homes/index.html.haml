@@ -38,10 +38,6 @@
                 = link_to q.title, q
 
     .panel
-      %h3 #{f_icon('link', :style=>'font-size:1.2em')} Top links
-    .panel
-      %h3 Top users
-    .panel
       %h2 Welcome #{current_user.name}!
       / %p Last logged in at #{current_user.last_sign_in_at} (#{time_ago_in_words(current_user.last_sign_in_at)} ago) from #{current_user.last_sign_in_ip}
       %h3 Your Stats
