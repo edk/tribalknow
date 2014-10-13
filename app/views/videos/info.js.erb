@@ -1,0 +1,9 @@
+
+<% if @completed %>
+  location.reload();
+<% else %>
+  $('#info_popup h2').html('<%= @video_info %>');
+  $('#info_popup p').html('<ul><%= @job_info.map { |info| "<li>#{info}</li>" }.join.html_safe %></ul>');
+
+  $('#info_popup').foundation('reveal', 'open')
+<% end %>

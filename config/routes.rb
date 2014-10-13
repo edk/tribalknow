@@ -15,6 +15,14 @@ Tribalknow::Application.routes.draw do
     end
   end
 
+  resources :videos do
+    member do
+      get :info
+      post :trigger
+      post :update_status
+    end
+  end
+  
   resource  :account do
     post :avatar
   end

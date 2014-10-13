@@ -1,0 +1,57 @@
+- set_title "Q-tube"
+
+.row
+  .columns.large-10
+    %h2 Videos
+  .columns.large-2
+
+.row
+  .columns.large-10
+    %ul.large-block-grid-2.small-block-grid-1
+      - @published_videos.each do |vid|
+        %li
+          .video_panel{id: dom_id(vid)}
+            /%iframe{style: 'width: 400px; height: 200px', frameborder: '0'}
+            = link_to video_path(vid) do
+              %image{src: vid.asset.expiring_url(60.minutes, :thumb), style: "border:1px solid green;"}
+              / %image{src: "http://placehold.it/400x200", style: "border:1px solid green;"}
+            %b.name= vid.name.presence || "Name me!"
+            - if current_user == vid.creator
+              = link_to "&#215;".html_safe, video_path(vid, dom_id: dom_id(vid) ), remote: true, method: :delete, data: { confirm: "Are you sure?" }
+            .desc= vid.description
+            .date= time_tag((vid.date || vid.created_at).to_date)
+            tags, vote, views
+            .edit_wrapper{style: 'position: relative'}
+              .edit_link{style: 'position:absolute; bottom: 0; right: 0;'}
+                = link_to f_icon('pencil'), edit_video_path(vid)
+  .columns.large-2
+    .row
+      = link_to "Upload new video", new_video_path, class: 'button'
+    .row
+      - @draft_videos.each do |video|
+        .panel{id: dom_id(video)}
+          %div
+            = link_to "#{video.name.presence || 'No name'}", edit_video_path(video), title: 'Edit'
+            - if current_user == video.creator
+              = link_to "&#215;".html_safe, video_path(video, dom_id: dom_id(video)), remote: true, method: :delete#, data: { confirm: "Are you sure?" }
+          %div
+            = video.description
+          %div.small
+            Uploaded by #{video.updater.try(:name)} on #{l(video.created_at, format: :onlydate)}
+          %div
+            Status: #{video.friendly_state}
+            = link_to f_icon('info'), info_video_path(video), title: 'More Info', remote: true
+            = link_to f_icon('refresh'), trigger_video_path(video), title: 'Trigger transcode job again', remote: true, method: :post
+
+.row_spacer
+.row
+  .columns.large-8
+    = will_paginate @published_videos
+  .columns.large-4.center
+
+%div#info_popup.reveal-modal{:'data-reveal' => ''}
+  %h2 title
+  %p Some text
+  %a.close-reveal-modal &#215;
+
+

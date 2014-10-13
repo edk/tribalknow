@@ -23,6 +23,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.0.7)
     actionmailer (4.0.7)
       actionpack (= 4.0.7)
       mail (~> 2.5.4)
@@ -56,6 +57,8 @@ GEM
     acts_as_votable (0.10.0)
     ambry (0.3.1)
     arel (4.0.2)
+    av (0.8.0)
+      cocaine
     aws-sdk (1.51.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -82,7 +85,7 @@ GEM
     certified (1.0.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.4)
+    cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -102,6 +105,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -153,7 +159,7 @@ GEM
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    i18n (0.6.11)
+    i18n (0.7.0)
     innertube (1.1.0)
     interactor (3.0.1)
     interactor-rails (2.0.1)
@@ -218,11 +224,14 @@ GEM
     paper_trail (3.0.5)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
-    paperclip (4.2.0)
+    paperclip (4.2.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paperclip-av-transcoder (0.6.2)
+      av (>= 0.7.1)
+      paperclip (>= 2.5.2)
     polyglot (0.3.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -325,7 +334,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.41)
+    tzinfo (0.3.42)
     uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -338,6 +347,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   activerecord-session_store
   acts-as-taggable-on
   acts_as_votable
@@ -351,7 +361,9 @@ DEPENDENCIES
   certified
   coffee-rails (~> 4.0.0)
   devise
+  dotenv-rails
   exception_notification
+  faraday
   foundation-icons-sass-rails
   foundation-rails
   foundation-social-web-icons-rails!
@@ -373,6 +385,7 @@ DEPENDENCIES
   omniauth-github
   paper_trail (~> 3.0.5)
   paperclip
+  paperclip-av-transcoder
   pry
   public_activity
   pundit

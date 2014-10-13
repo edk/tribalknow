@@ -1,0 +1,42 @@
+- content_for(:head_stylesheet) do
+  = stylesheet_link_tag "dropzone-basic"
+
+= hidden_field_tag 'max_file_size', VideoAsset::MAX_FILE_SIZE
+
+- path = @video.new_record? ? videos_path : video_path(@video)
+= simple_form_for(@video, url: path, html: { class: 'upload_form' }) do |f|
+  = f.error_notification
+  .row
+    .column.large-7
+      =# f.input topic_id
+      = f.input :name, required: true
+      = f.input :date, as: 'string', input_html: { class: 'datepicker' }
+      = f.input :description, as: :text, input_html: { rows: 6 }
+
+      =# tags
+    .column.large-5
+      .video_drop.dropzone{style: 'height: 13em;'}
+        .dz-message.center.y_center
+          - if @video.new_record?
+            Click here or<br/>
+            drop an <b>.mp4</b> or <b>.mov</b> here
+          - elsif @video.asset?
+            Click or drop an <b>.mp4</b> or <b>.mov</b> to overwrite the existing video
+          - else
+            Click here or<br/>
+            drop an .mp4 or .mov here
+      .panel.file_info
+        - if @video.asset?
+          - asset = @video.asset
+          .filename{title: asset.original_filename}= asset.original_filename
+          .size= number_to_human_size asset.size
+
+  .actions
+    .row
+      %hr
+      .row{style: 'padding-top: 1.5em;'}
+        .columns.large-4{style: 'padding-left: 1.5em;'}
+          = f.submit "Save", class: 'button expand', id: 'save_btn'
+        .columns.large-4
+          = post_to_hipchat_checkbox
+        .columns.large-4

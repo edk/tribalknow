@@ -13,9 +13,11 @@ gem 'devise'
 gem 'omniauth-github'
 gem "pundit"
 gem 'paperclip'
+gem 'paperclip-av-transcoder'
 gem 'aws-sdk'
 gem 'hipchat'
 gem 'certified'
+gem 'aasm'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', github:'kimkong/userstamp'
@@ -54,6 +56,7 @@ gem 'foundation-social-web-icons-rails', github: "jclusso/foundation-social-web-
 gem 'sass-rails', '~> 4.0.0.rc2'
 gem 'uglifier', '>= 1.3.0'
 gem 'nokogiri'
+gem 'faraday'
 
 group :development do
   gem 'capistrano', '~> 3.0'
@@ -64,6 +67,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry'
   gem 'byebug'
   gem 'seed_dump'

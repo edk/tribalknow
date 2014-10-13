@@ -1,6 +1,7 @@
 class Topic < ActiveRecord::Base
   stampable
   acts_as_taggable
+  acts_as_votable
   has_paper_trail
   include EventMessage
 
@@ -12,6 +13,7 @@ class Topic < ActiveRecord::Base
   validates  :name, presence: true, length: { minimum: 3 }
   has_many   :topic_files
   has_many   :questions
+  has_many   :file_assets
   # has_many   :links
   # has_many   :contributors
 

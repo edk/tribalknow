@@ -287,39 +287,13 @@ div.who_panel {
   -ms-transform: translate(-50%, -50%);
 }
 
-.markdown_tip {
-  text-align: right;
-  font-size: .7em;
-  margin-top: -1em;
+.video_panel {
+  background-color: #CCC;
+  border: 1px solid black;
+  padding: 1em;
+  margin: 1em;
+  .name {}
+  .desc {}
+  .date {}
 }
 
-.anchor_link {
-  position: relative;
-}
-
-i.header_anchor_link {
-  opacity: 0;
-  transition: 1s linear;
-  position: absolute;
-  left: -1.5em;
-  top: 2.25rem;
-  font-size: 1.5rem;
-}
-
-.anchor_link:hover > i.header_anchor_link, .header_anchor_link:hover {
-  opacity: 1;
-  transition: 1s;
-  visibility: visible;
-}
-
-.panel {
-  ul.panel_list {
-    font-size: 0.90rem;
-    margin-left: 12px;
-    li {
-      margin-top:0.25rem;
-      margin-bottom:0.25rem;
-      line-height: 0.92rem;
-    }
-  }
-}
