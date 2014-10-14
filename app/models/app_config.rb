@@ -4,7 +4,7 @@ class AppConfig < ActiveRecord::Base
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
 
   def self.[] key, default = nil
-    conf = AppConfig.find_by_key key
+    conf = AppConfig.find_by(key: key)
     if conf.value
       conf.value
     else

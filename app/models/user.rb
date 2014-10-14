@@ -28,6 +28,13 @@ class User < ActiveRecord::Base
     self.class.where(:tenant_id=>tenant_id).instance_eval &block
   end
 
+  before_create :fake_confirmation_if_necessary
+  def fake_confirmation_if_necessary
+    if AppConfig['disable_confirmation'].to_i == 1
+      self.confirmed_at = Time.now
+    end
+  end
+
   after_create :send_admin_email
   def send_admin_email
     if requires_admin_approval?
@@ -51,7 +58,7 @@ class User < ActiveRecord::Base
 
   def approve_and_activate_send_email!
     self.update_columns(approved: true, active: true)
-    if self.respond_to?(:send_confirmation_instructions)
+    if self.respond_to?(:send_confirmation_instructions) && AppConfig['disable_confirmation'].to_i == 1
       send_confirmation_instructions
     else
       AdminMailer.you_are_approved(self).deliver
@@ -114,7 +121,7 @@ class User < ActiveRecord::Base
   end
 
   def confirmation_required?
-    false
+    AppConfig['disable_confirmation'].to_i == 1
   end
 
   def active_for_authentication?
