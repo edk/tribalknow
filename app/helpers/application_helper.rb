@@ -148,6 +148,11 @@ module ApplicationHelper
   def private_notes
     
   end
+
+  def post_to_hipchat_checkbox
+    simple_fields_for :notify do |ff|
+      ff.input :notify, :label=>'Post to hipchat', :as=>:boolean, :input_html => {style: 'margin-right: 0.5em;'}
+    end
+  end
+
 end
-
-
