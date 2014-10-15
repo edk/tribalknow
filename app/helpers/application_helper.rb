@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def render_md(text)
-    GitHub::Markdown.render_gfm(sanitize(text)).html_safe
+    GitHub::Markdown.render_gfm(sanitize(text, attributes: %w(class style title href))).html_safe
   end
 
   def render_avatar user, options = {}
