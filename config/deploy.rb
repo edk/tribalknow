@@ -34,7 +34,7 @@ namespace :deploy do
       within release_path do
         with rails_env: fetch(:rails_env) do
           execute :rake, "ts:index"
-        end unless ENV["SKIP_TS"].present?
+        end unless ENV["SKIP_TS"] == '1'
       end
     end
   end
