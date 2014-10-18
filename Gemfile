@@ -22,6 +22,7 @@ gem 'userstamp', github:'kimkong/userstamp'
 gem 'paper_trail', '~> 3.0.5'
 gem 'public_activity'
 gem 'acts_as_votable'
+gem 'merit'
 gem "interactor-rails", "~> 2.0"
 gem 'rambulance'
 
