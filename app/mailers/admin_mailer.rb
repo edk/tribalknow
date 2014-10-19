@@ -22,7 +22,7 @@ class AdminMailer < ActionMailer::Base
   def you_are_approved user
     @user = user
     @tenant = user.tenant
-    mail to: @user.email, subject: "Your account has been approved on #{tenant.fqdn}"
+    mail to: @user.email, subject: "Your account has been approved on #{@tenant.fqdn}"
   end
 
 end
