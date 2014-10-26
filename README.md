@@ -3,6 +3,8 @@
 
 This is a tool to explore new ways to spread tribal knowledge of a software project within a group.
 
+See also: http://en.wikipedia.org/wiki/Knowledge_management
+
 Features:
   * Q&A - think a private StackOverflow
   * Topics - A structured wiki

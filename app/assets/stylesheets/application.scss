@@ -312,3 +312,15 @@ i.header_anchor_link {
   visibility: visible;
 }
 
+.panel {
+  ul.panel_list {
+    font-size: 0.90rem;
+    // list-style-type: none;
+    margin-left: 12px;
+    li {
+      padding-left: 0;
+      margin-left: 0;
+      margin-top:0.25rem;
+    }
+  }
+}
