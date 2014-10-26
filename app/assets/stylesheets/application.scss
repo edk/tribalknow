@@ -315,12 +315,11 @@ i.header_anchor_link {
 .panel {
   ul.panel_list {
     font-size: 0.90rem;
-    // list-style-type: none;
     margin-left: 12px;
     li {
-      padding-left: 0;
-      margin-left: 0;
       margin-top:0.25rem;
+      margin-bottom:0.25rem;
+      line-height: 0.92rem;
     }
   }
 }
