@@ -11,9 +11,10 @@ module ApplicationHelper
   end
 
   def add_anchor_links_to_headers html
+    toc = []
     doc = Nokogiri::HTML::DocumentFragment.parse html
-    headers = doc.css "h1,h2"
 
+    headers = doc.css "h1,h2"
     headers.each { |h|
       # create a new anchor node
       anchor = Nokogiri::XML::Node.new 'a', doc
@@ -30,9 +31,11 @@ module ApplicationHelper
       anchor['class'] = 'anchor_link'
       name_slug       = h.content.to_s.parameterize
       anchor['href']  = "##{name_slug}"
+      toc << ["#{h.content}", "##{name_slug}"]
       anchor['name']  = "#{name_slug}"
     }
-    doc.to_s.html_safe
+
+    [doc.to_s.html_safe, toc]
   end
 
   def render_avatar user, options = {}

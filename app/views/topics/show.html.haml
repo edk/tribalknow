@@ -12,9 +12,15 @@
       %b= @topic.name
     %i= @topic.description
     .topic_content<
-      = render_md @topic.content
+      - html, toc = render_md @topic.content
+      = html
 
   .columns.large-3
+    - if toc.present?
+      .panel
+        .panel_title TOC
+        - toc.each do |anchor|
+          %div= link_to anchor[0], anchor[1]
     .panel
       .panel_title Sub-topics
       - @topic.sub_topics.each do |sub|
