@@ -53,6 +53,7 @@ gem 'foundation-icons-sass-rails'
 gem 'foundation-social-web-icons-rails', github: "jclusso/foundation-social-web-icons-rails"
 gem 'sass-rails', '~> 4.0.0.rc2'
 gem 'uglifier', '>= 1.3.0'
+gem 'nokogiri'
 
 group :development do
   gem 'capistrano', '~> 3.0'

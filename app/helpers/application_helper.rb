@@ -6,7 +6,33 @@ module ApplicationHelper
   end
 
   def render_md(text)
-    GitHub::Markdown.render_gfm(sanitize(text, attributes: %w(class style title href))).html_safe
+    html = GitHub::Markdown.render_gfm(sanitize(text, attributes: %w(class style title href))).html_safe
+    add_anchor_links_to_headers(html)
+  end
+
+  def add_anchor_links_to_headers html
+    doc = Nokogiri::HTML::DocumentFragment.parse html
+    headers = doc.css "h1,h2"
+
+    headers.each { |h|
+      # create a new anchor node
+      anchor = Nokogiri::XML::Node.new 'a', doc
+
+      anchor_link = Nokogiri::XML::Node.new 'i', doc
+      anchor_link['class'] = "fi-link header_anchor_link"
+      anchor_link.parent = anchor
+
+      # add it next to the header tag, and then put the header inside the anchor
+      h.add_next_sibling(anchor)
+      h.parent = anchor
+
+      # add some local #href flavor
+      anchor['class'] = 'anchor_link'
+      name_slug       = h.content.to_s.parameterize
+      anchor['href']  = "##{name_slug}"
+      anchor['name']  = "#{name_slug}"
+    }
+    doc.to_s.html_safe
   end
 
   def render_avatar user, options = {}

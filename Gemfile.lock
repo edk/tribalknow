@@ -369,6 +369,7 @@ DEPENDENCIES
   ledermann-rails-settings
   merit
   mysql2
+  nokogiri
   omniauth-github
   paper_trail (~> 3.0.5)
   paperclip

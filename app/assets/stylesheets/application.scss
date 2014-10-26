@@ -292,3 +292,23 @@ div.who_panel {
   font-size: .7em;
   margin-top: -1em;
 }
+
+.anchor_link {
+  position: relative;
+}
+
+i.header_anchor_link {
+  opacity: 0;
+  transition: 1s linear;
+  position: absolute;
+  left: -1.5em;
+  top: 2.25rem;
+  font-size: 1.5rem;
+}
+
+.anchor_link:hover > i.header_anchor_link, .header_anchor_link:hover {
+  opacity: 1;
+  transition: 1s;
+  visibility: visible;
+}
+
