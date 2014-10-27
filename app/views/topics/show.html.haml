@@ -12,7 +12,7 @@
       %b= @topic.name
     %i= @topic.description
     .topic_content<
-      - html, toc = render_md @topic.content
+      - html, toc = render_md @topic.content, with_toc: true
       = html
 
   .columns.large-3

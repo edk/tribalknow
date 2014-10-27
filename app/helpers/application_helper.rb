@@ -5,9 +5,14 @@ module ApplicationHelper
     content_for :title, (page_title.presence || "Q")
   end
 
-  def render_md(text)
+  def render_md(text, options = {})
     html = GitHub::Markdown.render_gfm(sanitize(text, attributes: %w(class style title href))).html_safe
-    add_anchor_links_to_headers(html)
+    html, toc = add_anchor_links_to_headers(html)
+    if options[:with_toc]
+      [html, toc]
+    else
+      html
+    end
   end
 
   def add_anchor_links_to_headers html
