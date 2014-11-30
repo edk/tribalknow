@@ -38,7 +38,7 @@ Question.create!([
 
 
 Tenant.create!([
-  { :name => "Coupa", :subdomain => "coupa", :fqdn => "coupa.tribalknownow.com", :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-09 10:16:06", :new_user_restriction => true, :self_serve_allowed_domain => nil. :default => true },
+  { :name => "Coupa", :subdomain => "coupa", :fqdn => "coupa.tribalknownow.com", :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-09 10:16:06", :new_user_restriction => true, :self_serve_allowed_domain => nil, :default => true },
   { :name => "Dynawebworks", :subdomain => "dww", :fqdn => "dww.tribalknownow.com", :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-03 14:17:07", :new_user_restriction => false, :self_serve_allowed_domain => nil }
 ])
 
@@ -64,7 +64,3 @@ user.instance_eval do
   end
 end
 user.save(:validate=>false)
-
-
-
-
