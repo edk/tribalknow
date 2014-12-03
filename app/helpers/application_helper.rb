@@ -6,13 +6,23 @@ module ApplicationHelper
   end
 
   def render_md(text, options = {})
-    html = GitHub::Markdown.render_gfm(sanitize(text, attributes: %w(class style title href))).html_safe
+    html = GitHub::Markdown.render_gfm(h(text)).html_safe
+    html = reverse_entity_encoding_inside_code_blocks(html)
     html, toc = add_anchor_links_to_headers(html)
     if options[:with_toc]
       [html, toc]
     else
       html
     end
+  end
+
+  def reverse_entity_encoding_inside_code_blocks html
+    doc = Nokogiri::HTML::DocumentFragment.parse html
+    code_blocks = doc.css "code"
+    code_blocks.each { |node|
+      node.content = CGI.unescapeHTML(node.content)
+    }
+    doc.to_s.html_safe
   end
 
   def add_anchor_links_to_headers html
@@ -180,7 +190,12 @@ module ApplicationHelper
 
   # like local_notes but private?
   def private_notes
-    
+  end
+
+  def post_to_hipchat_checkbox
+    simple_fields_for :notify do |ff|
+      ff.input :notify, :label=>'Post to hipchat', :as=>:boolean, :input_html => {style: 'margin-right: 0.5em;'}
+    end
   end
 
   def post_to_hipchat_checkbox
