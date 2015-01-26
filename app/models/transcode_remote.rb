@@ -51,7 +51,6 @@ class TranscodeRemote < ActiveRecord::Base
     connect do |conn|
       resp = conn.get [transcoding_server, "api/transcode_jobs/#{video_asset.id}"].join('/')
       if resp.success?
-        puts "XXXX #{resp.body}"
         resp_hash = JSON.parse(resp.body)
         self.status = resp.status
         self.response = resp.body
