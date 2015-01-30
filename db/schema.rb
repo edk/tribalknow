@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917210613) do
+ActiveRecord::Schema.define(version: 20150124224309) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -72,6 +72,32 @@ ActiveRecord::Schema.define(version: 20140917210613) do
 
   add_index "docs", ["basepath"], name: "index_docs_on_basepath", using: :btree
   add_index "docs", ["doc_group_id"], name: "index_docs_on_doc_group_id", using: :btree
+
+  create_table "file_assets", force: true do |t|
+    t.integer  "tenant_id"
+    t.integer  "parent_id"
+    t.string   "type"
+    t.integer  "topic_id"
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "draft",                        default: false
+    t.date     "date"
+    t.integer  "runtime"
+    t.string   "slug"
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size",    limit: 8
+    t.datetime "asset_updated_at"
+    t.text     "asset_meta"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "aasm_state"
+  end
+
+  add_index "file_assets", ["aasm_state"], name: "index_file_assets_on_aasm_state", using: :btree
+  add_index "file_assets", ["tenant_id"], name: "index_file_assets_on_tenant_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string    "slug",                      null: false
@@ -237,6 +263,18 @@ ActiveRecord::Schema.define(version: 20140917210613) do
 
   add_index "topics", ["tenant_id"], name: "tenant_id", using: :btree
 
+  create_table "transcode_remotes", force: true do |t|
+    t.integer  "video_asset_id"
+    t.integer  "job_id"
+    t.integer  "status"
+    t.text     "response"
+    t.datetime "last_checked"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transcode_remotes", ["video_asset_id"], name: "index_transcode_remotes_on_video_asset_id", using: :btree
+
   create_table "user_notifications", force: true do |t|
     t.integer  "user_id"
     t.integer  "notification_id"
@@ -244,6 +282,10 @@ ActiveRecord::Schema.define(version: 20140917210613) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_notifications", ["notification_id"], name: "index_user_notifications_on_notification_id", using: :btree
+  add_index "user_notifications", ["user_id", "notification_id"], name: "index_user_notifications_on_user_id_and_notification_id", using: :btree
+  add_index "user_notifications", ["user_id"], name: "index_user_notifications_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string    "provider"
@@ -289,6 +331,15 @@ ActiveRecord::Schema.define(version: 20140917210613) do
   end
 
   add_index "versions", ["item_type", "item_id"], name: "item_type", using: :btree
+
+  create_table "video_access_secrets", force: true do |t|
+    t.integer  "video_asset_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "video_access_secrets", ["video_asset_id"], name: "index_video_access_secrets_on_video_asset_id", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "votable_id"

@@ -15,7 +15,7 @@
     = "#{trackable.class.to_s}: " # 2nd is the id of the topic
     = str
             
-    - act = activity[1].map {|a| { a[:key].split('.').last => a[:owner].name } }
+    - act = activity[1].map {|a| { a[:key].split('.').last => a[:owner].try(:name) } }
     - act = act.inject({}) {|m,o| m[o.keys.first] ||= []; m[o.keys.first] << o.values.first; m}
     - if act["update"]
       %div= "Updated by #{act["update"].uniq.join(', ')}"

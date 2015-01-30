@@ -1,0 +1,27 @@
+
+- content_for(:head_stylesheet) do
+  = javascript_include_tag "video-js/video.js"
+  = stylesheet_link_tag "video-js/video-js.css"
+
+%h2= @video.name
+
+- expiry = 60.minutes
+- poster_attr = "poster: #{@video.asset.expiring_url(expiry, :thumb)}"
+
+.row
+  .large-8.columns.small-12
+    .flex-video
+      %video.video-js.vjs-default-skin{controls:'', preload:"auto", width:"640", height:"264"}
+        %source{src: @video.asset.expiring_url(expiry, :mp4), type: 'video/mp4'}
+        %source{src: @video.asset.expiring_url(expiry, :ogg), type: 'video/ogg'}
+        %p.vjs-no-js
+          To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+  .large-4.columns.small-12
+    .panel
+      TODO:
+      %ul
+        %li comments
+        %li links
+        %li tags, categories
+        %li related assets (slides) 
+

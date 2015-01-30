@@ -87,7 +87,7 @@ Tribalknow::Application.configure do
   config.assets.precompile += %w( mdedit.js mdedit.css )
   config.assets.precompile += %w( vendor/modernizr.js autocomplete.js accounts.js autocomplete.js
     docs.js homes.js questions.js topics.js users.js welcome.js admin/users.js admin/apporve_users.js admin/config.js
-    devise/sessions.js searches.js )
+    devise/sessions.js searches.js videos.js )
 
 end
 

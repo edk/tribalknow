@@ -1,0 +1,11 @@
+
+$('#info_popup h2').html('<%= @video.name %>');
+
+<% if @success %>
+  $('#info_popup p').html('<div class="large">Successfully submitted job.  Depending on the size and other video in the queue it may take a while.</div>');
+<% else %>
+  $('#info_popup p').html('<div class="large">Error submitting job.  Please contact your Admin.</div><%= @video.transcode_jobs.last.response %>');
+<% end %>
+
+$('#info_popup').foundation('reveal', 'open')
+
