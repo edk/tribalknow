@@ -83,7 +83,7 @@ class VideosController < ApplicationController
   end
 
   def info
-    video = VideoAsset.find(params[:id])
+    video = VideoAsset.friendly.find(params[:id])
     if video.submitted?
       begin
         if video.check_status!
@@ -111,11 +111,12 @@ class VideosController < ApplicationController
   end
 
   def trigger
-    @video = VideoAsset.find(params[:id])
+    @video = VideoAsset.friendly.find(params[:id])
     @video.submit!
     @success = !@video.failed?
   end
 
+  # callback used by transcode server to update a completed/failed job
   def update_status
     @video = VideoAsset.find(params[:id])
     if !@video.secret  || @video.secret.value != params[:video_asset_secret]

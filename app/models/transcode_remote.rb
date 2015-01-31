@@ -15,6 +15,10 @@ class TranscodeRemote < ActiveRecord::Base
     true
   end
 
+  def disable_ssl_verification?
+    ENV['TRANSCODING_SERVER_DISABLE_VERIFY'].present?
+  end
+
   def queue_new_job
     connect do |conn|
       # build up the payload
@@ -70,7 +74,9 @@ class TranscodeRemote < ActiveRecord::Base
 
   def connect
     begin
-      conn = Faraday.new :url => transcoding_server do |faraday|
+      options = { :url => transcoding_server }
+      options.merge!( :ssl => { :verify => false } ) if disable_ssl_verification?
+      conn = Faraday.new options do |faraday|
         faraday.request  :url_encoded               # form-encode POST params
         faraday.response :logger if enable_logging? # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter
