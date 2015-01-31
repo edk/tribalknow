@@ -59,6 +59,8 @@ gem 'sass-rails', '~> 4.0.0.rc2'
 gem 'uglifier', '>= 1.3.0'
 gem 'nokogiri'
 gem 'faraday'
+gem 'dotenv-rails'
+gem 'dotenv-deployment'
 
 group :development do
   gem 'capistrano', '~> 3.0'
@@ -69,7 +71,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dotenv-rails'
   gem 'pry'
   gem 'byebug'
   gem 'seed_dump'
