@@ -37,7 +37,7 @@ class VideoAsset < FileAsset
     s3_credentials: Proc.new { |a| a.instance.s3_credentials },
     styles: {
       mp4: { format: 'mp4' },
-      ogg: { format: 'ogg' },
+      ogg: { format: 'webm' },
       thumb:  { geometry: "300x200", format: 'jpg' },
     }# normally, you would add processors: [:transcoder] to transcode locally
     # instead, we are using a service to do the transcoding for us.
