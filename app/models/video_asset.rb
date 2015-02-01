@@ -1,16 +1,16 @@
 
 class Paperclip::MediaTypeSpoofDetector
-  def spoofed_with_webm_check?
+  def spoofed?
     if File.extname(@name) =~ /webm\Z/
       # Paperclip::MediaTypeSpoofDetector uses the 'file' utility to try to determine
       # the content type of the file.  For webm, the result is the useless 
       # 'application/octect-stream' so skip checking for webm.
       false
-    else
-      spoofed_without_webm_check?
+    elsif has_name? && has_extension? && media_type_mismatch? && mapping_override_mismatch?
+      Paperclip.log("Content Type Spoof: Filename #{File.basename(@name)} (#{supplied_file_content_types}), content type discovered from file command: #{calculated_content_type}. See documentation to allow this combination.")
+      true
     end
   end
-  alias_method_chain :spoofed?, :webm_check
 end
 
 class VideoAsset < FileAsset

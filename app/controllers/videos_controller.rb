@@ -19,7 +19,7 @@ class VideosController < ApplicationController
     @video = VideoAsset.new
     @video.name = "New Video"
     @video.save!
-    redirect_to edit_video_path(@video)
+    redirect_to edit_video_path(@video.id)
   end
 
   def create
@@ -39,11 +39,11 @@ class VideosController < ApplicationController
   end
 
   def edit
-    @video = VideoAsset.friendly.find(params[:id])
+    @video = VideoAsset.find(params[:id])
   end
 
   def update
-    @video = VideoAsset.friendly.find(params[:id])
+    @video = VideoAsset.find(params[:id])
     @video.draft_id = @video.id
 
     if @video.name != params[:video_asset][:name]

@@ -3,7 +3,7 @@
 
 = hidden_field_tag 'max_file_size', VideoAsset::MAX_FILE_SIZE
 
-- path = @video.new_record? ? videos_path : video_path(@video)
+- path = @video.new_record? ? videos_path : video_path(@video.id)
 = simple_form_for(@video, url: path, html: { class: 'upload_form' }) do |f|
   = f.error_notification
   .row

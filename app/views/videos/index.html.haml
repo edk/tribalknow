@@ -23,7 +23,7 @@
             tags, vote, views
             .edit_wrapper{style: 'position: relative'}
               .edit_link{style: 'position:absolute; bottom: 0; right: 0;'}
-                = link_to f_icon('pencil'), edit_video_path(vid)
+                = link_to f_icon('pencil'), edit_video_path(vid.id)
   .columns.large-2
     .row
       = link_to "Upload new video", new_video_path, class: 'button'
@@ -31,7 +31,7 @@
       - @draft_videos.each do |video|
         .panel{id: dom_id(video)}
           %div
-            = link_to "#{video.name.presence || 'No name'}", edit_video_path(video), title: 'Edit'
+            = link_to "#{video.name.presence || 'No name'}", edit_video_path(video.id), title: 'Edit'
             - if current_user == video.creator
               = link_to "&#215;".html_safe, video_path(video, dom_id: dom_id(video)), remote: true, method: :delete#, data: { confirm: "Are you sure?" }
           %div
