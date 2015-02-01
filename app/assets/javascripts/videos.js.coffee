@@ -16,7 +16,7 @@ $ ->
     maxFilesize: $('#max_file_size').val() || 1000
     uploadMultiple: false
     addRemoveLinks: false
-    acceptedFiles: 'video/mp4,video/quicktime,video/m4v'
+    acceptedFiles: 'video/mp4,video/quicktime,video/m4v,video/webm'
     headers: 
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     url: $('form.upload_form').attr('action')
