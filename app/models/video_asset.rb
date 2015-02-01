@@ -1,3 +1,18 @@
+
+class Paperclip::MediaTypeSpoofDetector
+  def spoofed_with_webm_check?
+    if File.extname(@name) =~ /webm\Z/
+      # Paperclip::MediaTypeSpoofDetector uses the 'file' utility to try to determine
+      # the content type of the file.  For webm, the result is the useless 
+      # 'application/octect-stream' so skip checking for webm.
+      false
+    else
+      spoofed_without_webm_check?
+    end
+  end
+  alias_method_chain :spoofed?, :webm_check
+end
+
 class VideoAsset < FileAsset
 
   has_many :transcode_jobs, class_name: 'TranscodeRemote', dependent: :destroy
@@ -42,7 +57,9 @@ class VideoAsset < FileAsset
     }# normally, you would add processors: [:transcoder] to transcode locally
     # instead, we are using a service to do the transcoding for us.
 
-  validates_attachment_content_type :asset, :content_type => /\Avideo\/(ogg|webm|mp4|m4v|quicktime)\Z/
+  # do_not_validate_attachment_file_type :asset
+  validates_attachment_file_name :asset, :matches => [/m4v\Z/, /mp4\Z/, /mov\Z/, /webm\Z/, /avi\Z/]
+
   MAX_FILE_SIZE = 1000.megabytes
   validates_attachment_size :asset, :in => 0.megabytes .. MAX_FILE_SIZE
   scope :published, -> { completed }
