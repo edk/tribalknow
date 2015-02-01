@@ -42,7 +42,7 @@ class VideoAsset < FileAsset
     }# normally, you would add processors: [:transcoder] to transcode locally
     # instead, we are using a service to do the transcoding for us.
 
-  validates_attachment_content_type :asset, :content_type => /\Avideo\/(ogg|webm|mp4|quicktime)\Z/
+  validates_attachment_content_type :asset, :content_type => /\Avideo\/(ogg|webm|mp4|m4v|quicktime)\Z/
   MAX_FILE_SIZE = 1000.megabytes
   validates_attachment_size :asset, :in => 0.megabytes .. MAX_FILE_SIZE
   scope :published, -> { completed }
