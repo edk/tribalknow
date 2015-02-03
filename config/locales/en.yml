@@ -56,3 +56,6 @@ en:
       subject: "Sorry, your account request was rejected."
     new_user_waiting_for_approval:
       subject: "New user signed up, awaiting approval."
+  activerecord:
+    models:
+      video_asset: Video

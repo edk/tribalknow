@@ -16,14 +16,18 @@ class VideosController < ApplicationController
   end
 
   def new
-    @video = VideoAsset.new
-    @video.name = "New Video"
-    @video.save!
+    VideoAsset.without_public_activity do
+      @video = VideoAsset.new
+      @video.name = "New Video"
+      @video.save!
+    end
     redirect_to edit_video_path(@video.id)
   end
 
   def create
-    @video = VideoAsset.new(video_params)
+    VideoAsset.without_public_activity do
+      @video = VideoAsset.new(video_params)
+    end
 
     respond_to do |format|
       if @video.save
@@ -39,7 +43,9 @@ class VideosController < ApplicationController
   end
 
   def edit
-    @video = VideoAsset.find(params[:id])
+    VideoAsset.without_public_activity do
+      @video = VideoAsset.find(params[:id])
+    end
   end
 
   def update
@@ -51,9 +57,15 @@ class VideosController < ApplicationController
     end
 
     respond_to do |format|
-      if @video.update(video_params)
+      update_success = nil
+      VideoAsset.without_public_activity do
+        update_success = @video.update(video_params)
+      end
+      if update_success
         if @video.asset? && !@video.asset.exists?(:thumb) && @video.draft?
-          @video.submit!
+          VideoAsset.without_public_activity do
+            @video.submit!
+          end
         end
         format.html { redirect_to videos_path, notice: 'Video was successfully updated.' }
         format.json { head :no_content }
@@ -68,11 +80,13 @@ class VideosController < ApplicationController
     @video = VideoAsset.friendly.find(params[:id])
 
     if @video.creator == current_user
-      if @video.destroy
-        flash.now[:notice] = "Deleted #{@video.name}!"
-      else
-        flash.now[:alert] = "Error deleting #{@video.name}! #{@video.errors.full_messages}"
-        @video = nil
+      VideoAsset.without_public_activity do
+        if @video.destroy
+          flash.now[:notice] = "Deleted #{@video.name}!"
+        else
+          flash.now[:alert] = "Error deleting #{@video.name}! #{@video.errors.full_messages}"
+          @video = nil
+        end
       end
       # redirect_to videos_path
     else
@@ -126,15 +140,20 @@ class VideosController < ApplicationController
       return
     end
 
-    job = @video.transcode_jobs.create params.permit(:response, :status)
-    if job.status == 201
-      @video.complete!
-    else
-      @video.fail!
+    VideoAsset.without_public_activity do
+      job = @video.transcode_jobs.create params.permit(:response, :status)
+      if job.status == 201
+        @video.complete!
+        @upload_success = true
+      else
+        @video.fail!
+      end
+      respond_to do |format|
+        format.any(:html, :json) { render json: @video, status: :ok}
+      end
     end
-    respond_to do |format|
-      format.any(:html, :json) { render json: @video, status: :ok}
-    end
+
+    @video.create_activity(key: 'video.uploaded', owner: @video.creator) if @upload_success
   end
 
   private

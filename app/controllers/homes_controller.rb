@@ -5,7 +5,12 @@ class HomesController < ApplicationController
     if current_user && Tenant.current_id
       # @activities = PublicActivity::Activity.all
       @activities = PublicActivity::Activity.order("created_at DESC").where('created_at > ?', 14.days.ago).limit(50)
-      @collapsed_activities = @activities.inject({}) { |m,o| k="#{o.trackable_type}:#{o.trackable_id}"; m[k] ||= []; m[k] << {:key=>o.key,:at=>o.created_at,:owner=>o.owner, :obj=>o}  ;m }
+      @collapsed_activities = @activities.inject({}) do |m,o|
+        k = "#{o.trackable_type}:#{o.trackable_id}"
+        m[k] ||= []
+        m[k] << {:key=>o.key,:at=>o.created_at,:owner=>o.owner, :obj=>o}
+        m
+      end
 
       @popular_questions = Question.popular
     else

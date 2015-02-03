@@ -80,13 +80,13 @@ ActiveRecord::Schema.define(version: 20150124224309) do
     t.integer  "topic_id"
     t.string   "name"
     t.text     "description"
-    t.boolean  "draft",                        default: false
+    t.boolean  "draft",              default: false
     t.date     "date"
     t.integer  "runtime"
     t.string   "slug"
     t.string   "asset_file_name"
     t.string   "asset_content_type"
-    t.integer  "asset_file_size",    limit: 8
+    t.integer  "asset_file_size"
     t.datetime "asset_updated_at"
     t.text     "asset_meta"
     t.integer  "creator_id"

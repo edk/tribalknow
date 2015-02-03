@@ -104,4 +104,13 @@ class VideoAsset < FileAsset
     }
   end
 
+  def self.without_public_activity
+    begin
+      VideoAsset.public_activity_off
+      yield
+    ensure
+      VideoAsset.public_activity_on
+    end
+  end
+
 end
