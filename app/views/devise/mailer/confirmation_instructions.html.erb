@@ -7,3 +7,5 @@
 <%- confirm = confirmation_url(@resource, {:confirmation_token => @token}.merge(host_params) ) %>
 <p><%= link_to "Confirm my account:", confirm %></p>
 <p><%= link_to "#{confirm}", confirm %></p>
+
+<p>Once confirmed, you may also need to wait until your account is manually confirmed, if you signed up using an email instead of a Github account.</p>

@@ -12,7 +12,8 @@ class AdminMailer < ActionMailer::Base
     end
 
     proto = Rails.env.production? ? 'https' : 'http'
-    @url_params = @resource ? {subdomain: @resource.tenant.subdomain, protocol: proto} : {}
+    tenant = user.tenant
+    @url  = "#{proto}://#{tenant.fqdn}/#{admin_approve_users_path}"
     @user = user
     mail(to: recipients.map(&:email), :from=>"system@#{Tenant.current.fqdn}") unless recipients.empty?
   end
