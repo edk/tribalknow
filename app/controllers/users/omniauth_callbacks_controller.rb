@@ -1,7 +1,10 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     user = User.from_omniauth(request.env["omniauth.auth"])
-    if user && user.persisted?
+    
+    if user && !user.active?
+      redirect_to new_user_session_path, notice: user.errors.full_messages.join("<br/>").html_safe
+    elsif user && user.persisted?
       sign_in_and_redirect user, notice: 'signed in!'
     else
       if !user && session.has_key?(:from_omniauth)

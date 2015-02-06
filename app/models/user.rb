@@ -53,12 +53,13 @@ class User < ActiveRecord::Base
   end
 
   def requires_admin_approval?
-    self.tenant && self.tenant.email_domain_requires_approval?(self.email)
+    return false if skip_activation?
+    tenant && tenant.email_domain_requires_approval?(email)
   end
 
   def approve_and_activate_send_email!
     self.update_columns(approved: true, active: true)
-    if self.respond_to?(:send_confirmation_instructions) && AppConfig['disable_confirmation'].to_i == 1
+    if self.respond_to?(:send_confirmation_instructions) && !(AppConfig['disable_confirmation'].to_i == 1 || skip_confirmation?)
       send_confirmation_instructions
     else
       AdminMailer.you_are_approved(self).deliver
@@ -66,10 +67,7 @@ class User < ActiveRecord::Base
   end
 
   def from_external_auth?
-    if %w[provider uid name].all? {|attr| self.send(attr).present? }
-      return true
-    end
-    false
+    %w[provider uid name].all? {|attr| self.send(attr).present? }
   end
 
   # All this extra machinery is to allow github authentication without a password,
@@ -89,6 +87,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth auth
     user = User.where(:provider=>auth.provider, :uid=>auth.uid).first
+
     if !user
       # if not in our system with github authentication, need to either create a new
       # user, or find an existing user with matching email
@@ -98,16 +97,29 @@ class User < ActiveRecord::Base
         user.provider, user.uid, user.avatar_url = auth.provider, auth.uid, auth.info.image
         user.save(:validate=>false)
       else
-        fields = {:provider=>auth.provider, :uid=>auth.uid, :name=>auth.info.nickname, :email=>auth.info.email}
+
+        fields = {
+          provider: auth.provider, uid: auth.uid, name: auth.info.nickname, email: auth.info.email,
+        }
         # create from scratch
         if auth.info.email.blank?
           # no email?  That's unfortunate.  Let's ask them what it is.
           session[:from_omniauth] = fields
         else
+          if github_org_required? && is_org_member?(auth['credentials']['token'])
+            fields.merge!({skip_confirmation: true, skip_activation: true})
+          end
           user = User.create!(fields)
         end
       end
     end
+
+    if user && github_org_required?
+      if !is_org_member?(auth['credentials']['token'])
+        user.disable_unauthorized!(user.tenant.github_auth_failure_message)
+      end
+    end
+
     user
   end
 
@@ -118,10 +130,6 @@ class User < ActiveRecord::Base
 
   def to_s
     name
-  end
-
-  def confirmation_required?
-    AppConfig['disable_confirmation'].to_i == 1
   end
 
   def active_for_authentication?
@@ -148,6 +156,22 @@ class User < ActiveRecord::Base
       recoverable.send_reset_password_instructions
     end
     recoverable
+  end
+
+  def disable_unauthorized! msg=nil
+    self.update_attribute :active, false
+    self.errors.add(:base, msg || "Sorry this user is not authorized to access this site.")
+  end
+
+  def self.github_org_required?
+    tenant = Tenant.current
+    tenant && tenant.required_github_organization.present?
+  end
+
+  def self.is_org_member? access_token
+    tenant = Tenant.current
+    client = Octokit::Client.new access_token: access_token
+    client.org_member?(tenant.required_github_organization, client.user.login)
   end
 
 end

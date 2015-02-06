@@ -43,3 +43,14 @@ Tribalknow::Application.configure do
 end
 
 require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))
+
+SanitizeEmail::Config.configure do |config|
+  config[:sanitized_to] =         ENV['sanitized_to_address']
+  config[:sanitized_cc] =         ENV['sanitized_cc_address']
+  config[:sanitized_bcc] =        ENV['sanitized_bcc_address']
+  # run/call whatever logic should turn sanitize_email on and off in this Proc:
+  config[:activation_proc] =      Proc.new { %w(development test).include?(Rails.env) }
+  config[:use_actual_email_prepended_to_subject] = true         # or false
+  config[:use_actual_environment_prepended_to_subject] = true   # or false
+  config[:use_actual_email_as_sanitized_user_name] = true       # or false
+end

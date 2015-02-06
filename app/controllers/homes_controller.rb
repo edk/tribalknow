@@ -17,7 +17,7 @@ class HomesController < ApplicationController
       if (landing_page = Tenant.current.try(:landing_page)).present?
         render :text => landing_page, :layout=>true
       else
-        render :action => 'public_index'
+        redirect_to new_user_session_path
       end
 
       return

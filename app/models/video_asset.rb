@@ -37,7 +37,7 @@ class VideoAsset < FileAsset
       transitions from: [:draft, :submitted, :initial, :failed], to: :failed
     end
     event :complete do
-      transitions from: [:draft, :submitted, :initial, :failed], to: :completed
+      transitions from: [:draft, :submitted, :initial, :failed, :completed], to: :completed
     end
   end
 

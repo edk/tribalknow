@@ -11,6 +11,8 @@ class AdminMailer < ActionMailer::Base
       raise "no admin users found"
     end
 
+    proto = Rails.env.production? ? 'https' : 'http'
+    @url_params = @resource ? {subdomain: @resource.tenant.subdomain, protocol: proto} : {}
     @user = user
     mail(to: recipients.map(&:email), :from=>"system@#{Tenant.current.fqdn}") unless recipients.empty?
   end

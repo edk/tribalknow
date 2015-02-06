@@ -3,14 +3,7 @@ Hi Admin,
 
 There is a new user, #{@user.email}, awaiting your approval.
 
-:ruby
-  if @resource
-    params = {:subdomain => @resource.tenant.subdomain} 
-  else
-    params = {}
-  end
-  ""
-You can view pending requests at: #{admin_approve_users_url(params) rescue "#{$!} #{$@}"}
+You can view pending requests at: #{admin_approve_users_url(@url_params) rescue "#{$!} #{$@}"}
 
 Thanks,
 The system.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124224309) do
+ActiveRecord::Schema.define(version: 20150205164311) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -219,15 +219,17 @@ ActiveRecord::Schema.define(version: 20150124224309) do
     t.string    "name"
     t.string    "subdomain"
     t.string    "fqdn"
-    t.timestamp "created_at",                                null: false
-    t.timestamp "updated_at",                                null: false
-    t.boolean   "new_user_restriction",      default: false
+    t.timestamp "created_at",                                   null: false
+    t.timestamp "updated_at",                                   null: false
+    t.boolean   "new_user_restriction",         default: false
     t.string    "self_serve_allowed_domain"
     t.string    "safe_domains"
-    t.boolean   "default",                   default: false
+    t.boolean   "default",                      default: false
     t.text      "site_title"
     t.text      "landing_page"
     t.text      "footer"
+    t.string    "required_github_organization"
+    t.text      "github_auth_failure_message"
   end
 
   add_index "tenants", ["fqdn"], name: "domain", using: :btree
@@ -317,6 +319,8 @@ ActiveRecord::Schema.define(version: 20150124224309) do
     t.string    "avatar_content_type"
     t.integer   "avatar_file_size"
     t.datetime  "avatar_updated_at"
+    t.boolean   "skip_confirmation",      default: false
+    t.boolean   "skip_activation",        default: false
   end
 
   add_index "users", ["approved"], name: "approved", using: :btree

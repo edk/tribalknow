@@ -13,6 +13,7 @@ gem 'rollout'
 gem 'mysql2'
 gem 'devise'
 gem 'omniauth-github'
+gem "octokit"
 gem "pundit"
 gem 'paperclip'
 gem 'paperclip-av-transcoder'
@@ -68,6 +69,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
   gem 'guard-livereload', require: false
+  gem 'sanitize_email'
 end
 
 group :development, :test do

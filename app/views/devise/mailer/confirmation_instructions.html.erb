@@ -3,7 +3,7 @@
 <p>This is a site for company specific Q&A and an organized, searchable wiki.</p>
 
 <p>You won't be able to login until you confirm your account email through the link below:</p>
-<% host_params = @resource.tenant.try(:fqdn) ? {:protcol=>'https', :host=>@resource.tenant.fqdn} : {:protcol=>'https', :subdomain => @resource.tenant.subdomain} %>
+<% host_params = @resource.tenant.try(:fqdn) ? {:protocol=>'https', :host=>@resource.tenant.fqdn} : {:protocol=>'https', :subdomain => @resource.tenant.subdomain} %>
 <%- confirm = confirmation_url(@resource, {:confirmation_token => @token}.merge(host_params) ) %>
 <p><%= link_to "Confirm my account:", confirm %></p>
 <p><%= link_to "#{confirm}", confirm %></p>
