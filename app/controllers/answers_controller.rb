@@ -69,14 +69,22 @@ class AnswersController < ApplicationController
   # DELETE /answers/1
   # DELETE /answers/1.json
   def destroy
-    @answer.destroy
-    
-    NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer])) if params[:notify][:notify] == '1'
+    if current_user == @answer.creator || current_user.admin?
+      @answer.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to answers_url }
-      format.json { head :no_content }
+      revert_link = view_context.link_to "I didn't mean it! Undo!!! Undo!!! Undo!!!", revert_question_answer_path(@answer.question, @answer.versions.last), method: :post
+      flash[:notice] = "Succesfully deleted: '#{@answer.title.truncate(50, :separator => ' ')}'! #{revert_link}"
+      redirect_to question_path(@answer.question)
+    else
+      flash[:notice] = "You are not the owner of the question and cannot delete it."
+      redirect_to :back
     end
+  end
+
+  def revert
+    answer = PaperTrail::Version.find(params[:id]).reify
+    answer.save!
+    redirect_to question_path(answer.question)
   end
 
   private

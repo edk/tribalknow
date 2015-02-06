@@ -1,10 +1,11 @@
 - set_title "Q: #{@question.title}"
 
 .row.for_header
-  .columns.large-11
+  .columns.large-10
     %h1.title#question_title= best_in_place @question, :title
-  .columns.large-1
-    = link_to image_tag("HipChat.png", :size=>"45x45", :title => "Post to Hipchat"), notify_question_path(@question, :ping=>true), {:style=>"text-decoration:none !important; border-bottom: 0px;", :remote=>true, :method=>:post, :confirm=>"Post to Hipchat?"} if NotifyHipchat.hipchat_configured?
+  .columns.large-2{style: 'position:relative'}
+    %div{style:'float: left; padding-top: 1.25em; padding-right: 0.5em;'}= archive_question(@question)
+    %div{style:'float: left; padding-top: 0.5em;'}= link_to image_tag("HipChat.png", :size=>"45x45", :title => "Post to Hipchat"), notify_question_path(@question, :ping=>true), {:class=>'icon_link', :remote=>true, :method=>:post, :confirm=>"Post to Hipchat?"} if NotifyHipchat.hipchat_configured?
 
 .row.answer
   .columns.large-11#question_body

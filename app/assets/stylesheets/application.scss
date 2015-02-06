@@ -97,6 +97,18 @@ h1.title {
   }
 }
 
+#content a.icon_link {
+  color:inherit;
+  text-decoration:none !important;
+  border-bottom: 0px;
+}
+
+#content a.left_of_answer {
+  position: absolute;
+  top: 0.25em;
+  left: -1em;
+}
+
 div.tags_editor {
   display: inline;
 }

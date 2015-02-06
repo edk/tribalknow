@@ -72,6 +72,25 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    @question = Question.friendly.find(params[:id])
+    if current_user == @question.creator || current_user.admin?
+      @question.destroy
+      revert_link = view_context.link_to "I didn't mean it! Undo!!! Undo!!! Undo!!!", revert_question_path(@question.versions.last), method: :post
+      flash[:notice] = "Succesfully deleted #{@question.title}! #{revert_link}"
+      redirect_to action: :index
+    else
+      flash[:notice] = "You are not the owner of the question and cannot delete it."
+      redirect_to :back
+    end
+  end
+
+  def revert
+    question = PaperTrail::Version.find(params[:id]).reify( has_many: true )
+    question.save!
+    redirect_to question_path(question)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -49,6 +49,7 @@ Tribalknow::Application.routes.draw do
   resources :questions, path_names: { new: 'ask' } do
     member do
       post :notify
+      post :revert
     end
     collection do
       get 'search'
@@ -56,6 +57,7 @@ Tribalknow::Application.routes.draw do
     resources :answers, path_names: { new: 'new' } do
       member do
         post :notify
+        post :revert
       end
     end
   end

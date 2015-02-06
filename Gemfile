@@ -24,7 +24,7 @@ gem 'aasm'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', github:'kimkong/userstamp'
-gem 'paper_trail', '~> 3.0.5'
+gem 'paper_trail', github:'airblade/paper_trail'
 gem 'public_activity'
 gem 'acts_as_votable'
 gem 'merit'

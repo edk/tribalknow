@@ -9,7 +9,6 @@ class Question < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, :use => [:slugged, :finders]
 
-  # TODO add to_param and associated magic to make urls to questions nicer than the ids currently in use
   has_many   :answers, :dependent => :destroy
   has_many   :uniq_answerers, -> { distinct }, through: :answers, :source=>:creator
   belongs_to :user
