@@ -1,4 +1,4 @@
-- set_title "Q: All topics"
+- set_title "#{Tenant.default_title}: All topics"
 
 .row
   %h2= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"

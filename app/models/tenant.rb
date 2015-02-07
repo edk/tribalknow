@@ -8,7 +8,7 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.current_id=(id)
-    Thread.current[:tenant_id]=id
+    Thread.current[:tenant_id] = id
   end
   
   def self.current_id
@@ -16,7 +16,7 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.current
-    current_id && Tenant.find_by_id(current_id)
+    @current_tenant ||= Tenant.find_by_id(current_id)
   end
 
   def self.default_tenant

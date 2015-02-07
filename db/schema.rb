@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206152625) do
+ActiveRecord::Schema.define(version: 20150207000633) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -57,6 +57,32 @@ ActiveRecord::Schema.define(version: 20150206152625) do
 
   add_index "app_configs", ["key"], name: "index_app_configs_on_key", using: :btree
   add_index "app_configs", ["tenant_id"], name: "index_app_configs_on_tenant_id", using: :btree
+
+  create_table "customized_pages", force: true do |t|
+    t.boolean  "active",     default: false
+    t.integer  "tenant_id"
+    t.string   "page"
+    t.string   "title"
+    t.string   "position1"
+    t.text     "header1"
+    t.text     "content1"
+    t.string   "position2"
+    t.text     "header2"
+    t.text     "content2"
+    t.string   "position3"
+    t.text     "header3"
+    t.text     "content3"
+    t.string   "position4"
+    t.text     "header4"
+    t.text     "content4"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "customized_pages", ["page"], name: "index_customized_pages_on_page", using: :btree
+  add_index "customized_pages", ["tenant_id", "page"], name: "index_customized_pages_on_tenant_id_and_page", using: :btree
 
   create_table "docs", force: true do |t|
     t.string   "doc_group_id"

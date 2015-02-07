@@ -1,8 +1,28 @@
 
 module ApplicationHelper
 
+  def render_custom_text position
+    location = "#{controller_name}/#{action_name}"
+
+    if custom = CustomizedPage.location(location)
+      header, text = custom.at(position)
+    end
+
+    if block_given?
+      yield header.to_s.html_safe, text.to_s.html_safe
+    else
+      text.to_s.html_safe
+    end if text.present?
+
+  end
+
   def set_title page_title, options={}
-    content_for :title, (page_title.presence || "Q")
+    location = "#{controller_name}/#{action_name}"
+    if custom = CustomizedPage.location(location)
+      custom_title = custom.title
+    end
+
+    content_for :title, (custom_title || page_title.presence || "TribalKnowNow")
   end
 
   def render_md(text, options = {})
