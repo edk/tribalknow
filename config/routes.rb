@@ -35,6 +35,7 @@ Tribalknow::Application.routes.draw do
     resources :topic_files
     member do
       post :set_icon
+      get  :show_history
     end
   end
 

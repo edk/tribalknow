@@ -29,14 +29,17 @@
           %li= link_to sub.name, topic_path(sub)
       .row_divider
       .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
-    .panel
-      .panel_title Links/files
-    .panel
-      .panel_title Quizzes
-      How well do you know the topic?
+    / .panel
+    /   .panel_title Links/files
+    / .panel
+    /   .panel_title Quizzes
+    /   How well do you know the topic?
     .panel
       .panel_title{:style=>'margin-bottom:8px;'} Tags
-      = render_tag_links @topic.tags
+      - if @topic.tags.size > 0
+        = render_tag_links @topic.tags
+      - else
+        %p No tags for this topic
     .panel
       .panel_title Questions
       - @topic.questions.each do |question|
@@ -44,4 +47,11 @@
       .row_divider
       .panel_offset_link= link_to "Ask Related Question", new_question_path(:topic_id=>@topic.id)
     .panel
-      .panel_title Contributors / history
+      .panel_title History
+      = render partial: 'history', locals: { topic: @topic }
+
+%div#history_popup.reveal-modal{:'data-reveal' => ''}
+  %h2 title
+  %p some text
+  %a.close-reveal-modal &#215;
+

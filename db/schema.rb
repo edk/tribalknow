@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207000633) do
+ActiveRecord::Schema.define(version: 20150207162914) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -368,6 +368,7 @@ ActiveRecord::Schema.define(version: 20150207000633) do
     t.text      "object"
     t.timestamp "created_at",     null: false
     t.integer   "transaction_id"
+    t.text      "object_changes"
   end
 
   add_index "versions", ["item_type", "item_id"], name: "item_type", using: :btree

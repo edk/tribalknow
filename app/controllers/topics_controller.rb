@@ -10,6 +10,11 @@ class TopicsController < ApplicationController
     session[:return_to] = topic_path(@topic)
   end
 
+  def show_history
+    topic = Topic.friendly.find(params[:id])
+    @ver = topic.versions.find(params[:ver])
+  end
+
   def set_icon
     topic = Topic.friendly.find(params[:id])
     topic.icon = params[:file]

@@ -114,6 +114,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    diffy (3.0.7)
     dotenv (1.0.2)
     dotenv-deployment (0.2.0)
       dotenv (~> 1.0)
@@ -377,6 +378,7 @@ DEPENDENCIES
   certified
   coffee-rails (~> 4.0.0)
   devise
+  diffy
   dotenv-deployment
   dotenv-rails
   exception_notification
