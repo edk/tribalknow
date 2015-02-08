@@ -19,7 +19,6 @@
           - else
             = link_to edit_topic_path(topic) do
               No description
-              %span (Add one!)
         - if topic.sub_topics.present?
           .subtopics
             = "#{pluralize topic.sub_topics.count, 'subtopic'}"
