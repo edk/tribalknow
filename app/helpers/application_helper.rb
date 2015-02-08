@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def render_md(text, options = {})
-    html = GitHub::Markdown.render_gfm(h(text)).html_safe
+    html = raw GitHub::Markdown.render_gfm(text)
     html = reverse_entity_encoding_inside_code_blocks(html)
     html, toc = add_anchor_links_to_headers(html)
     if options[:with_toc]
