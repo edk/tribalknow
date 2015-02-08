@@ -2,5 +2,6 @@
 %ul
   - topic.versions.each do |v|
     %li
-      = link_to "#{l(v.created_at, format: :civilian)} #{User.find_by_id(v.whodunnit).name}", show_history_topic_path(topic, ver: v.id), remote: true
+      - username = User.find_by_id(v.whodunnit).try(:name) || "Unknown"
+      = link_to "#{l(v.created_at, format: :civilian)} #{username}", show_history_topic_path(topic, ver: v.id), remote: true
       =# v.changeset
