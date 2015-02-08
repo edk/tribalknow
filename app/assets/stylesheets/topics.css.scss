@@ -44,3 +44,12 @@
   opacity: 1;
 }
 
+#content a.anchor_link {
+  position: relative;
+
+  i.header_anchor_link {
+    position: absolute;
+    bottom: -2.25em;
+    left: -1.5em;
+  }
+}
