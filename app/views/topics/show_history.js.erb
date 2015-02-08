@@ -1,6 +1,6 @@
 
 
-$('#history_popup h2').html('Edited by <%= escape_javascript( User.find_by_id(@ver.whodunnit).name ) %> at <%= l(@ver.created_at, format: :civilian) %>');
+$('#history_popup h2').html('Edited by <%= escape_javascript( User.find_by_id(@ver.whodunnit).try(:name) || "Unknown" ) %> at <%= l(@ver.created_at, format: :civilian) %>');
 <%
   diff = if @ver.changeset[:content].present?
     Diffy::Diff.new(@ver.changeset[:content].last, @ver.changeset[:content].first).to_s(:html)
