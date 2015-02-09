@@ -1,17 +1,20 @@
+
+require 'sqlite3'
+
 class StaticSitesController < ApplicationController
 
-  def show
-    # index
-    base_path = Rails.root.join('docs/tmp')
-    FileUtils.mkdir_p base_path
+  def base_path
+    base_path  = Rails.root.join('docs/tmp/q.docset')
+  end
 
-    topic_base = base_path.join('topics')
-    ques_base  = base_path.join('questions')
-    # FileUtils.mkdir_p topic_base.join('stylesheets')
-    asset_base = base_path.join('assets')
-    FileUtils.mkdir_p asset_base
-    FileUtils.mkdir_p topic_base
-    FileUtils.mkdir_p ques_base
+  def show
+    topic_base = base_path.join('Contents/Resources/Documents/topics')
+    ques_base  = base_path.join('Contents/Resources/Documents/questions')
+    asset_base = base_path.join('Contents/Resources/Documents/assets')
+    FileUtils.mkdir_p [base_path, asset_base, topic_base, ques_base]
+
+    gen_plist base_path
+    init_db base_path
 
     css_fields = if Rails.env.production?
       ['application.css']
@@ -34,7 +37,10 @@ class StaticSitesController < ApplicationController
     File.open(ques_base.join('index.html'),'w') { |f| f.write rewrite_page(render_to_string('questions/index')) }
     @questions.each do |q|
       @question = q
-      File.open(ques_base.join("#{q.to_param}.html"),'w') { |f| f.write rewrite_page(render_to_string('questions/show')) }
+      path = ques_base.join("#{q.to_param}.html")
+      insert_db q.title, 'Entry', path.to_s.gsub(%r|#{base_path}/Contents/Resources/Documents/|, '')
+      page = rewrite_page(render_to_string('questions/show'), path: path.to_s.gsub(%r|#{base_path}/Contents/Resources/Documents/|, ''))
+      File.open(path, 'w') { |f| f.write page }
     end
 
     @topics = Topic.order(:name).where(:parent_topic_id=>nil)
@@ -42,20 +48,41 @@ class StaticSitesController < ApplicationController
 
     walk_topics(@topics) do |topic|
       @topic = topic
-      File.open(topic_base.join("#{topic.to_param}.html"),'w') { |f| f.write rewrite_page(render_to_string('topics/show')) }
+      path = topic_base.join("#{topic.to_param}.html")
+      insert_db topic.title, 'Guide', path.to_s.gsub(%r|#{base_path}/Contents/Resources/Documents/|, '')
+      page = rewrite_page(render_to_string('topics/show'), path: path.to_s.gsub(%r|#{base_path}/Contents/Resources/Documents/|, ''))
+      File.open(path, 'w') { |f| f.write page }
     end
 
+    close_db
 
     render text: 'ok'
   end
 
   protected
 
+  def init_db base_path
+    db_file = "#{base_path}/Contents/Resources/docSet.dsidx"
+    File.unlink(db_file) if File.exist?(db_file)
+    @db = SQLite3::Database.new "#{base_path}/Contents/Resources/docSet.dsidx"
+    @db.execute <<-SQL
+      CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT);
+      CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path);
+    SQL
+  end
+
+  def insert_db name, type, path
+    @db.execute("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (?, ?, ?);", [name, type, path.to_s])
+  end
+
+  def close_db
+    @db.close
+  end
+
   def rewrite_page page, options = {}
     doc = Nokogiri::HTML(page)
 
     doc.css('nav a').each do |link|
-      puts "link.attributes['href'].value = #{link.attributes['href'].value}"
       href = case link.attributes['href'].value
       when '/'
         '../topics/index.html'
@@ -79,6 +106,13 @@ class StaticSitesController < ApplicationController
       link.attributes['href'].value = "#{link.attributes['href'].value.gsub(/^\//,'../')}.html" if link.attributes['href']
     end
 
+    if @db
+      doc.css('h1,h2,h3,h4').each do |heading|
+        text = heading.xpath('text()').to_s.strip
+        insert_db text, 'Entry', options[:path] if text.present?
+      end
+    end
+
     doc.to_s
   end
 
@@ -89,6 +123,30 @@ class StaticSitesController < ApplicationController
     else
       topics.each { |topic| walk_topics(topic, &blk) }
     end
+  end
+
+  def gen_plist base_path
+    File.open("#{base_path}/Contents/Info.plist",'w') { |f| f.write(plist) }
+  end
+
+  def plist
+    # <key>dashIndexFilePath</key><string>guides.rubyonrails.org/index.html</string><key>CFBundleName</key>
+    plist = %Q|
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+      <key>CFBundleIdentifier</key>
+      <string>Q</string>
+      <key>CFBundleName</key>
+      <string>Coupa Q</string>
+      <key>DocSetPlatformFamily</key>
+      <string>Q</string>
+      <key>isDashDocset</key>
+      <true/>
+    </dict>
+    </plist>
+    |.strip
   end
 
 end
