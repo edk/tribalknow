@@ -26,6 +26,8 @@ Tribalknow::Application.routes.draw do
   resource  :account do
     post :avatar
   end
+
+  resource  :static_site
   resources :searches
 
   get "registration/complete"

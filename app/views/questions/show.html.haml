@@ -28,6 +28,6 @@
   %b #{pluralize @question.answers.size, "answer"}:
 
 %hr
-= render :partial => @question.answers, :spacer_template=>'answer_spacer' if @question && @question.answers.present?
+= render :partial => @question.answers, :spacer_template=>'questions/answer_spacer' if @question && @question.answers.present?
 
-= render :partial=>'add_answer', :locals=>{:question=>@question}
+= render :partial=>'add_answer', :locals=>{:question=>@question} unless @static_render

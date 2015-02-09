@@ -2,9 +2,10 @@
 
 .row<
   .columns.large-9<
-    = render "topic_breadcrumb"
+    = render "topics/topic_breadcrumb"
   .columns.large-3
-    = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
+    - unless @static_render
+      = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
 
 
   .columns.large-9<
@@ -28,27 +29,28 @@
         - @topic.sub_topics.each do |sub|
           %li= link_to sub.name, topic_path(sub)
       .row_divider
-      .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id)
+      .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id) unless @static_render
     / .panel
     /   .panel_title Links/files
     / .panel
     /   .panel_title Quizzes
     /   How well do you know the topic?
-    .panel
-      .panel_title{:style=>'margin-bottom:8px;'} Tags
-      - if @topic.tags.size > 0
-        = render_tag_links @topic.tags
-      - else
-        %p No tags for this topic
-    .panel
-      .panel_title Questions
-      - @topic.questions.each do |question|
-        %p= link_to question.title, question_path(question)
-      .row_divider
-      .panel_offset_link= link_to "Ask Related Question", new_question_path(:topic_id=>@topic.id)
+    - unless @static_render
+      .panel
+        .panel_title{:style=>'margin-bottom:8px;'} Tags
+        - if @topic.tags.size > 0
+          = render_tag_links @topic.tags
+        - else
+          %p No tags for this topic
+      .panel
+        .panel_title Questions
+        - @topic.questions.each do |question|
+          %p= link_to question.title, question_path(question)
+        .row_divider
+        .panel_offset_link= link_to "Ask Related Question", new_question_path(:topic_id=>@topic.id)
     .panel
       .panel_title History
-      = render partial: 'history', locals: { topic: @topic }
+      = render partial: 'topics/history', locals: { topic: @topic }
 
 %div#history_popup.reveal-modal{:'data-reveal' => ''}
   %h2 title

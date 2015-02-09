@@ -3,7 +3,9 @@
 
 .row{:style=>'padding-top: 0.6em; padding-bottom: 0.35em;'}
   .columns.large-8
-    %h3 #{image_tag '739-question@2x.png', :size=>'38x38'} Questions:
+    %h3
+      = raw("#{image_tag '739-question@2x.png', :size=>'38x38'}") unless @static_render
+      Questions:
   .columns.large-4
     / Sort by [ latest | points ]<br/>
 
@@ -42,12 +44,13 @@
               = render_tag_links question.tags
     .row
       .columns
-        = will_paginate @questions
+        = will_paginate @questions if @questions.respond_to?(:total_pages)
 
-  .columns.large-4
-    .panel
-      .h2= link_to "#{f_icon('arrow-left')} Ask a new question".html_safe, new_question_path
-    .panel
-      .h2 Popular questions
-    .panel
-      .h2 Popular tags
+  - unless @static_render
+    .columns.large-4
+      .panel
+        .h2= link_to "#{f_icon('arrow-left')} Ask a new question".html_safe, new_question_path
+      .panel
+        .h2 Popular questions
+      .panel
+        .h2 Popular tags

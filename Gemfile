@@ -11,6 +11,7 @@ gem 'redis'
 gem 'rollout'
 
 gem 'mysql2'
+gem 'sqlite3', require: false
 gem 'devise'
 gem 'omniauth-github'
 gem "octokit"
