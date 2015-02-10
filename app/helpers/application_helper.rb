@@ -89,7 +89,7 @@ module ApplicationHelper
       else
         {}
       end
-      image_tag user.avatar.url(:thumb), opts.merge(:class=>'avatar')
+      image_tag user.avatar.url(:thumb), opts.merge(:class=>'avatar', :alt=>user.name, :title=>user.name)
     else
       render_gravatar user, options
     end
