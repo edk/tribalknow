@@ -1,10 +1,10 @@
 
 %ul
-  - topic.versions.each_with_index do |v, i|
+  - topic.versions.each_with_index do |v|
     %li
       - username = User.find_by_id(v.whodunnit).try(:name) || "Unknown"
       - str = "#{l(v.created_at, format: :civilian)} #{username}"
       - if @static_render
         = str
       - else
-        = link_to str, show_history_topic_path(topic, ver: v.id, counter: i), remote: true
+        = link_to str, show_history_topic_path(topic, ver: v.id), remote: true
