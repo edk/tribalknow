@@ -38,6 +38,7 @@ gem 'html_truncator'
 
 gem 'will_paginate'
 gem 'best_in_place', github: 'edk/best_in_place'
+gem 'render_anywhere', :require => false
 
 gem 'thinking-sphinx', '~> 3.1'
 

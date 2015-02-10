@@ -22,7 +22,7 @@
         .panel_title Contents
         %ul.panel_list
           - toc.each do |anchor|
-            %li= link_to anchor[0], anchor[1]
+            %li= link_to anchor[0], anchor[1], class: 'anchor_pointer'
     .panel
       .panel_title Sub-topics
       %ul.panel_list

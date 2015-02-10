@@ -171,8 +171,13 @@ module ApplicationHelper
 
     addl_options = { :activator => "##{edit_content_id}" }
 
-    rv = best_in_place obj, method, opts.merge(addl_options)
-    rv << f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon_right')
+    if @static_render
+      rv = obj.send method
+      rv = opts[:display_with].call(rv) if opts[:display_with]
+    else
+      rv = best_in_place obj, method, opts.merge(addl_options)
+      rv << f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon_right')
+    end
 
     rv.html_safe
   end

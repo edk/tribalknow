@@ -284,6 +284,8 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     redis (3.1.0)
+    render_anywhere (0.0.10)
+      rails (>= 3.0.7)
     riddle (1.5.11)
     rollout (2.1.0)
     rspec-collection_matchers (1.0.0)
@@ -414,6 +416,7 @@ DEPENDENCIES
   rails (~> 4.0)
   rambulance
   redis
+  render_anywhere
   rollout
   rspec-rails (~> 2.0)
   sanitize_email
