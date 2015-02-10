@@ -12,10 +12,23 @@ class Docset
     @topic_base = @base_path.join('Contents/Resources/Documents/topics')
     @ques_base  = @base_path.join('Contents/Resources/Documents/questions')
     @asset_base = @base_path.join('Contents/Resources/Documents/assets')
+    @paths = { base: @base_path, topics: @topic_base, questions: @ques_base, assets: @asset_base}
+    @paths = @paths.inject({}) { |m, (k,v)|
+      m[k] = v
+      m["#{k}_rel".to_sym] = v.to_s.gsub %r|#{@base_path}/Contents/Resources/Documents/|, ''
+      m
+    }
     FileUtils.mkdir_p [@base_path, @asset_base, @topic_base, @ques_base]
 
     gen_plist @base_path
     init_db @base_path
+  end
+
+  def lookup_path k, filename = nil
+    raise "key not found" unless @paths.has_key?(k)
+    path = Pathname.new(@paths[k])
+    path = path.join(filename.to_s) if filename
+    path
   end
 
   def finish
@@ -27,6 +40,21 @@ class Docset
 
   def gen_plist base_path
     File.open("#{@base_path}/Contents/Info.plist",'w') { |f| f.write(plist) }
+  end
+
+  def write filename, page, &block
+    filepath = if filename.is_a?(Array)
+      # a 2 element array
+      #  1) a symbol that maps to the type of prefix
+      #  2) the filename to append to it
+      lookup_path(filename.first, filename.last)
+    else
+      filename
+    end
+
+    instance_eval &block if block_given?
+
+    File.open(filepath, 'w') { |f| f.write page }
   end
 
   def plist

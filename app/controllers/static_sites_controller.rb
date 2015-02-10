@@ -1,6 +1,5 @@
 
 require 'sqlite3'
-require 'render_anywhere'
 
 class StaticSitesController < ApplicationController
 

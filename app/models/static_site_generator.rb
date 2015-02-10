@@ -1,10 +1,11 @@
+require 'render_anywhere'
 
 class StaticSiteGenerator
   include RenderAnywhere
 
   class RenderingController < RenderAnywhere::RenderingController
     def default_url_options
-      { host: 'localhost' }
+      { host: 'docset-localhost' }
     end
 
     def current_user
@@ -36,31 +37,33 @@ class StaticSiteGenerator
 
   def render_questions
     set_instance_variable('static_render', true)
-    @questions = Question.order(:id => :desc)
-    str = render(:template => 'questions/index', :locals => { :@questions => @questions } )
-    File.open(@docset.ques_base.join('index.html'),'w') { |f| f.write rewrite_page(str) }
+    questions = Question.order(:id => :desc)
+    page = render(:template => 'questions/index', :locals => { :@questions => questions } )
+    @docset.write([:questions, 'index.html'], rewrite_page(page))
 
-    @questions.each do |q|
-      path = @docset.ques_base.join("#{q.to_param}.html")
-      @docset.insert_db q.title, 'Entry', path.to_s.gsub(%r|#{@docset.base_path}/Contents/Resources/Documents/|, '')
-      str = render('questions/show', :locals => { :@question => q })
-      page = rewrite_page(str, path: path.to_s.gsub(%r|#{@docset.base_path}/Contents/Resources/Documents/|, ''))
-      File.open(path, 'w') { |f| f.write page }
+    questions.each do |q|
+      path = @docset.lookup_path(:questions, "#{q.to_param}.html")
+      rel_path  = @docset.lookup_path(:questions_rel, "#{q.to_param}.html")
+      page = render('questions/show', :locals => { :@question => q })
+      @docset.write(path, rewrite_page(page, path: rel_path) ) do
+        insert_db "Question: #{q.title}", 'Entry', rel_path
+      end
     end
   end
 
   def render_topics
     set_instance_variable('static_render', true)
     @topics = Topic.order(:name).where(:parent_topic_id=>nil)
-    str = render('topics/index', :locals => { :@topics => @topics })
-    File.open(@docset.topic_base.join('index.html'),'w') { |f| f.write rewrite_page(str) }
+    page = render('topics/index', :locals => { :@topics => @topics })
+    @docset.write([:topics, 'index.html'], rewrite_page(page))
 
     walk_topics(@topics) do |topic|
-      path = @docset.topic_base.join("#{topic.to_param}.html")
-      @docset.insert_db "#{topic.title} - #{topic.description}", 'Guide', path.to_s.gsub(%r|#{@docset.base_path}/Contents/Resources/Documents/|, '')
-      str = render('topics/show', :locals => { :@topic => topic })
-      page = rewrite_page(str, path: path.to_s.gsub(%r|#{@docset.base_path}/Contents/Resources/Documents/|, ''))
-      File.open(path, 'w') { |f| f.write page }
+      path = @docset.lookup_path(:topics, "#{topic.to_param}.html")
+      rel_path = @docset.lookup_path(:topics_rel, "#{topic.to_param}.html")
+      page = render('topics/show', :locals => { :@topic => topic })
+      @docset.write(path, rewrite_page(page, path: rel_path)) do
+        insert_db "#{topic.title} - #{topic.description}", 'Guide', rel_path
+      end
     end
   end
 
@@ -138,7 +141,5 @@ class StaticSiteGenerator
       topics.each { |topic| walk_topics(topic, &blk) }
     end
   end
-
-
 
 end
