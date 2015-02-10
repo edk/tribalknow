@@ -108,6 +108,7 @@ class StaticSiteGenerator
       link.attributes['href'].value = href
     end
 
+    # rewrite stylsheet links to be relative
     doc.css('head link').each do |link|
       link.attributes['href'].value = link.attributes['href'].value.gsub(/^\/assets/,'../assets')
     end
@@ -115,18 +116,37 @@ class StaticSiteGenerator
     doc.css('#content a').each do |link|
       if link.attributes['href'] && link.attributes['href'].to_s !~ /^#/
         ending = (link.attributes['class'].to_s =~ /(anchor_pointer|anchor_link)/) ? '' : '.html'
-        puts "\nlink.attributes['class'] = #{link.attributes['class'].inspect} -- ending = #{ending}"
         link.attributes['href'].value = "#{link.attributes['href'].value.gsub(/^\//,'../')}#{ending}"
       end
     end
 
-    if @db
-      doc.css('a.anchor_link').each do |a|
-        name = "##{a.attributes['name']}"
-        heading = a.css('h1,h2,h3,h4')
-        text = heading.xpath('text()').to_s.strip
-        insert_db text, 'Entry', "#{options[:path]}#{name}" if text.present?
+    doc.css('img').each do |tag|
+      if (src = tag.attributes['src'].to_s).present?
+        # download from where-ever it's located... s3? somewhere else?  put it in images/
+        uri = URI(src)
+
+        if uri.host
+          full_local_path = File.join(@docset.lookup_path(:images), uri.path)
+          FileUtils.mkdir_p File.dirname(full_local_path)
+          rel_path = File.join('../images', uri.path) # relative path
+          tag.attributes['src'].value = rel_path
+          begin
+            File.open(full_local_path, 'wb') { |f| f.write open(uri).read } unless File.exist?(full_local_path)
+          rescue StandardError
+            Rails.logger.error "#{$!} #{$!.backtrace}"
+          end
+        else
+          # copy the local file to the new location
+        end
       end
+    end
+
+    # add every anchor link to the index
+    doc.css('a.anchor_link').each do |a|
+      name = "##{a.attributes['name']}"
+      heading = a.css('h1,h2,h3,h4')
+      text = heading.xpath('text()').to_s.strip
+      @docset.insert_db text, 'Entry', "#{options[:path]}#{name}" if text.present?
     end
 
     doc.to_s

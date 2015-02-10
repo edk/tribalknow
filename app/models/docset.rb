@@ -1,7 +1,7 @@
 require 'sqlite3'
 
 class Docset
-  attr_accessor :base_path, :topic_base, :ques_base, :asset_base
+  attr_accessor :base_path, :topic_base, :ques_base, :asset_base, :image_base
 
   def initialize options = {}
     raise "Missing required key in Docset initialize(#{options.inspect})" if options.keys.any? { |k| !options.has_key?(k) }
@@ -12,13 +12,16 @@ class Docset
     @topic_base = @base_path.join('Contents/Resources/Documents/topics')
     @ques_base  = @base_path.join('Contents/Resources/Documents/questions')
     @asset_base = @base_path.join('Contents/Resources/Documents/assets')
-    @paths = { base: @base_path, topics: @topic_base, questions: @ques_base, assets: @asset_base}
+    @image_base = @base_path.join('Contents/Resources/Documents/images')
+
+    @paths = { base: @base_path, topics: @topic_base, questions: @ques_base, assets: @asset_base, images: @image_base}
+    FileUtils.mkdir_p @paths.values.map(&:to_s)
+
     @paths = @paths.inject({}) { |m, (k,v)|
       m[k] = v
       m["#{k}_rel".to_sym] = v.to_s.gsub %r|#{@base_path}/Contents/Resources/Documents/|, ''
       m
     }
-    FileUtils.mkdir_p [@base_path, @asset_base, @topic_base, @ques_base]
 
     gen_plist @base_path
     init_db @base_path
@@ -58,20 +61,22 @@ class Docset
   end
 
   def plist
-    # <key>dashIndexFilePath</key><string>guides.rubyonrails.org/index.html</string><key>CFBundleName</key>
     plist = %Q|
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
     <dict>
       <key>CFBundleIdentifier</key>
-      <string>Q</string>
+      <string>#{@name}</string>
       <key>CFBundleName</key>
-      <string>Coupa Q</string>
+      <string>#{@name}</string>
       <key>DocSetPlatformFamily</key>
-      <string>Q</string>
+      <string>#{@name}</string>
       <key>isDashDocset</key>
       <true/>
+      <key>dashIndexFilePath</key>
+      <string>topics/index.html</string>
+      <key>CFBundleName</key>
     </dict>
     </plist>
     |.strip
