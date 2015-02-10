@@ -110,7 +110,7 @@ module ApplicationHelper
 
     if user
       opt_string = "?s=#{size}" if size
-      image_tag(gravitar_url(user, opt_string), :alt=>"Your avatar", :class=>'avatar')
+      image_tag(gravitar_url(user, opt_string), :alt=>user.name, :title=>user.name, :class=>'avatar')
     else
       size = "40x40"
       size = "#{options[:size]}x#{options[:size]}" if options[:size]
