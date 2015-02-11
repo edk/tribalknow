@@ -110,11 +110,8 @@ class StaticSiteGenerator
 
     # rewrite stylsheet links to be relative
     doc.css('head link').each do |link|
-      if Rails.env.production?
-        link.attributes['href'].value = link.attributes['href'].value.gsub(%r|/stylesheets|, '../assets')
-      else
-        link.attributes['href'].value = link.attributes['href'].value.gsub(%r|^/assets|,'../assets')
-      end
+      link.attributes['href'].value = link.attributes['href'].value.gsub(/application-.*\.css$/, 'application.css')
+      link.attributes['href'].value = link.attributes['href'].value.gsub(%r{^(/assets|/stylesheets)},'../assets')
     end
 
     doc.css('#content a').each do |link|
