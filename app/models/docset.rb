@@ -76,7 +76,6 @@ class Docset
       <true/>
       <key>dashIndexFilePath</key>
       <string>topics/index.html</string>
-      <key>CFBundleName</key>
     </dict>
     </plist>
     |.strip
