@@ -5,7 +5,8 @@ gem 'activerecord-session_store'
 gem 'haml-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'quiet_assets', :group => :development
-#gem 'puma'
+gem 'sidekiq'
+gem 'sinatra', :require => nil # for the sidekiq web ui
 gem 'google-analytics-rails'
 gem 'redis'
 gem 'rollout'

@@ -5,13 +5,9 @@ class StaticSitesController < ApplicationController
 
   def show
     docset = Docset.new name: Tenant.current.site_title, base_path: Rails.root.join("docs/tmp/#{Tenant.current.site_title}.docset")
-    site = StaticSiteGenerator.new docset
-    site.render_all_to_file
-    site.finish
-
-    # zip, send_data
-
-    render text: 'ok'
+    if File.exist?(docset.zip_path)
+      send_file docset.zip_path, disposition: 'attachment', type: 'application/zip'
+    end
   end
-  
+
 end

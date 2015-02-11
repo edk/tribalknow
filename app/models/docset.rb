@@ -27,6 +27,10 @@ class Docset
     init_db @base_path
   end
 
+  def zip_path
+    "#{@base_path}.zip"
+  end
+
   def lookup_path k, filename = nil
     raise "key not found" unless @paths.has_key?(k)
     path = Pathname.new(@paths[k])
