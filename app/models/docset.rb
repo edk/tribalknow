@@ -1,7 +1,7 @@
 require 'sqlite3'
 
 class Docset
-  attr_accessor :base_path, :topic_base, :ques_base, :asset_base, :image_base
+  attr_accessor :name, :base_path, :topic_base, :ques_base, :asset_base, :image_base
 
   def initialize options = {}
     raise "Missing required key in Docset initialize(#{options.inspect})" if options.keys.any? { |k| !options.has_key?(k) }

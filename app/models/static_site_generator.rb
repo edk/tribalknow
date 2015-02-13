@@ -34,7 +34,7 @@ class StaticSiteGenerator
     zip_path = docset.zip_path
     dir_path = docset.base_path
     File.unlink(zip_path) if File.exist?(zip_path)
-    `(cd #{dir_path}/.. ; zip -q9r #{zip_path} #{dir_path})`
+    `(cd #{dir_path}/.. ; zip -q9r #{zip_path} #{docset.name}.docset)`
   end
 
   def initialize docset
