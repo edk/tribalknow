@@ -5,6 +5,17 @@ class QuestionsController < ApplicationController
     if params[:tag].present?
       query = query.tagged_with(params[:tag])
     end
+
+    if params[:created_by].present?
+      @created_by = User.find_by_id params[:created_by]
+      query = query.where(creator_id: params[:created_by])
+    end
+
+    if params[:answered_by]
+      @answered_by = User.find_by_id params[:answered_by]
+      query = query.joins(:answers).where("answers.creator_id" => @answered_by.id)
+    end
+
     @questions = query.paginate(:page=>params[:page])
   end
 

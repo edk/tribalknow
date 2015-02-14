@@ -1,29 +1,28 @@
-.panel
-  %h2 Welcome #{current_user.name}!
-  / %p Last logged in at #{current_user.last_sign_in_at} (#{time_ago_in_words(current_user.last_sign_in_at)} ago) from #{current_user.last_sign_in_ip}
-  %h3 Your Stats
+.panel.stats_panel
+  %h3 #{f_icon 'graph-bar'} Stats for #{current_user.name}
   %ul
+    - if Topic.created_by(current_user).size > 0
+      %li
+        Created #{pluralize Topic.created_by(current_user).size, "topic"}
+    / - if Topic.updated_by(current_user).size > 0
+    /   %li
+    /     Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
     %li
       - if n_asked = Question.asked_by(current_user).size
-        = pluralize n_asked, 'question'
-        asked.
+        = link_to (pluralize n_asked, 'question'), questions_path(created_by:current_user.id)
       - else
         = link_to "No questions asked yet.", new_question_path
     %li
       - if n_answered = Answer.answered_by(current_user).size
-        = pluralize n_asked, 'answer'
-        asked.
+        = link_to questions_path(answered_by:current_user.id) do
+          = pluralize n_asked, 'answer'
       - else
         = link_to "No answers yet."
-    - if Topic.created_by(current_user).size > 0
-      %li
-        Created #{pluralize Topic.created_by(current_user).size, "topic"}
-    - if Topic.updated_by(current_user).size > 0
-      %li
-        Updated #{pluralize Topic.updated_by(current_user).size, "topic"}
     - if (count = current_user.votes.up.size) > 0
       %li
         = "#{count} total upvotes"
+        = f_icon 'like'
     - if (count = current_user.votes.down.size) > 0
       %li
         = "#{count} total downvotes"
+        = f_icon 'dislike'

@@ -327,3 +327,29 @@ div.who_panel {
   margin-top: 1em;
   border-top: 1px solid #CCC;
 }
+
+.stats_panel {
+  h3 i {
+    color: #3A3;
+  }
+  ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+#content .search_param a:hover,#content .search_param a:focus {
+  border-bottom:none; color: #EEE;
+}
+
+.search_param {
+  @include label;
+  span {
+    padding-left: 6px;
+    margin-left: 4px;
+    border-left: 1px solid #666;
+  }
+}
+
+

@@ -3,14 +3,33 @@
 
 .row{:style=>'padding-top: 0.6em; padding-bottom: 0.35em;'}
   .columns.large-8
-    %h3
-      = raw("#{image_tag '739-question@2x.png', :size=>'38x38'}") unless @static_render
-      Questions:
+    %h3{style:"margin-bottom:-8px;"} Questions: 
+    .search_params
+      - if params[:created_by]
+        %span.search_param
+          questions by #{@created_by.try(:name)}
+          = link_to questions_path(params.except(:created_by)) do
+            %span= f_icon "x"
+
+      - if params[:answered_by]
+        %span.search_param
+          answers by #{@answered_by.try(:name)}
+          = link_to questions_path(params.except(:answered_by)) do
+            %span= f_icon "x"
+
+      - if params[:tag]
+        %span.search_param
+          #{params[:tag]}
+          = link_to questions_path(params.except(:tag)) do
+            %span= f_icon "x"
   .columns.large-4
     / Sort by [ latest | points ]<br/>
 
 .row
   .columns.large-8
+    - if @questions.empty?
+      %h3
+        Whaaaaaaaa.  nothing found
     - @questions.each do |question|
       .row
         .columns.large-12
