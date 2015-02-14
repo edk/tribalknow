@@ -25,6 +25,10 @@
 @import 'foundation-social-web-icons';
 @import 'foundation_and_overrides';
 
+.muted {
+  color: #999;
+}
+
 .center {
   text-align: center
 }
@@ -310,3 +314,16 @@ div.who_panel {
   .date {}
 }
 
+.activity_entry {
+  font-size: 0.8em;
+  .whodunnit {
+    font-size: 0.8em;
+    text-align: right;
+  }
+}
+
+.activity_entry+.activity_entry {
+  padding-top: 1em;
+  margin-top: 1em;
+  border-top: 1px solid #CCC;
+}

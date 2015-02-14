@@ -13,17 +13,19 @@
             link_to trackable.name.to_s, video_path(trackable)
           end
   - next if trackable.nil?
-  .panel
-    = "#{trackable.class.model_name.human}: "
+  .activity_entry
+    %span.muted= "#{trackable.class.model_name.human}: "
     = linked_description
     - act = activity[1].map {|a| { a[:key].split('.').last => a[:owner].try(:name) } }
     - act = act.inject({}) {|m,o| m[o.keys.first] ||= []; m[o.keys.first] << o.values.first; m}
-    - if act["update"]
-      %div= "Updated by #{act["update"].uniq.join(', ')}"
-    - elsif act["create"]
-      %div= "Created by #{act["create"].uniq.join(', ')}"
-    - elsif act["delete"]
-      %div= "Deleted by #{act["delete"].uniq.join(', ')}"
-    - elsif act["uploaded"]
-      %div= "Uploaded by #{act["uploaded"].uniq.join(', ')}"
-    = trackable && "#{time_ago_in_words trackable.updated_at} ago"
+
+    .whodunnit.muted
+      - if act["update"]
+        = "Updated by #{act["update"].uniq.join(', ')}"
+      - elsif act["create"]
+        = "Created by #{act["create"].uniq.join(', ')}"
+      - elsif act["delete"]
+        = "Deleted by #{act["delete"].uniq.join(', ')}"
+      - elsif act["uploaded"]
+        = "Uploaded by #{act["uploaded"].uniq.join(', ')}"
+      = trackable && "#{time_ago_in_words trackable.updated_at} ago"
