@@ -343,6 +343,13 @@ div.who_panel {
   border-bottom:none; color: #EEE;
 }
 
+.tag_cloud {
+  .css1 { font-size: 0.7em; background-color: lighten(#08B, 0%);  color: darken(#fff, 0%)}
+  .css2 { font-size: 0.7em; background-color: lighten(#08B, 10%); color: darken(#fff, 10%)}
+  .css3 { font-size: 0.7em; background-color: lighten(#08B, 30%); color: darken(#fff, 40%)}
+  .css4 { font-size: 0.7em; background-color: lighten(#08B, 60%); color: darken(#fff, 60%)}
+}
+
 .search_param {
   @include label;
   span {

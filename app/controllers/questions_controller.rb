@@ -16,6 +16,8 @@ class QuestionsController < ApplicationController
       query = query.joins(:answers).where("answers.creator_id" => @answered_by.id)
     end
 
+    @tag_cloud = Question.tag_counts_on(:tags)
+
     @questions = query.paginate(:page=>params[:page])
   end
 

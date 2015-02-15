@@ -1,4 +1,5 @@
 module QuestionHelper
+  include ActsAsTaggableOn::TagsHelper
 
   def archive_question(question)
     if question.creator == current_user

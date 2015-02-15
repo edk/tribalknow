@@ -67,9 +67,12 @@
 
   - unless @static_render
     .columns.large-4
-      .panel
-        .h2= link_to "#{f_icon('arrow-left')} Ask a new question".html_safe, new_question_path
-      .panel
-        .h2 Popular questions
-      .panel
-        .h2 Popular tags
+      = link_to "Ask a new question".html_safe, new_question_path, class: 'button expand'
+      .panel.tag_cloud
+        %h3 Tags
+        - tag_cloud(@tag_cloud, %w(css1 css2 css3 css4)) do |tag, css_class|
+          = link_to tag.name, questions_path(tag: tag.name), :class => "#{css_class} label round"
+      / .panel
+      /   .h2 Popular questions
+      / .panel
+      /   .h2 Popular tags
