@@ -37,6 +37,10 @@ class StaticSiteGenerator
     `(cd #{dir_path}/.. ; zip -q9r #{zip_path} #{docset.name}.docset)`
   end
 
+  def self.changed!
+    
+  end
+
   def initialize docset
     @docset = docset
     set_render_anywhere_helpers(QuestionHelper)

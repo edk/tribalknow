@@ -23,6 +23,7 @@ gem 'aws-sdk'
 gem 'hipchat'
 gem 'certified'
 gem 'aasm'
+gem 'rails-observers'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', github:'kimkong/userstamp'
