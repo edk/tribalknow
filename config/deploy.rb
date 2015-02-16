@@ -1,7 +1,7 @@
-# require 'debugger'
+require 'dotenv'
+Dotenv.load
 
 set :application, 'tribalknow'
-# set :repo_url, 'git@github.com:edk/tribalknow.git'
 set :repo_url, 'https://github.com/edk/tribalknow.git'
 
 set :branch, 'master'
@@ -25,6 +25,12 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :god, 'restart sidekiq'
+        end
+      end
+      execute :wget, "-O /dev/null --no-verbose #{ENV['SITE_URL']}" if ENV['SITE_URL']
     end
   end
 

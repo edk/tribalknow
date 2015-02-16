@@ -33,6 +33,8 @@ config/initializers/stoken.rb
 config/deploy/coupa*.rb
 config/docs_config.yml
 config/deploy.rb
+config/sidekiq.god
 .env
 *.orig
 docs
+
