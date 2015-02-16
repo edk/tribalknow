@@ -2,34 +2,27 @@
 class StaticSiteGeneratorWorker
   include Sidekiq::Worker
 
-
   # producer
   def self.trigger tenant_id
-    puts "class trigger"
     StaticSiteGeneratorWorker.perform_async(tenant_id)
   end
-
-  # include Debounce
-  # debounce_class_method :trigger
-
 
   # consumer of the job.
   def perform tenant_id
     accepting_new_jobs = $redis.setnx "generating_docset", Time.now.to_i
-    puts accepting_new_jobs
 
     if !accepting_new_jobs 
       $redis.setnx "new_docset_request", Time.now.to_i
 
       if stale?
-        puts "assume prev job died, doing heavy lifting anyway"
+        Rails.logger.debug "assume prev job died, doing heavy lifting anyway"
         run_job tenant_id
       else
-        puts "already in progress, skipping"
+        Rails.logger.debug "already in progress, skipping"
       end
 
     else
-      puts "starting new job"
+      Rails.logger.debug "starting new job"
       run_job tenant_id
     end
 
@@ -43,10 +36,10 @@ class StaticSiteGeneratorWorker
   end
 
   def run_job tenant_id
-    puts "doing heavy lifting"
+    Rails.logger.debug "doing heavy lifting"
     StaticSiteGenerator.generate(tenant_id)
     # sleep 10
-    puts "done!"
+    Rails.logger.debug "done!"
     if $redis.get("new_docset_request")
       $redis.del "new_docset_request"
       StaticSiteGeneratorWorker.trigger tenant_id
