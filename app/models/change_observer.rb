@@ -3,7 +3,7 @@ class ChangeObserver < ActiveRecord::Observer
   observe :topic, :question, :answer
 
   def after_save(record)
-    # StaticSiteGenerator.changed!
+    StaticSiteGeneratorWorker.trigger(Tenant.current.id) if Tenant.current
   end
 
 end
