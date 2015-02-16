@@ -3,7 +3,7 @@
 $('#history_popup h2').html('Edited by <%= escape_javascript( User.find_by_id(@ver.whodunnit).try(:name) || "Unknown" ) %> at <%= l(@ver.created_at, format: :civilian) %>');
 <%
   diff = if @ver.changeset[:content].present?
-    Diffy::Diff.new(@ver.changeset[:content].last, @ver.changeset[:content].first, allow_empty_diff: false, context: 3).to_s(:html)
+    Diffy::Diff.new(@ver.changeset[:content].first, @ver.changeset[:content].last, allow_empty_diff: false, context: 3).to_s(:html)
   else
     if @ver.event == 'create'
       "Initial creation"
