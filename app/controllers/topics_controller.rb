@@ -38,11 +38,16 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
+    topic_redir_to = if @topic.parent_topic
+      topic_url(@topic.parent_topic.id)
+    else
+      topics_url
+    end
 
     respond_to do |format|
       if @topic.save
         NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify][:notify] == '1'
-        format.html { redirect_to topics_url, notice: 'Topic was successfully created.' }
+        format.html { redirect_to topic_redir_to, notice: 'Topic was successfully created.' }
         format.json { render action: 'show', status: :created, location: @topic }
       else
         format.html { render action: 'new' }
