@@ -2,12 +2,10 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.order(:name).where(:parent_topic_id=>nil).paginate(:page=>params[:page], :per_page=> 3*9 )  # 3 per row, 9 rows
-    session[:return_to] = topics_path
   end
 
   def show
     @topic = Topic.friendly.find(params[:id])
-    session[:return_to] = topic_path(@topic)
   end
 
   def show_history
@@ -36,7 +34,6 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.friendly.find(params[:id])
-    session[:return_to] ||= request.referer
   end
 
   def create
@@ -56,13 +53,12 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.friendly.find(params[:id])
-    redir_to = session.delete(:return_to) || topics_path
 
     NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify] && params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to redir_to, notice: 'Topic was successfully updated.' }
+        format.html { redirect_to topic_path(@topic), notice: 'Topic was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
