@@ -1,6 +1,7 @@
 
 %ul
-  - topic.versions.each_with_index do |v|
+  - topic.versions.each_with_index do |v, index|
+    -# next if index != 0 && v.whodunnit.nil? || (v.changeset[:content] && !v.changeset[:content].any?(&:present?))
     %li
       - username = User.find_by_id(v.whodunnit).try(:name) || "Unknown"
       - str = "#{l(v.created_at, format: :civilian)} #{username}"

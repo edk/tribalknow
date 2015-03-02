@@ -22,7 +22,7 @@
                 No description
         - if topic.sub_topics.present?
           .subtopics
-            = "#{pluralize topic.sub_topics.count, 'subtopic'}"
+            = "#{pluralize topic.descendants.count, 'subtopic'}"
 
 - unless @static_render
   .row_spacer

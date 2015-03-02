@@ -24,6 +24,7 @@ gem 'hipchat'
 gem 'certified'
 gem 'aasm'
 gem 'rails-observers'
+gem 'awesome_nested_set'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', github:'kimkong/userstamp'

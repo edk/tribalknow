@@ -68,6 +68,8 @@ GEM
     arel (4.0.2)
     av (0.8.0)
       cocaine
+    awesome_nested_set (3.0.2)
+      activerecord (>= 4.0.0, < 5)
     aws-sdk (1.51.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -388,6 +390,7 @@ DEPENDENCIES
   activerecord-session_store
   acts-as-taggable-on
   acts_as_votable
+  awesome_nested_set
   aws-sdk
   best_in_place!
   byebug

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207162914) do
+ActiveRecord::Schema.define(version: 20150302182552) do
 
   create_table "activities", force: true do |t|
     t.integer   "trackable_id"
@@ -287,8 +287,17 @@ ActiveRecord::Schema.define(version: 20150207162914) do
     t.integer   "icon_file_size"
     t.timestamp "icon_updated_at",                  null: false
     t.boolean   "delta",             default: true, null: false
+    t.integer   "lft"
+    t.integer   "rgt"
+    t.integer   "depth"
+    t.integer   "children_count"
+    t.integer   "position"
   end
 
+  add_index "topics", ["tenant_id", "depth"], name: "index_topics_on_tenant_id_and_depth", using: :btree
+  add_index "topics", ["tenant_id", "lft"], name: "index_topics_on_tenant_id_and_lft", using: :btree
+  add_index "topics", ["tenant_id", "parent_topic_id"], name: "index_topics_on_tenant_id_and_parent_topic_id", using: :btree
+  add_index "topics", ["tenant_id", "rgt"], name: "index_topics_on_tenant_id_and_rgt", using: :btree
   add_index "topics", ["tenant_id"], name: "tenant_id", using: :btree
 
   create_table "transcode_remotes", force: true do |t|

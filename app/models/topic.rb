@@ -3,12 +3,13 @@ class Topic < ActiveRecord::Base
   acts_as_taggable
   acts_as_votable
   has_paper_trail
+  acts_as_nested_set parent_column: 'parent_topic_id', counter_cache: :children_count
   include EventMessage
 
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
-  has_many   :sub_topics, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:parent_topic
+  has_many   :sub_topics, -> { order 'position, id' }, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:parent_topic
   belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics
   validates  :name, presence: true, length: { minimum: 3 }
   has_many   :topic_files
