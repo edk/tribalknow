@@ -70,6 +70,7 @@ gem 'dotenv-rails'
 gem 'dotenv-deployment'
 
 group :development do
+  gem "airbrussh", require: false
   gem 'capistrano', '~> 3.0'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'

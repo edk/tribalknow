@@ -9,7 +9,7 @@ set :branch, 'master'
 set :deploy_to, '/home/deploy/tribalknow'
 set :scm, :git
 
-set :format, :pretty
+#set :format, :pretty  # not needed with Airbrussh
 set :log_level, :debug
 # set :pty, true
 
