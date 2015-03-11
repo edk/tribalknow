@@ -1,13 +1,11 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
-  # GET /answers
-  # GET /answers.json
   def index
-    @answers = Answer.all
+    @question = Question.friendly.find(params[:question_id])
+    redirect_to question_path(@question)
   end
 
-  # GET /answers/new
   def new
     @answer = Answer.new
   end
@@ -27,7 +25,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @question = Question.find(params[:question_id])
+    @question = Question.friendly.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
 
     respond_to do |format|
@@ -45,7 +43,7 @@ class AnswersController < ApplicationController
         format.html { redirect_to @question, notice: note }
         format.json { render action: 'show', status: :created, location: @question }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to @question, notice: @answer.errors.full_messages.join("<br/>".html_safe) }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
