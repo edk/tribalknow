@@ -29,7 +29,7 @@
           %div
             = link_to att.name.presence || "No name", att.asset.expiring_url(expiry)
       - else
-        %h4 No related files
+        %h5 No related files uploaded yet
 
       %hr
       = form_for @video_attachment, url: video_video_attachments_path(@video, @video_attachment), multipart: true do |f|
