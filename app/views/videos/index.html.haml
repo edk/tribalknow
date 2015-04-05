@@ -20,7 +20,7 @@
               = link_to "&#215;".html_safe, video_path(vid, dom_id: dom_id(vid) ), remote: true, method: :delete, data: { confirm: "Are you sure?" }
             .desc= vid.description
             .date= time_tag((vid.date || vid.created_at).to_date)
-            tags, vote, views
+            / tags, vote, views
             .edit_wrapper{style: 'position: relative'}
               .edit_link{style: 'position:absolute; bottom: 0; right: 0;'}
                 = link_to f_icon('pencil'), edit_video_path(vid.id)
