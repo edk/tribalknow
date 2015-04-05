@@ -13,6 +13,7 @@ class VideosController < ApplicationController
 
   def show
     @video = VideoAsset.friendly.find(params[:id])
+    @video_attachment = VideoAttachment.new
   end
 
   def new

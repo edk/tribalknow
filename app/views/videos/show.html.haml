@@ -18,10 +18,24 @@
           To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
   .large-4.columns.small-12
     .panel
-      TODO:
-      %ul
-        %li comments
-        %li links
-        %li tags, categories
-        %li related assets (slides) 
+      / TODO:
+      / %ul
+      /   %li comments
+      /   %li links
+      /   %li tags, categories
+      - if @video.video_attachments.present?
+        %h4 Related files:
+        - @video.video_attachments.each do |att|
+          %div
+            = link_to att.name.presence || "No name", att.asset.expiring_url(expiry)
+      - else
+        %h4 No related files
+
+      %hr
+      = form_for @video_attachment, url: video_video_attachments_path(@video, @video_attachment), multipart: true do |f|
+        = label_tag do
+          Name or description *:
+          = f.text_field :name
+        = f.file_field :asset
+        = f.submit "Upload file"
 

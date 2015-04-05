@@ -41,6 +41,8 @@ class VideoAsset < FileAsset
     end
   end
 
+  has_many :video_attachments
+
   has_attached_file :thumbnail,
     storage: :s3,
     s3_permissions: 'private',
