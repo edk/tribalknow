@@ -7,6 +7,8 @@
     - unless @static_render
       = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
 
+      = link_to "#{f_icon('x')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'button tiny radius expand alert' if current_user.admin? || @topic.creator == current_user
+
 
   .columns.large-9<
     %h1{:style=>'border-bottom: 1px solid silver; font-size: 275%;'}

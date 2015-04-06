@@ -76,9 +76,14 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.friendly.find(params[:id])
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify][:notify] == '1'
+    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify] && params[:notify][:notify] == '1'
 
-    @topic.destroy
+    if current_user.admin? || current_user == @topic.creator
+      @topic.destroy
+      flash[:notice] = "Deleted topic, '#{@topic.name}'"
+    else
+      flash[:alert] = "You are not authorized to perform this action."
+    end
     respond_to do |format|
       format.html { redirect_to topics_url }
       format.json { head :no_content }
