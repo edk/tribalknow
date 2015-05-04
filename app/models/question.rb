@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   has_many   :answers, :dependent => :destroy
   has_many   :uniq_answerers, -> { distinct }, through: :answers, :source=>:creator
   belongs_to :user
-  validates  :title, :text, presence: true, length: { minimum: 3 }
+  validates  :title, presence: true, length: { minimum: 3 }
   belongs_to :topic
 
   include PublicActivity::Model

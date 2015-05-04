@@ -6,9 +6,7 @@
       = f.input :title
   .row
     .large-10.columns
-      #in
-        = f.text_area :text, input_html:{style:'height:18em'}
-      #out
+      = f.text_area :text, style:'height:8em' # 18em is oversized so the rte attached to #in can max out
   - if @question.topic
     .row
       .large-10.columns
@@ -20,6 +18,15 @@
         %span#tags{:style => "display:none;"}
           = Tag.all_tags.to_json
         = f.input :tags, as: :hidden, input_html: { class: 'select2-with-tags', style:'min-width:80%', value: f.object.tags.empty? ? '' : f.object.tags.join(',') }
+
+  - if @question.new_record?
+    .row
+      .small-8.columns
+        %h3= "Add an answer to this question (if ya gots one)..."
+    %br/
+    .row
+      .large-10.columns
+        = text_area_tag :answer_text, '', style:'height:8em'
 
   .actions
     .row
