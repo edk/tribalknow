@@ -107,9 +107,12 @@ class User < ActiveRecord::Base
           session[:from_omniauth] = fields
         else
           if github_org_required? && is_org_member?(auth['credentials']['token'])
+            Rails.logger.error("DBG: #{__LINE__} fields => #{fields.inspect}  probably need to add active: true to this hash")
             fields.merge!({skip_confirmation: true, skip_activation: true})
           end
           user = User.create!(fields)
+          Rails.logger.error("DBG: user.active => #{user.active}")
+          user
         end
       end
     end
