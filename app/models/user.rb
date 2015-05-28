@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
         else
           if github_org_required? && is_org_member?(auth['credentials']['token'])
             Rails.logger.error("DBG: #{__LINE__} fields => #{fields.inspect}  probably need to add active: true to this hash")
-            fields.merge!({skip_confirmation: true, skip_activation: true})
+            fields.merge!({skip_confirmation: true, skip_activation: true, active: true})
           end
           user = User.create!(fields)
           Rails.logger.error("DBG: user.active => #{user.active}")
