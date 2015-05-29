@@ -85,6 +85,11 @@ pre, code{
   background-color: #F8F8F8;
   border: 1px solid #CCC;
 }
+
+.topic_content > pre, .question_content pre, .answer_content pre {
+  margin-bottom: 2em;
+}
+
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px;}
 pre code { border: 0px !important; background: transparent !important; line-height: 1.3em; }
 code { padding: 0 3px 0 3px; }
