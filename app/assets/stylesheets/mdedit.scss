@@ -67,12 +67,12 @@ img{max-width:100%;}
 
 h1,h2,h3,h4,h5,h6{font-weight:normal;color:#111;line-height:1em;}
 h4,h5,h6{ font-weight: bold; }
-h1{ font-size:2em; }
-h2{ font-size:1.5em; border-bottom:1px solid silver; padding-bottom: 5px; }
-h3{ font-size:1em; }
-h4{ font-size:1em; }
-h5{ font-size:0.8em; }
-h6{ font-size:0.6em; }
+h1{ font-size:2.5em; }
+h2{ font-size:2em; border-bottom:1px solid silver; padding-bottom: 5px; }
+h3{ font-size:1.5em; }
+h4{ font-size:1.2em; }
+h5{ font-size:1em; }
+h6{ font-size:0.9em; }
 
 blockquote{color:#666666;margin:0;padding-left: 3em;border-left: 0.5em #EEE solid;}
 hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
@@ -85,17 +85,8 @@ pre, code{
   background-color: #F8F8F8;
   border: 1px solid #CCC;
 }
-pre, code :after {
-  margin-bottom: 2em !important;
-}
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px;}
-
-pre code {
-  border: 0px !important;
-  background: transparent !important;
-  line-height: 1.3em;
-}
-
+pre code { border: 0px !important; background: transparent !important; line-height: 1.3em; }
 code { padding: 0 3px 0 3px; }
 sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
 sup { top: -0.5em; }
