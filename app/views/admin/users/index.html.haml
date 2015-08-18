@@ -15,6 +15,7 @@
         %th email
         %th tenant_id
         %th sign in count
+        %th last logged in
         %th created at
         %th confirmed at
         %th admin? approved? active?
@@ -24,7 +25,7 @@
       %tbody
         - @users.each do |user|
           %tr
-            - ( [["id", "uid"], "provider" ] + [ Proc.new {|u| render_avatar(user) } ] + %w[name email tenant_id sign_in_count created_at confirmed_at] + [ Proc.new {|u| %w[admin? approved active].map {|f| "#{u.send(f) ? f_icon("check", :color => 'green') : f_icon("x", :color=>'red') } #{f}" }.join("<br/>").html_safe } ] ).each do |field|
+            - ( [["id", "uid"], "provider" ] + [ Proc.new {|u| render_avatar(user) } ] + %w[name email tenant_id sign_in_count last_sign_in_at created_at confirmed_at] + [ Proc.new {|u| %w[admin? approved active].map {|f| "#{u.send(f) ? f_icon("check", :color => 'green') : f_icon("x", :color=>'red') } #{f}" }.join("<br/>").html_safe } ] ).each do |field|
               %td
                 - if field.respond_to?(:call)
                   = field.call(user)
