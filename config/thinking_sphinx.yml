@@ -1,0 +1,12 @@
+development:
+  enable_star: 1
+  min_infix_len: 2
+  morphology: stem_en
+test:
+  enable_star: 1
+  min_infix_len: 2
+  morphology: stem_en
+production:
+  enable_star: 1
+  min_infix_len: 2
+  morphology: stem_en
