@@ -27,7 +27,7 @@ namespace :deploy do
       execute :touch, release_path.join('tmp/restart.txt')
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :god, 'restart sidekiq'
+          #execute :god, 'restart sidekiq'
         end
       end
       execute :wget, "-O /dev/null --no-verbose #{ENV['SITE_URL']}" if ENV['SITE_URL']
