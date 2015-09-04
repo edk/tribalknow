@@ -4,7 +4,7 @@
     %h3
       Searching for:
       %q #{params[:q]}
-    (Pro-tip: Use * to tell Sphinx to use wildcards so you can search partial strings instead of whole words)
+    %p (Pro-tip: Use <strong>*</strong> to tell Sphinx to use wildcards so you can search partial strings instead of whole words)
 .row
   .columns.large-10
     = render :partial => 'results', :collection => @results
