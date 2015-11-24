@@ -10,7 +10,7 @@ class NotifyHipchat
     begin
       send_message msg
     rescue
-      Rails.logger.error("There was a failure sending the notification to hipchat")
+      Rails.logger.error("There was a failure sending the notification to hipchat #{$!}")
       # TODO: add a background job system to retry in the future.
     end
   end
