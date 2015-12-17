@@ -22,6 +22,7 @@ en:
       default: "%a, %d %b %Y %H:%M:%S %z"
       anytime: "%m/%d/%Y %H:%M%p"
       short: "%d %b %H:%M"
+      medium: "%b %d, %Y"
       long: "%B %d, %Y %l:%M%p"
       civilian: "%b %e, %l:%M%p"
       monthday: "%a, %b %e"
