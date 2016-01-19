@@ -5,22 +5,24 @@
 
     - render_custom_text 'top' do |header, text|
       .row
-        .large-11.large-centered.columns
+        .large-12.large-centered.columns
           = text
 
-    .columns.large-6{:'data-equalizer-watch'=>''}
-      = f.error_notification
-      .form-inputs
-        = f.input :email, :required => true, :autofocus => true
-        = f.input :password, :required => true
-        = f.input :password_confirmation, :required => true
-      .row
-        .columns.large-8.push-6
-          = f.button :submit, "Sign up for an account"
-    .columns.large-2{:'data-equalizer-watch'=>''}
-      .xy_center OR
-    .columns.large-4{:'data-equalizer-watch'=>''}
-      .y_center= link_to "Sign up with GitHub", user_omniauth_authorize_path(:github), {:class=>'button'}
+    .row
+      /
+        .columns.large-6{:'data-equalizer-watch'=>''}
+          = f.error_notification
+          .form-inputs
+            = f.input :email, :required => true, :autofocus => true
+            = f.input :password, :required => true
+            = f.input :password_confirmation, :required => true
+            .row
+              .columns.large-12
+                = f.button :submit, "Sign up for an account", class:"right"
+        .columns.large-2{:'data-equalizer-watch'=>''}
+          .xy_center OR
+      .columns.large-4{:'data-equalizer-watch'=>''}
+        = link_to "Sign up with GitHub", user_omniauth_authorize_path(:github), {:class=>'button'}
 
     - render_custom_text 'bottom' do |header, text|
       .row
