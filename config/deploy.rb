@@ -30,7 +30,7 @@ namespace :deploy do
           #execute :god, 'restart sidekiq'
         end
       end
-      execute :wget, "-O /dev/null --no-verbose #{ENV['SITE_URL']}" if ENV['SITE_URL']
+      execute :wget, "-O /dev/null --no-check-certificate --no-verbose #{ENV['SITE_URL']}" if ENV['SITE_URL']
     end
   end
 
