@@ -37,4 +37,6 @@ config/sidekiq.god
 .env
 *.orig
 docs
-
+/public/assets
+/public/images
+/public/system
