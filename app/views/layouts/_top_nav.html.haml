@@ -44,7 +44,8 @@
                 .small-8.columns
                   = search_field_tag :q
                 .small-4.columns
-                  = submit_tag 'Search', :name=>'', :class=>'button'
+                  %button.submit.btn
+                    %i.fi-magnifying-glass
       %li.divider.show-for-small
       - if current_tenant
         - unless @static_render
