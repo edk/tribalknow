@@ -69,6 +69,7 @@ class VideoAsset < FileAsset
     va = VideoAsset.arel_table
     where( va[:aasm_state].eq('draft').or(va[:aasm_state].eq('submitted')).or(va[:aasm_state].eq('failed')) )
   }
+  scope :by_most_recent_first, -> { order('updated_at') }
 
   has_one :secret, class_name: 'VideoAccessSecret', dependent: :destroy
   after_initialize :init_values
@@ -92,6 +93,21 @@ class VideoAsset < FileAsset
 
   def friendly_state
     submitted? ? "processing" : aasm_state
+  end
+
+  def expiring_download_url options = {}
+    s3 = AWS::S3.new
+    s3_videos_bucket = s3_credentials[:bucket]
+    bucket = s3.buckets[s3_videos_bucket]
+    style = options[:style] || :mp4
+    object_path = asset.path(style).sub(/^\//,'') # strip the leading /
+    object = bucket.objects[object_path]
+    expires = options[:expires] || 60.minutes
+
+    object.url_for(:get, { 
+      expires: expires,
+      response_content_disposition: 'attachment;'
+    }).to_s
   end
 
   def s3_credentials

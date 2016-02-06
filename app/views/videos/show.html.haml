@@ -5,7 +5,7 @@
 
 %h2= @video.name
 
-- expiry = 60.minutes
+- expiry = 180.minutes
 - poster_attr = "poster: #{@video.asset.expiring_url(expiry, :thumb)}"
 
 .row
@@ -23,6 +23,10 @@
       /   %li comments
       /   %li links
       /   %li tags, categories
+      - if @video.asset.exists?
+        %h4
+          .download_video= link_to  "Download video", @video.expiring_download_url(expires: expiry, style: :mp4)
+        %hr
       - if @video.video_attachments.present?
         %h4 Related files:
         - @video.video_attachments.each do |att|

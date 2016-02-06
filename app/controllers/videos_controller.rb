@@ -3,7 +3,7 @@ class VideosController < ApplicationController
   protect_from_forgery :except => [:update_status]
 
   def index
-    @published_videos = VideoAsset.published.paginate(:page=>params[:page], :per_page=> 3*9 )
+    @published_videos = VideoAsset.by_most_recent_first.published.paginate(:page=>params[:page], :per_page=> 3*9 )
     if current_user.admin?
       @draft_videos = VideoAsset.unpublished
     else
