@@ -96,7 +96,7 @@ class VideoAsset < FileAsset
   end
 
   def expiring_download_url options = {}
-    s3 = AWS::S3.new
+    s3 = AWS::S3.new(s3_credentials)
     s3_videos_bucket = s3_credentials[:bucket]
     bucket = s3.buckets[s3_videos_bucket]
     style = options[:style] || :mp4
