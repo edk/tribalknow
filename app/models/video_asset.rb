@@ -69,7 +69,7 @@ class VideoAsset < FileAsset
     va = VideoAsset.arel_table
     where( va[:aasm_state].eq('draft').or(va[:aasm_state].eq('submitted')).or(va[:aasm_state].eq('failed')) )
   }
-  scope :by_most_recent_first, -> { order('updated_at') }
+  scope :by_most_recent_first, -> { order('updated_at desc') }
 
   has_one :secret, class_name: 'VideoAccessSecret', dependent: :destroy
   after_initialize :init_values
