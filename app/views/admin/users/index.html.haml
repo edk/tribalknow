@@ -25,7 +25,7 @@
       %tbody
         - @users.each do |user|
           %tr
-            - ( [["id", "uid"], "provider" ] + [ Proc.new {|u| render_avatar(user) } ] + %w[name email tenant_id sign_in_count last_sign_in_at created_at confirmed_at] + [ Proc.new {|u| %w[admin? approved active].map {|f| "#{u.send(f) ? f_icon("check", :color => 'green') : f_icon("x", :color=>'red') } #{f}" }.join("<br/>").html_safe } ] ).each do |field|
+            - ( [["id", "uid"], "provider" ] + [ Proc.new {|u| render_avatar(user) } ] + [ Proc.new { |u| u.provider == 'github' ? link_to(u.name, "https://github.com/#{u.name}", target: "_blank") : u.name }, Proc.new{ |u| mail_to(u.email) }] + %w[tenant_id sign_in_count last_sign_in_at created_at confirmed_at] + [ Proc.new {|u| %w[admin? approved active].map {|f| "#{u.send(f) ? f_icon("check", :color => 'green') : f_icon("x", :color=>'red') } #{f}" }.join("<br/>").html_safe } ] ).each do |field|
               %td
                 - if field.respond_to?(:call)
                   = field.call(user)
