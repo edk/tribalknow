@@ -46,7 +46,7 @@
             .row
               .columns.large-9
                 .question_answer
-                  = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 45)
+                  = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 120, {:length_in_chars => true})
             .row
               .columns.large-7
                 %span.question_answer_links
