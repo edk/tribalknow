@@ -12,7 +12,7 @@
         - if content=result.excerpts.text.presence
           = raw content
         - else
-          = raw HTML_Truncator.truncate(render_md(result.text), 100)
+          = raw HTML_Truncator.truncate(render_md(result.text), 120, {:length_in_chars => true})
 
   .columns.large-3
     .row
