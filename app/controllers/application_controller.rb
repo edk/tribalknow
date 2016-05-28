@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   around_filter :scope_current_tenant
   include PublicActivity::StoreController
 
+  before_filter :set_paper_trail_whodunnit
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private

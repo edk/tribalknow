@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.2'
 gem 'activerecord-session_store'
 gem 'haml-rails'
 gem 'jbuilder', '~> 1.2'
@@ -28,7 +28,7 @@ gem 'awesome_nested_set'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', github: 'kimkong/userstamp'
-gem 'paper_trail', github:'airblade/paper_trail'
+gem 'paper_trail'
 gem 'diffy'
 gem 'public_activity'
 gem 'acts_as_votable'
