@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.2'
 gem 'activerecord-session_store'
 gem 'haml-rails'
 gem 'jbuilder', '~> 1.2'
@@ -13,7 +13,7 @@ gem 'rollout'
 
 gem 'mysql2'
 gem 'sqlite3', require: false
-gem 'devise'
+gem 'devise', '~> 3'
 gem 'omniauth-github'
 gem "octokit"
 gem "pundit"
@@ -27,8 +27,8 @@ gem 'rails-observers'
 gem 'awesome_nested_set'
 
 gem 'acts-as-taggable-on'
-gem 'userstamp', github:'kimkong/userstamp'
-gem 'paper_trail', github:'airblade/paper_trail'
+gem 'userstamp', github: 'kimkong/userstamp'
+gem 'paper_trail'
 gem 'diffy'
 gem 'public_activity'
 gem 'acts_as_votable'
