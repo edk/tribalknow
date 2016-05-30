@@ -27,7 +27,7 @@ gem 'rails-observers'
 gem 'awesome_nested_set'
 
 gem 'acts-as-taggable-on'
-gem 'userstamp', github: 'kimkong/userstamp'
+gem 'userstamp', github: 'kimkong/userstamp', branch: 'fix-for-rails-4-2'
 gem 'paper_trail'
 gem 'diffy'
 gem 'public_activity'

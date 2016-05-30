@@ -16,7 +16,8 @@ GIT
 
 GIT
   remote: git://github.com/kimkong/userstamp.git
-  revision: 0917f0e1b361adc262e3cf150c77efe2f2d2f8be
+  revision: 4b986234d916d3701f897d2a21b53af3277ba3f6
+  branch: fix-for-rails-4-2
   specs:
     userstamp (2.0.2)
 
