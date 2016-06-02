@@ -135,6 +135,10 @@ class User < ActiveRecord::Base
     name
   end
 
+  def self.allow_unconfirmed_access_for
+    7.days
+  end
+
   def active_for_authentication?
     if tenant && tenant.new_user_restriction?
       super && approved? && (respond_to?(:confirmed?) && (confirmed? || confirmation_period_valid?))
