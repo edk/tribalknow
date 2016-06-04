@@ -6,6 +6,7 @@
 
 class DocsController < ApplicationController
   # layout 'application', :except=>:show
+  skip_before_action :verify_authenticity_token, only: :show
 
   def index
     # list available docs sets
