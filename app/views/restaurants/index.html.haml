@@ -1,0 +1,14 @@
+
+%h1
+  Restaurants
+
+
+%ul
+  - @restaurants.each do |restaurant|
+    %li
+      = link_to restaurant, restaurant_path(restaurant)
+
+
+
+
+

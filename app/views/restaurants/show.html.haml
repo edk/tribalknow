@@ -1,0 +1,11 @@
+
+.row
+  %h1 #{@restaurant.name}
+
+.row
+  .columns.medium-6
+    %p #{@restaurant.description}
+  .columns.medium-6
+    %h3 comments
+    = react_component "CommentList", {comments: raw(render(template: 'restaurant_comments/index.json.jbuilder' ) )}
+
