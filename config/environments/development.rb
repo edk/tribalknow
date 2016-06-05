@@ -40,6 +40,8 @@ Tribalknow::Application.configure do
   # config.logger.level = Logger.const_get(
   #   ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG'
   # )
+
+  config.react.variant = :development
 end
 
 require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))

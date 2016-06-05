@@ -56,6 +56,7 @@ gem 'jquery-ui-rails'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'friendly_id'
 
+gem 'react-rails'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'simple_form'
 gem 'foundation-rails'

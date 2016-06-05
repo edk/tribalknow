@@ -326,6 +326,11 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    react-rails (0.13.0.0)
+      execjs
+      rails (>= 3.1)
+      react-source (= 0.13.0)
+    react-source (0.13.0)
     redis (3.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
@@ -477,6 +482,7 @@ DEPENDENCIES
   rails (~> 4.2)
   rails-observers
   rambulance
+  react-rails
   redis
   render_anywhere
   rollout

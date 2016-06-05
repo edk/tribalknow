@@ -89,6 +89,7 @@ Tribalknow::Application.configure do
     docs.js homes.js questions.js topics.js users.js welcome.js admin/users.js admin/apporve_users.js admin/config.js
     devise/sessions.js searches.js videos.js )
 
+  config.react.variant = :production
 end
 
 require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))
