@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
   before_filter :set_paper_trail_whodunnit
+  skip_after_action :warn_about_not_setting_whodunnit # even though i'm setting it, the warning continues.
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
