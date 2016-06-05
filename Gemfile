@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 4.2'
 gem 'activerecord-session_store'
 gem 'haml-rails'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 gem 'quiet_assets', :group => :development
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for the sidekiq web ui
@@ -57,7 +57,7 @@ gem 'jquery-ui-rails'
 gem 'friendly_id'
 
 gem 'react-rails'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 gem 'simple_form'
 gem 'foundation-rails'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage

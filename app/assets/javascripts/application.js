@@ -23,6 +23,9 @@
 //= require best_in_place.purr
 //= require jquery-ui
 //= require autocomplete
+//= require react
+//= require react_ujs
+//= require components
 
 // require google-code-prettify/prettify
 // require_tree .
