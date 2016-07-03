@@ -24,17 +24,6 @@
           - if current_user && current_user.admin?
             %li= link_to "Admin", admin_home_index_path, :class=>'highlight'
 
-        - unless @static_render
-          %li.has-dropdown
-            %a.highlight{:href => "#"} Do Things
-            %ul.dropdown
-              %li= link_to "Ask new question", new_question_path, :class=>'highlight'
-              %li
-                %a.highlight{:href => "#"} Your Achievements (todo)
-              %li= link_to "Your Account", account_path, :class=>'highlight'
-              %li.divider
-              %li
-                %a.highlight{:href => "#"} FAQ (todo)
         %li.divider
 
         - unless @static_render
