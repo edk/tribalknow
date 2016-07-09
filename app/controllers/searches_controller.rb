@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
 
-  skip_after_action :track_action
+  skip_after_action :track_action, only: :autocomplete
 
   def index
     @results = get_sphinx_search_results params[:q]
@@ -12,6 +12,10 @@ class SearchesController < ApplicationController
         render :json => @results.to_a
       end
     end
+  end
+
+  def autocomplete
+    index
   end
 
   private

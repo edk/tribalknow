@@ -35,7 +35,9 @@ Tribalknow::Application.routes.draw do
   end
 
   resource  :static_site
-  resources :searches
+  resources :searches do
+    get 'autocomplete', on: :collection
+  end
 
   get "registration/complete"
   post 'registration/complete', :to => 'registration#update', :as=>'update_registration'

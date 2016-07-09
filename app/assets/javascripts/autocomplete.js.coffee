@@ -18,7 +18,7 @@ $ ->
   $("#q").catcomplete
     source: (request, response) ->
       $.ajax
-        url: "/searches"
+        url: "/searches/autocomplete"
         dataType: "json"
         data:
           q: request.term
