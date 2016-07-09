@@ -1,7 +1,7 @@
 %dl.sub-nav
   %dt Admin Functions:
   - num_of_users_awaiting_approval = (num = User.where(:approved=>false).count) > 0 ? "(#{num})" : ""
-  - [[admin_users_path, "Users"], [admin_approve_users_path, "Users awaiting approval #{num_of_users_awaiting_approval}"], [admin_config_index_path, "Site Config"]].each do |path, str|
+  - [[admin_users_path, "Users"], [admin_approve_users_path, "Users awaiting approval #{num_of_users_awaiting_approval}"], [admin_analytics_path, 'Analytics'], [admin_config_index_path, "Site Config"]].each do |path, str|
     - if current_page?(path)
       %dd.active= link_to(str, path)
     - else

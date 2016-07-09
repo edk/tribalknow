@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :thumb => "80x80#" }, :default_url => "blank-icon-80x80.gif"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  has_many :visits
   has_many :topics, foreign_key: :creator_id
   has_many :questions, foreign_key: :creator_id
   has_many :answers, foreign_key: :creator_id

@@ -2,8 +2,13 @@
 
 .row
   .columns.large-8
-    = render :partial=>"site_news"
+    =# render :partial=>"site_news"
     = render :partial=>'admin_panel' if current_user.admin?
+
+    /.row
+    /  .columns.large-12<
+    /    .panel
+    /      %h2 Bookmarks and favorites
 
     .row
       .columns.large-12<
@@ -15,11 +20,7 @@
       /    %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}
       /    %p #{image_tag("787-browser-windows-selected@2x.png", :size=>"25x25")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
 
-    .row
-      .columns.large-12
-        .panel
-          %h2 Dashboard
-          / some sort of way to easily plug in links to dashboards or data sources
+    =# render partial: 'popular_lists', locals: { top: @top }
 
   .columns.large-4
     / .panel
@@ -37,5 +38,5 @@
               %span.title
                 = link_to q.title, q
 
-    = render partial: 'your_stats'
+    =# render partial: 'your_stats'
     = render partial: 'activities'

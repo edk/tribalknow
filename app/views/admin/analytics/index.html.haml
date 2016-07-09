@@ -1,0 +1,10 @@
+
+= render :template=>'layouts/admin_sub_nav'
+
+
+.row
+  &nbsp;
+.row
+  .columns.small-12
+    = line_chart User.group_by_day(:created_at).count
+    

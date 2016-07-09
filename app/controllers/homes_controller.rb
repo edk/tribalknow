@@ -12,6 +12,26 @@ class HomesController < ApplicationController
         m
       end
 
+      @top = {}
+
+      @top[:topics] = Ahoy::Event.where(name: 'topics#show').limit(10).top(:properties)
+      @top[:topics] = @top[:topics].map do |props|
+        {
+          count: props[1],
+          id: props[0]["id"],
+          title: Topic.friendly.find(props[0]["id"]).title,
+        }
+      end
+
+      @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(10).top(:properties)
+      @top[:qna] = @top[:qna].map do |props|
+        {
+          count: props[1],
+          id: props[0]["id"],
+          title: Question.friendly.find(props[0]["id"]).title,
+        }
+      end
+
       @popular_questions = Question.popular
     else
       if (landing_page = Tenant.current.try(:landing_page)).present?

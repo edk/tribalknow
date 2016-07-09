@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_paper_trail_whodunnit
   skip_after_action :warn_about_not_setting_whodunnit # even though i'm setting it, the warning continues.
+  after_action :track_action
+  
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -42,6 +44,10 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to request.headers["Referer"] || root_path
+  end
+
+  def track_action
+    ahoy.track "#{controller_name}##{action_name}", request.filtered_parameters
   end
 
 end

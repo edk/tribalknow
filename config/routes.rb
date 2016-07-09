@@ -12,6 +12,7 @@ Tribalknow::Application.routes.draw do
   namespace :admin do
     resources :home
     resources :users
+    resources :analytics
     resources :config
     resources :approve_users, :only => [ :index ] do
       member do

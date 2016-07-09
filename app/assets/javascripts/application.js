@@ -23,6 +23,9 @@
 //= require best_in_place.purr
 //= require jquery-ui
 //= require autocomplete
+//= require ahoy
+//= require Chart.bundle
+//= require chartkick
 
 // require google-code-prettify/prettify
 // require_tree .
@@ -88,3 +91,4 @@ jQuery.fn.highlight = function() {
             .fadeOut(1500);
     });
 }
+

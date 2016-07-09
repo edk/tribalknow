@@ -1,0 +1,16 @@
+
+.row
+  .columns.large-6
+    .panel.width_6
+      %h2 Popular Topics
+      %ul
+        - top[:topics] && top[:topics].each do |props|
+          %li
+            = link_to "#{props[:title]}", topic_path(props[:id]), title: "#{props[:count]} views"
+  .columns.large-6
+    .panel.width_6
+      %h2 Top Q&amp;A
+      %ul
+        - top[:qna] && top[:qna].each do |props|
+          %li
+            = link_to "#{props[:title]}", question_path(props[:id]), title: "#{props[:count]} views"
