@@ -1,5 +1,6 @@
 class SearchesController < ApplicationController
 
+  skip_after_action :track_action
 
   def index
     @results = get_sphinx_search_results params[:q]
