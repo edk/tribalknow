@@ -19,6 +19,7 @@
     = csrf_meta_tags
     = analytics_init if Rails.env.production?
   %body
+    = javascript_include_tag "https://www.google.com/jsapi"
     = javascript_include_tag "application", params[:controller]
     = render 'layouts/top_nav'
     - if flash.keys.present?
