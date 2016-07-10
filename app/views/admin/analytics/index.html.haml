@@ -9,5 +9,5 @@
     .columns.large-12
       .panel
         %h2= stat[0]
-        = send(stat[2], stat[1])
+        = send(stat[2], stat[1], stat[3]||{})
 
