@@ -39,7 +39,10 @@ gem 'public_activity'
 gem 'acts_as_votable'
 gem 'merit'
 gem "interactor-rails", "~> 2.0"
+
 gem 'rambulance'
+gem 'newrelic_rpm'
+gem 'exception_notification'
 
 gem 'github-markdown'
 gem 'html_truncator'
@@ -53,7 +56,6 @@ gem 'thinking-sphinx', '~> 3.1'
 gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
 gem 'underscore-rails'
-gem 'exception_notification'
 gem 'ledermann-rails-settings', :require => 'rails-settings'
 gem 'jquery-ui-rails'
 

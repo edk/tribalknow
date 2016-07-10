@@ -170,6 +170,7 @@ namespace :deploy do
       configdir = File.join(basedir, "shared", "config", "initializers")
       execute :mkdir, '-p', configdir
       execute :cp, "#{homedir}/secret_token.rb", "#{configdir}/"
+      execute :cp, "#{homedir}/newrelic.yml", "#{configdir}/"
       # TODO make the mkdir/cp conditional
     end
   end

@@ -256,6 +256,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
+    newrelic_rpm (3.16.0.318)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth2 (1.0.0)
@@ -498,6 +499,7 @@ DEPENDENCIES
   ledermann-rails-settings
   merit
   mysql2
+  newrelic_rpm
   nokogiri
   octokit
   omniauth-github
