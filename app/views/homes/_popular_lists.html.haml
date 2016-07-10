@@ -15,7 +15,7 @@
         - top[:qna] && top[:qna].each do |props|
           %li
             = link_to "#{props[:title]}", question_path(props[:id]), title: "#{props[:count]} views"
-
+.row
   .columns.large-6
     .panel.width_6
       %h2 Top Search Terms

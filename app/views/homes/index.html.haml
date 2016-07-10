@@ -20,7 +20,8 @@
       /    %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}
       /    %p #{image_tag("787-browser-windows-selected@2x.png", :size=>"25x25")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
 
-    =# render partial: 'popular_lists', locals: { top: @top }
+    - if ($rollout.active?(:home_popular_lists) rescue false)
+      = render partial: 'popular_lists', locals: { top: @top }
 
   .columns.large-4
     / .panel
