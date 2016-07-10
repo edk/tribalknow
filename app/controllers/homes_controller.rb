@@ -32,6 +32,27 @@ class HomesController < ApplicationController
         }
       end
 
+      @top[:videos] =Ahoy::Event.where(name: 'videos#show').limit(10).top(:properties)
+      @top[:videos] = @top[:videos].map do |props|
+        {
+          count: props[1],
+          id: props[0]["id"],
+          title: VideoAsset.friendly.find(props[0]["id"]).name,
+        }
+      end
+
+      @time_zone = Searchjoy.time_zone || Time.zone
+      @time_range = 8.weeks.ago.in_time_zone(@time_zone).beginning_of_week(:sunday)..Time.now
+      @searches = Searchjoy::Search.connection.select_all(
+        Searchjoy::Search.select("normalized_query, COUNT(*) as searches_count, COUNT(converted_at) as conversions_count, AVG(results_count) as avg_results_count").
+        where(created_at: @time_range).
+        group("normalized_query").
+        order("searches_count desc, normalized_query asc").
+        limit(20).to_sql).to_a
+      
+      @top[:searches] = @searches
+
+
       @popular_questions = Question.popular
     else
       if (landing_page = Tenant.current.try(:landing_page)).present?
