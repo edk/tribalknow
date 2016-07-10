@@ -29,6 +29,7 @@ gem 'ahoy_matey'
 gem 'groupdate'
 gem 'chartkick'
 gem 'hightop'
+gem 'searchjoy'
 
 gem 'acts-as-taggable-on'
 gem 'userstamp', github: 'kimkong/userstamp', branch: 'fix-for-rails-4-2'

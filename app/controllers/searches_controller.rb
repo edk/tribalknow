@@ -1,10 +1,17 @@
 class SearchesController < ApplicationController
 
-  skip_after_action :track_action, only: :autocomplete
+  skip_after_action :track_action
 
   def index
     @results = get_sphinx_search_results params[:q]
     @results.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
+
+    Searchjoy::Search.create(
+      query: params[:q],
+      results_count: @results.size,
+      user_id: current_user.id
+    ) unless request.xhr?
+
     respond_to do |format|
       format.html #do nothing, defaults to default template
       format.json do

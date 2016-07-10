@@ -3,6 +3,7 @@ Tribalknow::Application.routes.draw do
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
+    mount Searchjoy::Engine, at: "/searchjoy"
   end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

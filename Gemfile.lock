@@ -390,6 +390,10 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    searchjoy (0.0.10)
+      activerecord
+      chartkick
+      groupdate
     seed_dump (3.1.0)
       activerecord
       activesupport
@@ -514,6 +518,7 @@ DEPENDENCIES
   sanitize_email
   sass-rails (~> 4.0.0.rc2)
   sdoc
+  searchjoy
   seed_dump
   select2-rails
   sidekiq
