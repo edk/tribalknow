@@ -13,7 +13,7 @@ set :scm, :git
 set :log_level, :debug
 # set :pty, true
 
-set :linked_files, %w{config/database.yml config/initializers/secret_token.rb config/local_config.rb config/docs_config.yml .env}
+set :linked_files, %w{ config/newrelic.yml config/database.yml config/initializers/secret_token.rb config/local_config.rb config/docs_config.yml .env}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system db/sphinx public/assets}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
