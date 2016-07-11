@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+
   include Pundit
   protect_from_forgery with: :exception
 
@@ -47,7 +46,11 @@ class ApplicationController < ActionController::Base
   end
 
   def track_action
-    ahoy.track "#{controller_name}##{action_name}", request.filtered_parameters
+    skip_tracking = %w[homes#index sessions#new]
+    action = "#{controller_name}##{action_name}"
+    unless skip_tracking.include? action
+      ahoy.track action, request.filtered_parameters
+    end
   end
 
 end
