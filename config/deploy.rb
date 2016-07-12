@@ -1,6 +1,8 @@
 require 'dotenv'
 Dotenv.load
 
+require 'new_relic/recipes'
+
 set :application, 'tribalknow'
 set :repo_url, 'https://github.com/edk/tribalknow.git'
 
@@ -18,6 +20,8 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 5
+
+after "deploy:updated", "newrelic:notice_deployment"
 
 namespace :deploy do
 
