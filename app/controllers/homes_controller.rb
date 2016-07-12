@@ -19,7 +19,7 @@ class HomesController < ApplicationController
         {
           count: props[1],
           id: props[0]["id"],
-          title: Topic.friendly.find(props[0]["id"]).title,
+          title: (topic = Topic.friendly.find(props[0]["id"])).title.presence || topic.name,
         }
       end
 
