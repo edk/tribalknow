@@ -16,10 +16,12 @@ class HomesController < ApplicationController
 
       @top[:topics] = Ahoy::Event.where(name: 'topics#show').limit(10).top(:properties)
       @top[:topics] = @top[:topics].map do |props|
+        topic = Topic.friendly.find(props[0]["id"])
+        name = topic.name
         {
           count: props[1],
           id: props[0]["id"],
-          title: (topic = Topic.friendly.find(props[0]["id"])).title.presence || topic.name,
+          title: name,
         }
       end
 
