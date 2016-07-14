@@ -28,7 +28,7 @@ class HomesController < ApplicationController
         }
       end
 
-      @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(10).top(:properties)
+      @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(12).top(:properties)
       @top[:qna] = @top[:qna].map do |props|
         view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i} views", class:'badge-count')
         {
