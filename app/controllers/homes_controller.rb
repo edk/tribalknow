@@ -17,29 +17,36 @@ class HomesController < ApplicationController
       @top[:topics] = Ahoy::Event.where(name: 'topics#show').limit(10).top(:properties)
       @top[:topics] = @top[:topics].map do |props|
         topic = Topic.friendly.find(props[0]["id"])
-        name = topic.name
+        string =  ActionController::Base.helpers.sanitize([topic.name, topic.description].reject(&:blank?).join(' - '))
+        #view_count = "<span class='badge-count'>#{props[1].to_i} views</span>".html_safe
+        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i} views", class:'badge-count')
         {
           count: props[1],
           id: props[0]["id"],
-          title: name,
+          title: string,
+          view_count: view_count
         }
       end
 
       @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(10).top(:properties)
       @top[:qna] = @top[:qna].map do |props|
+        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i} views", class:'badge-count')
         {
           count: props[1],
           id: props[0]["id"],
           title: Question.friendly.find(props[0]["id"]).title,
+          view_count: view_count
         }
       end
 
       @top[:videos] =Ahoy::Event.where(name: 'videos#show').limit(10).top(:properties)
       @top[:videos] = @top[:videos].map do |props|
+        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i} views", class:'badge-count')
         {
           count: props[1],
           id: props[0]["id"],
           title: VideoAsset.friendly.find(props[0]["id"]).name,
+          view_count: view_count
         }
       end
 
@@ -52,7 +59,13 @@ class HomesController < ApplicationController
         order("searches_count desc, normalized_query asc").
         limit(20).to_sql).to_a
       
-      @top[:searches] = @searches
+      @top[:searches] = @searches.reject {|el| el['normalized_query'].blank? }.map do |props|
+        view_count = ActionController::Base.helpers.content_tag(:span, "#{props['searches_count'].to_i} searches", class:'badge-count')
+        {
+          normalized_query: props['normalized_query'],
+          view_count: view_count
+        }
+      end
 
 
       @popular_questions = Question.popular

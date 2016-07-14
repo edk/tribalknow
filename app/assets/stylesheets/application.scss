@@ -47,6 +47,26 @@ a.button {
   }
 }
 
+span.badge-count {
+  vertical-align: middle;
+  font-size: .7em;
+  text-align: center;
+  border-radius: 10px;
+  border: 4px;
+  display: inline-block;
+  white-space: nowrap;
+  color: #7a7a7a;
+  background-color: #e4e4e4;
+  padding: .4em;
+  margin: 0px 2px 0px 2px;
+  line-height: 1;
+}
+
+.small-font {
+  margin: .2em;
+  font-size: 0.5em;
+}
+
 .panel.width_6 {
   h2 {
     font-size: 1.5em;

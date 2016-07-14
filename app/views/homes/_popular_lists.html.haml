@@ -6,7 +6,8 @@
       %ul
         - top[:topics] && top[:topics].each do |props|
           %li
-            = link_to "#{props[:title]}", topic_path(props[:id]), title: "#{props[:count]} views"
+            = link_to props[:title], topic_path(props[:id])
+            = props[:view_count]
 
   .columns.large-6
     .panel.width_6
@@ -14,15 +15,19 @@
       %ul
         - top[:qna] && top[:qna].each do |props|
           %li
-            = link_to "#{props[:title]}", question_path(props[:id]), title: "#{props[:count]} views"
+            = link_to "#{props[:title]}", question_path(props[:id])
+            = props[:view_count]
 .row
   .columns.large-6
     .panel.width_6
-      %h2 Top Search Terms
+      %h2
+        Top Search Terms
+        %div.small-font Last 8 weeks
       %ul
         - top[:searches] && top[:searches].each do |props|
           %li
-            = link_to "#{props['normalized_query']}", searches_path(q: props['normalized_query']), title: "#{props['searches_count']} views"
+            = link_to "#{props[:normalized_query]}", searches_path(q: props[:normalized_query])
+            = props[:view_count]
 
   .columns.large-6
     .panel.width_6
@@ -30,6 +35,7 @@
       %ul
         - top[:videos] && top[:videos].each do |props|
           %li
-            = link_to "#{props[:title]}", video_path(props[:id]), title: "#{props[:count]} views"
+            = link_to "#{props[:title]}", video_path(props[:id])
+            = props[:view_count]
 
 
