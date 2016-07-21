@@ -2,6 +2,50 @@
 
 .topic_content {
   padding-top: 1.5em;
+  h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+  h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: 1px solid #CCC;
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: bold;
+    border-bottom: 0.8px solid #CCC;
+  }
+}
+
+div#toc {
+  #toc_list {
+    margin-left: -17px;
+  }
+
+  ul {
+    font-size: 0.98em;
+    margin-top: 0.5em;
+    list-style: none;
+    margin-left: 10px;
+  }
+  li {
+    position: relative;
+    line-height: 0.95em;
+    margin-bottom: 0.5em;
+  }
+}
+ul.subtopic_list {
+  //margin-left: -17px;
+    font-size: 0.98em;
+    margin-top: 0.5em;
+    list-style: none;
+    margin-left: 0px;
+  li {
+    position: relative;
+    line-height: 0.95em;
+    margin-bottom: 0.5em;
+  }
 }
 
 .topic_index_element {
@@ -53,3 +97,5 @@
     left: -1.5em;
   }
 }
+
+

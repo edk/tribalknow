@@ -20,14 +20,10 @@
 
   .columns.large-3
     - if toc.present?
-      .panel
-        .panel_title Contents
-        %ul.panel_list
-          - toc.each do |anchor|
-            %li= link_to anchor[0], anchor[1], class: 'anchor_pointer'
+      = render partial: 'toc', locals: { toc: toc }
     .panel
       .panel_title Sub-topics
-      %ul.panel_list
+      %ul.panel_list.subtopic_list
         - @topic.sub_topics.each do |sub|
           %li= link_to sub.name, topic_path(sub)
       .row_divider

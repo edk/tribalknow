@@ -39,38 +39,90 @@ module ApplicationHelper
   def reverse_entity_encoding_inside_code_blocks html
     doc = Nokogiri::HTML::DocumentFragment.parse html
     code_blocks = doc.css "code"
-    code_blocks.each { |node|
-      node.content = CGI.unescapeHTML(node.content)
-    }
+    code_blocks.each { |node| node.content = CGI.unescapeHTML(node.content) }
     doc.to_s.html_safe
   end
 
+  def create_and_add_anchor_node h, doc
+    anchor = Nokogiri::XML::Node.new 'a', doc
+
+    anchor_link = Nokogiri::XML::Node.new 'i', doc
+    anchor_link['class'] = "fi-link header_anchor_link"
+    anchor_link.parent = anchor
+
+    # add it next to the header tag, and then put the header inside the anchor
+    h.add_next_sibling(anchor)
+    h.parent = anchor
+
+    # add some local #href flavor
+    anchor['class'] = 'anchor_link'
+    name_slug       = h.content.to_s.parameterize
+    anchor['href']  = "##{name_slug}"
+    anchor['name']  = "#{name_slug}"
+
+    name_slug
+  end
+
   def add_anchor_links_to_headers html
-    toc = []
     doc = Nokogiri::HTML::DocumentFragment.parse html
 
-    headers = doc.css "h1,h2"
+    toc = [[]]
+    cur_level = [0]
+    levels = {}
+    cur_pos = toc.first
+    first_level = nil
+
+    headers = doc.css "h1,h2,h3,h4"
     headers.each { |h|
+      h.name =~ /([0-9]+)/ # h.name => h2, h3, h4 etc
+      header_level = $1.to_i
+
+      first_level = header_level if first_level.nil?
+      header_level = header_level - first_level
+      header_level = 0 if header_level < 0
+
+
       # create a new anchor node
-      anchor = Nokogiri::XML::Node.new 'a', doc
+      name_slug = create_and_add_anchor_node h, doc
 
-      anchor_link = Nokogiri::XML::Node.new 'i', doc
-      anchor_link['class'] = "fi-link header_anchor_link"
-      anchor_link.parent = anchor
+      if header_level > (cur_level.last || 0)
+        levels[header_level] = cur_pos
+        cur_level << header_level
+        cur_pos << []
+        cur_pos = cur_pos.last
+      elsif header_level < cur_level.last
+        cur_level = cur_level.reverse.drop_while { |el| el > header_level }.reverse if cur_level.size > 0
+        cur_level = [0] if cur_level.nil? || cur_level.size == 0
+        cur_pos = levels[header_level]
+        cur_pos = toc.last if cur_pos.nil?
+        cur_pos = [ cur_pos ] if cur_pos.is_a? Hash
+      else
+        # keep appending at the current level
+      end
 
-      # add it next to the header tag, and then put the header inside the anchor
-      h.add_next_sibling(anchor)
-      h.parent = anchor
-
-      # add some local #href flavor
-      anchor['class'] = 'anchor_link'
-      name_slug       = h.content.to_s.parameterize
-      anchor['href']  = "##{name_slug}"
-      toc << ["#{h.content}", "##{name_slug}"]
-      anchor['name']  = "#{name_slug}"
+      cur_pos << {level: header_level, content: h.content, slug: "##{name_slug}"}
     }
 
     [doc.to_s.html_safe, toc]
+  end
+
+  def render_toc_tree toc, options = {}
+    rv = toc.map do |elem|
+      if elem.is_a? Array
+        next if elem.empty?
+        render_toc_tree elem, skip_first_ul: false
+      elsif elem.is_a? Hash
+        content_tag(:li, link_to("#{elem[:content]}", elem[:slug], class: 'anchor_pointer') )
+        #content_tag(:li, link_to("(#{elem[:level]}) #{elem[:content]}", elem[:slug], class: 'anchor_pointer') )
+      end
+    end
+    content = safe_join(rv)
+
+    if options[:skip_first_ul]
+      content
+    else
+      content_tag(:ul, content, class: "panel_list toc_tree")
+    end
   end
 
   def render_avatar user, options = {}
