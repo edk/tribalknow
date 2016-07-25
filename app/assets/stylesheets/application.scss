@@ -47,6 +47,21 @@ a.button {
   }
 }
 
+.panel.popular_list {
+
+  ul {
+    margin-left: 2px;
+    font-size: 0.98em;
+    margin-top: 0.5em;
+    list-style: none;
+  }
+  li {
+    position: relative;
+    line-height: 0.95em;
+    margin-bottom: 0.5em;
+  }
+}
+
 span.badge-count {
   vertical-align: middle;
   font-size: .7em;
