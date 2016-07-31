@@ -9,6 +9,7 @@ gem 'sidekiq'
 gem 'sinatra', :require => nil # for the sidekiq web ui
 gem 'google-analytics-rails'
 gem 'redis'
+gem 'redis-rails'
 gem 'rollout'
 
 gem 'mysql2'

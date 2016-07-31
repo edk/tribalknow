@@ -14,30 +14,8 @@
       .columns.large-12<
         = local_notes :fixed=>true, :default_title=>"Dev Central", :disable_admin=>true
 
-    .row
-      /.columns.large-6
-      /  .panel
-      /    %p #{image_tag("739-question-selected@2x.png", :size=>"25x25")} Got a #{link_to "question? Ask here!", new_question_url}
-      /    %p #{image_tag("787-browser-windows-selected@2x.png", :size=>"25x25")} See a #{link_to 'list of topics', topics_path} you can learn about or add knowledge to?
-
     - if ($rollout.active?(:home_popular_lists) rescue true)
       = render partial: 'popular_lists', locals: { top: @top }
 
   .columns.large-4
-    / .panel
-    /   %h3 #{image_tag "794-chart-selected@2x.png", :size=>'24x24'} Popular Topics
-
-    - if false #@popular_questions.present?
-      .panel
-        %h3 #{image_tag "832-stack-1-selected@2x.png", :size=>'24x24'} Popular Questions
-        %ul.popular_questions
-          - @popular_questions.each do |q|
-            %li
-              %span.votes
-                = q.vote_count
-                %i.fi-like
-              %span.title
-                = link_to q.title, q
-
-    =# render partial: 'your_stats'
     = render partial: 'activities'

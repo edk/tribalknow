@@ -2,7 +2,8 @@ class TopicsController < ApplicationController
 
   def index
     # using the .roots scope orders by lft which is not what we want on the index.
-    @topics = Topic.order(:name).where(:parent_topic_id=>nil).paginate(:page=>params[:page], :per_page=> 3*20 )  # 3 per row, 9 rows
+    @topics = Topic.order(:name).where(:parent_topic_id=>nil).paginate(:page=>params[:page], :per_page=> 3*20 )
+    @topics_cache_key = [ @topics.pluck(:id), @topics.maximum(:updated_at) ]
   end
 
   def show

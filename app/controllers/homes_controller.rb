@@ -3,50 +3,62 @@ class HomesController < ApplicationController
 
   def index
     if current_user && Tenant.current_id
-      # @activities = PublicActivity::Activity.all
+
       @activities = PublicActivity::Activity.order("created_at DESC").where('created_at > ?', 30.days.ago).limit(50)
-      @collapsed_activities = @activities.inject({}) do |m,o|
-        k = "#{o.trackable_type}:#{o.trackable_id}"
-        m[k] ||= []
-        m[k] << {:key=>o.key,:at=>o.created_at,:owner=>o.owner, :obj=>o}
-        m
+      cache_key = [ 'public_activities', @activities.pluck(:id), @activities.maximum(:updated_at) ]
+      @collapsed_activities = Rails.cache.fetch(cache_key) do
+        @activities.inject({}) do |m,o|
+          k = "#{o.trackable_type}:#{o.trackable_id}"
+          m[k] ||= []
+          m[k] << {:key=>o.key,:at=>o.created_at,:owner=>o.owner, :obj=>o}
+          m
+        end
       end
 
       @top = {}
 
       @top[:topics] = Ahoy::Event.where(name: 'topics#show').limit(10).top(:properties)
-      @top[:topics] = @top[:topics].map do |props|
-        topic = Topic.friendly.find(props[0]["id"])
-        string =  ActionController::Base.helpers.sanitize([topic.name, topic.description].reject(&:blank?).join(' - '))
-        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
-        {
-          count: props[1],
-          id: props[0]["id"],
-          title: string,
-          view_count: view_count
-        }
+      cache_key = [ 'top_topics', @top[:topics].map{ |k,v| v } ]
+      @top[:topics] = Rails.cache.fetch(cache_key) do
+        @top[:topics].map do |props|
+          topic = Topic.friendly.find(props[0]["id"])
+          string =  ActionController::Base.helpers.sanitize([topic.name, topic.description].reject(&:blank?).join(' - '))
+          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+          {
+            count: props[1],
+            id: props[0]["id"],
+            title: string,
+            view_count: view_count
+          }
+        end
       end
 
       @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(12).top(:properties)
-      @top[:qna] = @top[:qna].map do |props|
-        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
-        {
-          count: props[1],
-          id: props[0]["id"],
-          title: Question.friendly.find(props[0]["id"]).title,
-          view_count: view_count
-        }
+      cache_key = [ 'top_qna', @top[:qna].map{ |k,v| v } ]
+      @top[:qna] = Rails.cache.fetch(cache_key) do
+        @top[:qna].map do |props|
+          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+          {
+            count: props[1],
+            id: props[0]["id"],
+            title: Question.friendly.find(props[0]["id"]).title,
+            view_count: view_count
+          }
+        end
       end
 
-      @top[:videos] =Ahoy::Event.where(name: 'videos#show').limit(10).top(:properties)
-      @top[:videos] = @top[:videos].map do |props|
-        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
-        {
-          count: props[1],
-          id: props[0]["id"],
-          title: VideoAsset.friendly.find(props[0]["id"]).name,
-          view_count: view_count
-        }
+      @top[:videos] = Ahoy::Event.where(name: 'videos#show').limit(10).top(:properties)
+      cache_key = [ 'top_videos', @top[:videos].map{ |k,v| v } ]
+      @top[:videos] = Rails.cache.fetch(cache_key) do
+        @top[:videos].map do |props|
+          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+          {
+            count: props[1],
+            id: props[0]["id"],
+            title: VideoAsset.friendly.find(props[0]["id"]).name,
+            view_count: view_count
+          }
+        end
       end
 
       @time_zone = Searchjoy.time_zone || Time.zone

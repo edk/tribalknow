@@ -1,16 +1,17 @@
 
 .row
   .columns.large-6
-    .panel.width_6.popular_list
+    .panel.popular_list
       %h2 Popular Topics
       %ul
-        - top[:topics] && top[:topics].each do |props|
-          %li
-            = link_to props[:title], topic_path(props[:id])
-            = props[:view_count]
+        = cache top[:topics] do
+          - top[:topics] && top[:topics].each do |props|
+            %li
+              = link_to props[:title], topic_path(props[:id])
+              = props[:view_count]
 
   .columns.large-6
-    .panel.width_6.popular_list
+    .panel.popular_list
       %h2 Top Q&amp;A
       %ul
         - top[:qna] && top[:qna].each do |props|
@@ -19,7 +20,7 @@
             = props[:view_count]
 .row
   .columns.large-6
-    .panel.width_6.popular_list
+    .panel.popular_list
       %h2
         Top Search Terms
         %div.small-font Last 8 weeks
@@ -30,7 +31,7 @@
             = props[:view_count]
 
   .columns.large-6
-    .panel.width_6.popular_list
+    .panel.popular_list
       %h2 Top Videos
       %ul
         - top[:videos] && top[:videos].each do |props|

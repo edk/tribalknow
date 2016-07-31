@@ -48,6 +48,9 @@ a.button {
 }
 
 .panel.popular_list {
+  h2 {
+    font-size: 1.5em;
+  }
 
   ul {
     margin-left: 0;
@@ -80,12 +83,6 @@ span.badge-count {
 .small-font {
   margin: .2em;
   font-size: 0.5em;
-}
-
-.panel.width_6 {
-  h2 {
-    font-size: 1.5em;
-  }
 }
 
 h1.title {

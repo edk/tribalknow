@@ -1,53 +1,54 @@
-- set_title "#{Tenant.default_title}: #{@topic.name}"
-
-.row<
-  .columns.large-9<
-    = render "topics/topic_breadcrumb"
-    %h1{:style=>'border-bottom: 1px solid silver; font-size: 275%;'}
-      %b= @topic.name
-    %i= @topic.description
-    .topic_content<
-      - html, toc = render_md @topic.content, with_toc: true
-      = html
-
-  .columns.large-3
-    - unless @static_render
-      = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
-
-      = link_to "#{f_icon('x')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'button tiny radius expand alert' if current_user.admin? || @topic.creator == current_user
-    - if toc.present?
-      = render partial: 'toc', locals: { toc: toc }
-    .panel
-      .panel_title Sub-topics
-      %ul.panel_list.subtopic_list
-        - @topic.sub_topics.each do |sub|
-          %li= link_to sub.name, topic_path(sub)
-      .row_divider
-      .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id) unless @static_render
-    / .panel
-    /   .panel_title Links/files
-    / .panel
-    /   .panel_title Quizzes
-    /   How well do you know the topic?
-    - unless @static_render
+- cache @topic do
+  - set_title "#{Tenant.default_title}: #{@topic.name}"
+  
+  .row<
+    .columns.large-9<
+      = render "topics/topic_breadcrumb"
+      %h1{:style=>'border-bottom: 1px solid silver; font-size: 275%;'}
+        %b= @topic.name
+      %i= @topic.description
+      .topic_content<
+        - html, toc = render_md @topic.content, with_toc: true
+        = html
+  
+    .columns.large-3
+      - unless @static_render
+        = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
+  
+        = link_to "#{f_icon('x')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'button tiny radius expand alert' if current_user.admin? || @topic.creator == current_user
+      - if toc.present?
+        = render partial: 'toc', locals: { toc: toc }
       .panel
-        .panel_title{:style=>'margin-bottom:8px;'} Tags
-        - if @topic.tags.size > 0
-          = render_tag_links @topic.tags
-        - else
-          %p No tags for this topic
-      .panel
-        .panel_title Questions
-        - @topic.questions.each do |question|
-          %p= link_to question.title, question_path(question)
+        .panel_title Sub-topics
+        %ul.panel_list.subtopic_list
+          - @topic.sub_topics.each do |sub|
+            %li= link_to sub.name, topic_path(sub)
         .row_divider
-        .panel_offset_link= link_to "Ask Related Question", new_question_path(:topic_id=>@topic.id)
-    .panel
-      .panel_title History
-      = render partial: 'topics/history', locals: { topic: @topic }
-
-%div#history_popup.reveal-modal{:'data-reveal' => ''}
-  %h2 title
-  %p some text
-  %a.close-reveal-modal &#215;
-
+        .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id) unless @static_render
+      / .panel
+      /   .panel_title Links/files
+      / .panel
+      /   .panel_title Quizzes
+      /   How well do you know the topic?
+      - unless @static_render
+        .panel
+          .panel_title{:style=>'margin-bottom:8px;'} Tags
+          - if @topic.tags.size > 0
+            = render_tag_links @topic.tags
+          - else
+            %p No tags for this topic
+        .panel
+          .panel_title Questions
+          - @topic.questions.each do |question|
+            %p= link_to question.title, question_path(question)
+          .row_divider
+          .panel_offset_link= link_to "Ask Related Question", new_question_path(:topic_id=>@topic.id)
+      .panel
+        .panel_title History
+        = render partial: 'topics/history', locals: { topic: @topic }
+  
+  %div#history_popup.reveal-modal{:'data-reveal' => ''}
+    %h2 title
+    %p some text
+    %a.close-reveal-modal &#215;
+  

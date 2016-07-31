@@ -351,8 +351,24 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     redis (3.1.0)
+    redis-actionpack (5.0.0)
+      actionpack (>= 4.0.0, < 6)
+      redis-rack (~> 2.0.0.pre)
+      redis-store (~> 1.2.0.pre)
+    redis-activesupport (5.0.1)
+      activesupport (>= 3, < 6)
+      redis-store (~> 1.2.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
+    redis-rack (2.0.0.pre)
+      rack (> 1.5, < 3)
+      redis-store (~> 1.2.0.pre)
+    redis-rails (5.0.1)
+      redis-actionpack (~> 5.0.0)
+      redis-activesupport (~> 5.0.0)
+      redis-store (~> 1.2.0)
+    redis-store (1.2.0)
+      redis (>= 2.2)
     referer-parser (0.3.0)
     render_anywhere (0.0.10)
       rails (>= 3.0.7)
@@ -516,6 +532,7 @@ DEPENDENCIES
   rails-observers
   rambulance
   redis
+  redis-rails
   render_anywhere
   rollout
   rspec-rails (~> 2.0)
@@ -534,6 +551,3 @@ DEPENDENCIES
   underscore-rails
   userstamp!
   will_paginate
-
-BUNDLED WITH
-   1.10.6
