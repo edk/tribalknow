@@ -12,7 +12,7 @@ Tribalknow::Application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   # config.consider_all_requests_local       = false  # uncomment this to view the rambulance errors in dev mode
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
