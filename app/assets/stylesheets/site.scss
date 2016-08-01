@@ -238,9 +238,28 @@ div.who_panel {
   border: 1px solid black;
   padding: 1em;
   margin: 1em;
-  .name {}
-  .desc {}
-  .date {}
+  height: 16em;
+  .video_poster {
+    height: 8em;
+    overflow: hidden;
+    img {
+      border:1px solid green;
+      width:100%;
+    }
+  }
+  .name_container {
+    overflow: hidden;
+    height: 2em;
+  }
+  .name {
+    width: 85%;
+  }
+  .desc {
+    font-size: 0.7em;
+  }
+  .date {
+    font-size: 0.7em;
+  }
 }
 
 .activity_entry {
