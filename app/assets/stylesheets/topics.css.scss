@@ -90,11 +90,28 @@ ul.subtopic_list {
 
 #content a.anchor_link {
   position: relative;
+  display: block;
+  text-decoration: none;
+  border-bottom: none;
+  border-bottom-color: none;
 
   i.header_anchor_link {
-    position: absolute;
-    bottom: -2.25em;
-    left: -1.5em;
+    margin-left: -1.25em;
+    padding-right: 0.65em;
+    visibility: hidden;
+  }
+  h1 { display: inline; border-bottom: none; }
+  h2 { display: inline; border-bottom: none; }
+  h3 { display: inline; border-bottom: none; }
+  h4 { display: inline; border-bottom: none; }
+  h5 { display: inline; border-bottom: none; }
+}
+
+#content a.anchor_link:hover {
+  i.header_anchor_link {
+    margin-left: -1.25em;
+    padding-right: 0.65em;
+    visibility: visible;
   }
 }
 
