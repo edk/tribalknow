@@ -235,10 +235,10 @@ module ApplicationHelper
   end
 
   def in_place_edit_panel note, path
-    title = content_tag(:h3, best_in_place(note, :title,{ :as=>:input, :raw=>true }))
+    title = content_tag(:h3, best_in_place(note, 'title' , {:as=>'input', :raw=>true }))
 
     edit_content_id = dom_id(note, :content)
-    content = best_in_place(note, :content, {:as=>:textarea, :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
+    content = best_in_place(note, :content, {:as=>'textarea', :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
     edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon')
 
     content_tag(:div, "#{title} #{content} &nbsp;#{edit_icon}".html_safe, :class=>'panel')
