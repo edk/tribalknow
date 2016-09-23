@@ -3,9 +3,12 @@
 .row
   .columns.large-12
     %h2
-      .right= link_to "upload video", new_video_path, class:"button tiny"
       Videos
-      .right= render partial: 'upload_progress', locals: { draft_videos: @draft_videos }
+      .right= link_to "upload video", new_video_path, class:"button tiny"
+  - if @draft_videos.present?
+    .columns.large-12
+      %h4 Videos in transcoding process
+      = render partial: 'upload_progress', locals: { draft_videos: @draft_videos }
 
 .row
   .columns.large-12

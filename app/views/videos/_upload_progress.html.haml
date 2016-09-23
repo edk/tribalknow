@@ -1,12 +1,10 @@
 
-/.row
-/  =# link_to "Upload new video", new_video_path, class: 'button'
-.row
+.columns.large-6
   - draft_videos.each do |video|
     .panel{id: dom_id(video)}
       %div
         = link_to "#{video.name.presence || 'No name'} #{video.id}", edit_video_path(video.id), title: 'Edit'
-        - if current_user == video.creator
+        - if current_user == video.creator || current_user.admin?
           = link_to "&#215;".html_safe, video_path(video, dom_id: dom_id(video)), remote: true, method: :delete#, data: { confirm: "Are you sure?" }
       %div
         = video.description
@@ -14,6 +12,9 @@
         Uploaded by #{video.updater.try(:name)} on #{l(video.created_at, format: :onlydate)}
       %div
         Status: #{video.friendly_state}
-        = link_to f_icon('info'), info_video_path(video), title: 'More Info', remote: true
+        = link_to f_icon('info'), info_video_path(video), title: 'Click for more info', remote: true
         = link_to f_icon('refresh'), trigger_video_path(video), title: 'Trigger transcode job again', remote: true, method: :post
+      - if video.submitted?
+        %span
+          %small <D-r>Note: Files are sent to AWS elastic transcoder and <b>webm</b> files take an extrememly long time to process.  Please be patient and come back later to check on progress.
 
