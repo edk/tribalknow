@@ -53,13 +53,15 @@ class HomesController < ApplicationController
         @top[:videos].map do |props|
           view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
           title = VideoAsset.friendly.find(props[0]["id"]).name rescue ""
+          video_id = props[0]["id"] rescue nil
+          count = props[1] rescue nil
           {
-            count: props[1],
-            id: props[0]["id"],
+            count: count,
+            id: video_id,
             title: title,
             view_count: view_count
           }
-        end
+        end.reject { |el| [:count, :id, :title].any? { |k| k.nil? } }
       end
 
       @time_zone = Searchjoy.time_zone || Time.zone
