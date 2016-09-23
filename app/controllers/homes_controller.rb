@@ -52,10 +52,11 @@ class HomesController < ApplicationController
       @top[:videos] = Rails.cache.fetch(cache_key) do
         @top[:videos].map do |props|
           view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+          title = VideoAsset.friendly.find(props[0]["id"]).name rescue ""
           {
             count: props[1],
             id: props[0]["id"],
-            title: VideoAsset.friendly.find(props[0]["id"]).name,
+            title: title,
             view_count: view_count
           }
         end
