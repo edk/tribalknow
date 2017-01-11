@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-
+  include SearchHelper
   skip_after_action :track_action
 
   def index
@@ -26,13 +26,13 @@ class SearchesController < ApplicationController
   end
 
   private
+
   def get_sphinx_search_results(term)
     ThinkingSphinx.search Riddle::Query.escape(term),
-                          :excerpts => { :limit=>255, :around=>50 },
-                          :classes => [Question, Answer, Topic, Note],
-                          :with=>{ :tenant_id => Tenant.current_id },
-                          :per_page => per_page, :page=>params[:page]
-
+                        :excerpts => { :limit=>255, :around=>50 },
+                        :classes => [Question, Answer, Topic, Note],
+                        :with=>{ :tenant_id => Tenant.current_id },
+                        :per_page => per_page, :page=>params[:page]
   end
 
   def per_page
