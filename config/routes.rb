@@ -74,7 +74,15 @@ Tribalknow::Application.routes.draw do
       end
     end
   end
-  
+
+  # API
+  namespace :api do
+    resources :search, only: [:index]
+    resources :questions, only: [:show]
+    resources :answers, only: [:show]
+    resources :topics, only: [:show]
+  end
+
   post '/votes' => 'votes#create'
 
   get '/todo' => 'homes#todo'

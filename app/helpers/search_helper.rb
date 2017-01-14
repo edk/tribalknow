@@ -1,6 +1,5 @@
 module SearchHelper
 
-
   def render_search_results search
     results = ""
     debugger
