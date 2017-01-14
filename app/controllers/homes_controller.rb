@@ -21,16 +21,20 @@ class HomesController < ApplicationController
       cache_key = [ 'top_topics', @top[:topics].map{ |k,v| v } ]
       @top[:topics] = Rails.cache.fetch(cache_key) do
         @top[:topics].map do |props|
-          topic = Topic.friendly.find(props[0]["id"])
-          string =  ActionController::Base.helpers.sanitize([topic.name, topic.description].reject(&:blank?).join(' - '))
-          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
-          {
-            count: props[1],
-            id: props[0]["id"],
-            title: string,
-            view_count: view_count
-          }
-        end
+          begin
+            topic = Topic.friendly.find(props[0]["id"])
+            string =  ActionController::Base.helpers.sanitize([topic.name, topic.description].reject(&:blank?).join(' - '))
+            view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+            {
+              count: props[1],
+              id: props[0]["id"],
+              title: string,
+              view_count: view_count
+            }
+          rescue
+            nil
+          end
+        end.compact
       end
 
       @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(12).top(:properties)
