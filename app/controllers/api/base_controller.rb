@@ -7,7 +7,7 @@ class Api::BaseController < ApplicationController
   protected
 
     def authenticate_api
-      if AppConfig[:api_key] != params[:api_key]
+      if AppConfig[:api_key] != params[:api_key] || params[:api_key].blank?
         render :text => "Sorry, you don't have access.", :status => 403
         return
       end
