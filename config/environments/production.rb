@@ -46,7 +46,7 @@ Tribalknow::Application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :subdomain, :uuid ]
+  config.log_tags = [ :subdomain, :uuid, lambda { |req| "#{req.cookie_jar['_session_id']}" } ]
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
