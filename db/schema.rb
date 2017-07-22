@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160710160028) do
+ActiveRecord::Schema.define(version: 20170722010724) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
-    t.string   "trackable_type", limit: 255
+    t.string   "trackable_type", limit: 191
     t.integer  "owner_id",       limit: 4
-    t.string   "owner_type",     limit: 255
+    t.string   "owner_type",     limit: 191
     t.string   "key",            limit: 255
-    t.text     "parameters",     limit: 65535
+    t.text     "parameters",     limit: 16777215
     t.integer  "recipient_id",   limit: 4
-    t.string   "recipient_type", limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "recipient_type", limit: 191
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "tenant_id",      limit: 4
   end
 
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   create_table "ahoy_events", force: :cascade do |t|
     t.integer  "visit_id",   limit: 4
     t.integer  "user_id",    limit: 4
-    t.string   "name",       limit: 255
-    t.text     "properties", limit: 65535
+    t.string   "name",       limit: 191
+    t.text     "properties", limit: 16777215
     t.datetime "time"
   end
 
@@ -46,14 +46,14 @@ ActiveRecord::Schema.define(version: 20160710160028) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id", limit: 4
-    t.text     "text",        limit: 65535
-    t.integer  "score",       limit: 4,     default: 0
+    t.text     "text",        limit: 16777215
+    t.integer  "score",       limit: 4,        default: 0
     t.integer  "tenant_id",   limit: 4
     t.integer  "creator_id",  limit: 4
     t.integer  "updater_id",  limit: 4
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.boolean  "delta",                     default: true, null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "delta",                        default: true, null: false
   end
 
   add_index "answers", ["question_id"], name: "question_id", using: :btree
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160710160028) do
 
   create_table "app_configs", force: :cascade do |t|
     t.integer  "tenant_id",  limit: 4
-    t.string   "key",        limit: 255
+    t.string   "key",        limit: 191
     t.string   "value",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -71,22 +71,22 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   add_index "app_configs", ["tenant_id"], name: "index_app_configs_on_tenant_id", using: :btree
 
   create_table "customized_pages", force: :cascade do |t|
-    t.boolean  "active",                   default: false
+    t.boolean  "active",                      default: false
     t.integer  "tenant_id",  limit: 4
-    t.string   "page",       limit: 255
+    t.string   "page",       limit: 191
     t.string   "title",      limit: 255
     t.string   "position1",  limit: 255
-    t.text     "header1",    limit: 65535
-    t.text     "content1",   limit: 65535
+    t.text     "header1",    limit: 16777215
+    t.text     "content1",   limit: 16777215
     t.string   "position2",  limit: 255
-    t.text     "header2",    limit: 65535
-    t.text     "content2",   limit: 65535
+    t.text     "header2",    limit: 16777215
+    t.text     "content2",   limit: 16777215
     t.string   "position3",  limit: 255
-    t.text     "header3",    limit: 65535
-    t.text     "content3",   limit: 65535
+    t.text     "header3",    limit: 16777215
+    t.text     "content3",   limit: 16777215
     t.string   "position4",  limit: 255
-    t.text     "header4",    limit: 65535
-    t.text     "content4",   limit: 65535
+    t.text     "header4",    limit: 16777215
+    t.text     "content4",   limit: 16777215
     t.integer  "creator_id", limit: 4
     t.integer  "updater_id", limit: 4
     t.datetime "created_at"
@@ -97,13 +97,13 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   add_index "customized_pages", ["tenant_id", "page"], name: "index_customized_pages_on_tenant_id_and_page", using: :btree
 
   create_table "docs", force: :cascade do |t|
-    t.string   "doc_group_id", limit: 255
+    t.string   "doc_group_id", limit: 191
     t.string   "name",         limit: 255
     t.string   "type",         limit: 255
     t.string   "description",  limit: 255
     t.string   "path",         limit: 255
-    t.string   "basepath",     limit: 255
-    t.text     "data",         limit: 65535
+    t.string   "basepath",     limit: 191
+    t.text     "data",         limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -117,8 +117,8 @@ ActiveRecord::Schema.define(version: 20160710160028) do
     t.string   "type",               limit: 255
     t.integer  "topic_id",           limit: 4
     t.string   "name",               limit: 255
-    t.text     "description",        limit: 65535
-    t.boolean  "draft",                            default: false
+    t.text     "description",        limit: 16777215
+    t.boolean  "draft",                               default: false
     t.date     "date"
     t.integer  "runtime",            limit: 4
     t.string   "slug",               limit: 255
@@ -126,19 +126,19 @@ ActiveRecord::Schema.define(version: 20160710160028) do
     t.string   "asset_content_type", limit: 255
     t.integer  "asset_file_size",    limit: 4
     t.datetime "asset_updated_at"
-    t.text     "asset_meta",         limit: 65535
+    t.text     "asset_meta",         limit: 16777215
     t.integer  "creator_id",         limit: 4
     t.integer  "updater_id",         limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "aasm_state",         limit: 255
+    t.string   "aasm_state",         limit: 191
   end
 
   add_index "file_assets", ["aasm_state"], name: "index_file_assets_on_aasm_state", using: :btree
   add_index "file_assets", ["tenant_id"], name: "index_file_assets_on_tenant_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string   "slug",           limit: 255, null: false
+    t.string   "slug",           limit: 191, null: false
     t.integer  "sluggable_id",   limit: 4,   null: false
     t.string   "sluggable_type", limit: 50
     t.string   "scope",          limit: 255
@@ -150,21 +150,21 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "sluggable_type", using: :btree
 
   create_table "notes", force: :cascade do |t|
-    t.string   "path",       limit: 255
+    t.string   "path",       limit: 191
     t.string   "title",      limit: 255
-    t.text     "content",    limit: 65535
+    t.text     "content",    limit: 16777215
     t.integer  "creator_id", limit: 4
     t.integer  "updater_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "delta",                    default: true, null: false
+    t.boolean  "delta",                       default: true, null: false
   end
 
   add_index "notes", ["path"], name: "index_notes_on_path", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.string   "title",      limit: 255
-    t.text     "content",    limit: 65535
+    t.text     "content",    limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -172,27 +172,27 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   create_table "questions", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
     t.string   "title",      limit: 255
-    t.text     "text",       limit: 65535
+    t.text     "text",       limit: 16777215
     t.integer  "tenant_id",  limit: 4
     t.integer  "creator_id", limit: 4
     t.integer  "updater_id", limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "slug",       limit: 255
-    t.boolean  "delta",                    default: true, null: false
+    t.boolean  "delta",                       default: true, null: false
   end
 
   add_index "questions", ["tenant_id"], name: "tenant_id", using: :btree
 
   create_table "searchjoy_searches", force: :cascade do |t|
     t.integer  "user_id",          limit: 4
-    t.string   "search_type",      limit: 255
+    t.string   "search_type",      limit: 191
     t.string   "query",            limit: 255
-    t.string   "normalized_query", limit: 255
+    t.string   "normalized_query", limit: 191
     t.integer  "results_count",    limit: 4
     t.datetime "created_at"
     t.integer  "convertable_id",   limit: 4
-    t.string   "convertable_type", limit: 255
+    t.string   "convertable_type", limit: 191
     t.datetime "converted_at"
   end
 
@@ -202,30 +202,30 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   add_index "searchjoy_searches", ["search_type", "normalized_query", "created_at"], name: "index_searchjoy_searches_on_search_type_and_normalized_query_an", using: :btree
 
   create_table "sessions", force: :cascade do |t|
-    t.string   "session_id", limit: 255,   null: false
-    t.text     "data",       limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "session_id", limit: 191,      null: false
+    t.text     "data",       limit: 16777215
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "sessions", ["session_id"], name: "session_id", using: :btree
   add_index "sessions", ["updated_at"], name: "updated_at", using: :btree
 
   create_table "settings", force: :cascade do |t|
-    t.string   "var",         limit: 255,   null: false
-    t.text     "value",       limit: 65535
-    t.integer  "target_id",   limit: 4,     null: false
-    t.string   "target_type", limit: 255,   null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "var",         limit: 255,      null: false
+    t.text     "value",       limit: 16777215
+    t.integer  "target_id",   limit: 4,        null: false
+    t.string   "target_type", limit: 255,      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "site_news", force: :cascade do |t|
     t.integer  "tenant_id",  limit: 4
     t.string   "title",      limit: 255
-    t.text     "text",       limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "text",       limit: 16777215
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "creator_id", limit: 4
     t.integer  "updater_id", limit: 4
   end
@@ -235,9 +235,9 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4
     t.integer  "taggable_id",   limit: 4
-    t.string   "taggable_type", limit: 255
+    t.string   "taggable_type", limit: 191
     t.integer  "tagger_id",     limit: 4
-    t.string   "tagger_type",   limit: 255
+    t.string   "tagger_type",   limit: 191
     t.string   "context",       limit: 128
     t.datetime "created_at"
   end
@@ -246,7 +246,7 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name",           limit: 255
+    t.string   "name",           limit: 191
     t.integer  "tenant_id",      limit: 4
     t.integer  "creator_id",     limit: 4
     t.integer  "updater_id",     limit: 4
@@ -258,13 +258,13 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   add_index "tags", ["name", "tenant_id"], name: "index_tags_on_name_and_tenant_id", unique: true, using: :btree
 
   create_table "tags_original", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.text     "description", limit: 65535
+    t.string   "name",        limit: 191
+    t.text     "description", limit: 16777215
     t.integer  "tenant_id",   limit: 4
     t.integer  "creator_id",  limit: 4
     t.integer  "updater_id",  limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "tags_original", ["name"], name: "name", using: :btree
@@ -272,19 +272,19 @@ ActiveRecord::Schema.define(version: 20160710160028) do
 
   create_table "tenants", force: :cascade do |t|
     t.string   "name",                         limit: 255
-    t.string   "subdomain",                    limit: 255
-    t.string   "fqdn",                         limit: 255
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-    t.boolean  "new_user_restriction",                       default: false
+    t.string   "subdomain",                    limit: 191
+    t.string   "fqdn",                         limit: 191
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.boolean  "new_user_restriction",                          default: false
     t.string   "self_serve_allowed_domain",    limit: 255
     t.string   "safe_domains",                 limit: 255
-    t.boolean  "default",                                    default: false
-    t.text     "site_title",                   limit: 65535
-    t.text     "landing_page",                 limit: 65535
-    t.text     "footer",                       limit: 65535
+    t.boolean  "default",                                       default: false
+    t.text     "site_title",                   limit: 16777215
+    t.text     "landing_page",                 limit: 16777215
+    t.text     "footer",                       limit: 16777215
     t.string   "required_github_organization", limit: 255
-    t.text     "github_auth_failure_message",  limit: 65535
+    t.text     "github_auth_failure_message",  limit: 16777215
   end
 
   add_index "tenants", ["fqdn"], name: "domain", using: :btree
@@ -304,18 +304,18 @@ ActiveRecord::Schema.define(version: 20160710160028) do
     t.integer  "parent_topic_id",   limit: 4
     t.string   "name",              limit: 255
     t.string   "description",       limit: 255
-    t.text     "content",           limit: 65535
+    t.text     "content",           limit: 16777215
     t.integer  "tenant_id",         limit: 4
     t.integer  "creator_id",        limit: 4
     t.integer  "updater_id",        limit: 4
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "slug",              limit: 255
     t.string   "icon_file_name",    limit: 255
     t.string   "icon_content_type", limit: 255
     t.integer  "icon_file_size",    limit: 4
-    t.datetime "icon_updated_at",                                null: false
-    t.boolean  "delta",                           default: true, null: false
+    t.datetime "icon_updated_at",                                   null: false
+    t.boolean  "delta",                              default: true, null: false
     t.integer  "lft",               limit: 4
     t.integer  "rgt",               limit: 4
     t.integer  "depth",             limit: 4
@@ -333,7 +333,7 @@ ActiveRecord::Schema.define(version: 20160710160028) do
     t.integer  "video_asset_id", limit: 4
     t.integer  "job_id",         limit: 4
     t.integer  "status",         limit: 4
-    t.text     "response",       limit: 65535
+    t.text     "response",       limit: 16777215
     t.datetime "last_checked"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -391,7 +391,7 @@ ActiveRecord::Schema.define(version: 20160710160028) do
 
   create_table "version_associations", force: :cascade do |t|
     t.integer "version_id",       limit: 4
-    t.string  "foreign_key_name", limit: 255, null: false
+    t.string  "foreign_key_name", limit: 191, null: false
     t.integer "foreign_key_id",   limit: 4
   end
 
@@ -399,14 +399,14 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   add_index "version_associations", ["version_id"], name: "index_version_associations_on_version_id", using: :btree
 
   create_table "versions", force: :cascade do |t|
-    t.string   "item_type",      limit: 255,      null: false
-    t.integer  "item_id",        limit: 4,        null: false
-    t.string   "event",          limit: 255,      null: false
+    t.string   "item_type",      limit: 191,        null: false
+    t.integer  "item_id",        limit: 4,          null: false
+    t.string   "event",          limit: 255,        null: false
     t.string   "whodunnit",      limit: 255
-    t.text     "object",         limit: 65535
-    t.datetime "created_at",                      null: false
+    t.text     "object",         limit: 16777215
+    t.datetime "created_at",                        null: false
     t.integer  "transaction_id", limit: 4
-    t.text     "object_changes", limit: 16777215
+    t.text     "object_changes", limit: 4294967295
   end
 
   add_index "versions", ["item_type", "item_id"], name: "item_type", using: :btree
@@ -425,7 +425,7 @@ ActiveRecord::Schema.define(version: 20160710160028) do
     t.integer  "tenant_id",          limit: 4
     t.integer  "video_asset_id",     limit: 4
     t.string   "name",               limit: 255
-    t.text     "description",        limit: 65535
+    t.text     "description",        limit: 16777215
     t.string   "asset_file_name",    limit: 255
     t.string   "asset_content_type", limit: 255
     t.integer  "asset_file_size",    limit: 4
@@ -437,7 +437,7 @@ ActiveRecord::Schema.define(version: 20160710160028) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.string   "visit_token",      limit: 255
+    t.string   "visit_token",      limit: 191
     t.string   "visitor_token",    limit: 255
     t.string   "ip",               limit: 255
     t.text     "user_agent",       limit: 65535
@@ -470,11 +470,11 @@ ActiveRecord::Schema.define(version: 20160710160028) do
 
   create_table "votes", force: :cascade do |t|
     t.integer  "votable_id",   limit: 4
-    t.string   "votable_type", limit: 255
+    t.string   "votable_type", limit: 191
     t.integer  "voter_id",     limit: 4
-    t.string   "voter_type",   limit: 255
+    t.string   "voter_type",   limit: 191
     t.boolean  "vote_flag"
-    t.string   "vote_scope",   limit: 255
+    t.string   "vote_scope",   limit: 191
     t.integer  "vote_weight",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
