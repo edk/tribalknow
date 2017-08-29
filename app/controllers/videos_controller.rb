@@ -80,7 +80,7 @@ class VideosController < ApplicationController
   def destroy
     @video = VideoAsset.friendly.find(params[:id])
 
-    if @video.creator == current_user
+    if @video.creator == current_user || (current_user.admin? && @video.draft?)
       VideoAsset.without_public_activity do
         if @video.destroy
           flash.now[:notice] = "Deleted #{@video.name}!"
