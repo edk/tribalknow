@@ -11,6 +11,8 @@ gem 'google-analytics-rails'
 gem 'redis'
 gem 'redis-rails'
 gem 'rollout'
+gem 'rollbar' # exception service
+gem 'oj', '~> 2.12.14'
 
 gem 'mysql2'
 gem 'sqlite3', require: false
