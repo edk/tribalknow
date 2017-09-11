@@ -94,8 +94,11 @@ h1.title {
 
 #content {
   a {
-    border-bottom: 1px solid rgba(0,0,0,0);
-    transition: all 0.3s ease;
+    border-bottom: 1px solid #92CDE0; 
+  }
+  a:visited {
+    color: #8000BA;
+    border-bottom: 1px solid #C59AD9;
   }
   a:hover, a:focus {
     border-bottom-color: #333;

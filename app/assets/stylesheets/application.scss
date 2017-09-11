@@ -56,28 +56,3 @@ $o: false;
   #{$property}: #{$value};
 }
 
-/* Glow */
-@mixin glow {
-  display: inline-block;
-  @include prefixed(transition-duration, $defaultDuration);
-  @include prefixed(transition-property, box-shadow);
-  &:hover,
-  &:focus,
-  &:active {
-    box-shadow: 0 0 8px $shadowColour;
-  }
-}
-
-.glow {
-  @include glow();
-}
-
-#content {
-  a {
-    border-bottom: 1px solid #92CDE0; 
-  }
-  a:visited {
-    color: #8000BA;
-    border-bottom: 1px solid #C59AD9;
-  }
-}
