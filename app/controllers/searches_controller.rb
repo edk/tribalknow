@@ -30,7 +30,7 @@ class SearchesController < ApplicationController
   def get_sphinx_search_results(term)
     ThinkingSphinx.search Riddle::Query.escape(term),
                         :excerpts => { :limit=>255, :around=>50 },
-                        :classes => [Question, Answer, Topic, Note],
+                        :classes => [Question, Answer, Topic, Note, VideoAttachment],
                         :with=>{ :tenant_id => Tenant.current_id },
                         :per_page => per_page, :page=>params[:page]
   end
