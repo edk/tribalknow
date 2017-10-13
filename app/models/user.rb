@@ -179,7 +179,9 @@ class User < ActiveRecord::Base
   def self.is_org_member? access_token
     tenant = Tenant.current
     client = Octokit::Client.new access_token: access_token
-    client.org_member?(tenant.required_github_organization, client.user.login)
+    tenant.required_github_organization.to_s.split(',').map(&:strip).any? do |org|
+      client.org_member?(org, client.user.login)
+    end
   end
 
 end
