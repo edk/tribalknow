@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
 
   def disable_unauthorized! msg=nil
     self.update_attribute :active, false
-    self.errors.add(:base, msg || "Sorry this user is not authorized to access this site.")
+    self.errors.add(:base, "Sorry this user is not authorized to access this site. #{msg}")
   end
 
   def self.github_org_required?
