@@ -14,7 +14,7 @@ gem 'rollout'
 gem 'rollbar' # exception service
 gem 'oj', '~> 2.12.14'
 
-gem 'mysql2'
+gem 'mysql2', '~> 0.4.10'
 gem 'sqlite3', require: false
 gem 'devise', '~> 3'
 gem 'omniauth-github'
@@ -94,7 +94,7 @@ group :development, :test do
   gem 'byebug'
   gem 'seed_dump'
   #gem 'protected_attributes' # only to get seed_dump to work
-  gem 'rspec-rails', '~> 2.0'
+  gem 'rspec-rails'
 end
 
 group :doc do
