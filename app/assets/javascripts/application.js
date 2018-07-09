@@ -92,3 +92,5 @@ jQuery.fn.highlight = function() {
     });
 }
 
+
+$(function(){ $(document).foundation(); });
