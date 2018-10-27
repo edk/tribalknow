@@ -1,3 +1,5 @@
-#class Ahoy::Store < Ahoy::Stores::ActiveRecordTokenStore
-#  # customize here
-#end
+class Ahoy::Store < Ahoy::DatabaseStore
+  def visit_model
+    Visit
+  end
+end
