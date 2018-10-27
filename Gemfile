@@ -68,7 +68,7 @@ gem 'friendly_id'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'simple_form'
-gem 'foundation-rails'
+gem 'foundation-rails', '= 5.4.3.1'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage
 gem 'foundation-icons-sass-rails'
 gem 'foundation-social-web-icons-rails', github: "jclusso/foundation-social-web-icons-rails"
@@ -101,3 +101,5 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+gem 'tzinfo-data'

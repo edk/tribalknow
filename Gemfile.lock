@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/edk/best_in_place.git
+  remote: git://github.com/edk/best_in_place.git
   revision: e5736320e7a5905cdaaa075d3ac8eba3962f3d30
   specs:
     best_in_place (3.0.0.alpha)
@@ -7,7 +7,7 @@ GIT
       railties (>= 3.2)
 
 GIT
-  remote: https://github.com/jclusso/foundation-social-web-icons-rails.git
+  remote: git://github.com/jclusso/foundation-social-web-icons-rails.git
   revision: a23b267e42178bd3bd5b5e9860c55c71bbfdb6ee
   specs:
     foundation-social-web-icons-rails (1.0.0)
@@ -15,7 +15,7 @@ GIT
       sass-rails (>= 3.1.1)
 
 GIT
-  remote: https://github.com/kimkong/userstamp.git
+  remote: git://github.com/kimkong/userstamp.git
   revision: 4b986234d916d3701f897d2a21b53af3277ba3f6
   branch: fix-for-rails-4-2
   specs:
@@ -736,9 +736,9 @@ GEM
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
-    foundation-rails (5.5.0.0)
+    foundation-rails (5.4.3.1)
       railties (>= 3.1.0)
-      sass (>= 3.2.0, < 3.4)
+      sass (>= 3.2.0)
     friendly_id (5.2.4)
       activerecord (>= 4.0.0)
     geocoder (1.4.9)
@@ -1046,6 +1046,8 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2018.5)
+      tzinfo (>= 1.0.0)
     uglifier (4.1.12)
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
@@ -1082,7 +1084,7 @@ DEPENDENCIES
   exception_notification
   faraday
   foundation-icons-sass-rails
-  foundation-rails
+  foundation-rails (= 5.4.3.1)
   foundation-social-web-icons-rails!
   friendly_id
   github-markdown
@@ -1132,10 +1134,11 @@ DEPENDENCIES
   sinatra
   sqlite3
   thinking-sphinx (~> 3.1)
+  tzinfo-data
   uglifier (>= 1.3.0)
   underscore-rails
   userstamp!
   will_paginate
 
 BUNDLED WITH
-   1.16.2
+   1.16.3
