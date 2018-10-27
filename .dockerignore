@@ -1,0 +1,44 @@
+# Ignore version control files:
+.git/
+.gitignore
+# Ignore docker and environment files:
+*Dockerfile
+docker-compose*.yml
+*.env
+.env*
+.dockerignore
+
+# Ignore log files:
+log/*.log
+# Ignore temporary files:
+tmp/
+docs/
+
+# Ignore test files:
+.rspec
+Guardfile
+#spec/
+
+# Ignore OS artifacts:
+**/.DS_Store
+
+.bash_history
+.byebug_hist
+.byebug_history
+.pry_history
+.guard_history
+
+# 3.3: bundler stuff
+.bundle/*
+
+# app specific files
+log/*
+tmp/*
+vendor/services/*
+id_rsa*
+id_dsa*
+keyfile*
+.GITHUB_KEY_PATH
+.AWS_PROFILE
+
+config/database.yml
