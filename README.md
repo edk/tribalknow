@@ -1,49 +1,39 @@
 
-## What's this?
+## What is this?
 
-This is a tool to explore new ways to spread tribal knowledge of a software project within a group.
-
-See also: http://en.wikipedia.org/wiki/Knowledge_management
+A tool to explore new ways to spread tribal knowledge of a software project within a group.
 
 Features:
   * Q&A - think a private StackOverflow
   * Topics - A structured wiki
-  * Integration - Hipchat
-
-Upcoming features:
-  * File uploads - with players/viewers for appropriate types, like video
-  * Google integration (?)
-  * badges for topic experts
-  * Hubot integration
+  * Chat integration
 
 ### Motivation
 
-While wiki's such as Google Docs or Github wiki make it easy to enter data, a large complex project
-can quickly become overwhelming in pure wiki form.
+Commonly used tools such as Google Docs or Github wiki make it easy to enter data, a large complex project can quickly become overwhelming due to unstructured and unmaintained form.
 
-The goal of this project is to provide the tools to enable members of a development team to enter and
-maintain the information that is useful to newcomers and existing members alike.
+The goal of this project is to provide the tools to enable members of a development team to enter and maintain the information that is useful to newcomers and existing members alike.
 
-Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions.
-Unfortunately,  it's not available for private groups.
-
-In addition, the complex topics that an advanced software project needs to share can be difficult to squeeze
-into a Q&A format.
-
-Long form articles require a skilled writer to clearly and correctly teach a concept or topic.  Long, meandering
-mind-dumps aren't pleasant to read through.  Tools to help manage the process of articles is necessary.
-
-And finally, not everyone learns the same way.  Some people are audio/visual learners, and some topics are
-better suited to demonstrating, rather than describing.  Tools to help generate generate non-annoying screencasts
-are badly needed.
-
-
+Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately,  it's not available for private groups.  2018 update: half a decade later, S/O now offers [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, but if it's anything like S/O, I'm sure this amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling the knowledge of private teams.
 
 ### Setup
 
-* install mysql
+* docker and docker-compose should be installed locally.
 
-* clone repo, then `bundle install`
+build images:
+```
+$ docker-compose build
+```
+
+initialize local database:
+```
+$ docker-compose run tribalknow ./bin/setup
+```
+
+run locally:
+```
+$ docker-compose up
+```
 
 * install sphinx.  using brew:
 
