@@ -2,18 +2,33 @@ version: '3.2'
 services:
   mysql:
     image: mysql:5.7
+    entrypoint: /custom-init/entrypoint-mysql.sh
+    # command: mysqld --user=mysql --log_error_verbosity=1
     ports:
-    - 8083:3306
+      - 8083:3306
+    volumes:
+      - ./docker/:/custom-init/
+      - ./mysql:/var/lib/mysql
     environment:
+      USER_ID: ${UID}
+      # GROUP_ID: ${GID}
       MYSQL_ROOT_PASSWORD: 
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
+  redis:
+    image: redis:2.8
+    #command: redis-server --any-opts-you-want-to-pass-in
+  
+  sphinx:
+    image: leodido/sphinxsearch:latest
+
   tribalknow:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     environment:
       - MYSQL_HOST=mysql
+      - REDIS_STORE_URL=redis://redis:6379/0/cache
     command: bundle exec rails s -p 3000 -b 0.0.0.0
     volumes:
       - .:/home/app/tribalknow
@@ -22,6 +37,7 @@ services:
       - "3000:3000"
     depends_on:
       - mysql
+      - redis
 
 volumes:
   bundle_config:

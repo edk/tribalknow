@@ -41,3 +41,5 @@ docs
 /public/assets
 /public/images
 /public/system
+mysql/
+config/redis.conf
