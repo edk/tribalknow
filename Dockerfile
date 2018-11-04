@@ -57,11 +57,6 @@ ENV MYSQL_HOST=mysql
 
 # This is a bug in bundler - it does not use BUNDLE_PATH properly and only
 # picks it up from the .bundle/config (local, home or global file settings).
-# the danger here is that it will write this out to your local filesystem when
-# volume mounted, and causes problems when running locally vs in container.
-# The compose override tries to work around it by setting a docker volume, to avoid
-# interfering when launching locally outside of docker.  If not using docker-compose
-# be careful when switching between local and container execution contexts.
 RUN rm -rf /home/app/tribalknow/.bundle && cp -R /build/.bundle /home/app/tribalknow
 
 COPY config/database.yml.sample config/database.yml
