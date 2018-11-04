@@ -1,4 +1,4 @@
-FROM phusion/passenger-ruby23 as build
+FROM phusion/passenger-ruby25 as build
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -14,7 +14,7 @@ ENV HOME=/root
 
 #ARG BUNDLE_PATH=/usr/local/rvm/gems/ruby-2.5.1@global
 # ARG BUNDLE_PATH=/usr/local/rvm/gems/default
-ARG BUNDLE_PATH=/usr/local/rvm/gems/ruby-2.3.7@global
+ARG BUNDLE_PATH=/usr/local/rvm/gems/ruby-2.5.1@global
 ENV BUNDLE_PATH=$BUNDLE_PATH
 ENV BUNDLE_GEMFILE=Gemfile
 #ENV BUNDLE_CACHE_PATH=$BUNDLE_PATH/cache
