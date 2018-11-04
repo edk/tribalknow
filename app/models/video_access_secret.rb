@@ -1,4 +1,4 @@
-class VideoAccessSecret < ActiveRecord::Base
+class VideoAccessSecret < ApplicationRecord
   belongs_to :video_asset
 
   after_initialize :secret_init

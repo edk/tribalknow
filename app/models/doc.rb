@@ -1,4 +1,4 @@
-class Doc < ActiveRecord::Base
+class Doc < ApplicationRecord
   serialize :data
 
   def self.config_filename

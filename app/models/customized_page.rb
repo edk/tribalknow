@@ -1,7 +1,7 @@
 # with some helpers in application_helper, such as render_custom_text
 # this is to allow custom text and page titles without the full blown
 # overhead of a CMS
-class CustomizedPage < ActiveRecord::Base
+class CustomizedPage < ApplicationRecord
   stampable
 
   default_scope { where(tenant_id:Tenant.current_id) if Tenant.current_id }

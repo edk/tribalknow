@@ -1,4 +1,4 @@
-class Answer < ActiveRecord::Base
+class Answer < ApplicationRecord
   stampable
   has_paper_trail
   acts_as_votable

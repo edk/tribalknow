@@ -1,5 +1,5 @@
 
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   stampable
   acts_as_taggable
   has_paper_trail

@@ -1,4 +1,4 @@
-class VideoAttachment < ActiveRecord::Base
+class VideoAttachment < ApplicationRecord
   stampable
 
   belongs_to :video_asset

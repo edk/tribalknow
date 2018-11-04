@@ -1,4 +1,4 @@
-class Tenant < ActiveRecord::Base
+class Tenant < ApplicationRecord
   validates :name, presence: true
   validates :fqdn, uniqueness: true, allow_nil:true
   validates :subdomain, uniqueness: true, allow_nil:true

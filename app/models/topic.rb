@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   stampable
   acts_as_taggable
   acts_as_votable

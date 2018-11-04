@@ -1,4 +1,4 @@
-class FileAsset < ActiveRecord::Base
+class FileAsset < ApplicationRecord
   stampable
   acts_as_taggable
   acts_as_votable

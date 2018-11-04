@@ -1,4 +1,4 @@
-class AppConfig < ActiveRecord::Base
+class AppConfig < ApplicationRecord
   validates_presence_of :key
   
   default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
