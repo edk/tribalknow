@@ -6,15 +6,26 @@ A tool to explore new ways to spread tribal knowledge of a software project with
 Features:
   * Q&A - think a private StackOverflow
   * Topics - A structured wiki
+  * Video - upload and manage videos
   * Chat integration
+
+Future additions:
+  * improved editor(s) and editing workflow with better asset uploading.
+  * Tests and quizzes
+  * read-integration from chat applications
+  * import from email by forwarding to application
+  * Information "aging" and validation to help keep documentation fresh.
+  * Make creation of multimedia easier with "asciinema"-like terminal recording/playback
+    with audio and text.
 
 ### Motivation
 
 Commonly used tools such as Google Docs or Github wiki make it easy to enter data, a large complex project can quickly become overwhelming due to unstructured and unmaintained form.
 
-The goal of this project is to provide the tools to enable members of a development team to enter and maintain the information that is useful to newcomers and existing members alike.
+The goal of this project is to provide the tools to enable members of a development team to enter and maintain the information that is useful to newcomers and existing members alike.  See https://www.youtube.com/watch?v=o-JL-so5Gm8 for a talk that resonates with
+the goals of this project.
 
-Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately,  it's not available for private groups.  2018 update: half a decade later, S/O now offers [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, but if it's anything like S/O, I'm sure this amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling the knowledge of private teams.
+Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately, it's not available for private groups.  2018 update: half a decade later, S/O now offers [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, but if it's anything like S/O, I'm sure this amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling the knowledge of private teams.
 
 ### Setup
 
@@ -35,6 +46,7 @@ run locally:
 $ docker-compose up
 ```
 
+#### Installing without docker:
 * install sphinx.  using brew:
 
 `brew install  sphinx --mysql` to install searchd

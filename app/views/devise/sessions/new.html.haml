@@ -22,7 +22,7 @@
     .large-4.columns{:'data-equalizer-watch'=>''}
       %br
       .y_center
-        = link_to "Login with GitHub Oauth", user_omniauth_authorize_path(:github), {:class=>'button expand',:style=>'padding-left:5em;padding-right:5em;'}
+        = link_to "Login with GitHub Oauth", user_github_omniauth_authorize_path, {:class=>'button expand',:style=>'padding-left:5em;padding-right:5em;'}
         %div
           If you have access to the repo for this organization, <strong>DO NOT</strong> signup with the email/password on the left.  After the initial
           access through Github, check your <strong>SPAM</strong> folder for the confirmation email for the final step.  Thanks!

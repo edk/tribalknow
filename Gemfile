@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2'
+gem 'sprockets-es6'
 gem 'activerecord-session_store'
 gem 'haml-rails'
 gem 'jbuilder'#, '~> 1.2'
@@ -14,7 +15,7 @@ gem 'rollout'
 gem 'rollbar' # exception service
 gem 'oj'#, '~> 2.12.14'
 
-gem 'mysql2'#, '~> 0.4.10'
+gem 'mysql2', '~> 0.4.10'
 gem 'sqlite3', require: false
 gem 'devise'#, '~> 3'
 gem 'omniauth-github'
@@ -40,7 +41,7 @@ gem 'paper_trail'
 gem 'diffy'
 gem 'public_activity'
 gem 'acts_as_votable'
-gem 'merit'
+# gem 'merit'
 gem "interactor-rails"#, "~> 2.0"
 
 gem 'rambulance'
@@ -66,7 +67,6 @@ gem 'jquery-ui-rails'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'friendly_id'
 
-gem 'coffee-rails'#, '~> 4.0.0'
 gem 'simple_form'
 gem 'foundation-rails'#, '= 5.4.3.1'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage

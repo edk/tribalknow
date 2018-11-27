@@ -14,7 +14,7 @@
     %title= content_for?(:title) ? yield(:title) : (@page_title || Tenant.default_title)
     = javascript_include_tag "vendor/modernizr"
     = yield(:head_js)
-    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag "application"
     = yield(:head_stylesheet)
     = csrf_meta_tags
     = analytics_init if Rails.env.production?
