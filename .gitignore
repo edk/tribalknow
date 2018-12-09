@@ -47,3 +47,4 @@ config/redis.conf
 TAGS
 sample-db.sql
 node_modules
+public/packs
