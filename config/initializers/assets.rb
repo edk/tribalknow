@@ -17,6 +17,7 @@ Rails.application.config.assets.precompile += %w(
   accounts.js answers.js autocomplete.js docs.js homes.js
   questions.js searches.js topics.js users.js videos.js
   welcome.js
+  admin/users.js
   )
   # # Precompile additional assets.
   # # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
