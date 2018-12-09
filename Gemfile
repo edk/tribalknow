@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 5.0'
 gem 'sprockets-es6'
 gem 'activerecord-session_store'
 gem 'haml-rails'
 gem 'jbuilder'#, '~> 1.2'
-gem 'quiet_assets', :group => :development
+# gem 'quiet_assets', :group => :development
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for the sidekiq web ui
 gem 'google-analytics-rails'
@@ -15,7 +15,7 @@ gem 'rollout'
 gem 'rollbar' # exception service
 gem 'oj'#, '~> 2.12.14'
 
-gem 'mysql2', '~> 0.4.10'
+gem 'mysql2'#, '~> 0.4.10'
 gem 'sqlite3', require: false
 gem 'devise'#, '~> 3'
 gem 'omniauth-github'
@@ -44,7 +44,7 @@ gem 'acts_as_votable'
 # gem 'merit'
 gem "interactor-rails"#, "~> 2.0"
 
-gem 'rambulance'
+# gem 'rambulance'
 gem 'newrelic_rpm'
 gem 'exception_notification'
 
