@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require select2
 //= require underscore
-//= require foundation
+// require foundation
 // require foundation/foundation.tooltip
 //= require mdedit
 //= require dropzone
@@ -93,4 +93,4 @@ jQuery.fn.highlight = function() {
 }
 
 
-$(function(){ $(document).foundation(); });
+// $(function(){ $(document).foundation(); });

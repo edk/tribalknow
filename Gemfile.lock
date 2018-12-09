@@ -7,14 +7,6 @@ GIT
       railties (>= 3.2)
 
 GIT
-  remote: git://github.com/jclusso/foundation-social-web-icons-rails.git
-  revision: a23b267e42178bd3bd5b5e9860c55c71bbfdb6ee
-  specs:
-    foundation-social-web-icons-rails (1.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
-
-GIT
   remote: git://github.com/kimkong/userstamp.git
   revision: 4b986234d916d3701f897d2a21b53af3277ba3f6
   branch: fix-for-rails-4-2
@@ -839,10 +831,6 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     formatador (0.2.5)
-    foundation-icons-sass-rails (3.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
-    foundation-rails (6.5.1.0)
     friendly_id (5.2.4)
       activerecord (>= 4.0.0)
     geocoder (1.5.0)
@@ -1191,9 +1179,6 @@ DEPENDENCIES
   dotenv-rails
   exception_notification
   faraday
-  foundation-icons-sass-rails
-  foundation-rails
-  foundation-social-web-icons-rails!
   friendly_id
   github-markdown
   google-analytics-rails

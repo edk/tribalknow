@@ -123,12 +123,12 @@ div.tags_editor {
 
 
 a.taglink {
-  $padding: 0.25rem;
-  $bg: $primary-color;
-  $radius: .7rem;
-  $full-width: false;
-  $disabled: false;
-  @include button($padding, $bg, $radius, $full-width, $disabled);
+  // $padding: 0.25rem;
+  // $bg: $primary-color;
+  // $radius: .7rem;
+  // $full-width: false;
+  // $disabled: false;
+  // @include button($padding, $bg, $radius, $full-width, $disabled);
   margin-bottom: 0.2rem;
   padding-top: 0.4rem;
   font-size: 75%;
@@ -301,7 +301,7 @@ div.who_panel {
 }
 
 .search_param {
-  @include label;
+  // @include label;
   span {
     padding-left: 6px;
     margin-left: 4px;
