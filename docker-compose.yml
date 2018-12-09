@@ -29,9 +29,10 @@ services:
     environment:
       - MYSQL_HOST=mysql
       - REDIS_STORE_URL=redis://redis:6379/0/cache
-    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    command: bin/docker-start-rails-server.sh
     volumes:
       - .:/home/app/tribalknow
+      - tmp_vol:/home/app/tribalknow/tmp
       - bundle_config:/home/app/tribalknow/.bundle
     ports:
       - "3000:3000"
@@ -41,3 +42,6 @@ services:
 
 volumes:
   bundle_config:
+  tmp_vol:
+  # File exists @ dir_s_mkdir - /home/app/tribalknow/tmp/cache/assets/sprockets/v3.0/VX
+  # https://github.com/rails/sprockets-rails/issues/325
