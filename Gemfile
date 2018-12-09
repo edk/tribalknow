@@ -5,7 +5,6 @@ gem 'sprockets-es6'
 gem 'activerecord-session_store'
 gem 'haml-rails'
 gem 'jbuilder'#, '~> 1.2'
-# gem 'quiet_assets', :group => :development
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for the sidekiq web ui
 gem 'google-analytics-rails'
@@ -44,7 +43,6 @@ gem 'acts_as_votable'
 # gem 'merit'
 gem "interactor-rails"#, "~> 2.0"
 
-# gem 'rambulance'
 gem 'newrelic_rpm'
 gem 'exception_notification'
 

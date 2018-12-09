@@ -1,4 +1,4 @@
-Tribalknow::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -9,51 +9,53 @@ Tribalknow::Application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  # config.consider_all_requests_local       = false  # uncomment this to view the rambulance errors in dev mode
-  config.action_controller.perform_caching = true
+  # Show full error reports.
+  config.consider_all_requests_local = true
 
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
+  # Enable/disable caching. By default caching is disabled.
+  # Run rails dev:cache to toggle caching.
+  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+    config.action_controller.perform_caching = true
+
+    config.cache_store = :memory_store
+    config.public_file_server.headers = {
+      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+    }
+  else
+    config.action_controller.perform_caching = false
+
+    config.cache_store = :null_store
+  end
+
+  # Store uploaded files on the local file system (see config/storage.yml for options)
+  # config.active_storage.service = :local
+
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  # Prepend all log lines with the following tags.
-  config.log_tags = [ :subdomain, :uuid, lambda { |req| "#{req.cookie_jar['_session_id']}" } ]
-
-  # Raise an error on page load if there are pending migrations
+  # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
+
+  # Highlight code that triggered database queries in logs.
+  config.active_record.verbose_query_logs = true
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  # Add the fonts path
-  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-  # Precompile additional assets
-  config.assets.precompile += %w( .svg .eot .woff .ttf )
 
-  # recommended by devise generator
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
 
-  # to make server logs go to stdout when using unicorn
-  # config.logger = Logger.new(STDOUT)
-  # config.logger.level = Logger.const_get(
-  #   ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG'
-  # )
-end
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
 
-require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))
-
-SanitizeEmail::Config.configure do |config|
-  config[:sanitized_to] =         ENV['sanitized_to_address']
-  config[:sanitized_cc] =         ENV['sanitized_cc_address']
-  config[:sanitized_bcc] =        ENV['sanitized_bcc_address']
-  # run/call whatever logic should turn sanitize_email on and off in this Proc:
-  config[:activation_proc] =      Proc.new { %w(development test).include?(Rails.env) }
-  config[:use_actual_email_prepended_to_subject] = true         # or false
-  config[:use_actual_environment_prepended_to_subject] = true   # or false
-  config[:use_actual_email_as_sanitized_user_name] = true       # or false
+  # Use an evented file watcher to asynchronously detect changes in source code,
+  # routes, locales, etc. This feature depends on the listen gem.
+  config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
