@@ -23,7 +23,13 @@ class Topic < ApplicationRecord
   has_attached_file :icon, :styles => { :thumb => "100x100#" }, :default_url => "blank-icon-100x100.gif" #/images/:style/missing.png"
   validates_attachment_content_type :icon, :content_type => /\Aimage\/.*\Z/
 
-  default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+  default_scope {
+    if Tenant.current_id
+      where(tenant_id:Tenant.current_id)
+    else
+      where('1=1')
+    end
+  }
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }

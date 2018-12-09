@@ -8,7 +8,13 @@ class User < ApplicationRecord
          :confirmable, :omniauthable, :omniauth_providers => [:github]
 
   belongs_to :tenant
-  default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+  default_scope {
+    if Tenant.current_id
+      where(tenant_id:Tenant.current_id)
+    else
+      where('1=1')
+    end
+  }
 
   has_attached_file :avatar, :styles => { :thumb => "80x80#" }, :default_url => "blank-icon-80x80.gif"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/

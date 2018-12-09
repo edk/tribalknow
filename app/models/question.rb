@@ -18,8 +18,14 @@ class Question < ApplicationRecord
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
 
-  default_scope { where(tenant_id:Tenant.current_id) if Tenant.current_id }
-  
+  default_scope {
+    if Tenant.current_id
+      where(tenant_id:Tenant.current_id)
+    else
+      where('1=1')
+    end
+  }
+
   scope :asked_by, ->(user) { where(:creator_id => user.id ) }
 
   scope :popular, ->(limit=10) {
