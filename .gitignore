@@ -43,3 +43,6 @@ docs
 /public/system
 mysql/
 config/redis.conf
+.byebug_history
+TAGS
+sample-db.sql
