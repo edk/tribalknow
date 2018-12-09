@@ -27,7 +27,7 @@ module Tribalknow
     # config.i18n.default_locale = :de
     I18n.enforce_available_locales = false
     config.active_record.observers = :change_observer
-    config.active_record.raise_in_transactional_callbacks = true
+    # config.active_record.raise_in_transactional_callbacks = true
 
     config.cache_store = :redis_store, ENV['REDIS_STORE_URL'] || "redis://localhost:6379/0/cache" #, { expires_in: 90.minutes }
   end
