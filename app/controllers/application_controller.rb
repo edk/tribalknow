@@ -3,15 +3,14 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
 
-  before_filter :authenticate_user!
-  include Userstamp
-  around_filter :scope_current_tenant
+  before_action :authenticate_user!
+  # include Userstamp
+  around_action :scope_current_tenant
   include PublicActivity::StoreController
 
-  before_filter :set_paper_trail_whodunnit
-  skip_after_action :warn_about_not_setting_whodunnit # even though i'm setting it, the warning continues.
+  before_action :set_paper_trail_whodunnit
+  # skip_after_action :warn_about_not_setting_whodunnit # even though i'm setting it, the warning continues.
   after_action :track_action
-  
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
