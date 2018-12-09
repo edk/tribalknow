@@ -128,8 +128,7 @@ a.taglink {
   $radius: .7rem;
   $full-width: false;
   $disabled: false;
-  $is-input: false;
-  @include button($padding, $bg, $radius, $full-width, $disabled, $is-input);
+  @include button($padding, $bg, $radius, $full-width, $disabled);
   margin-bottom: 0.2rem;
   padding-top: 0.4rem;
   font-size: 75%;

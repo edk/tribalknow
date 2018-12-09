@@ -15,7 +15,7 @@
 //= require select2
 //= require underscore
 //= require foundation
-//= require foundation/foundation.tooltip
+// require foundation/foundation.tooltip
 //= require mdedit
 //= require dropzone
 //= require best_in_place

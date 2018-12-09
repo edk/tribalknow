@@ -67,6 +67,7 @@ gem 'jquery-ui-rails'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'friendly_id'
 
+gem 'coffee-rails'
 gem 'simple_form'
 gem 'foundation-rails'#, '= 5.4.3.1'
 # gem 'foundation_rails_helper' # https://github.com/sgruhier/foundation_rails_helper#usage
