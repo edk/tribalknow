@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require select2
 //= require underscore
-// require foundation
-// require foundation/foundation.tooltip
 //= require mdedit
 //= require dropzone
 //= require best_in_place
@@ -33,7 +31,6 @@
 Dropzone.autoDiscover = false;
 
 $(function(){
-  $(document).foundation();
   $('.select2').select2();
   if ($('#tags').length > 0) {
     var all_tags = JSON.parse($('#tags').html());
@@ -92,5 +89,3 @@ jQuery.fn.highlight = function() {
     });
 }
 
-
-// $(function(){ $(document).foundation(); });

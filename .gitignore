@@ -46,3 +46,4 @@ config/redis.conf
 .byebug_history
 TAGS
 sample-db.sql
+node_modules

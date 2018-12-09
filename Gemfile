@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.2'
-gem 'sprockets-es6'
+gem 'puma'
+# gem 'sprockets-es6'
 gem 'activerecord-session_store'
 gem 'haml-rails'
-gem 'jbuilder'#, '~> 1.2'
+# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'webpacker'
+gem 'jbuilder'
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for the sidekiq web ui
 gem 'google-analytics-rails'
@@ -12,11 +15,11 @@ gem 'redis'
 gem 'redis-rails'
 gem 'rollout'
 gem 'rollbar' # exception service
-gem 'oj'#, '~> 2.12.14'
+gem 'oj'
 
-gem 'mysql2'#, '~> 0.4.10'
+gem 'mysql2'
 gem 'sqlite3', require: false
-gem 'devise'#, '~> 3'
+gem 'devise'
 gem 'omniauth-github'
 gem "octokit"
 gem "pundit"
@@ -65,7 +68,6 @@ gem 'jquery-ui-rails'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'friendly_id'
 
-gem 'coffee-rails'
 gem 'simple_form'
 gem 'sass-rails'#, '~> 4.0.0.rc2'
 gem 'uglifier'#, '>= 1.3.0'
@@ -73,6 +75,9 @@ gem 'nokogiri'
 gem 'faraday'
 gem 'dotenv-rails'
 gem 'dotenv-deployment'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development do
   gem "airbrussh", require: false
@@ -85,11 +90,21 @@ group :development do
 end
 
 group :development, :test do
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
   gem 'pry'
   gem 'byebug'
   gem 'seed_dump'
   #gem 'protected_attributes' # only to get seed_dump to work
   gem 'rspec-rails'
+end
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
 end
 
 group :doc do
