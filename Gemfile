@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.2'
 gem 'sprockets-es6'
 gem 'activerecord-session_store'
 gem 'haml-rails'

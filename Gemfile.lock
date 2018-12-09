@@ -1220,7 +1220,7 @@ DEPENDENCIES
   pry
   public_activity
   pundit
-  rails (~> 5.0)
+  rails (~> 5.2)
   rails-observers
   redis
   redis-rails
