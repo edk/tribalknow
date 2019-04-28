@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/edk/best_in_place.git
+  remote: https://github.com/edk/best_in_place.git
   revision: e5736320e7a5905cdaaa075d3ac8eba3962f3d30
   specs:
     best_in_place (3.0.0.alpha)
@@ -7,7 +7,7 @@ GIT
       railties (>= 3.2)
 
 GIT
-  remote: git://github.com/kimkong/userstamp.git
+  remote: https://github.com/kimkong/userstamp.git
   revision: 4b986234d916d3701f897d2a21b53af3277ba3f6
   branch: fix-for-rails-4-2
   specs:
@@ -1084,7 +1084,7 @@ GEM
     safely_block (0.2.1)
       errbase
     sanitize_email (2.0.3)
-    sass (3.7.2)
+    sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -1241,7 +1241,7 @@ DEPENDENCIES
   rollout
   rspec-rails
   sanitize_email
-  sass-rails
+  sass-rails (~> 5.0)
   sdoc
   searchjoy
   seed_dump
@@ -1253,12 +1253,15 @@ DEPENDENCIES
   sqlite3
   thinking-sphinx
   tzinfo-data
-  uglifier
+  uglifier (>= 1.3.0)
   underscore-rails
   userstamp!
   web-console (>= 3.3.0)
   webpacker
   will_paginate
+
+RUBY VERSION
+   ruby 2.5.3p105
 
 BUNDLED WITH
    1.17.1

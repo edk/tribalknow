@@ -1,12 +1,17 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.5.3'
 
 gem 'rails', '~> 5.2'
 gem 'puma'
 # gem 'sprockets-es6'
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'webpacker'
+
 gem 'activerecord-session_store'
 gem 'haml-rails'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker'
 gem 'jbuilder'
 gem 'sidekiq'
 gem 'sinatra', :require => nil # for the sidekiq web ui
@@ -69,8 +74,6 @@ gem 'jquery-ui-rails'
 gem 'friendly_id'
 
 gem 'simple_form'
-gem 'sass-rails'#, '~> 4.0.0.rc2'
-gem 'uglifier'#, '>= 1.3.0'
 gem 'nokogiri'
 gem 'faraday'
 gem 'dotenv-rails'
