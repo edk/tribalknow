@@ -1,19 +1,18 @@
 !!!
-%html{:lang => "en"}
+%html{lang: "en"}
   %head
     %meta{:charset => "utf-8"}/
-    / Set the viewport width to device width for mobile
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1, shrink-to-fit=no"}
     = favicon_link_tag "favicon.ico"
     %title= content_for?(:title) ? yield(:title) : (@page_title || Tenant.default_title)
     = yield(:head_js)
-    = stylesheet_link_tag "application"
+    = stylesheet_link_tag "application", media: 'all'
+
     = javascript_pack_tag "application"
-    = stylesheet_pack_tag "application"
-    = javascript_pack_tag 'application'
-    = stylesheet_pack_tag 'bootstrap'
+    = stylesheet_pack_tag "application", "bootstrap"
     = yield(:head_stylesheet)
     = csrf_meta_tags
+    = csp_meta_tag
     = analytics_init if Rails.env.production?
   %body
     = javascript_include_tag "https://www.google.com/jsapi"
@@ -30,9 +29,11 @@
             .alert-box.info.radius{"data-alert"=>""}
               = raw alert
               %a.close{:href => "#"}
-    .row#content{:style=>'padding-top:1.0em;min-height:65%;margin-left:88px;margin-right;88px'}
-      .columns.large-12
-        = yield
+
+    .container
+      .row
+        .col-lg
+          = yield
     
     .row#footer
       .row
