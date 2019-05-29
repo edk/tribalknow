@@ -23,11 +23,11 @@
         = render 'layouts/flash'
       = yield
 
-    #footer
-      .row
-        .columns.text-center
-          - if Tenant.default_footer.presence
-            = Tenant.default_footer.html_safe
-          - else
-            "TribalKnowNow Copyright 2014"
+    #footer.page-footer.font-small.unique-color-dark.pt-4
+      .container
+        .list-unstyled.list-inline.text-center.py-2
+          %li.list-inline-item
+            = Tenant.default_footer.html_safe if Tenant.default_footer.presence 
+        .footer-copyright.text-center.py-3 © 2018 Copyright TribalKnowNow:
+
     = yield(:post_body_js)
