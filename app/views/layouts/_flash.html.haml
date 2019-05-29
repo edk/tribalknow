@@ -1,0 +1,11 @@
+- if flash.keys.present?
+  .row
+    .large-12.columns
+      - if notice
+        .alert-box.success.radius{"data-alert"=>""}
+          = raw notice
+          %a.close{:href => "#"}
+      - if alert
+        .alert-box.info.radius{"data-alert"=>""}
+          = raw alert
+          %a.close{:href => "#"}
