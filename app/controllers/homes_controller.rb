@@ -4,7 +4,7 @@ class HomesController < ApplicationController
   def index
     if current_user && Tenant.current_id
 
-      @activities = PublicActivity::Activity.order("created_at DESC").where('created_at > ?', 30.days.ago).limit(100)
+      @activities = PublicActivity::Activity.order("created_at DESC").limit(100)
       cache_key = [ 'public_activities', @activities.pluck(:id), @activities.maximum(:updated_at) ]
       @collapsed_activities = Rails.cache.fetch(cache_key) do
         @activities.inject({}) do |m,o|

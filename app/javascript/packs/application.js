@@ -7,11 +7,6 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-// import 'bootstrap/dist/js/bootstrap';
-
-// console.log('Hello World from Webpacker')
-
-
 import 'jquery/dist/jquery';
 
 import $ from 'jquery';
@@ -25,3 +20,6 @@ import '@fortawesome/fontawesome-free/js/all';
 
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/css/bootstrap';
+
+// import './theme_custom.css';
+import './site_overrides'

@@ -1,4 +1,6 @@
 - if @collapsed_activities && @collapsed_activities.size > 0
-  .panel
-    %h3 #{f_icon 'heart', color:'#A33', style:'text-shadow: 2px 2px #DDD'} Recent Activity
-    = render :partial=>'/public_activity/index', :locals=>{:activities=>@collapsed_activities}
+  .card.card-lists.s-activity
+    .card-body
+      .card-header
+        %h5.card-title #{f_icon 'heart', color:'#A33', style:'text-shadow: 2px 2px #DDD'} Recent Activity
+      = render partial: '/public_activity/index', locals: {activities: @collapsed_activities}

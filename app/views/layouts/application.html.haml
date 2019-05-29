@@ -9,7 +9,7 @@
     = stylesheet_link_tag "application", media: 'all'
 
     = javascript_pack_tag "application"
-    = stylesheet_pack_tag "application", "bootstrap"
+    = stylesheet_pack_tag "application"
     = yield(:head_stylesheet)
     = csrf_meta_tags
     = csp_meta_tag
@@ -18,24 +18,12 @@
     = javascript_include_tag "https://www.google.com/jsapi"
     = javascript_include_tag "application", params[:controller]
     = render 'layouts/top_nav'
-    - if flash.keys.present?
-      .row
-        .large-12.columns
-          - if notice
-            .alert-box.success.radius{"data-alert"=>""}
-              = raw notice
-              %a.close{:href => "#"}
-          - if alert
-            .alert-box.info.radius{"data-alert"=>""}
-              = raw alert
-              %a.close{:href => "#"}
-
     .container
       .row
-        .col-lg
-          = yield
-    
-    .row#footer
+        = render 'layouts/flash'
+      = yield
+
+    #footer
       .row
         .columns.text-center
           - if Tenant.default_footer.presence

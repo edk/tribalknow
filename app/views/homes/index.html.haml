@@ -1,21 +1,15 @@
 - set_title "#{Tenant.default_title} Home"
 
 .row
-  .columns.large-8
+  .col-lg
     =# render :partial=>"site_news"
     = render :partial=>'admin_panel' if current_user.admin?
-
-    /.row
-    /  .columns.large-12<
-    /    .panel
-    /      %h2 Bookmarks and favorites
-
+.row
+  .col-lg-8
     .row
-      .columns.large-12<
+      .col-lg
         = local_notes :fixed=>true, :default_title=>"Dev Central", :disable_admin=>true
+    = render partial: 'popular_lists', locals: { top: @top }
 
-    - if ($rollout.active?(:home_popular_lists) rescue true)
-      = render partial: 'popular_lists', locals: { top: @top }
-
-  .columns.large-4
+  .col-lg-4
     = render partial: 'activities'

@@ -235,13 +235,18 @@ module ApplicationHelper
   end
 
   def in_place_edit_panel note, path
-    title = content_tag(:h3, best_in_place(note, 'title' , {:as=>'input', :raw=>true }))
+    content_tag(:div, { class: 'card' }) do
+      content_tag(:div, { class: 'card-body' }) do
+        content_tag(:div, { class: 'card-header' }) do
+          title = content_tag(:h5, best_in_place(note, 'title' , {:as=>'input', :raw=>true }), {class: 'card-title'} )
 
-    edit_content_id = dom_id(note, :content)
-    content = best_in_place(note, :content, {:as=>'textarea', :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
-    edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon')
-
-    content_tag(:div, "#{title} #{content} &nbsp;#{edit_icon}".html_safe, :class=>'panel')
+          edit_content_id = dom_id(note, :content)
+          content = best_in_place(note, :content, {:as=>'textarea', :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
+          edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon')
+          title + content_tag(:div, "#{content} &nbsp;#{edit_icon}".html_safe)
+        end
+      end
+    end
   end
 
   # display a series of panels per controller/action
@@ -260,7 +265,8 @@ module ApplicationHelper
       in_place_edit_panel(note, path)
     end.join.html_safe
 
-    str << content_tag(:div, link_to("Add New Note", notes_path(:path=>path), :method=>:post, :remote=>true), :class=>'panel', :id=>"add_#{path.gsub(/\//,'_')}") if allow_admin
+    klasses = "card"
+    str << content_tag(:div, link_to("Add New Note", notes_path(:path=>path), :method=>:post, :remote=>true), :class=>klasses, :id=>"add_#{path.gsub(/\//,'_')}") if allow_admin
 
     str
   end

@@ -1,42 +1,47 @@
 
 .row
-  .columns.large-6
-    .panel.popular_list
-      %h2 Popular Topics
-      %ul
-        = cache top[:topics] do
-          - top[:topics] && top[:topics].each do |props|
-            %li
-              = link_to props[:title], topic_path(props[:id])
+  .col-lg-6
+    .card.popular_list.card-lists
+      .card-body
+        .card-header
+          %h5.card-title Popular Topics
+        %ul.list-group
+          = cache top[:topics] do
+            - top[:topics] && top[:topics].each do |props|
+              %li.list-group-item.list-group-flush
+                = link_to props[:title], topic_path(props[:id])
+                = props[:view_count]
+
+  .col-lg-6
+    .card.popular_list.card-lists
+      .card-body
+        .card-header
+          %h5.card-title Top Q&amp;A
+        %ul.list-group
+          - top[:qna] && top[:qna].each do |props|
+            %li.list-group-item.list-group-flush
+              = link_to "#{props[:title]}", question_path(props[:id])
+              = props[:view_count]
+.row
+  .col-lg-6
+    .card.popular_list.card-lists
+      .card-body
+        .card-header
+          %h5.card-title Top Search Terms
+        %div.small-font Last 8 weeks
+        %ul.list-group
+          - top[:searches] && top[:searches].each do |props|
+            %li.list-group-item.list-group-flush
+              = link_to "#{props[:normalized_query]}", searches_path(q: props[:normalized_query])
               = props[:view_count]
 
-  .columns.large-6
-    .panel.popular_list
-      %h2 Top Q&amp;A
-      %ul
-        - top[:qna] && top[:qna].each do |props|
-          %li
-            = link_to "#{props[:title]}", question_path(props[:id])
-            = props[:view_count]
-.row
-  .columns.large-6
-    .panel.popular_list
-      %h2
-        Top Search Terms
-        %div.small-font Last 8 weeks
-      %ul
-        - top[:searches] && top[:searches].each do |props|
-          %li
-            = link_to "#{props[:normalized_query]}", searches_path(q: props[:normalized_query])
-            = props[:view_count]
-
-  .columns.large-6
-    .panel.popular_list
-      %h2 Top Videos
-      %ul
-        - top[:videos] && top[:videos].each do |props|
-          %li
-            = link_to "#{props[:title]}", video_path(props[:id])
-            = props[:view_count]
-
-
+  .col-lg-6
+    .card.popular_list.card-lists
+      .card-body
+        .card-header
+          %h5.card-title Top Videos
+        %ul.list-group
+          - top[:videos] && top[:videos].each do |props|
+            %li.list-group-item.list-group-flush
+              = link_to "#{props[:title]}", video_path(props[:id])
+              = props[:view_count]
