@@ -5,7 +5,6 @@ ruby '2.5.3'
 
 gem 'rails', '~> 5.2'
 gem 'puma'
-# gem 'sprockets-es6'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
@@ -14,7 +13,7 @@ gem 'activerecord-session_store'
 gem 'haml-rails'
 gem 'jbuilder'
 gem 'sidekiq'
-gem 'sinatra', :require => nil # for the sidekiq web ui
+# gem 'sinatra', :require => nil # for the sidekiq web ui
 gem 'google-analytics-rails'
 gem 'redis'
 gem 'redis-rails'
@@ -61,9 +60,9 @@ gem 'will_paginate'
 gem 'best_in_place', github: 'edk/best_in_place'
 gem 'render_anywhere', :require => false
 
-gem 'thinking-sphinx'#, '~> 3.1'
+# gem 'thinking-sphinx'#, '~> 3.1'
 
-gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
+# gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
 gem 'underscore-rails'
 gem 'ledermann-rails-settings', :require => 'rails-settings'
@@ -89,6 +88,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
   gem 'guard-livereload', require: false
+  gem 'rack-livereload'
   gem 'sanitize_email'
 end
 

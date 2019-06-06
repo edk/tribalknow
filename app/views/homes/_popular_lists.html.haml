@@ -28,7 +28,8 @@
       .card-body
         .card-header
           %h5.card-title Top Search Terms
-        %div.small-font Last 8 weeks
+        %ul.list-group
+          %li.list-group-item.list-group-flush Last 8 weeks
         %ul.list-group
           - top[:searches] && top[:searches].each do |props|
             %li.list-group-item.list-group-flush

@@ -6,27 +6,30 @@
       .large-8.large-centered.columns
         = text
 
-  .row{:'data-equalizer'=>''}
-    .large-6.columns{:'data-equalizer-watch'=>''}
-      %h2 Login
-      .form-inputs
-        = f.input :email, :required => false, :autofocus => true
-        = f.input :password, :required => false
-        = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-      .row
-        .large-4.columns.push-9
-          = f.button :submit, "Login", :class=>'button'
-    .large-2.columns{:'data-equalizer-watch'=>''}
+  .row
+    .col-lg-6
+      .card
+        .card-header
+          %h3.card-title Login with Github OAuth
+        .card-body
+          %p If you have access to the Github repo for this organization, <strong>DO NOT</strong> use manual login.  Check your <strong>SPAM</strong> folder for the confirmation email for the final step.  Thanks!
+        .card-body
+          = link_to "Login with GitHub OAuth", user_github_omniauth_authorize_path, {:class=>'btn btn-primary stretched-link'}
 
-      .xy_center OR
-    .large-4.columns{:'data-equalizer-watch'=>''}
-      %br
-      .y_center
-        = link_to "Login with GitHub Oauth", user_github_omniauth_authorize_path, {:class=>'button expand',:style=>'padding-left:5em;padding-right:5em;'}
-        %div
-          If you have access to the repo for this organization, <strong>DO NOT</strong> signup with the email/password on the left.  After the initial
-          access through Github, check your <strong>SPAM</strong> folder for the confirmation email for the final step.  Thanks!
-      %br
+  .row
+    .col-lg-6
+      .card
+        .card-header
+          %h5 Manual Login
+        .card-body
+          .form-group
+            = f.input :email, :required => false, :autofocus => true
+            = f.input :password, :required => false
+            = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+        .card-footer
+          = f.button :submit, "Login", :class=>'button'
+    .large-2.columns
+
 
   - render_custom_text 'bottom' do |header, text|
     .row

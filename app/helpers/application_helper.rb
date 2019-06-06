@@ -235,7 +235,7 @@ module ApplicationHelper
   end
 
   def in_place_edit_panel note, path
-    content_tag(:div, { class: 'card' }) do
+    content_tag(:div, { class: 'card card-lists' }) do
       content_tag(:div, { class: 'card-body' }) do
         content_tag(:div, { class: 'card-header' }) do
           title = content_tag(:h5, best_in_place(note, 'title' , {:as=>'input', :raw=>true }), {class: 'card-title'} )
@@ -243,7 +243,11 @@ module ApplicationHelper
           edit_content_id = dom_id(note, :content)
           content = best_in_place(note, :content, {:as=>'textarea', :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
           edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon')
-          title + content_tag(:div, "#{content} &nbsp;#{edit_icon}".html_safe)
+          note_body = content_tag(:div, {}) do
+            content_tag(:div, content, {}) +
+            content_tag(:span, "&nbsp;#{edit_icon}".html_safe)
+          end
+          title + note_body
         end
       end
     end

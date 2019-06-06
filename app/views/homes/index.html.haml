@@ -1,8 +1,7 @@
 - set_title "#{Tenant.default_title} Home"
-
 .row
   .col-lg
-    =# render :partial=>"site_news"
+    -# render :partial=>"site_news"
     = render :partial=>'admin_panel' if current_user.admin?
 .row
   .col-lg-8

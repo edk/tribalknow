@@ -1,46 +1,15 @@
- .card-lists {
-   padding-top: 0.75em;
-   padding-left: 0px;
-   padding-right: 0px;
+
+.card-lists {
+   margin-top: 1em;
+   padding: 0em;
    .card-body {
-     padding-top: 0px;
-     padding-left: 0px;
-     padding-right: 0px;
+     padding: 0px;
      .card-header {
        padding-bottom: 0px;
      }
    }
  }
 
-// .card {
-//   margin: 1em -0.5em;
-//   background-color: rgb(242,242,242);
-//   .card-body {
-//     margin: 0;
-//     padding: 0.5em;
-//   }
-//   .card-header {
-//     background-color: rgb(242,242,242);
-//     .card-title {
-//       margin: 0em;
-//       padding: 0em;
-//       font-size: 1.25em;
-//       font-weight: bold;
-//     }
-//   }
-//   ul {
-//     margin-left: 0;
-//     padding-left: 0.25em;
-//     font-size: 0.98em;
-//     margin-top: 0.5em;
-//     list-style: none;
-//   }
-//   li {
-//     position: relative;
-//     line-height: 1.2rem;
-//     margin-bottom: 0.5em;
-//   }
-// }
 
 span.badge-count {
   vertical-align: middle;
