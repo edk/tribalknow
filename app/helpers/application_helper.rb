@@ -141,7 +141,7 @@ module ApplicationHelper
       else
         {}
       end
-      image_tag user.avatar.url(:thumb), opts.merge(:class=>'avatar', :alt=>user.name, :title=>user.name)
+      image_tag user.avatar.url(:thumb), opts.merge(alt: user.name, title:user.name)
     else
       render_gravatar user, options
     end
@@ -162,11 +162,11 @@ module ApplicationHelper
 
     if user
       opt_string = "?s=#{size}" if size
-      image_tag(gravitar_url(user, opt_string), :alt=>user.name, :title=>user.name, :class=>'avatar')
+      image_tag(gravitar_url(user, opt_string), :alt=>user.name, :title=>user.name)
     else
       size = "40x40"
       size = "#{options[:size]}x#{options[:size]}" if options[:size]
-      image_tag("#{request.protocol||'https://'}placehold.it/#{size}", :class=>'avatar')
+      image_tag("#{request.protocol||'https://'}placehold.it/#{size}")
     end
   end
 

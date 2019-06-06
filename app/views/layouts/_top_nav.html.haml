@@ -1,33 +1,36 @@
+
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.justify-content-between
   %a.navbar-brand{:href => "/"}= [current_tenant && current_tenant.name, Tenant.default_title].join(' ')
   %button.navbar-toggler{'data-toggle': "collapse", 'data-target': "#navbarSupportedContent", 'aria-controls': "navbarSupportedContent", 'aria-expanded': "false", 'aria-label': "Toggle navigation"}
     %span.navbar-toggler-icon
 
-  = form_tag searches_path, :method=>:get, class: 'form-inline' do
-    = search_field_tag :q, "", class: 'form-control mr-sm-2'
-    = button_tag "Search", class: "btn btn-outline-primary"
-    %buttonbtn.btn-outline-success.my-2.my-sm-0
-      %i.fi-magnifying-glass
+  - if user_signed_in?
+    = form_tag searches_path, :method=>:get, class: 'form-inline' do
+      = search_field_tag :q, "", class: 'form-control mr-sm-2'
+      = button_tag "Search", class: "btn btn-outline-primary"
+      %buttonbtn.btn-outline-success.my-2.my-sm-0
+        %i.fi-magnifying-glass
+
+    %div#navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.ml-auto.pr-2
+        %li.nav-item= link_to "Topics", topics_path, class:'nav-link'
+        %li.nav-item= link_to "Questions", questions_path, class:'nav-link'
+        %li.nav-item= link_to "Videos", videos_path, class:'nav-link'
+        %li.nav-item= link_to "YARD Docs", docs_path, class:'nav-link'
+        - if current_user && current_user.admin?
+          %li.nav-item= link_to "Admin", admin_home_index_path, class:'nav-link'
 
 
-  %div#navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto.mx-auto
-      %li.nav-item= link_to "Topics", topics_path, class:'nav-link'
-      %li.nav-item= link_to "Questions", questions_path, class:'nav-link'
-      %li.nav-item= link_to "Videos", videos_path, class:'nav-link'
-      %li.nav-item= link_to "YARD Docs", docs_path, class:'nav-link'
-      - if current_user && current_user.admin?
-        %li.nav-item= link_to "Admin", admin_home_index_path, class:'nav-link'
-
-
-  - if current_tenant && ! @static_render
-    %nav.nav-item
+  - if current_tenant && !@static_render
+    %nav.navbar-nav.nav-item.ml-auto.px-1
       - if user_signed_in?
         = link_to "Sign Out", destroy_user_session_path, {:method=>:delete, :class=>'btn btn-info'}
       - else
-        = link_to "Sign in/Sign up", new_user_session_path, {:class=>'btn btn-info'}
-  %nav.divider.show-for-small
+        = link_to "Sign in/Sign up", new_user_session_path, {:class=>'btn btn-info '}
   - if user_signed_in? # no user if generating static docs from site
-    = current_user && link_to(account_path, :class=>'nav_avatar') do
-      = render_avatar(current_user, :size=>43)
+    .nav
+      = current_user && link_to(account_path, :class=>'nav_avatar') do
+        .navbar-nav.navbar-right.px-1
+          %li.avatar
+            = render_avatar(current_user, :size=>43)
 = javascript_include_tag "autocomplete"

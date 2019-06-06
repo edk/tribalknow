@@ -1,24 +1,22 @@
 
-= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+- render_custom_text 'top' do |header, text|
+  .row
+    .col
+      = text
 
-  - render_custom_text 'top' do |header, text|
-    .row
-      .col
-        = text
-
-  - if @use_github_oauth
-    .row.p-5
-      .col-lg-7
-        .row
-          .col
-            .card
-              .card-header
-                %h3.card-title Login with Github OAuth
-              .card-body
-                %p If you have access to the Github repo for this organization, use this login method.
-                = link_to "Login with GitHub OAuth", user_github_omniauth_authorize_path, {:class=>'btn btn-lg btn-primary card-link float-right'}
-            %br
-
+.row.p-5
+  .col-lg-7
+    - if @use_github_oauth
+      .row
+        .col
+          .card
+            .card-header
+              %h3.card-title Login with Github OAuth
+            .card-body
+              %p If you have access to the Github repo for this organization, use this login method.
+              = link_to "Login with GitHub OAuth", user_github_omniauth_authorize_path, {:class=>'btn btn-lg btn-primary card-link float-right'}
+          %br
+    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
       - if @use_manual_login
         .row.pt-5
           .col
@@ -32,10 +30,11 @@
                   = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
               .card-footer
                 = f.button :submit, "Login", :class=>'btn btn-warning float-right'
-      .col
-        = render "devise/shared/links"
 
-  - render_custom_text 'bottom' do |header, text|
-    .row
-      .col
-        = text
+  .col
+    = render "devise/shared/links"
+
+- render_custom_text 'bottom' do |header, text|
+  .row
+    .col
+      = text

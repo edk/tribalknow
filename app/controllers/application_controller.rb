@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def scope_current_tenant
     Tenant.current_id = current_tenant.try(:id)
-    @use_manual_login = false
+    @use_manual_login = true
     @use_github_oauth = true
 
     if current_tenant.nil? && !request.subdomain.blank?
