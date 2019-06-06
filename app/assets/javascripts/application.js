@@ -10,8 +10,6 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
 //= require select2
 //= require underscore
 //= require mdedit
@@ -20,6 +18,7 @@
 //= require jquery.purr
 //= require best_in_place.purr
 //= require jquery-ui
+//   this might require jquery or jquery ujs
 //= require autocomplete
 //= require ahoy
 //= require Chart.bundle

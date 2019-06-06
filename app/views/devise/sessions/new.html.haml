@@ -3,39 +3,39 @@
 
   - render_custom_text 'top' do |header, text|
     .row
-      .large-8.large-centered.columns
+      .col
         = text
 
-  .row
-    .col-lg-6
-      .card
-        .card-header
-          %h3.card-title Login with Github OAuth
-        .card-body
-          %p If you have access to the Github repo for this organization, <strong>DO NOT</strong> use manual login.  Check your <strong>SPAM</strong> folder for the confirmation email for the final step.  Thanks!
-        .card-body
-          = link_to "Login with GitHub OAuth", user_github_omniauth_authorize_path, {:class=>'btn btn-primary stretched-link'}
+  - if @use_github_oauth
+    .row.p-5
+      .col-lg-7
+        .row
+          .col
+            .card
+              .card-header
+                %h3.card-title Login with Github OAuth
+              .card-body
+                %p If you have access to the Github repo for this organization, use this login method.
+                = link_to "Login with GitHub OAuth", user_github_omniauth_authorize_path, {:class=>'btn btn-lg btn-primary card-link float-right'}
+            %br
 
-  .row
-    .col-lg-6
-      .card
-        .card-header
-          %h5 Manual Login
-        .card-body
-          .form-group
-            = f.input :email, :required => false, :autofocus => true
-            = f.input :password, :required => false
-            = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-        .card-footer
-          = f.button :submit, "Login", :class=>'button'
-    .large-2.columns
-
+      - if @use_manual_login
+        .row.pt-5
+          .col
+            .card
+              .card-header
+                %h5 Manual Login
+              .card-body
+                .form-group
+                  = f.input :email, :required => false, :autofocus => true
+                  = f.input :password, :required => false
+                  = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+              .card-footer
+                = f.button :submit, "Login", :class=>'btn btn-warning float-right'
+      .col
+        = render "devise/shared/links"
 
   - render_custom_text 'bottom' do |header, text|
     .row
-      .large-8.large-centered.columns
+      .col
         = text
-.row
-  .large-12.columns
-    = render "devise/shared/links"
-

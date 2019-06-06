@@ -26,6 +26,8 @@ class ApplicationController < ActionController::Base
 
   def scope_current_tenant
     Tenant.current_id = current_tenant.try(:id)
+    @use_manual_login = false
+    @use_github_oauth = true
 
     if current_tenant.nil? && !request.subdomain.blank?
       flash[:notice] = "Unknown subdomain #{request.subdomain}"
