@@ -1,36 +1,37 @@
 -# @static_render needs to disable cache for rendering in that context
 - cache(['topics/index', @topics_cache_key]) do
   - set_title "#{Tenant.default_title}: All topics"
-  
+
   .row
-    %h2= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"
-  
-    %br{:style=>'padding:3em;'}
-    %ul
-      - @topics.each do |topic|
-        %li.topic_index_element
-          .left.icon_drop_target.topic_icon{:id=>"topic_icon_#{topic.id}", :url=>set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb)), topic_path(topic)
-  
-          .title
-            = link_to topic.name, topic_path(topic)
-            = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
-  
-          %p
-            - if topic.description.present?
-              = truncate topic.description, length: 80*5
-            - else
-              - if !@static_render
-                = link_to edit_topic_path(topic) do
-                  No description
-          - if topic.sub_topics.present?
-            .subtopics
-              = "#{pluralize topic.descendants.count, 'subtopic'}"
+    .col
+      %h2= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"
+
+  .row
+    .col
+      .card-columns.topic-card
+        - @topics.each do |topic|
+          .card.bg-light
+            .icon_drop_target.topic_icon{id: "topic_icon_#{topic.id}", url: set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb), class: "card-img-top"), topic_path(topic)
+          .card-body
+            .card-title
+              = link_to topic.name, topic_path(topic)
+              = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
+    
+            .card-text
+              - if topic.description.present?
+                = truncate topic.description, length: 80*5
+              - else
+                - if !@static_render
+                  = link_to edit_topic_path(topic) do
+                    No description
+            - if topic.sub_topics.present?
+              .subtopics
+                = "#{pluralize topic.descendants.count, 'subtopic'}"
   
 - unless @static_render
-  .row_spacer
   .row
-    .columns.large-8
+    .col-lg-8
       = will_paginate(@topics) if @topic.respond_to?(:total_pages)
-    .columns.large-4.center
-      = link_to 'Create new Topic', new_topic_path, :class=>'button small'
+    .col
+      = link_to 'Create new Topic', new_topic_path, :class=>'btn btn-primary'
 

@@ -1,3 +1,11 @@
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/mixins/_breakpoints';
+
+.topic-card {
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+}
 
 .card-lists {
    margin-top: 1em;
