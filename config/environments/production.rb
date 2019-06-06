@@ -75,3 +75,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+
+require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))

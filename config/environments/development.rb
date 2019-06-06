@@ -53,3 +53,5 @@ Rails.application.configure do
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 end
+
+require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))
