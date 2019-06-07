@@ -1,7 +1,6 @@
 
 .row.answer_content.ml-5{:id=>"answer_#{answer.id}"}
   .col-sm-8
-    xx
     = archive_answer(answer)
     = find_and_preserve best_in_place_with_edit_icon(answer, :text, {:as=>'textarea', :raw=>true, :display_with=>lambda { |content| render_md(content.to_s)}, :url=>question_answer_url(answer.question, answer) } )
   .col-sm-3

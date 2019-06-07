@@ -67,10 +67,22 @@
   - unless @static_render
     .col-lg-4
       = link_to "Ask a new question".html_safe, new_question_path, class: 'btn btn-primary btn-sm btn-block'
-      .panel.tag_cloud
-        %h3 Tags
-        - tag_cloud(@tag_cloud, %w(css1 css2 css3 css4)) do |tag, css_class|
-          = link_to tag.name, questions_path(tag: tag.name), :class => "#{css_class} badge badge-secondary"
+
+
+      .card.popular_list.card-lists
+        .card-body
+          .card-header
+            %h5.card-title Top Q&amp;A
+          %ul.list-group
+            - @top[:qna] && @top[:qna].each do |props|
+              %li.list-group-item.list-group-flush
+                = link_to "#{props[:title]}", question_path(props[:id])
+                = props[:view_count]
+
+      -# .panel.tag_cloud
+      -#   %h3 Tags
+      -#   - tag_cloud(@tag_cloud, %w(css1 css2 css3 css4)) do |tag, css_class|
+      -#     = link_to tag.name, questions_path(tag: tag.name), :class => "#{css_class} badge badge-secondary"
       / .panel
       /   .h2 Popular questions
       / .panel

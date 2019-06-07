@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+
+
   def index
     query = Question.order(:id => :desc)
 
@@ -16,9 +18,24 @@ class QuestionsController < ApplicationController
       query = query.joins(:answers).where("answers.creator_id" => @answered_by.id)
     end
 
-    @tag_cloud = Question.tag_counts_on(:tags)
+    # @tag_cloud = Question.tag_counts_on(:tags)
 
     @questions = query.paginate(:page=>params[:page])
+    
+    @top = {}
+    @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(12).top(:properties)
+    cache_key = [ 'top_qna', @top[:qna].map{ |k,v| v } ]
+    @top[:qna] = Rails.cache.fetch(cache_key) do
+      @top[:qna].map do |props|
+        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+        {
+          count: props[1],
+          id: props[0]["id"],
+          title: Question.friendly.find(props[0]["id"]).title,
+          view_count: view_count
+        }
+      end
+    end
   end
 
   def show
