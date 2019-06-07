@@ -1,33 +1,33 @@
 - set_title "#{Tenant.default_title}: #{@question.title}"
 
-.row.for_header
-  .columns.large-10
+.row.mt-3.for_header.border-bottom
+  .col-lg-10
     %h1.title#question_title= best_in_place @question, :title
-  .columns.large-2{style: 'position:relative'}
+  .col-lg-2{style: 'position:relative'}
     %div{style:'float: left; padding-top: 1.25em; padding-right: 0.5em;'}= archive_question(@question)
     %div{style:'float: left; padding-top: 0.5em;'}= link_to image_tag("HipChat.png", :size=>"45x45", :title => "Post to Hipchat"), notify_question_path(@question, :ping=>true), {:class=>'icon_link', :remote=>true, :method=>:post, :confirm=>"Post to Hipchat?"} if NotifyHipchat.hipchat_configured?
 
 .row.question
-  .columns.large-11#question_body.question_content
+  .col-lg-8.pl-5#question_body.question_content
     = find_and_preserve best_in_place_with_edit_icon(@question, :text, {:as=>'textarea', :raw=>true, :display_with=>lambda{ |content| render_md(content.to_s) }})
-  .columns.large-1
+  .col-lg-4
     = render :partial=>'/shared/votes', :locals=>{:type=>'question', :object=>@question}
-.row{:style=>'margin-top:15px;'}
-  .columns.large-6
+    = asked_by(@question)
+
+.row.mb-5
+  .col
     %span.has-tip{:'data-tooltip'=>'', :title=>'click to edit tags'}= link_to "Tags:", "javascript:alert('TODO: need tag editing here')"
     .tags_editor
       - if @question.tags.present?
         -# @question.tags.each do |tag|
         =# link_to tag, questions_path(:tag=>tag), :class=>"tiny button radius round"
         = render_tag_links(@question.tags)
-  .columns.large-2
-  .columns.large-4
-    = asked_by(@question)
 
-%h4{:style=>"padding-top:1.5em;"}
-  %b #{pluralize @question.answers.size, "answer"}:
+.row.mb-5
+  .col
+    %h4.border-bottom #{pluralize @question.answers.size, "answer"}:
+    = render :partial => '/answers/answer', :collection => @question.answers, :spacer_template=>'questions/answer_spacer' if @question && @question.answers.present?
 
-%hr
-= render :partial => '/answers/answer', :collection => @question.answers, :spacer_template=>'questions/answer_spacer' if @question && @question.answers.present?
-
-= render :partial=>'add_answer', :locals=>{:question=>@question} unless @static_render
+.row
+  .col
+    = render :partial=>'add_answer', :locals=>{:question=>@question} unless @static_render

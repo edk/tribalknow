@@ -1,19 +1,16 @@
+- if question.answers.empty?
+  %h5= "No answers yet, be the first to add yours!"
+- else
+  %h5= "Add your answer..."
+
 .row
-  .small-8.columns
-    - if question.answers.empty?
-      %h3= "No answers yet, be the first to add yours!"
-    - else
-      %h3= "Add your answer..."
-%br/
-= simple_form_for [question, Answer.new], :url=>question_answers_path(question) do |f|
-  .row
-    .large-10.columns
+  .col-lg-10
+    = simple_form_for [question, Answer.new], :url=>question_answers_path(question) do |f|
       #in.row
         = f.text_area :text, class: ''
       #out
       .row
-        .columns.large-4
+        .col-lg-2
           = f.submit 'Submit answer', :class => 'button expand'
-        .columns.large-4
+        .col-lg-2
           = post_to_hipchat_checkbox
-        .columns.large-4
