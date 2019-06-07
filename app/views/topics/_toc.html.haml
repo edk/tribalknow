@@ -1,4 +1,8 @@
-.panel#toc
-  .panel_title Contents
-  %ul#toc_list
-    = render_toc_tree(toc, :skip_first_ul => false)
+.card.topic-card.bg-light.mb-3#toc
+  .card-body
+    .card-title
+      %h5 Contents
+    .card-text
+      %ul#toc_list
+        = render_toc_tree(toc, :skip_first_ul => false)
+

@@ -1,54 +1,88 @@
 - cache @topic do
   - set_title "#{Tenant.default_title}: #{@topic.name}"
   - html, toc = render_md @topic.content, with_toc: true
-  
-  .row<
-    .columns.large-3{style: 'margin-left: -2em'}
+  -# .row.p-3
+  -#   .col
+  -#     .card-columns.topic-card-area
+  -#       - @topics.each do |topic|
+  -#         .card.topic-card.bg-light
+  -#           .icon_drop_target.topic_icon{id: "topic_icon_#{topic.id}", url: set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb), class: "topic-card-image card-img-top"), topic_path(topic)
+            
+  -#           .card-body
+  -#             .card-title
+  -#               %h5
+  -#                 = link_to topic.name, topic_path(topic)
+  -#               = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
+    
+  -#             .card-text
+  -#               - if topic.description.present?
+  -#                 = truncate topic.description, length: 80*5
+  -#               - elsif !@static_render
+  -#                 = link_to edit_topic_path(topic) do
+  -#                   No description
+  -#           %ul.list-group.list-group-flush
+  -#             %li.list-group-item.list-group-item-light
+  -#               - if topic.sub_topics.present?
+  -#                 = "#{pluralize topic.descendants.count, 'subtopic'}"
+  -#               - else
+  -#                 No subtopics. needs to move?
+  .row
+    .col-lg-3
       - if toc.present?
         = render partial: 'toc', locals: { toc: toc }
-      .panel
-        .panel_title Sub-topics
-        %ul.panel_list.subtopic_list
-          - @topic.sub_topics.each do |sub|
-            %li= link_to sub.name, topic_path(sub)
-        .row_divider
-        .panel_offset_link= link_to "Add Sub-topic", new_topic_path(:parent_topic_id=>@topic.id) unless @static_render
-      / .panel
-      /   .panel_title Links/files
-      / .panel
-      /   .panel_title Quizzes
-      /   How well do you know the topic?
-      - unless @static_render
-        .panel
-          .panel_title{:style=>'margin-bottom:8px;'} Tags
-          - if @topic.tags.size > 0
-            = render_tag_links @topic.tags
-          - else
-            %p No tags for this topic
-        .panel
-          .panel_title Questions
-          - @topic.questions.each do |question|
-            %p= link_to question.title, question_path(question)
-          .row_divider
-          .panel_offset_link= link_to "Ask Related Question", new_question_path(:topic_id=>@topic.id)
-      - unless @static_render
-        = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'button small radius expand'
       
-        = link_to "#{f_icon('x')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'button tiny radius expand alert' if current_user.admin? || @topic.creator == current_user
-      .panel
-        .panel_title History
-        = render partial: 'topics/history', locals: { topic: @topic }
+      .card.topic-card.bg-light.mb-3
+        .card-body.pb-0
+          .card-title.pb-0
+            %h5 Sub-topics
+        %ul.list-group.list-group-flush
+          - @topic.sub_topics.each do |sub|
+            %li.list-group-item.pb-1.pt-1= link_to sub.name, topic_path(sub)
+        .card-body
+          = link_to "<i class='fas fa-plus-circle'></i> Add Sub-topic".html_safe, new_topic_path(:parent_topic_id=>@topic.id) unless @static_render
 
-    .columns.large-9{style: 'padding-left: 0'}<
+      - unless @static_render
+        .card.topic-card.bg-light.mb-3
+          .card-body
+            .card-title     
+              %h5 Tags
+            .card-text
+              - if @topic.tags.size > 0
+                = render_tag_links @topic.tags
+              - else
+                %p No tags for this topic
+
+        .card.topic-card.bg-light.mb-3
+          .card-body
+            .card-title 
+              %h5 Questions
+            .card-text
+            - @topic.questions.each do |question|
+              %p= link_to question.title, question_path(question)
+            = link_to "<i class='fas fa-question-circle'></i> Ask Related Question".html_safe, new_question_path(:topic_id=>@topic.id)
+
+      - unless @static_render
+        = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'btn btn-primary btn-sm btn-block'
+      
+        = link_to "#{f_icon('x')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-primary btn-sm btn-block btn-warning' if current_user.admin? || @topic.creator == current_user
+
+      .card.topic-card.bg-light.mt-3
+        .card-body
+          .card-title 
+            %h5 History
+          .card-text
+            = render partial: 'topics/history', locals: { topic: @topic }
+
+    .col-lg-9
       = render "topics/topic_breadcrumb"
       %h1{:style=>'border-bottom: 1px solid silver; font-size: 275%;'}
         %b= @topic.name
       %i= @topic.description
-      .topic_content<
+      .topic_content
         = html
   
-  %div#history_popup.reveal-modal{:'data-reveal' => ''}
-    %h2 title
-    %p some text
-    %a.close-reveal-modal &#215;
+  -# %div#history_popup.reveal-modal{:'data-reveal' => ''}
+  -#   %h2 title
+  -#   %p some text
+  -#   %a.close-reveal-modal &#215;
   
