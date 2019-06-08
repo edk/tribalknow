@@ -1,30 +1,30 @@
 - set_title "#{Tenant.default_title}: Account for #{@user.name}"
 
-.row
-  .columns.large-11
-    = simple_form_for @user, :url=>account_path do |f|
-      .row
-        .center= f.error_notification
-        .columns.large-1
-          &nbsp;
-        .columns.large-4
-          %br
-          .panel.center#avatar_drop
-            = render_avatar(@user)
-            %hr
-            %instructions
-              %a#reset_to_gravatar{href:'#', :style=>"display:#{@user.avatar? ? '' : 'none'}"}
-                Click to reset and use your Gravatar
-              %div#set_your_avatar{:style=>"display:#{!@user.avatar? ? '' : 'none'}"}
-                Click here or drag your own avatar
-        .columns.large-6
-          = f.input :name, :hint=>"This is the name used in display"
-          = f.input :email, :hint=>"Used for your login and notifications"
-          = f.input :hipchat_mention_name, :input_html=>{:placeholder=>"@mention"}, :hint=>"Used to notify you in Hipchat"
-          %br
-          = f.input :password
-          = f.input :password_confirmation
-      
-          %br
-          .right
-            = f.submit "Update", :class=>"button"
+.container.mt-3
+  .row
+    .col
+      = simple_form_for @user, :url=>account_path do |f|
+        .row
+          .col-lg-3
+            %br
+            .panel.center#avatar_drop
+              %center= render_avatar(@user)
+              %hr
+              %instructions
+                %a#reset_to_gravatar.btn.btn-secondary.p-1{href:'#', :style=>"display:#{@user.avatar? ? '' : 'none'}"}
+                  Click to reset and use your Gravatar
+                %div#set_your_avatar.btn.btn-secondary.p-1{:style=>"display:#{!@user.avatar? ? '' : 'none'}"}
+                  Click here or drag your own avatar
+              %br
+              %center= f.error_notification
+          .col-lg-6
+            = f.input :name, :hint=>"This is the name used in display"
+            = f.input :email, :hint=>"Used for your login and notifications"
+            = f.input :hipchat_mention_name, :input_html=>{:placeholder=>"@mention"}, :hint=>"Used to notify you in Hipchat"
+            %br
+            = f.input :password
+            = f.input :password_confirmation
+        
+            %br
+            .right
+              = f.submit "Update", :class=>"btn btn-primary"
