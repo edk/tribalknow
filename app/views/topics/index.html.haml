@@ -10,7 +10,8 @@
         = search_field_tag :q, "", class: 'form-control mr-sm-2'
         = button_tag "<i class='fas fa-search'></i> filter".html_safe, class: "btn btn-outline-secondary"
     .col
-      .text-muted Sort By Date, popularity, Filter By Category, By User
+      = link_to 'Create new Topic', new_topic_path, :class=>'btn btn-primary'
+      -# .text-muted sort by date, popularity, filter by category, by user
 
   .row.p-3
     .col
@@ -43,5 +44,4 @@
     .col-lg-8
       = will_paginate(@topics) if @topic.respond_to?(:total_pages)
     .col
-      = link_to 'Create new Topic', new_topic_path, :class=>'btn btn-primary'
 
