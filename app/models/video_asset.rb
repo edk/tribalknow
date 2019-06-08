@@ -114,11 +114,11 @@ class VideoAsset < FileAsset
     unless %w[S3_BUCKET S3_ACCESS_KEY S3_SECRET].all? { |key| ENV[key].present? }
       raise "Missing S3 Environment variables" 
     end
-
     {
       bucket: ENV['S3_BUCKET'],
       access_key_id: ENV['S3_ACCESS_KEY'],
-      secret_access_key: ENV['S3_SECRET']
+      secret_access_key: ENV['S3_SECRET'],
+      s3_region: ENV['S3_REGION']
     }
   end
 

@@ -19,8 +19,8 @@
             /%iframe{style: 'width: 400px; height: 200px', frameborder: '0'}
             = link_to video_path(vid) do
               .video_poster
-                %image{src: vid.asset.expiring_url(60.minutes, :thumb)}
-                / %image{src: "http://placehold.it/400x200", style: "border:1px solid green;"}
+                - expiring_url = vid.asset.expiring_url(600, :thumb)
+                %image{src: expiring_url.html_safe }
             .name_container
               %b.name{ title: vid.name }= vid.name.presence || "Name me!"
               - if current_user == vid.creator
