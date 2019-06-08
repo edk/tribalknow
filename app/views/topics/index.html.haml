@@ -15,32 +15,33 @@
       = link_to 'Create new Topic', new_topic_path, :class=>'btn btn-primary'
       -# .text-muted sort by date, popularity, filter by category, by user
 
-  .row.p-3
-    .col
-      .card-columns.topic-card-area
-        - @topics.each do |topic|
-          .card.topic-card.bg-light
-            .icon_drop_target.topic_icon{id: "topic_icon_#{topic.id}", url: set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb), class: "topic-card-image card-img-top"), topic_path(topic)
-            
-            .card-body
-              .card-title
-                %h5
-                  = link_to topic.name, topic_path(topic)
-                = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
-    
-              .card-text
-                - if topic.description.present?
-                  = truncate topic.description, length: 80*5
-                - elsif !@static_render
-                  = link_to edit_topic_path(topic) do
-                    No description
-            %ul.list-group.list-group-flush
-              %li.list-group-item.list-group-item-light
-                - if topic.sub_topics.present?
-                  = "#{pluralize topic.descendants.count, 'subtopic'}"
-                - else
-                  No subtopics. needs to move?
-    
+.topic-card-container
+  - @topics.each do |topic|
+    .card
+      .topic-image
+        .icon_drop_target.topic_icon{id: "topic_icon_#{topic.id}", url: set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb), class: "border border-dark rounded"), topic_path(topic)
+          
+        %center.mt-2
+          - if topic.sub_topics.present?
+            .text-muted= "#{pluralize topic.descendants.count, 'subtopic'}"
+          - else
+            .text-muted{title:"0 subtopics"} 0 subtopics
+        
+      .topic-body
+        .card-title
+          %h5.border-bottom.border-dark{style:'width:10em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'}
+            = link_to topic.name, topic_path(topic), {style:'', title:topic.name}
+          
+          = link_to "#{f_icon('x-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
+
+        .card-text
+          - if topic.description.present?
+            = truncate topic.description, length: 80*5
+          - elsif !@static_render
+            = link_to edit_topic_path(topic) do
+              No description
+
+
 - unless @static_render
   .row
     .col-lg-8

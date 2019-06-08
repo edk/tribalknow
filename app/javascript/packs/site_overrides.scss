@@ -1,47 +1,54 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/mixins/_breakpoints';
 
-.topic-card-area {
-  @include media-breakpoint-only(xl) {
-    column-count: 6;
-  }
-  .topic-card {
-    height: 420px;
-    overflow: auto;
-  }
-  .topic-card-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+.topic-card-container {
+  .card {
+    @extend .bg-light;
+    @extend .m-2;
+    @extend .float-left;
+    @extend .row;
+    width:20em; height:9em;
+
+    .topic-image {
+      @extend .col-4;
+      @extend .no-gutters;
+      @extend .px-0;
+    }
+    .topic-body {
+      @extend .col-8;
+      @extend .no-gutters;
+      @extend .px-1;
+      
+    }
   }
 }
 
-.card-lists {
-   margin-top: 1em;
-   padding: 0em;
-   .card-body {
-     padding: 0px;
-     .card-header {
-       padding-bottom: 0px;
-     }
-   }
- }
+// .topic-card-area {
+//   @include media-breakpoint-only(xl) {
+//     column-count: 6;
+//   }
+//   .topic-card {
+//     height: 420px;
+//     overflow: auto;
+//   }
+//   .topic-card-footer {
+//     position: absolute;
+//     bottom: 0;
+//     width: 100%;
+//   }
+// }
 
+// .card-lists {
+//    margin-top: 1em;
+//    padding: 0em;
+//    .card-body {
+//      padding: 0px;
+//      .card-header {
+//        padding-bottom: 0px;
+//      }
+//    }
+//  }
 
-span.badge-count {
-  vertical-align: middle;
-  font-size: .7em;
-  text-align: center;
-  border-radius: 10px;
-  border: 4px;
-  display: inline-block;
-  white-space: nowrap;
-  color: #7a7a7a;
-  background-color: #e4e4e4;
-  padding: .4em;
-  margin: 0px 2px 0px 2px;
-  line-height: 1;
-}
 
 .avatar {
   width: 48px;
