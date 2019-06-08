@@ -29,7 +29,8 @@ gem "octokit"
 gem "pundit"
 gem 'paperclip'
 gem 'paperclip-av-transcoder'
-gem 'aws-sdk'
+gem 'aws-sdk-s3'
+# gem 'aws-sdk'
 gem 'hipchat'
 gem 'certified'
 gem 'aasm'
