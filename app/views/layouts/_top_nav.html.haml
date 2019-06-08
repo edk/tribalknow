@@ -7,9 +7,9 @@
   - if user_signed_in?
     = form_tag searches_path, :method=>:get, class: 'form-inline' do
       = search_field_tag :q, "", class: 'form-control mr-sm-2'
-      = button_tag "Search", class: "btn btn-outline-primary"
-      %buttonbtn.btn-outline-success.my-2.my-sm-0
-        %i.fi-magnifying-glass
+      = button_tag class: "btn btn-outline-primary" do
+        %i.fas.fa-search 
+        search
 
     %div#navbarSupportedContent.collapse.navbar-collapse
       %ul.navbar-nav.ml-auto.pr-2

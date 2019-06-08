@@ -8,7 +8,9 @@
     .col
       = form_tag searches_path, :method=>:get, class: 'form-inline' do
         = search_field_tag :q, "", class: 'form-control mr-sm-2'
-        = button_tag "<i class='fas fa-search'></i> filter".html_safe, class: "btn btn-outline-secondary"
+        = button_tag class: "btn btn-outline-secondary" do
+          %i.fas.fa-search
+          filter
     .col
       = link_to 'Create new Topic', new_topic_path, :class=>'btn btn-primary'
       -# .text-muted sort by date, popularity, filter by category, by user
