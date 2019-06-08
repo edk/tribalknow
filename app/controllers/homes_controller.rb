@@ -24,7 +24,7 @@ class HomesController < ApplicationController
           begin
             topic = Topic.friendly.find(props[0]["id"])
             string =  ActionController::Base.helpers.sanitize([topic.name, topic.description].reject(&:blank?).join(' - '))
-            view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+            view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge badge-secondary')
             {
               count: props[1],
               id: props[0]["id"],
@@ -41,7 +41,7 @@ class HomesController < ApplicationController
       cache_key = [ 'top_qna', @top[:qna].map{ |k,v| v } ]
       @top[:qna] = Rails.cache.fetch(cache_key) do
         @top[:qna].map do |props|
-          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge badge-secondary')
           {
             count: props[1],
             id: props[0]["id"],
@@ -55,7 +55,7 @@ class HomesController < ApplicationController
       cache_key = [ 'top_videos', @top[:videos].map{ |k,v| v } ]
       @top[:videos] = Rails.cache.fetch(cache_key) do
         @top[:videos].map do |props|
-          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge-count')
+          view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge badge-secondary')
           title = VideoAsset.friendly.find(props[0]["id"]).name rescue ""
           video_id = props[0]["id"] rescue nil
           count = props[1] rescue nil
@@ -78,7 +78,7 @@ class HomesController < ApplicationController
         limit(20).to_sql).to_a
       
       @top[:searches] = @searches.reject {|el| el['normalized_query'].blank? }.map do |props|
-        view_count = ActionController::Base.helpers.content_tag(:span, "#{props['searches_count'].to_i}", class:'badge-count')
+        view_count = ActionController::Base.helpers.content_tag(:span, "#{props['searches_count'].to_i}", class:'badge badge-secondary')
         {
           normalized_query: props['normalized_query'],
           view_count: view_count
