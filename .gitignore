@@ -22,6 +22,7 @@ log/*.pid
 *.swp
 
 config/database.yml
+config/*-prod
 
 solr/data
 solr/pids
@@ -37,6 +38,7 @@ config/deploy.rb
 config/sidekiq.god
 config/newrelic.yml
 .env
+.env*
 *.orig
 docs
 /public/assets
