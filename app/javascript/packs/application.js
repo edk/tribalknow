@@ -19,8 +19,6 @@ import '@fortawesome/fontawesome-free/css/all';
 import '@fortawesome/fontawesome-free/js/all';
 
 import 'bootstrap/dist/js/bootstrap';
-// import 'bootstrap/dist/css/bootstrap';
-// import 'bootstrap/scss/mixins/_breakpoints';
 
 // import './theme_custom.css';
 import './site_overrides'
