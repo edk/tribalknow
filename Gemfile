@@ -86,10 +86,6 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem "airbrussh", require: false
-  gem 'capistrano'#, '~> 3.0'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rvm'
   gem 'guard-livereload', require: false
   gem 'rack-livereload'
   gem 'sanitize_email'
