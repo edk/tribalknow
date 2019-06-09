@@ -10,8 +10,8 @@
     width:20em; height:9em;
 
     .topic-image {
-      width: 6em;
     }
+    
     .topic-body {
       width: 14em;
       @extend .px-2;
@@ -25,7 +25,6 @@
 
           width:10em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
           position:relative;
-          
         }
       }
     }
