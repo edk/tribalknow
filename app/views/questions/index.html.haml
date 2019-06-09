@@ -62,7 +62,7 @@
             = render_tag_links question.tags
     .row
       .col
-        = will_paginate @questions if @questions.respond_to?(:total_pages)
+        = will_paginate(@questions,:renderer => WillPaginate::ActionView::BootstrapLinkRenderer) if @questions.respond_to?(:total_pages)
 
   - unless @static_render
     .col-lg-4
