@@ -83,6 +83,8 @@ gem 'dotenv-deployment'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development do
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 3.3.0'
   gem "airbrussh", require: false
   gem 'capistrano'#, '~> 3.0'
   gem 'capistrano-rails'
@@ -94,8 +96,6 @@ group :development do
 end
 
 group :development, :test do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'pry'
   gem 'byebug'
   gem 'seed_dump'
