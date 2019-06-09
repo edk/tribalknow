@@ -236,7 +236,7 @@ module ApplicationHelper
 
   def in_place_edit_panel note, path
     content_tag(:div, { class: 'card card-lists' }) do
-      content_tag(:div, { class: 'card-body' }) do
+      content_tag(:div, { class: 'card-body p-0' }) do
         content_tag(:div, { class: 'card-header' }) do
           title = content_tag(:h5, best_in_place(note, 'title' , {:as=>'input', :raw=>true }), {class: 'card-title'} )
 

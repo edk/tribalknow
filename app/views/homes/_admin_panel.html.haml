@@ -1,10 +1,9 @@
 - unless current_user.settings(:preference).admin_panel == 'closed'
-  .row{:'data-alert'=>'', :'data-href'=>settings_path('admin_panel', :value=>'closed')}
-    .columns.small-12
-      .panel.callout
-        %a{:href=>"#", :class=>"close"}
-        %h3 Links to admin functions
-        %ul
-          %li= link_to "Approve new users.", admin_approve_users_path
-          %li= link_to "Admin users", admin_users_path
+  .row.mb-3{:'data-alert'=>'', :'data-href'=>settings_path('admin_panel', :value=>'closed')}
+    .col
+      %a{:href=>"#", :class=>"close"}
+      %h3 Links to admin functions
+      %ul
+        %li= link_to "Approve new users.", admin_approve_users_path
+        %li= link_to "Admin users", admin_users_path
 

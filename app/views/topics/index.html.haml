@@ -11,9 +11,10 @@
       = button_tag class: "btn btn-outline-secondary" do
         %i.fas.fa-search
         filter
-  .col
+  .col.text-right
     = link_to 'Create new Topic', new_topic_path, :class=>'btn btn-primary'
     -# .text-muted sort by date, popularity, filter by category, by user
+
 .row
   .col-1
     Filters go here:

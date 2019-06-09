@@ -1,8 +1,8 @@
 
-.row
+.row.mb-3
   .col-lg-6
-    .card.popular_list.card-lists
-      .card-body
+    .card
+      .card-body.p-0
         .card-header
           %h5.card-title Popular Topics
         %ul.list-group
@@ -13,8 +13,8 @@
                 = props[:view_count]
 
   .col-lg-6
-    .card.popular_list.card-lists
-      .card-body
+    .card
+      .card-body.p-0
         .card-header
           %h5.card-title Top Q&amp;A
         %ul.list-group
@@ -24,8 +24,8 @@
               = props[:view_count]
 .row
   .col-lg-6
-    .card.popular_list.card-lists
-      .card-body
+    .card
+      .card-body.p-0
         .card-header
           %h5.card-title Top Search Terms
         %ul.list-group
@@ -37,8 +37,8 @@
               = props[:view_count]
 
   .col-lg-6
-    .card.popular_list.card-lists
-      .card-body
+    .card
+      .card-body.p-0
         .card-header
           %h5.card-title Top Videos
         %ul.list-group

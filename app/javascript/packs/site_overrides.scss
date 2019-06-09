@@ -14,10 +14,9 @@
     }
     .topic-body {
       width: 14em;
-      @extend .px-1;
+      @extend .px-2;
       
       .card-title {
-        @extend .px-1;
         a.delete_topic {position:absolute; top:0; right:0.25em;}
 
         h5 {

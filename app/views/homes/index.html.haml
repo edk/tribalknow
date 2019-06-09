@@ -1,13 +1,12 @@
 - set_title "#{Tenant.default_title} Home"
-.row
+.row.mt-3
   .col-lg
     -# render :partial=>"site_news"
     = render :partial=>'admin_panel' if current_user.admin?
+
 .row
   .col-lg-8
-    .row
-      .col-lg
-        = local_notes :fixed=>true, :default_title=>"Dev Central", :disable_admin=>true
+    .mb-3= local_notes :fixed=>true, :default_title=>"Dev Central", :disable_admin=>true
     = render partial: 'popular_lists', locals: { top: @top }
 
   .col-lg-4
