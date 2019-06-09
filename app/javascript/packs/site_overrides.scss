@@ -10,15 +10,25 @@
     width:20em; height:9em;
 
     .topic-image {
-      @extend .col-4;
-      @extend .no-gutters;
-      @extend .px-0;
+      width: 6em;
     }
     .topic-body {
-      @extend .col-8;
-      @extend .no-gutters;
+      width: 14em;
       @extend .px-1;
       
+      .card-title {
+        @extend .px-1;
+        a.delete_topic {position:absolute; top:0; right:0.25em;}
+
+        h5 {
+          @extend .border-bottom;
+          @extend .border-dark;
+
+          width:10em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+          position:relative;
+          
+        }
+      }
     }
   }
 }
