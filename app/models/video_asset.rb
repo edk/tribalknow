@@ -52,6 +52,7 @@ class VideoAsset < FileAsset
     storage: :s3,
     s3_permissions: 'private',
     s3_credentials: Proc.new { |a| a.instance.s3_credentials },
+    s3_url_options: { response_content_disposition: 'attachment;' },
     styles: {
       mp4: { format: 'mp4' },
       ogg: { format: 'webm' },
@@ -96,30 +97,29 @@ class VideoAsset < FileAsset
   end
 
   def expiring_download_url options = {}
-    s3 = AWS::S3.new(s3_credentials)
-    s3_videos_bucket = s3_credentials[:bucket]
-    bucket = s3.buckets[s3_videos_bucket]
-    style = options[:style] || :mp4
-    object_path = asset.path(style).sub(/^\//,'') # strip the leading /
-    object = bucket.objects[object_path]
-    expires = options[:expires] || 60.minutes
-
-    object.url_for(:get, { 
-      expires: expires,
-      response_content_disposition: 'attachment;'
-    }).to_s
+    asset.expiring_url(3600)
   end
 
-  def s3_credentials
+  def s3_credentials(version: nil)
     unless %w[S3_BUCKET S3_ACCESS_KEY S3_SECRET].all? { |key| ENV[key].present? }
       raise "Missing S3 Environment variables" 
     end
-    {
-      bucket: ENV['S3_BUCKET'],
-      access_key_id: ENV['S3_ACCESS_KEY'],
-      secret_access_key: ENV['S3_SECRET'],
-      s3_region: ENV['S3_REGION']
-    }
+    case version
+    when 2
+      {
+        credentials: {
+          access_key_id: ENV['S3_ACCESS_KEY'], secret_access_key: ENV['S3_SECRET'],
+        },
+        # bucket: ENV['S3_BUCKET'],
+        region: ENV['S3_REGION']
+      }
+    else
+      {
+        access_key_id: ENV['S3_ACCESS_KEY'], secret_access_key: ENV['S3_SECRET'],
+        bucket: ENV['S3_BUCKET'],
+        s3_region: ENV['S3_REGION']
+      }
+    end
   end
 
   def self.without_public_activity

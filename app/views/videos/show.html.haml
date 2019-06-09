@@ -5,7 +5,7 @@
 
 %h2= @video.name
 
-- expiry = 180.minutes
+- expiry = 180 * 60
 - poster_attr = "poster: #{@video.asset.expiring_url(expiry, :thumb)}"
 
 .row
