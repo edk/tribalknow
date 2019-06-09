@@ -16,6 +16,7 @@
 /log/*.log*
 log/*.pid
 /tmp
+/video
 /app/assets/tmp/*
 
 *.swp
@@ -55,3 +56,4 @@ public/packs
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+docker-compose.yml
