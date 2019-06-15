@@ -51,7 +51,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+  #config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+  config.web_console.whitelisted_ips = %w( 0.0.0.0/0 ::/0 )
+
 end
 
 require Rails.root.join("config/local_config.rb") if File.exist?(Rails.root.join("config/local_config.rb"))

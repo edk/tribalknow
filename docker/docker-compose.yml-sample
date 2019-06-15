@@ -22,7 +22,7 @@ services:
   # sphinx:
   #   image: leodido/sphinxsearch:latest
 
-  tribalknow:
+  web:
     build:
       context: .
       dockerfile: docker/Dockerfile
@@ -33,7 +33,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "3000:3000"
+      - 3000:3000
     depends_on:
       - mysql
       - redis

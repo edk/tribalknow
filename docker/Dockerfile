@@ -1,69 +1,45 @@
-FROM ruby:2.5-strech as build
+FROM ruby:2.5-stretch as build
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
-    apt-get install -qq -y locales build-essential nodejs yarn mysql-client \
-    libmysqlclient-dev curl default-jre cmake iputils-ping \
-    --fix-missing --no-install-recommends && \
+    apt-get install -qq -y nodejs yarn --fix-missing --no-install-recommends && \
+    apt-get install -qq -y locales build-essential mysql-client default-libmysqlclient-dev curl iputils-ping \
+        --fix-missing --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Set correct environment variables.
-ENV HOME=/root
-
-#ARG BUNDLE_PATH=/usr/local/rvm/gems/ruby-2.5.1@global
-# ARG BUNDLE_PATH=/usr/local/rvm/gems/default
-ARG BUNDLE_PATH=/usr/local/rvm/gems/ruby-2.5.1@global
-ENV BUNDLE_PATH=$BUNDLE_PATH
-ENV BUNDLE_GEMFILE=Gemfile
-#ENV BUNDLE_CACHE_PATH=$BUNDLE_PATH/cache
-
-# Use en_US.UTF-8 as our locale
-RUN locale-gen en_US.UTF-8
-ENV LC_ALL=C.UTF-8
-ENV LANG=en_US.UTF-8
-ENV LANGUAGE=en_US.UTF-8
-
-# there are two users in passenger-docker systems.  root and app.
-# rails apps can go under the app subdir and should be owned by app
-RUN mkdir -p /build
+RUN useradd -ms /bin/bash app
+RUN mkdir -p /build /app && chown -R app:app /build /app
+USER 1000
 WORKDIR /build
 
-ADD Gemfile Gemfile.lock ./
-
-ARG RAILS_ENV
-ARG BUNDLE_DEPLOYMENT_FLAG
-# set production vs dev bundle installs?
-RUN bundle config --global --delete  frozen 1
-RUN mkdir -p /root/.ssh
-# RUN rvm info
-RUN ssh-keyscan github.com >> /root/.ssh/known_hosts && \
-    mkdir -p $BUNDLE_PATH && \
-    echo "****Bundle installing packages" && \
-    echo "BUNDLE_PATH=$BUNDLE_PATH" && \
-    echo "bundle install --quiet --path $BUNDLE_PATH $BUNDLE_DEPLOYMENT_FLAG" && \
-    bundle install --quiet --path $BUNDLE_PATH $BUNDLE_DEPLOYMENT_FLAG
-    # && \
-    #echo "****Installing yarn packages" && \
-    #yarn install
-
-WORKDIR /root
-RUN rm -rf /root/.ssh
-
-RUN mkdir -p /home/app/tribalknow
-WORKDIR /home/app/tribalknow
+ENV HOME=/app
+ENV BUNDLE_PATH=/build
+ENV BUNDLE_GEMFILE=Gemfile
 ENV MYSQL_HOST=mysql
-
-# This is a bug in bundler - it does not use BUNDLE_PATH properly and only
-# picks it up from the .bundle/config (local, home or global file settings).
-RUN rm -rf /home/app/tribalknow/.bundle && cp -R /build/.bundle /home/app/tribalknow
-
-COPY config/database.yml.sample config/database.yml
-COPY --chown=app:app . /home/app/tribalknow
-
 ENV RAILS_LOG_TO_STDOUT=true
 ENV DISABLE_SPRING=1
 ARG IN_DOCKER_BUILD
+
+COPY --chown=app Gemfile Gemfile.lock ./
+
+RUN mkdir -p /app/.ssh/ && ssh-keyscan github.com >> /app/.ssh/known_hosts && \
+    mkdir -p $BUNDLE_PATH && \
+    echo "****Bundle installing packages" && \
+    echo "BUNDLE_PATH=$BUNDLE_PATH" && \
+    echo "bundle install --quiet --path $BUNDLE_PATH" && \
+    bundle install --quiet --path $BUNDLE_PATH
+
+WORKDIR /app
+
+COPY config/database.yml.sample config/database.yml
+COPY --chown=app:app . /app/
+
+RUN echo "****Installing yarn packages" && \
+    yarn install --check-files
+
 # RUN echo "creating assets" && bundle exec rake assets:precompile
 
+EXPOSE 3000
+CMD ['bundle', 'exec', 'puma', '-c', 'config/puma.rb']
