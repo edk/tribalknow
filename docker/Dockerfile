@@ -37,7 +37,8 @@ COPY config/database.yml.sample config/database.yml
 COPY --chown=app:app . /app/
 
 RUN echo "****Installing yarn packages" && \
-    yarn install --check-files
+    yarn install
+RUN ls -l node_modules || true
 
 # RUN echo "creating assets" && bundle exec rake assets:precompile
 

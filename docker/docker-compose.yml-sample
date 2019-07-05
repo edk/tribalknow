@@ -29,6 +29,8 @@ services:
     environment:
       - MYSQL_HOST=mysql
       - REDIS_STORE_URL=redis://redis:6379/0/cache
+    env_file:
+      - '.env.docker'
     command: bin/docker-start-rails-server.sh
     volumes:
       - .:/app
@@ -38,6 +40,20 @@ services:
       - mysql
       - redis
 
+  webpacker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    env_file:
+      - '.env.docker'
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/app
+    ports:
+      - 3035:3035
+    # depends_on:
+    #   - mysql
+    #   - redis
 # volumes:
 #   bundle_config:
 #   tmp_vol:
