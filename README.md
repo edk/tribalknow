@@ -51,6 +51,8 @@ $ docker-compose up
 
 `brew install  sphinx --mysql` to install searchd
 
+`bundle install`
+
 If you want to use the github omniauth provider (optional, not required):
 * set two environment variables, the client app id ID
 export GITHUB_KEY=your_key
@@ -62,6 +64,9 @@ See http://developer.github.com/guides/basics-of-authentication/ for more info.
 
 * seed the database:
 `rake db:seed`
+
+* launch with foreman:
+`foreman start`
 
 ### Thanks
 While the work on this project has been done outside of Coupa, special thanks to my employer,
