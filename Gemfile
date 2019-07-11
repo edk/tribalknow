@@ -22,7 +22,7 @@ gem 'rollbar' # exception service
 gem 'oj'
 
 gem 'mysql2'
-gem 'sqlite3', require: false
+#gem 'sqlite3', require: false
 gem 'devise'
 gem 'omniauth-github'
 gem "octokit"
