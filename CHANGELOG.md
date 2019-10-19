@@ -7,6 +7,7 @@ Major upgrade branch:
 * converted from zurb-foundation to bootstrap 4
 * add webpacker/yarn
 * Add docker configs to allow running locally with docker, as well as heroku
+* convert to postgres for heroku
 
 v0.0.1 - first major version of tkn
 

@@ -18,6 +18,7 @@ ENV HOME=/app
 ENV BUNDLE_PATH=/build
 ENV BUNDLE_GEMFILE=Gemfile
 ENV MYSQL_HOST=mysql
+ENV POSTGRES_URL=""
 ENV RAILS_LOG_TO_STDOUT=true
 ENV DISABLE_SPRING=1
 ARG IN_DOCKER_BUILD
@@ -38,7 +39,7 @@ COPY --chown=app:app . /app/
 
 RUN echo "****Installing yarn packages" && \
     yarn install
-RUN ls -l node_modules || true
+# RUN ls -l node_modules || true
 
 # RUN echo "creating assets" && bundle exec rake assets:precompile
 

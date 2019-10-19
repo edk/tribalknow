@@ -1,24 +1,36 @@
 version: '3.2'
 services:
-  mysql:
-    image: mysql:5.7
-    entrypoint: /custom-init/entrypoint-mysql.sh
-    # command: mysqld --user=mysql --log_error_verbosity=1
-    ports:
-      - 8083:3306
-    volumes:
-      - ./docker/:/custom-init/
-      - ./mysql:/var/lib/mysql
+  # mysql:
+  #   image: mysql:5.7
+  #   entrypoint: /custom-init/entrypoint-mysql.sh
+  #   # command: mysqld --user=mysql --log_error_verbosity=1
+  #   ports:
+  #     - 8083:3306
+  #   volumes:
+  #     - ./docker/:/custom-init/
+  #     - ./mysql:/var/lib/mysql
+  #   environment:
+  #     USER_ID: ${UID}
+  #     # GROUP_ID: ${GID}
+  #     MYSQL_ROOT_PASSWORD: 
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+  postgres:
+    image: postgres:11
+    restart: always
     environment:
-      USER_ID: ${UID}
-      # GROUP_ID: ${GID}
-      MYSQL_ROOT_PASSWORD: 
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      POSTGRES_PASSWORD: tkn
+      POSTGRES_USER: tkn
+      POSTGRES_DB: tkn
+    ports:
+      - 6432:5432
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
 
   redis:
     image: redis:2.8
     #command: redis-server --any-opts-you-want-to-pass-in
-  
+
   # sphinx:
   #   image: leodido/sphinxsearch:latest
 
@@ -27,8 +39,8 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     environment:
-      - MYSQL_HOST=mysql
       - REDIS_STORE_URL=redis://redis:6379/0/cache
+      # - REDISTOGO_URL=
     env_file:
       - '.env.docker'
     command: bin/docker-start-rails-server.sh
@@ -37,20 +49,25 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      - mysql
+      - postgres
       - redis
 
-  webpacker:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    env_file:
-      - '.env.docker'
-    command: ./bin/webpack-dev-server
-    volumes:
-      - .:/app
-    ports:
-      - 3035:3035
+  # sidekiq:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile
+
+  # webpacker:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile
+  #   env_file:
+  #     - '.env.docker'
+  #   command: WEBPACKER_DEV_SERVER_HOST=0.0.0.0 ./bin/webpack-dev-server
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - 3035:3035
     # depends_on:
     #   - mysql
     #   - redis
