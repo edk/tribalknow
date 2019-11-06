@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/edk/best_in_place.git
+  remote: git://github.com/edk/best_in_place.git
   revision: e5736320e7a5905cdaaa075d3ac8eba3962f3d30
   specs:
     best_in_place (3.0.0.alpha)
@@ -7,7 +7,7 @@ GIT
       railties (>= 3.2)
 
 GIT
-  remote: https://github.com/jclusso/foundation-social-web-icons-rails.git
+  remote: git://github.com/jclusso/foundation-social-web-icons-rails.git
   revision: a23b267e42178bd3bd5b5e9860c55c71bbfdb6ee
   specs:
     foundation-social-web-icons-rails (1.0.0)
@@ -15,7 +15,7 @@ GIT
       sass-rails (>= 3.1.1)
 
 GIT
-  remote: https://github.com/kimkong/userstamp.git
+  remote: git://github.com/kimkong/userstamp.git
   revision: 4b986234d916d3701f897d2a21b53af3277ba3f6
   branch: fix-for-rails-4-2
   specs:
@@ -130,6 +130,7 @@ GEM
     colorize (0.7.5)
     columnize (0.8.9)
     connection_pool (2.1.1)
+    crass (1.0.5)
     debugger-linecache (1.2.0)
     devise (3.5.10)
       bcrypt (~> 3.0)
@@ -234,7 +235,8 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    loofah (2.0.3)
+    loofah (2.3.1)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
     mail (2.6.4)
@@ -294,7 +296,7 @@ GEM
     paperclip-av-transcoder (0.6.2)
       av (>= 0.7.1)
       paperclip (>= 2.5.2)
-    pkg-config (1.1.7)
+    pkg-config (1.1.9)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
