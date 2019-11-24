@@ -21,7 +21,7 @@ log/*.pid
 
 *.swp
 
-config/database.yml
+#config/database.yml
 config/*-prod
 
 solr/data

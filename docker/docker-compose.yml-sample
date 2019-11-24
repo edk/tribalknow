@@ -25,7 +25,8 @@ services:
     ports:
       - 6432:5432
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      #- ./postgres:/var/lib/postgresql/data
+      - postgres_data
 
   redis:
     image: redis:2.8
@@ -71,8 +72,8 @@ services:
     # depends_on:
     #   - mysql
     #   - redis
-# volumes:
-#   bundle_config:
-#   tmp_vol:
-#   # File exists @ dir_s_mkdir - /home/app/tribalknow/tmp/cache/assets/sprockets/v3.0/VX
-#   # https://github.com/rails/sprockets-rails/issues/325
+
+volumes:
+  postgres_data:
+  # File exists @ dir_s_mkdir - /home/app/tribalknow/tmp/cache/assets/sprockets/v3.0/VX
+  # https://github.com/rails/sprockets-rails/issues/325

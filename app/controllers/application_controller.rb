@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
 
     if current_tenant.nil? && !request.subdomain.blank?
       flash[:notice] = "Unknown subdomain #{request.subdomain}"
-      canonical_landing = "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
       redirect_to canonical_landing
       return
     end
@@ -39,6 +38,14 @@ class ApplicationController < ActionController::Base
     yield
   ensure
     Tenant.current_id = nil
+  end
+
+  def canonical_landing
+    if ENV['DEFAULT_FQDN'].presence
+      ENV['DEFAULT_FQDN']
+    else
+      "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
+    end
   end
 
   def user_not_authorized

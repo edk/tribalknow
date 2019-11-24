@@ -12,6 +12,7 @@ require "action_view/railtie"
 # require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require 'action_cable/engine'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,7 +24,9 @@ module Tribalknow
     config.load_defaults 5.0
 
     config.autoload_paths << Rails.root.join("lib")
+    config.autoload_paths << Rails.root.join("app/channels")
     config.eager_load_paths << Rails.root.join("lib")
+    config.eager_load_paths << Rails.root.join("app/channels")
 
     config.cache_store = :redis_store, ENV['REDIS_STORE_URL'] || "redis://localhost:6379/0/cache" #, { expires_in: 90.minutes }
     # Settings in config/environments/* take precedence over those specified here.

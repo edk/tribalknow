@@ -8,6 +8,7 @@ gem 'puma'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
+gem 'actioncable'
 
 gem 'activerecord-session_store'
 gem 'haml-rails'
@@ -21,7 +22,8 @@ gem 'rollout'
 gem 'rollbar' # exception service
 gem 'oj'
 
-gem 'mysql2'
+gem 'pg'
+# gem 'mysql2'
 #gem 'sqlite3', require: false
 gem 'devise'
 gem 'omniauth-github'

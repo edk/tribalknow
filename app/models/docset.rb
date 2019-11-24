@@ -1,4 +1,4 @@
-require 'sqlite3'
+# require 'sqlite3'
 
 class Docset
   attr_accessor :name, :base_path, :topic_base, :ques_base, :asset_base, :image_base

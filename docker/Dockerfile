@@ -5,7 +5,10 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -qq -y nodejs yarn --fix-missing --no-install-recommends && \
-    apt-get install -qq -y locales build-essential mysql-client default-libmysqlclient-dev curl iputils-ping \
+    #  mysql-client default-libmysqlclient-dev
+    apt-get install -qq -y locales build-essential \
+        postgresql-client libpq-dev \
+        curl iputils-ping \
         --fix-missing --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
@@ -17,7 +20,7 @@ WORKDIR /build
 ENV HOME=/app
 ENV BUNDLE_PATH=/build
 ENV BUNDLE_GEMFILE=Gemfile
-ENV MYSQL_HOST=mysql
+ENV POSTGRESQL_HOST=postgres
 ENV POSTGRES_URL=""
 ENV RAILS_LOG_TO_STDOUT=true
 ENV DISABLE_SPRING=1
@@ -39,6 +42,8 @@ COPY --chown=app:app . /app/
 
 RUN echo "****Installing yarn packages" && \
     yarn install
+RUN echo "****Precompiling assets" && \
+    bundle exec rake assets:precompile
 # RUN ls -l node_modules || true
 
 # RUN echo "creating assets" && bundle exec rake assets:precompile

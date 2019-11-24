@@ -28,9 +28,9 @@ else
       { :question_id => 2, :text => "This is the answer you're looking for", :score => 0, :tenant_id => 1, :creator_id => nil, :updater_id => nil, :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-03 14:17:07" }
     ]) rescue nil
 
-    PublicActivity::ORM::ActiveRecord::Activity.create!([
-      { :trackable_id => 1, :trackable_type => "Question", :owner_id => nil, :owner_type => nil, :key => "question.create", :parameters => {}, :recipient_id => nil, :recipient_type => nil, :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-03 14:17:07" }
-    ]) rescue nil
+    # PublicActivity::ORM::ActiveRecord::Activity.create!([
+    #   { :trackable_id => 1, :trackable_type => "Question", :owner_id => nil, :owner_type => nil, :key => "question.create", :parameters => {}, :recipient_id => nil, :recipient_type => nil, :created_at => "2014-02-03 14:17:07", :updated_at => "2014-02-03 14:17:07" }
+    # ]) rescue nil
 
     Question.create!([
       { :topic_id => nil, :title => "Silencing Rails schema load", :text => "I've written a multi-tenancy gem for Rails.\r\n\r\nWhen I create a new tenant, I load in the schema.rb file. This works fine, except that each time I do it, I get a deluge of log messages:\r\n\r\n-- create_table(\"users\", {:force=>true})\r\nNOTICE:  CREATE TABLE will create implicit sequence \"users_id_seq\" for serial column \"users.id\"\r\nNOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index \"users_pkey\" for table \"users\"\r\n   -> 0.0102s\r\n-- add_index(\"users\", [\"email\"], {:name=>\"index_users_on_email\", :unique=>true})\r\n   -> 0.0035s\r\n-- add_index(\"users\", [\"reset_password_token\"], {:name=>\"index_users_on_reset_password_token\", :unique=>true})\r\n   -> 0.0040s\r\n\r\nEtc etc... all typical of the loading the schema.rb file. My problem is that it's rather annoying to see this during tests. I really don't care to see this and it muddies up my test output, making it much harder for me to debug and verify tests etc...\r\n\r\nDoes anyone know of a way I can silence this output? I've tried the following in my gem:\r\n\r\nRails.logger.silence{ load(\"\#{Rails.root}/db/seeds.rb\") }\r\n\r\nbut that doesn't change a thing. Does anyone know of a config option or some other way I can silence the output from schema loading?\r\n", :tag_list => ["rails", "activerecord"].join(','), :tenant_id => 1, :creator_id => 1, :updater_id => 1, :created_at => "2013-10-05 15:24:21", :updated_at => "2013-10-05 15:24:21" }
