@@ -1,4 +1,4 @@
-class AddAttachmentAssetToTopicFiles < ActiveRecord::Migration
+class AddAttachmentAssetToTopicFiles < ActiveRecord::Migration[5.2]
   def self.up
     change_table :topic_files do |t|
       t.attachment :asset

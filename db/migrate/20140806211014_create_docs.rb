@@ -1,4 +1,4 @@
-class CreateDocs < ActiveRecord::Migration
+class CreateDocs < ActiveRecord::Migration[5.2]
   def change
     create_table :docs do |t|
       t.string :doc_group_id

@@ -1,4 +1,4 @@
-class AddNestedToTopics < ActiveRecord::Migration
+class AddNestedToTopics < ActiveRecord::Migration[5.2]
   def self.up
     PaperTrail.enabled = false
     # add_column :topics, :parent_id, :integer # Comment this line if your project already has this column

@@ -1,4 +1,4 @@
-class CreateUserNotifications < ActiveRecord::Migration
+class CreateUserNotifications < ActiveRecord::Migration[5.2]
   def change
     create_table :user_notifications do |t|
       t.belongs_to :user
@@ -7,8 +7,8 @@ class CreateUserNotifications < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :user_notifications, [:user_id]
-    add_index :user_notifications, [:notification_id]
+    # add_index :user_notifications, [:user_id]
+    # add_index :user_notifications, [:notification_id]
     add_index :user_notifications, [:user_id, :notification_id]
 
   end

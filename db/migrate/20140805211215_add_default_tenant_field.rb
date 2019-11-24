@@ -1,4 +1,4 @@
-class AddDefaultTenantField < ActiveRecord::Migration
+class AddDefaultTenantField < ActiveRecord::Migration[5.2]
   def change
     add_column :tenants, :default, :boolean, :default=>false
     add_column :tenants, :site_title, :text

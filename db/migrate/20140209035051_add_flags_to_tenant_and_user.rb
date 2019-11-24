@@ -1,4 +1,4 @@
-class AddFlagsToTenantAndUser < ActiveRecord::Migration
+class AddFlagsToTenantAndUser < ActiveRecord::Migration[5.2]
   def change
     add_column :tenants, :new_user_restriction, :boolean, :default=>false
     add_column :tenants, :self_serve_allowed_domain, :string, :default=>nil
