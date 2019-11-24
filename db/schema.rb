@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,477 +10,465 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005172743) do
+ActiveRecord::Schema.define(version: 2017_10_05_172743) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.integer  "trackable_id",   limit: 4
-    t.string   "trackable_type", limit: 191
-    t.integer  "owner_id",       limit: 4
-    t.string   "owner_type",     limit: 191
-    t.string   "key",            limit: 255
-    t.text     "parameters",     limit: 16777215
-    t.integer  "recipient_id",   limit: 4
-    t.string   "recipient_type", limit: 191
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "tenant_id",      limit: 4
+    t.string "trackable_type"
+    t.bigint "trackable_id"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "key"
+    t.text "parameters"
+    t.string "recipient_type"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "tenant_id"
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
+    t.index ["owner_type", "owner_id"], name: "index_activities_on_owner_type_and_owner_id"
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type"
+    t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
+    t.index ["tenant_id", "created_at"], name: "index_activities_on_tenant_id_and_created_at"
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
   end
-
-  add_index "activities", ["owner_id", "owner_type"], name: "owner_id", using: :btree
-  add_index "activities", ["recipient_id", "recipient_type"], name: "recipient_id", using: :btree
-  add_index "activities", ["tenant_id", "created_at"], name: "tenant_id", using: :btree
-  add_index "activities", ["trackable_id", "trackable_type"], name: "trackable_id", using: :btree
 
   create_table "ahoy_events", force: :cascade do |t|
-    t.integer  "visit_id",   limit: 4
-    t.integer  "user_id",    limit: 4
-    t.string   "name",       limit: 191
-    t.text     "properties", limit: 16777215
+    t.integer "visit_id"
+    t.integer "user_id"
+    t.string "name"
+    t.text "properties"
     t.datetime "time"
+    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
+    t.index ["user_id", "name"], name: "index_ahoy_events_on_user_id_and_name"
+    t.index ["visit_id", "name"], name: "index_ahoy_events_on_visit_id_and_name"
   end
-
-  add_index "ahoy_events", ["name", "time"], name: "index_ahoy_events_on_name_and_time", using: :btree
-  add_index "ahoy_events", ["user_id", "name"], name: "index_ahoy_events_on_user_id_and_name", using: :btree
-  add_index "ahoy_events", ["visit_id", "name"], name: "index_ahoy_events_on_visit_id_and_name", using: :btree
 
   create_table "answers", force: :cascade do |t|
-    t.integer  "question_id", limit: 4
-    t.text     "text",        limit: 16777215
-    t.integer  "score",       limit: 4,        default: 0
-    t.integer  "tenant_id",   limit: 4
-    t.integer  "creator_id",  limit: 4
-    t.integer  "updater_id",  limit: 4
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.boolean  "delta",                        default: true, null: false
+    t.integer "question_id"
+    t.text "text"
+    t.integer "score", default: 0
+    t.bigint "tenant_id"
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "delta", default: true, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["tenant_id"], name: "index_answers_on_tenant_id"
   end
-
-  add_index "answers", ["question_id"], name: "question_id", using: :btree
-  add_index "answers", ["tenant_id"], name: "tenant_id", using: :btree
 
   create_table "app_configs", force: :cascade do |t|
-    t.integer  "tenant_id",  limit: 4
-    t.string   "key",        limit: 191
-    t.string   "value",      limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "tenant_id"
+    t.string "key"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_app_configs_on_key"
+    t.index ["tenant_id"], name: "index_app_configs_on_tenant_id"
   end
-
-  add_index "app_configs", ["key"], name: "index_app_configs_on_key", using: :btree
-  add_index "app_configs", ["tenant_id"], name: "index_app_configs_on_tenant_id", using: :btree
 
   create_table "customized_pages", force: :cascade do |t|
-    t.boolean  "active",                      default: false
-    t.integer  "tenant_id",  limit: 4
-    t.string   "page",       limit: 191
-    t.string   "title",      limit: 255
-    t.string   "position1",  limit: 255
-    t.text     "header1",    limit: 16777215
-    t.text     "content1",   limit: 16777215
-    t.string   "position2",  limit: 255
-    t.text     "header2",    limit: 16777215
-    t.text     "content2",   limit: 16777215
-    t.string   "position3",  limit: 255
-    t.text     "header3",    limit: 16777215
-    t.text     "content3",   limit: 16777215
-    t.string   "position4",  limit: 255
-    t.text     "header4",    limit: 16777215
-    t.text     "content4",   limit: 16777215
-    t.integer  "creator_id", limit: 4
-    t.integer  "updater_id", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean "active", default: false
+    t.integer "tenant_id"
+    t.string "page"
+    t.string "title"
+    t.string "position1"
+    t.text "header1"
+    t.text "content1"
+    t.string "position2"
+    t.text "header2"
+    t.text "content2"
+    t.string "position3"
+    t.text "header3"
+    t.text "content3"
+    t.string "position4"
+    t.text "header4"
+    t.text "content4"
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page"], name: "index_customized_pages_on_page"
+    t.index ["tenant_id", "page"], name: "index_customized_pages_on_tenant_id_and_page"
   end
-
-  add_index "customized_pages", ["page"], name: "index_customized_pages_on_page", using: :btree
-  add_index "customized_pages", ["tenant_id", "page"], name: "index_customized_pages_on_tenant_id_and_page", using: :btree
 
   create_table "docs", force: :cascade do |t|
-    t.string   "doc_group_id", limit: 191
-    t.string   "name",         limit: 255
-    t.string   "type",         limit: 255
-    t.string   "description",  limit: 255
-    t.string   "path",         limit: 255
-    t.string   "basepath",     limit: 191
-    t.text     "data",         limit: 16777215
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "doc_group_id"
+    t.string "name"
+    t.string "type"
+    t.string "description"
+    t.string "path"
+    t.string "basepath"
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["basepath"], name: "index_docs_on_basepath"
+    t.index ["doc_group_id"], name: "index_docs_on_doc_group_id"
   end
-
-  add_index "docs", ["basepath"], name: "index_docs_on_basepath", using: :btree
-  add_index "docs", ["doc_group_id"], name: "index_docs_on_doc_group_id", using: :btree
 
   create_table "file_assets", force: :cascade do |t|
-    t.integer  "tenant_id",          limit: 4
-    t.integer  "parent_id",          limit: 4
-    t.string   "type",               limit: 255
-    t.integer  "topic_id",           limit: 4
-    t.string   "name",               limit: 255
-    t.text     "description",        limit: 16777215
-    t.boolean  "draft",                               default: false
-    t.date     "date"
-    t.integer  "runtime",            limit: 4
-    t.string   "slug",               limit: 255
-    t.string   "asset_file_name",    limit: 255
-    t.string   "asset_content_type", limit: 255
-    t.integer  "asset_file_size",    limit: 4
+    t.bigint "tenant_id"
+    t.bigint "parent_id"
+    t.string "type"
+    t.bigint "topic_id"
+    t.string "name"
+    t.text "description"
+    t.boolean "draft", default: false
+    t.date "date"
+    t.integer "runtime"
+    t.string "slug"
+    t.string "asset_file_name"
+    t.string "asset_content_type"
+    t.integer "asset_file_size"
     t.datetime "asset_updated_at"
-    t.text     "asset_meta",         limit: 16777215
-    t.integer  "creator_id",         limit: 4
-    t.integer  "updater_id",         limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "aasm_state",         limit: 191
+    t.text "asset_meta"
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "aasm_state"
+    t.index ["aasm_state"], name: "index_file_assets_on_aasm_state"
+    t.index ["draft"], name: "index_file_assets_on_draft"
+    t.index ["parent_id"], name: "index_file_assets_on_parent_id"
+    t.index ["slug"], name: "index_file_assets_on_slug", unique: true
+    t.index ["tenant_id"], name: "index_file_assets_on_tenant_id"
+    t.index ["topic_id"], name: "index_file_assets_on_topic_id"
   end
-
-  add_index "file_assets", ["aasm_state"], name: "index_file_assets_on_aasm_state", using: :btree
-  add_index "file_assets", ["tenant_id"], name: "index_file_assets_on_tenant_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string   "slug",           limit: 191, null: false
-    t.integer  "sluggable_id",   limit: 4,   null: false
-    t.string   "sluggable_type", limit: 50
-    t.string   "scope",          limit: 255
-    t.datetime "created_at",                 null: false
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "slug", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "sluggable_type", using: :btree
 
   create_table "notes", force: :cascade do |t|
-    t.string   "path",       limit: 191
-    t.string   "title",      limit: 255
-    t.text     "content",    limit: 16777215
-    t.integer  "creator_id", limit: 4
-    t.integer  "updater_id", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "delta",                       default: true, null: false
+    t.string "path"
+    t.string "title"
+    t.text "content"
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "delta", default: true, null: false
+    t.index ["path"], name: "index_notes_on_path"
   end
 
-  add_index "notes", ["path"], name: "index_notes_on_path", using: :btree
-
   create_table "notifications", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.text     "content",    limit: 16777215
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer  "topic_id",   limit: 4
-    t.string   "title",      limit: 255
-    t.text     "text",       limit: 16777215
-    t.integer  "tenant_id",  limit: 4
-    t.integer  "creator_id", limit: 4
-    t.integer  "updater_id", limit: 4
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.string   "slug",       limit: 255
-    t.boolean  "delta",                       default: true, null: false
+    t.integer "topic_id"
+    t.string "title"
+    t.text "text"
+    t.bigint "tenant_id"
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.boolean "delta", default: true, null: false
+    t.index ["slug"], name: "index_questions_on_slug", unique: true
+    t.index ["tenant_id"], name: "index_questions_on_tenant_id"
   end
-
-  add_index "questions", ["tenant_id"], name: "tenant_id", using: :btree
 
   create_table "searchjoy_searches", force: :cascade do |t|
-    t.integer  "user_id",          limit: 4
-    t.string   "search_type",      limit: 191
-    t.string   "query",            limit: 255
-    t.string   "normalized_query", limit: 191
-    t.integer  "results_count",    limit: 4
+    t.integer "user_id"
+    t.string "search_type"
+    t.string "query"
+    t.string "normalized_query"
+    t.integer "results_count"
     t.datetime "created_at"
-    t.integer  "convertable_id",   limit: 4
-    t.string   "convertable_type", limit: 191
+    t.integer "convertable_id"
+    t.string "convertable_type"
     t.datetime "converted_at"
+    t.index ["convertable_id", "convertable_type"], name: "index_searchjoy_searches_on_convertable_id_and_convertable_type"
+    t.index ["created_at"], name: "index_searchjoy_searches_on_created_at"
+    t.index ["search_type", "created_at"], name: "index_searchjoy_searches_on_search_type_and_created_at"
+    t.index ["search_type", "normalized_query", "created_at"], name: "index_searchjoy_searches_on_search_type_and_normalized_query_an"
   end
-
-  add_index "searchjoy_searches", ["convertable_id", "convertable_type"], name: "index_searchjoy_searches_on_convertable_id_and_convertable_type", using: :btree
-  add_index "searchjoy_searches", ["created_at"], name: "index_searchjoy_searches_on_created_at", using: :btree
-  add_index "searchjoy_searches", ["search_type", "created_at"], name: "index_searchjoy_searches_on_search_type_and_created_at", using: :btree
-  add_index "searchjoy_searches", ["search_type", "normalized_query", "created_at"], name: "index_searchjoy_searches_on_search_type_and_normalized_query_an", using: :btree
 
   create_table "sessions", force: :cascade do |t|
-    t.string   "session_id", limit: 191,      null: false
-    t.text     "data",       limit: 16777215
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id"
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  add_index "sessions", ["session_id"], name: "session_id", using: :btree
-  add_index "sessions", ["updated_at"], name: "updated_at", using: :btree
-
   create_table "settings", force: :cascade do |t|
-    t.string   "var",         limit: 255,      null: false
-    t.text     "value",       limit: 16777215
-    t.integer  "target_id",   limit: 4,        null: false
-    t.string   "target_type", limit: 255,      null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string "var", null: false
+    t.text "value"
+    t.string "target_type", null: false
+    t.bigint "target_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
+    t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
   end
 
   create_table "site_news", force: :cascade do |t|
-    t.integer  "tenant_id",  limit: 4
-    t.string   "title",      limit: 255
-    t.text     "text",       limit: 16777215
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "creator_id", limit: 4
-    t.integer  "updater_id", limit: 4
+    t.bigint "tenant_id"
+    t.string "title"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.index ["tenant_id", "created_at"], name: "index_site_news_on_tenant_id_and_created_at"
+    t.index ["tenant_id"], name: "index_site_news_on_tenant_id"
   end
-
-  add_index "site_news", ["tenant_id", "created_at"], name: "tenant_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
-    t.integer  "tag_id",        limit: 4
-    t.integer  "taggable_id",   limit: 4
-    t.string   "taggable_type", limit: 191
-    t.integer  "tagger_id",     limit: 4
-    t.string   "tagger_type",   limit: 191
-    t.string   "context",       limit: 128
+    t.bigint "tag_id"
+    t.string "taggable_type"
+    t.bigint "taggable_id"
+    t.string "tagger_type"
+    t.bigint "tagger_id"
+    t.string "context", limit: 128
     t.datetime "created_at"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
+    t.index ["tagger_type", "tagger_id"], name: "index_taggings_on_tagger_type_and_tagger_id"
   end
-
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name",           limit: 191
-    t.integer  "tenant_id",      limit: 4
-    t.integer  "creator_id",     limit: 4
-    t.integer  "updater_id",     limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "taggings_count", limit: 4,   default: 0
+    t.string "name"
+    t.integer "tenant_id"
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "taggings_count", default: 0
+    t.index ["name", "tenant_id"], name: "index_tags_on_name_and_tenant_id", unique: true
   end
-
-  add_index "tags", ["name", "tenant_id"], name: "index_tags_on_name_and_tenant_id", unique: true, using: :btree
-
-  create_table "tags_original", force: :cascade do |t|
-    t.string   "name",        limit: 191
-    t.text     "description", limit: 16777215
-    t.integer  "tenant_id",   limit: 4
-    t.integer  "creator_id",  limit: 4
-    t.integer  "updater_id",  limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-  end
-
-  add_index "tags_original", ["name"], name: "name", using: :btree
-  add_index "tags_original", ["tenant_id"], name: "tenant_id", using: :btree
 
   create_table "tenants", force: :cascade do |t|
-    t.string   "name",                         limit: 255
-    t.string   "subdomain",                    limit: 191
-    t.string   "fqdn",                         limit: 191
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
-    t.boolean  "new_user_restriction",                          default: false
-    t.string   "self_serve_allowed_domain",    limit: 255
-    t.string   "safe_domains",                 limit: 255
-    t.boolean  "default",                                       default: false
-    t.text     "site_title",                   limit: 16777215
-    t.text     "landing_page",                 limit: 16777215
-    t.text     "footer",                       limit: 16777215
-    t.string   "required_github_organization", limit: 255
-    t.text     "github_auth_failure_message",  limit: 16777215
+    t.string "name"
+    t.string "subdomain"
+    t.string "fqdn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "new_user_restriction", default: false
+    t.string "self_serve_allowed_domain"
+    t.string "safe_domains"
+    t.boolean "default", default: false
+    t.text "site_title"
+    t.text "landing_page"
+    t.text "footer"
+    t.string "required_github_organization"
+    t.text "github_auth_failure_message"
+    t.index ["fqdn"], name: "index_tenants_on_fqdn"
+    t.index ["subdomain"], name: "index_tenants_on_subdomain"
   end
 
-  add_index "tenants", ["fqdn"], name: "domain", using: :btree
-  add_index "tenants", ["subdomain"], name: "subdomain", using: :btree
-
   create_table "topic_files", force: :cascade do |t|
-    t.integer  "topic_id",           limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "asset_file_name",    limit: 255
-    t.string   "asset_content_type", limit: 255
-    t.integer  "asset_file_size",    limit: 4
-    t.datetime "asset_updated_at",               null: false
+    t.bigint "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "asset_file_name"
+    t.string "asset_content_type"
+    t.bigint "asset_file_size"
+    t.datetime "asset_updated_at"
+    t.index ["topic_id"], name: "index_topic_files_on_topic_id"
   end
 
   create_table "topics", force: :cascade do |t|
-    t.integer  "parent_topic_id",   limit: 4
-    t.string   "name",              limit: 255
-    t.string   "description",       limit: 255
-    t.text     "content",           limit: 16777215
-    t.integer  "tenant_id",         limit: 4
-    t.integer  "creator_id",        limit: 4
-    t.integer  "updater_id",        limit: 4
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.string   "slug",              limit: 255
-    t.string   "icon_file_name",    limit: 255
-    t.string   "icon_content_type", limit: 255
-    t.integer  "icon_file_size",    limit: 4
-    t.datetime "icon_updated_at",                                   null: false
-    t.boolean  "delta",                              default: true, null: false
-    t.integer  "lft",               limit: 4
-    t.integer  "rgt",               limit: 4
-    t.integer  "depth",             limit: 4
-    t.integer  "children_count",    limit: 4
-    t.integer  "position",          limit: 4
+    t.integer "parent_topic_id"
+    t.string "name"
+    t.string "description"
+    t.text "content"
+    t.bigint "tenant_id"
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.string "icon_file_name"
+    t.string "icon_content_type"
+    t.bigint "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.boolean "delta", default: true, null: false
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
+    t.integer "children_count"
+    t.integer "position"
+    t.index ["slug"], name: "index_topics_on_slug", unique: true
+    t.index ["tenant_id", "depth"], name: "index_topics_on_tenant_id_and_depth"
+    t.index ["tenant_id", "lft"], name: "index_topics_on_tenant_id_and_lft"
+    t.index ["tenant_id", "parent_topic_id"], name: "index_topics_on_tenant_id_and_parent_topic_id"
+    t.index ["tenant_id", "rgt"], name: "index_topics_on_tenant_id_and_rgt"
+    t.index ["tenant_id"], name: "index_topics_on_tenant_id"
   end
-
-  add_index "topics", ["tenant_id", "depth"], name: "index_topics_on_tenant_id_and_depth", using: :btree
-  add_index "topics", ["tenant_id", "lft"], name: "index_topics_on_tenant_id_and_lft", using: :btree
-  add_index "topics", ["tenant_id", "parent_topic_id"], name: "index_topics_on_tenant_id_and_parent_topic_id", using: :btree
-  add_index "topics", ["tenant_id", "rgt"], name: "index_topics_on_tenant_id_and_rgt", using: :btree
-  add_index "topics", ["tenant_id"], name: "tenant_id", using: :btree
 
   create_table "transcode_remotes", force: :cascade do |t|
-    t.integer  "video_asset_id", limit: 4
-    t.integer  "job_id",         limit: 4
-    t.integer  "status",         limit: 4
-    t.text     "response",       limit: 16777215
+    t.integer "video_asset_id"
+    t.integer "job_id"
+    t.integer "status"
+    t.text "response"
     t.datetime "last_checked"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_asset_id"], name: "index_transcode_remotes_on_video_asset_id"
   end
-
-  add_index "transcode_remotes", ["video_asset_id"], name: "index_transcode_remotes_on_video_asset_id", using: :btree
 
   create_table "user_notifications", force: :cascade do |t|
-    t.integer  "user_id",         limit: 4
-    t.integer  "notification_id", limit: 4
-    t.boolean  "read",                      default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.bigint "user_id"
+    t.bigint "notification_id"
+    t.boolean "read", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_id"], name: "index_user_notifications_on_notification_id"
+    t.index ["user_id", "notification_id"], name: "index_user_notifications_on_user_id_and_notification_id"
+    t.index ["user_id"], name: "index_user_notifications_on_user_id"
   end
-
-  add_index "user_notifications", ["notification_id"], name: "index_user_notifications_on_notification_id", using: :btree
-  add_index "user_notifications", ["user_id", "notification_id"], name: "index_user_notifications_on_user_id_and_notification_id", using: :btree
-  add_index "user_notifications", ["user_id"], name: "index_user_notifications_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",               limit: 255
-    t.string   "uid",                    limit: 255
-    t.string   "name",                   limit: 255
-    t.string   "avatar_url",             limit: 255
-    t.boolean  "admin"
-    t.integer  "tenant_id",              limit: 4
-    t.string   "email",                  limit: 255, default: ""
-    t.string   "encrypted_password",     limit: 255, default: ""
-    t.string   "reset_password_token",   limit: 255
-    t.datetime "reset_password_sent_at",                             null: false
-    t.datetime "remember_created_at",                                null: false
-    t.integer  "sign_in_count",          limit: 4,   default: 0,     null: false
-    t.datetime "current_sign_in_at",                                 null: false
-    t.datetime "last_sign_in_at",                                    null: false
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.string   "confirmation_token",     limit: 255
-    t.datetime "confirmed_at",                                       null: false
-    t.datetime "confirmation_sent_at",                               null: false
-    t.string   "unconfirmed_email",      limit: 255
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.boolean  "approved",                           default: false
-    t.boolean  "active",                             default: true
-    t.string   "hipchat_mention_name",   limit: 255
-    t.string   "avatar_file_name",       limit: 255
-    t.string   "avatar_content_type",    limit: 255
-    t.integer  "avatar_file_size",       limit: 4
+    t.string "provider"
+    t.string "uid"
+    t.string "name"
+    t.string "avatar_url"
+    t.boolean "admin"
+    t.bigint "tenant_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "approved", default: false
+    t.boolean "active", default: false
+    t.string "hipchat_mention_name"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.bigint "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.boolean  "skip_confirmation",                  default: false
-    t.boolean  "skip_activation",                    default: false
+    t.boolean "skip_confirmation", default: false
+    t.boolean "skip_activation", default: false
+    t.index ["approved"], name: "index_users_on_approved"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tenant_id"], name: "index_users_on_tenant_id"
   end
-
-  add_index "users", ["approved"], name: "approved", using: :btree
 
   create_table "version_associations", force: :cascade do |t|
-    t.integer "version_id",       limit: 4
-    t.string  "foreign_key_name", limit: 191, null: false
-    t.integer "foreign_key_id",   limit: 4
+    t.integer "version_id"
+    t.string "foreign_key_name", null: false
+    t.integer "foreign_key_id"
+    t.index ["foreign_key_name", "foreign_key_id"], name: "index_version_associations_on_foreign_key"
+    t.index ["version_id"], name: "index_version_associations_on_version_id"
   end
-
-  add_index "version_associations", ["foreign_key_name", "foreign_key_id"], name: "index_version_associations_on_foreign_key", using: :btree
-  add_index "version_associations", ["version_id"], name: "index_version_associations_on_version_id", using: :btree
 
   create_table "versions", force: :cascade do |t|
-    t.string   "item_type",      limit: 191,        null: false
-    t.integer  "item_id",        limit: 4,          null: false
-    t.string   "event",          limit: 255,        null: false
-    t.string   "whodunnit",      limit: 255
-    t.text     "object",         limit: 16777215
-    t.datetime "created_at",                        null: false
-    t.integer  "transaction_id", limit: 4
-    t.text     "object_changes", limit: 4294967295
+    t.string "item_type", null: false
+    t.integer "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object"
+    t.datetime "created_at"
+    t.integer "transaction_id"
+    t.text "object_changes"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+    t.index ["transaction_id"], name: "index_versions_on_transaction_id"
   end
-
-  add_index "versions", ["item_type", "item_id"], name: "item_type", using: :btree
-  add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
   create_table "video_access_secrets", force: :cascade do |t|
-    t.integer  "video_asset_id", limit: 4
-    t.string   "value",          limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.bigint "video_asset_id"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_asset_id"], name: "index_video_access_secrets_on_video_asset_id"
   end
 
-  add_index "video_access_secrets", ["video_asset_id"], name: "index_video_access_secrets_on_video_asset_id", using: :btree
-
   create_table "video_attachments", force: :cascade do |t|
-    t.integer  "tenant_id",          limit: 4
-    t.integer  "video_asset_id",     limit: 4
-    t.string   "name",               limit: 255
-    t.text     "description",        limit: 16777215
-    t.string   "asset_file_name",    limit: 255
-    t.string   "asset_content_type", limit: 255
-    t.integer  "asset_file_size",    limit: 4
+    t.integer "tenant_id"
+    t.integer "video_asset_id"
+    t.string "name"
+    t.text "description"
+    t.string "asset_file_name"
+    t.string "asset_content_type"
+    t.integer "asset_file_size"
     t.datetime "asset_updated_at"
-    t.integer  "creator_id",         limit: 4
-    t.integer  "updater_id",         limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "delta",                               default: true, null: false
+    t.integer "creator_id"
+    t.integer "updater_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "delta", default: true, null: false
   end
 
   create_table "visits", force: :cascade do |t|
-    t.string   "visit_token",      limit: 191
-    t.string   "visitor_token",    limit: 255
-    t.string   "ip",               limit: 255
-    t.text     "user_agent",       limit: 65535
-    t.text     "referrer",         limit: 65535
-    t.text     "landing_page",     limit: 65535
-    t.integer  "user_id",          limit: 4
-    t.string   "referring_domain", limit: 255
-    t.string   "search_keyword",   limit: 255
-    t.string   "browser",          limit: 255
-    t.string   "os",               limit: 255
-    t.string   "device_type",      limit: 255
-    t.integer  "screen_height",    limit: 4
-    t.integer  "screen_width",     limit: 4
-    t.string   "country",          limit: 255
-    t.string   "region",           limit: 255
-    t.string   "city",             limit: 255
-    t.string   "postal_code",      limit: 255
-    t.decimal  "latitude",                       precision: 10
-    t.decimal  "longitude",                      precision: 10
-    t.string   "utm_source",       limit: 255
-    t.string   "utm_medium",       limit: 255
-    t.string   "utm_term",         limit: 255
-    t.string   "utm_content",      limit: 255
-    t.string   "utm_campaign",     limit: 255
+    t.string "visit_token"
+    t.string "visitor_token"
+    t.string "ip"
+    t.text "user_agent"
+    t.text "referrer"
+    t.text "landing_page"
+    t.integer "user_id"
+    t.string "referring_domain"
+    t.string "search_keyword"
+    t.string "browser"
+    t.string "os"
+    t.string "device_type"
+    t.integer "screen_height"
+    t.integer "screen_width"
+    t.string "country"
+    t.string "region"
+    t.string "city"
+    t.string "postal_code"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.string "utm_source"
+    t.string "utm_medium"
+    t.string "utm_term"
+    t.string "utm_content"
+    t.string "utm_campaign"
     t.datetime "started_at"
+    t.index ["user_id"], name: "index_visits_on_user_id"
+    t.index ["visit_token"], name: "index_visits_on_visit_token", unique: true
   end
-
-  add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
-  add_index "visits", ["visit_token"], name: "index_visits_on_visit_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "votable_id",   limit: 4
-    t.string   "votable_type", limit: 191
-    t.integer  "voter_id",     limit: 4
-    t.string   "voter_type",   limit: 191
-    t.boolean  "vote_flag"
-    t.string   "vote_scope",   limit: 191
-    t.integer  "vote_weight",  limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "votable_type"
+    t.bigint "votable_id"
+    t.string "voter_type"
+    t.bigint "voter_id"
+    t.boolean "vote_flag"
+    t.string "vote_scope"
+    t.integer "vote_weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+    t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
-
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end
