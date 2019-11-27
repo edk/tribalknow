@@ -24,9 +24,9 @@ Commonly used tools such as Google Docs or Github wiki make it easy to enter dat
 
 The goal of this project is to provide the tools to enable members of a development team to enter and maintain the information that is useful to newcomers and existing members alike.  See https://www.youtube.com/watch?v=o-JL-so5Gm8 for a talk that resonates with the goals of this project.
 
-Another excellent documentation talk is [What nobody tells you about documentation](https://www.youtube.com/watch?v=t4vKPhjcMZg)
+Another excellent talk is [What nobody tells you about documentation](https://www.youtube.com/watch?v=t4vKPhjcMZg)
 
-Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately, it's not available for private groups.  2018 update: half a decade later, S/O now offers [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, but if it's anything like S/O, I'm sure this amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling the knowledge of private teams.
+Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately, it wasn't available for private groups until 2018 with [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, I'm sure it is amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling the knowledge of private teams.
 
 ### Local Setup
 
@@ -67,6 +67,13 @@ See http://developer.github.com/guides/basics-of-authentication/ for more info.
 ### Convert an existing mysql database to postgres
 
 ### Deploy to heroku
+
+* create your heroku application
+* add your heroku push path to the remote
+* git push heroku master
+
+The first time through on a fresh heroku app, you'll want to run `bin/setup-demo` or `bin/setup-heroku` to create and setup the database.
+
 Add postgres addon (see https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres)
 
 
