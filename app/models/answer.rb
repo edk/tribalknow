@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
   acts_as_votable
   include EventMessage
 
-  belongs_to :question
+  belongs_to :question, required: false
   validates  :text, presence: true, length: { minimum: 3 }
   default_scope {
     if Tenant.current_id

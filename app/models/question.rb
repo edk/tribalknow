@@ -13,7 +13,7 @@ class Question < ApplicationRecord
   has_many   :uniq_answerers, -> { distinct }, through: :answers, :source=>:creator
   belongs_to :user
   validates  :title, presence: true, length: { minimum: 3 }
-  belongs_to :topic
+  belongs_to :topic, required: false
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }

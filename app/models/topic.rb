@@ -10,7 +10,7 @@ class Topic < ApplicationRecord
   friendly_id :name, :use => :slugged
 
   has_many   :sub_topics, -> { order 'position, id' }, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:parent_topic
-  belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics, touch: true
+  belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics, touch: true, required: false
   validates  :name, presence: true, length: { minimum: 3 }
   has_many   :topic_files
   has_many   :questions
