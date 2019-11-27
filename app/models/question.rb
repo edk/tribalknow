@@ -11,7 +11,7 @@ class Question < ApplicationRecord
 
   has_many   :answers, :dependent => :destroy
   has_many   :uniq_answerers, -> { distinct }, through: :answers, :source=>:creator
-  belongs_to :user
+  belongs_to :user, required: false
   validates  :title, presence: true, length: { minimum: 3 }
   belongs_to :topic, required: false
 
