@@ -59,3 +59,5 @@ public/packs
 yarn-debug.log*
 .yarn-integrity
 docker-compose.yml
+.yarnrc
+.bash_history
