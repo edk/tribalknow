@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   # include Userstamp
   around_action :scope_current_tenant
-  include PublicActivity::StoreController
+  # include PublicActivity::StoreController
 
   before_action :set_paper_trail_whodunnit
   # skip_after_action :warn_about_not_setting_whodunnit # even though i'm setting it, the warning continues.

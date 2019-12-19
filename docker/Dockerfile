@@ -13,6 +13,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     rm -rf /var/lib/apt/lists/*
 
 RUN useradd -ms /bin/bash app
+RUN echo -e "app\napp" | passwd app
 RUN mkdir -p /build /app && chown -R app:app /build /app
 USER 1000
 WORKDIR /build
