@@ -303,7 +303,7 @@ GEM
     puma (3.12.0)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
-    rack (2.0.7)
+    rack (2.2.2)
     rack-livereload (0.3.17)
       rack
     rack-protection (2.0.4)
