@@ -1,8 +1,7 @@
 - set_title "#{Tenant.default_title}: List of questions"
 
-
-.row{:style=>'padding-top: 0.6em; padding-bottom: 0.35em;'}
-  .columns.large-8
+.row.mt-3.mb-3
+  .col-lg-8
     %h3{style:"margin-bottom:-8px;"} Questions: 
     .search_params
       - if params[:created_by]
@@ -22,56 +21,67 @@
           #{params[:tag]}
           = link_to questions_path(params.except(:tag)) do
             %span= f_icon "x"
-  .columns.large-4
+  .col-lg-4
     / Sort by [ latest | points ]<br/>
 
 .row
-  .columns.large-8
+  .col-lg-8
     - if @questions.empty?
       %h3
         Whaaaaaaaa.  nothing found
     - @questions.each do |question|
-      .row
-        .columns.large-12
-          .panel.question_panel
-            - if question.get_upvotes.size > 0
-              .votebox
-                = "+ #{question.get_upvotes.size}"
-            .row
-              .columns.large-9
-                .question_title
-                  = link_to "#{question.title}", question_path(question)
-              .columns.large-3.text-right
-                = render_avatar(question.creator, :size=>'28x28')
-            .row
-              .columns.large-9
-                .question_answer
-                  = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 120, {:length_in_chars => true})
-            .row
-              .columns.large-7
-                %span.question_answer_links
-                  = link_to(question_path(question)) do
-                    = question.answers.count == 0 ? "No answers yet" : "#{question.answers.count} #{"answer".pluralize question.answers.count}"
-                %span.answering_avatars
-                  - question.uniq_answerers.each do |user|
-                    = render_avatar( user, :size=>:small )
-              .columns.large-5.text-right
-                .question_last_updated
-                  Last updated<br/>
-                  #{I18n.l(question.updated_at.to_date, :format => :medium)}
-            .tags{:style=>'margin-top:0.8em;margin-bottom:-1.25em;'}
-              = render_tag_links question.tags
+      .card.topic-card.bg-light.mb-3
+        .card-body.pb-2
+          - if question.get_upvotes.size > 0
+            .votebox
+              = "+ #{question.get_upvotes.size}"
+          .row
+            .col-lg-9
+              .question_title
+                = link_to "#{question.title}", question_path(question)
+            .col-lg-3.text-right
+              = render_avatar(question.creator, :size=>'28x28')
+          .row
+            .col-lg-9
+              .question_answer
+                = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 120, {:length_in_chars => true})
+          .row
+            .col-lg-7
+              %span.question_answer_links
+                = link_to(question_path(question)) do
+                  = question.answers.count == 0 ? "No answers yet" : "#{question.answers.count} #{"answer".pluralize question.answers.count}"
+              %span.answering_avatars
+                - question.uniq_answerers.each do |user|
+                  = render_avatar( user, :size=>:small )
+            .col-lg-5.text-right
+              .question_last_updated
+                Last updated<br/>
+                #{I18n.l(question.updated_at.to_date, :format => :medium)}
+          .tags.mb-0.mt-3
+            = render_tag_links question.tags
     .row
-      .columns
-        = will_paginate @questions if @questions.respond_to?(:total_pages)
+      .col
+        = will_paginate(@questions,:renderer => WillPaginate::ActionView::BootstrapLinkRenderer) if @questions.respond_to?(:total_pages)
 
   - unless @static_render
-    .columns.large-4
-      = link_to "Ask a new question".html_safe, new_question_path, class: 'button expand'
-      .panel.tag_cloud
-        %h3 Tags
-        - tag_cloud(@tag_cloud, %w(css1 css2 css3 css4)) do |tag, css_class|
-          = link_to tag.name, questions_path(tag: tag.name), :class => "#{css_class} label round"
+    .col-lg-4
+      = link_to "Ask a new question".html_safe, new_question_path, class: 'btn btn-primary btn-sm btn-block'
+
+
+      .card.popular_list.card-lists
+        .card-body
+          .card-header
+            %h5.card-title Top Q&amp;A
+          %ul.list-group
+            - @top[:qna] && @top[:qna].each do |props|
+              %li.list-group-item.list-group-flush
+                = link_to "#{props[:title]}", question_path(props[:id])
+                = props[:view_count]
+
+      -# .panel.tag_cloud
+      -#   %h3 Tags
+      -#   - tag_cloud(@tag_cloud, %w(css1 css2 css3 css4)) do |tag, css_class|
+      -#     = link_to tag.name, questions_path(tag: tag.name), :class => "#{css_class} badge badge-secondary"
       / .panel
       /   .h2 Popular questions
       / .panel

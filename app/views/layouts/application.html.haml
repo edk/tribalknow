@@ -1,47 +1,33 @@
 !!!
-/ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
-/[if lt IE 7 ] <html class="ie6" lang="en">
-/[if IE 7 ] <html class="ie7" lang="en">
-/[if IE 8 ] <html class="ie8" lang="en">
-/ [if (gte IE 9)|!(IE)]><!
-%html{:lang => "en"}
-  / <![endif]
+%html{lang: "en"}
   %head
     %meta{:charset => "utf-8"}/
-    / Set the viewport width to device width for mobile
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    = favicon_link_tag "favicon.ico"
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1, shrink-to-fit=no"}
+    = favicon_link_tag asset_path('favicon-default/favicon.ico'), rel: 'icon', type: 'image/png'
     %title= content_for?(:title) ? yield(:title) : (@page_title || Tenant.default_title)
-    = javascript_include_tag "vendor/modernizr"
     = yield(:head_js)
-    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag "application", media: 'all'
+
+    = javascript_pack_tag "application"
+    = stylesheet_pack_tag "application"
     = yield(:head_stylesheet)
     = csrf_meta_tags
+    = csp_meta_tag
     = analytics_init if Rails.env.production?
   %body
     = javascript_include_tag "https://www.google.com/jsapi"
     = javascript_include_tag "application", params[:controller]
     = render 'layouts/top_nav'
-    - if flash.keys.present?
+    .container-fluid.page-content
       .row
-        .large-12.columns
-          - if notice
-            .alert-box.success.radius{"data-alert"=>""}
-              = raw notice
-              %a.close{:href => "#"}
-          - if alert
-            .alert-box.info.radius{"data-alert"=>""}
-              = raw alert
-              %a.close{:href => "#"}
-    .row#content{:style=>'padding-top:1.0em;min-height:65%;margin-left:88px;margin-right;88px'}
-      .columns.large-12
-        = yield
+        .col
+          = render 'layouts/flash'
+      = yield
     
-    .row#footer
-      .row
-        .columns.text-center
-          - if Tenant.default_footer.presence
-            = Tenant.default_footer.html_safe
-          - else
-            "TribalKnowNow Copyright 2014"
+    .clearfix
+    #footer.page-footer.pt-4
+      .container.text-center
+        = Tenant.default_footer.html_safe if Tenant.default_footer.presence 
+        .footer-copyright.py-3 © 2018 Copyright TribalKnowNow
+
     = yield(:post_body_js)

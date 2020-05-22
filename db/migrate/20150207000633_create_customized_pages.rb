@@ -1,4 +1,4 @@
-class CreateCustomizedPages < ActiveRecord::Migration
+class CreateCustomizedPages < ActiveRecord::Migration[5.2]
   def change
     create_table :customized_pages do |t|
       t.boolean :active, default: false

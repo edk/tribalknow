@@ -1,3 +1,3 @@
-class PublicProfile < ActiveRecord::Base
+class PublicProfile < ApplicationRecord
 
 end

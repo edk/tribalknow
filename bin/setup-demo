@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = File.expand_path('..', __dir__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  puts '== Installing dependencies =='
+  system! 'gem install bundler --conservative'
+  system('bundle check') || system!('bundle install')
+
+  # Install JavaScript dependencies if using Yarn
+  system('bin/yarn')
+
+  # puts "\n== Copying sample files =="
+  unless File.exist?('config/database.yml')
+    cp 'config/database.yml.sample', 'config/database.yml'
+  end
+
+  puts "\n== Preparing database == (use `heroku pg:reset DATABASE` to clear an existing db and be able to load the schema)"
+  system 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bin/rails db:create' # this fails if the db is already present, but on heroku, one cannot drop a table
+  system! 'DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bin/rails db:schema:load'
+  # Other ways of creating that don't play well in heroku.
+  # system! 'bin/rails db:create db:schema:load'
+  # system! 'bin/rails db:setup'
+  # system! 'bin/rails db:drop db:create db:schema:load'
+
+  puts "\n== Removing old logs and tempfiles =="
+  system! 'bin/rails log:clear tmp:clear'
+
+  if File.exist?('db/seeds-demo.rb')
+    puts "\n== Loading demo data =="
+    system! 'bin/rails runner db/seeds-demo.rb'
+  end
+
+  puts "\n== Restarting application server =="
+  system! 'bin/rails restart'
+end

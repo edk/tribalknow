@@ -141,7 +141,7 @@ module ApplicationHelper
       else
         {}
       end
-      image_tag user.avatar.url(:thumb), opts.merge(:class=>'avatar', :alt=>user.name, :title=>user.name)
+      image_tag user.avatar.url(:thumb), opts.merge(alt: user.name, title:user.name)
     else
       render_gravatar user, options
     end
@@ -162,17 +162,17 @@ module ApplicationHelper
 
     if user
       opt_string = "?s=#{size}" if size
-      image_tag(gravitar_url(user, opt_string), :alt=>user.name, :title=>user.name, :class=>'avatar')
+      image_tag(gravitar_url(user, opt_string), :alt=>user.name, :title=>user.name)
     else
       size = "40x40"
       size = "#{options[:size]}x#{options[:size]}" if options[:size]
-      image_tag("#{request.protocol||'https://'}placehold.it/#{size}", :class=>'avatar')
+      image_tag("#{request.protocol||'https://'}placehold.it/#{size}")
     end
   end
 
   def render_tag_links tags, options={}
     tags.map do |tag|
-      link_to tag, questions_path(:tag=>tag.name), :class=>'taglink'
+      link_to tag, questions_path(:tag=>tag.name), :class=>'badge badge-secondary'
     end.join(' ').html_safe
   end
 
@@ -205,7 +205,7 @@ module ApplicationHelper
 
   # foundation icon generate
   def f_icon name, options={}
-    css_class = ["fi-#{name}", options[:class]].join(" ").strip
+    css_class = ["fas fa-#{name}", options[:class]].join(" ").strip
     if options[:color]
       options[:style] = [ "color:#{options[:color]}", options[:style] ].join(";").strip
       options.delete(:color)
@@ -235,13 +235,22 @@ module ApplicationHelper
   end
 
   def in_place_edit_panel note, path
-    title = content_tag(:h3, best_in_place(note, 'title' , {:as=>'input', :raw=>true }))
+    content_tag(:div, { class: 'card card-lists' }) do
+      content_tag(:div, { class: 'card-body p-0' }) do
+        content_tag(:div, { class: 'card-header' }) do
+          title = content_tag(:h5, best_in_place(note, 'title' , {:as=>'input', :raw=>true }), {class: 'card-title'} )
 
-    edit_content_id = dom_id(note, :content)
-    content = best_in_place(note, :content, {:as=>'textarea', :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
-    edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon')
-
-    content_tag(:div, "#{title} #{content} &nbsp;#{edit_icon}".html_safe, :class=>'panel')
+          edit_content_id = dom_id(note, :content)
+          content = best_in_place(note, :content, {:as=>'textarea', :raw=>true, :activator=>"##{edit_content_id}", :display_with=>lambda{ |content| content.to_s.html_safe}})
+          edit_icon = f_icon('pencil', :id=>edit_content_id, :class=>'edit_icon')
+          note_body = content_tag(:div, {}) do
+            content_tag(:div, content, {}) +
+            content_tag(:span, "&nbsp;#{edit_icon}".html_safe)
+          end
+          title + note_body
+        end
+      end
+    end
   end
 
   # display a series of panels per controller/action
@@ -260,7 +269,8 @@ module ApplicationHelper
       in_place_edit_panel(note, path)
     end.join.html_safe
 
-    str << content_tag(:div, link_to("Add New Note", notes_path(:path=>path), :method=>:post, :remote=>true), :class=>'panel', :id=>"add_#{path.gsub(/\//,'_')}") if allow_admin
+    klasses = "card"
+    str << content_tag(:div, link_to("Add New Note", notes_path(:path=>path), :method=>:post, :remote=>true), :class=>klasses, :id=>"add_#{path.gsub(/\//,'_')}") if allow_admin
 
     str
   end

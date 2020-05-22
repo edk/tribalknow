@@ -1,4 +1,4 @@
-class CreateAppConfigs < ActiveRecord::Migration
+class CreateAppConfigs < ActiveRecord::Migration[5.2]
   def change
     create_table :app_configs do |t|
       t.integer :tenant_id

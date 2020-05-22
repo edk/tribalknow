@@ -1,4 +1,4 @@
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   stampable
   acts_as_taggable
   acts_as_votable
@@ -10,7 +10,7 @@ class Topic < ActiveRecord::Base
   friendly_id :name, :use => :slugged
 
   has_many   :sub_topics, -> { order 'position, id' }, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:parent_topic
-  belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics, touch: true
+  belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics, touch: true, required: false
   validates  :name, presence: true, length: { minimum: 3 }
   has_many   :topic_files
   has_many   :questions
@@ -23,7 +23,13 @@ class Topic < ActiveRecord::Base
   has_attached_file :icon, :styles => { :thumb => "100x100#" }, :default_url => "blank-icon-100x100.gif" #/images/:style/missing.png"
   validates_attachment_content_type :icon, :content_type => /\Aimage\/.*\Z/
 
-  default_scope {where(tenant_id:Tenant.current_id) if Tenant.current_id }
+  default_scope {
+    if Tenant.current_id
+      where(tenant_id:Tenant.current_id)
+    else
+      where('1=1')
+    end
+  }
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }

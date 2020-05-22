@@ -8,51 +8,22 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require select2-zurb
- *= require mdedit
- *= require autocomplete
- *= require top_nav
- *= require in_place_edit
- *= require topics
- *= require questions
- *= require drag_n_drop
- *= require alerts_n_errors
- *= require voting
- *= require diffy
+ * = require select2-zurb
+ * = require mdedit
+ * = require autocomplete
+ * = require in_place_edit
+ * = require topics
+ * = require questions
+ * = require drag_n_drop
+ * = require alerts_n_errors
+ * = require voting
+ * = require diffy
+ * = require top_nav
  */
+ 
+// @import 'foundation-icons';
+// @import 'foundation-social-web-icons';
+// @import 'foundation_and_overrides';
 
-@import 'foundation-icons';
-@import 'foundation-social-web-icons';
-@import 'foundation_and_overrides';
-
-@import 'tools';
-@import 'site';
-
-// DEFAULT OPTIONS
-$defaultDuration: .3s;
-$primaryColour: #e1e1e1;
-$secondaryColour: #666;
-$shadowColour: rgba(0, 0, 0, .6);
-// Browser Prefixes
-$webkit: true;
-$moz: false;
-$ms: false;
-$o: false;
-
-// prefix declarations
-@mixin prefixed($property, $value) {
-  @if $webkit == true {
-    -webkit-#{$property}: #{$value};
-  }
-  @if $moz == true {
-    -moz-#{$property}: #{$value};
-  }
-  @if $ms == true {
-    -ms-#{$property}: #{$value};
-  }
-  @if $o == true {
-    -o-#{$property}: #{$value};
-  }
-  #{$property}: #{$value};
-}
-
+// @import 'tools';
+// @import 'site';

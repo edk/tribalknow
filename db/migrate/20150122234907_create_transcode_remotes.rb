@@ -1,4 +1,4 @@
-class CreateTranscodeRemotes < ActiveRecord::Migration
+class CreateTranscodeRemotes < ActiveRecord::Migration[5.2]
   def change
     create_table :transcode_remotes do |t|
       t.integer  :video_asset_id

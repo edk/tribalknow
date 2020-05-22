@@ -1,10 +1,16 @@
 # with some helpers in application_helper, such as render_custom_text
 # this is to allow custom text and page titles without the full blown
 # overhead of a CMS
-class CustomizedPage < ActiveRecord::Base
+class CustomizedPage < ApplicationRecord
   stampable
 
-  default_scope { where(tenant_id:Tenant.current_id) if Tenant.current_id }
+  default_scope {
+    if Tenant.current_id
+      where(tenant_id:Tenant.current_id)
+    else
+      where('1=1')
+    end
+  }
 
   def self.location location
     where(page: location, active: true).first

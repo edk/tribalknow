@@ -1,4 +1,4 @@
-class CreateVideoAttachments < ActiveRecord::Migration
+class CreateVideoAttachments < ActiveRecord::Migration[5.2]
   def change
     create_table :video_attachments do |t|
       t.integer :tenant_id

@@ -10,18 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
 //= require select2
 //= require underscore
-//= require foundation
-//= require foundation/foundation.tooltip
 //= require mdedit
 //= require dropzone
 //= require best_in_place
 //= require jquery.purr
 //= require best_in_place.purr
 //= require jquery-ui
+//   this might require jquery or jquery ujs
 //= require autocomplete
 //= require ahoy
 //= require Chart.bundle
@@ -33,7 +30,6 @@
 Dropzone.autoDiscover = false;
 
 $(function(){
-  $(document).foundation();
   $('.select2').select2();
   if ($('#tags').length > 0) {
     var all_tags = JSON.parse($('#tags').html());

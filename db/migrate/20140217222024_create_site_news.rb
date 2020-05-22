@@ -1,4 +1,4 @@
-class CreateSiteNews < ActiveRecord::Migration
+class CreateSiteNews < ActiveRecord::Migration[5.2]
   def change
     create_table :site_news do |t|
       t.belongs_to :tenant

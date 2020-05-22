@@ -1,4 +1,4 @@
-class FileAsset < ActiveRecord::Base
+class FileAsset < ApplicationRecord
   stampable
   acts_as_taggable
   acts_as_votable
@@ -7,7 +7,13 @@ class FileAsset < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, :use => [:slugged, :finders]
 
-  default_scope { where(tenant_id:Tenant.current_id) if Tenant.current_id }
+  default_scope {
+    if Tenant.current_id
+      where(tenant_id:Tenant.current_id)
+    else
+      where('1=1')
+    end
+  }
 
   has_attached_file :asset, s3_permissions: 'private'
 

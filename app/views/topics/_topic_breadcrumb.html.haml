@@ -1,5 +1,7 @@
-%ul.breadcrumbs
-  %li= link_to "Topics", topics_path
-  - @topic.hierarchy.each do |topic|
-    %li= link_to topic.name, topic_path(topic)
-  %li.current= @topic.name
+
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item= link_to "Topics", topics_path
+    - @topic.hierarchy.each do |topic|
+      %li.breadcrumb-item= link_to topic.name, topic_path(topic)
+    %li.breadcrumb-item.active{"aria-current" => "page"}= @topic.name

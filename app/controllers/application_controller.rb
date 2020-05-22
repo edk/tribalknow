@@ -3,15 +3,14 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
 
-  before_filter :authenticate_user!
-  include Userstamp
-  around_filter :scope_current_tenant
-  include PublicActivity::StoreController
+  before_action :authenticate_user!
+  # include Userstamp
+  around_action :scope_current_tenant
+  # include PublicActivity::StoreController
 
-  before_filter :set_paper_trail_whodunnit
-  skip_after_action :warn_about_not_setting_whodunnit # even though i'm setting it, the warning continues.
+  before_action :set_paper_trail_whodunnit
+  # skip_after_action :warn_about_not_setting_whodunnit # even though i'm setting it, the warning continues.
   after_action :track_action
-  
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -27,10 +26,11 @@ class ApplicationController < ActionController::Base
 
   def scope_current_tenant
     Tenant.current_id = current_tenant.try(:id)
+    @use_manual_login = true
+    @use_github_oauth = true
 
     if current_tenant.nil? && !request.subdomain.blank?
       flash[:notice] = "Unknown subdomain #{request.subdomain}"
-      canonical_landing = "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
       redirect_to canonical_landing
       return
     end
@@ -38,6 +38,14 @@ class ApplicationController < ActionController::Base
     yield
   ensure
     Tenant.current_id = nil
+  end
+
+  def canonical_landing
+    if ENV['DEFAULT_FQDN'].presence
+      ENV['DEFAULT_FQDN']
+    else
+      "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
+    end
   end
 
   def user_not_authorized

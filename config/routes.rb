@@ -1,4 +1,4 @@
-Tribalknow::Application.routes.draw do
+Rails.application.routes.draw do
 
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do

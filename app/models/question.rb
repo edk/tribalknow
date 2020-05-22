@@ -1,5 +1,5 @@
 
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   stampable
   acts_as_taggable
   has_paper_trail
@@ -11,15 +11,21 @@ class Question < ActiveRecord::Base
 
   has_many   :answers, :dependent => :destroy
   has_many   :uniq_answerers, -> { distinct }, through: :answers, :source=>:creator
-  belongs_to :user
+  belongs_to :user, required: false
   validates  :title, presence: true, length: { minimum: 3 }
-  belongs_to :topic
+  belongs_to :topic, required: false
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
 
-  default_scope { where(tenant_id:Tenant.current_id) if Tenant.current_id }
-  
+  default_scope {
+    if Tenant.current_id
+      where(tenant_id:Tenant.current_id)
+    else
+      where('1=1')
+    end
+  }
+
   scope :asked_by, ->(user) { where(:creator_id => user.id ) }
 
   scope :popular, ->(limit=10) {

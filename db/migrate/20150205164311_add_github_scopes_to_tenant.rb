@@ -1,4 +1,4 @@
-class AddGithubScopesToTenant < ActiveRecord::Migration
+class AddGithubScopesToTenant < ActiveRecord::Migration[5.2]
   def change
     add_column :tenants, :required_github_organization, :string, default: nil
     add_column :tenants, :github_auth_failure_message, :text, default: nil

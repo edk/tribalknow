@@ -1,13 +1,14 @@
 
-%h2 Resend confirmation instructions
-= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-  .row{:'data-equalizer'=>''}
-    = f.error_notification
-    = f.full_error :confirmation_token
-    .row
-      .columns.large-6{:'data-equalizer-watch'=>''}
-        = f.input :email, :required => true, :autofocus => true
-    .row
-      .columns.large-6{:'data-equalizer-watch'=>''}
-        = f.button :submit, "Resend confirmation instructions", :style=>'margin-top:1em;', :class=>"expand"
-= render "devise/shared/links"
+.row.p-5
+  .col
+    .card
+      .card-header
+        %h2 Resend confirmation instructions
+      .card-body
+        = simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+          = f.error_notification
+          = f.full_error :confirmation_token
+          = f.input :email, :required => true, :autofocus => true
+          = f.button :submit, "Resend confirmation instructions", :class=>"btn btn-primary btn-lg"
+  .col
+    = render "devise/shared/links"

@@ -1,6 +1,6 @@
 # An adapter class to encapsulate the operations needed
 # to communicate with the remote transcoding server.
-class TranscodeRemote < ActiveRecord::Base
+class TranscodeRemote < ApplicationRecord
   belongs_to :video_asset
 
   def key

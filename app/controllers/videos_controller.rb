@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  skip_before_filter :authenticate_user!, :only => :update_status
+  skip_before_action :authenticate_user!, :only => :update_status
   protect_from_forgery :except => [:update_status]
 
   def index

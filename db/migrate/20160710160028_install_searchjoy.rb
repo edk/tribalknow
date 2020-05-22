@@ -1,4 +1,4 @@
-class InstallSearchjoy < ActiveRecord::Migration
+class InstallSearchjoy < ActiveRecord::Migration[5.2]
   def change
     create_table :searchjoy_searches do |t|
       t.integer :user_id

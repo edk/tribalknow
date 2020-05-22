@@ -1,4 +1,4 @@
-class CreateFileAssets < ActiveRecord::Migration
+class CreateFileAssets < ActiveRecord::Migration[5.2]
   def change
     create_table :file_assets do |t|
       t.references :tenant, index: true
@@ -18,10 +18,9 @@ class CreateFileAssets < ActiveRecord::Migration
 
       t.userstamps
       t.timestamps
-
-      add_index  :file_assets, :slug, :unique => true rescue nil
-      add_index  :file_assets, :draft rescue nil
-      add_index  :file_assets, :parent_id rescue nil
     end
-  end
+    add_index  :file_assets, :slug, :unique => true
+    add_index  :file_assets, :draft
+    # add_index  :file_assets, :parent_id
+end
 end

@@ -16,11 +16,13 @@
 /log/*.log*
 log/*.pid
 /tmp
+/video
 /app/assets/tmp/*
 
 *.swp
 
-config/database.yml
+#config/database.yml
+config/*-prod
 
 solr/data
 solr/pids
@@ -36,8 +38,26 @@ config/deploy.rb
 config/sidekiq.god
 config/newrelic.yml
 .env
+.env*
 *.orig
 docs
 /public/assets
 /public/images
 /public/system
+mysql/
+config/redis.conf
+.byebug_history
+TAGS
+sample-db.sql
+node_modules
+public/packs
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
+docker-compose.yml
+.yarnrc
+.bash_history

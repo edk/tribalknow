@@ -1,48 +1,46 @@
 - set_title "#{Tenant.default_title}-tube"
 
-.row
-  .columns.large-12
+.row.mt-3
+  .col
     %h2
       Videos
-      .right= link_to "upload video", new_video_path, class:"button tiny"
   - if @draft_videos.present?
     .columns.large-12
       %h4 Videos in transcoding process
       = render partial: 'upload_progress', locals: { draft_videos: @draft_videos }
 
+
 .row
-  .columns.large-12
-    %ul.large-block-grid-3.small-block-grid-1
-      - @published_videos.each do |vid|
-        %li
-          .video_panel{id: dom_id(vid)}
-            /%iframe{style: 'width: 400px; height: 200px', frameborder: '0'}
-            = link_to video_path(vid) do
-              .video_poster
-                %image{src: vid.asset.expiring_url(60.minutes, :thumb)}
-                / %image{src: "http://placehold.it/400x200", style: "border:1px solid green;"}
-            .name_container
-              %b.name{ title: vid.name }= vid.name.presence || "Name me!"
-              - if current_user == vid.creator
-                = link_to "&#215;".html_safe, video_path(vid, dom_id: dom_id(vid) ), remote: true, method: :delete, data: { confirm: "Are you sure?" }
+  .col-2
+    = link_to "upload video", new_video_path, class:"btn btn-sm btn-secondary btn-block"
+    %hr
+    %p playlists (coming soon)
 
-            .desc{ title: vid.description }= truncate(vid.description, length: 80)
-            .date= time_tag((vid.date || vid.created_at).to_date)
-            / tags, vote, views
-            .edit_wrapper{style: 'position: relative'}
-              .edit_link{style: 'position:absolute; bottom: 0; right: 0;'}
-                = link_to f_icon('pencil'), edit_video_path(vid.id)
+  .col-10
+    - @published_videos.each_slice(3) do |row|
+      .card-deck
+        - row.each do |vid|
+          .card.mb-4
+            .video_panel{id: dom_id(vid)}
+              = link_to video_path(vid) do
+                .video_poster
+                  - expiring_url = vid.asset.expiring_url(600, :thumb)
+                  %image.card-img-top{src: expiring_url }
+            .card-body      
+              .card-title
+                %h5.font-weight-bold{ title: vid.name }= vid.name.presence || "Name me!"
+
+              .card-text{ title: vid.description }= truncate(vid.description, length: 80)
+
+            .card-footer
+              .edit_link.float-right.ml-2= link_to f_icon('pencil-alt'), edit_video_path(vid.id)
+              .float-right #{vid.creator}
+              .date
+                - if current_user == vid.creator
+                  = link_to f_icon('trash', {class:'text-danger'}), video_path(vid, dom_id: dom_id(vid) ), remote: true, method: :delete, data: { confirm: "Are you sure?" }
+                = time_tag((vid.date || vid.created_at).to_date) 
+              / tags, vote, views
 
 
-.row_spacer
-.row
-  .columns.large-8
     = will_paginate @published_videos
-  .columns.large-4.center
-
-%div#info_popup.reveal-modal{:'data-reveal' => ''}
-  %h2 title
-  %p Some text
-  %a.close-reveal-modal &#215;
-
 

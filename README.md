@@ -1,53 +1,53 @@
 
-## What's this?
+## What is this?
 
-This is a tool to explore new ways to spread tribal knowledge of a software project within a group.
-
-See also: http://en.wikipedia.org/wiki/Knowledge_management
+An awkward name for a project to explore knowledge sharing and organization in a software development setting.
 
 Features:
   * Q&A - think a private StackOverflow
   * Topics - A structured wiki
-  * Integration - Hipchat
+  * Video - upload and manage videos
+  * Chat integration
 
-Upcoming features:
-  * File uploads - with players/viewers for appropriate types, like video
-  * Google integration (?)
-  * badges for topic experts
-  * Hubot integration
+Future additions:
+  * improved editor(s) and editing workflow with better asset uploading.
+  * Tests and quizzes
+  * read-integration from chat applications
+  * import from email by forwarding to application
+  * Information "aging" and validation to help keep documentation fresh.
+  * Make creation of multimedia easier with "asciinema"-like terminal recording/playback
+    with audio and text.
 
 ### Motivation
 
-While wiki's such as Google Docs or Github wiki make it easy to enter data, a large complex project
-can quickly become overwhelming in pure wiki form.
+Commonly used tools such as Google Docs or Github wiki make it easy to enter data, a large complex project can quickly become overwhelming due to unstructured and unmaintained form.  Other more focussed tools (e.g. Confluence) also may have their strengths and weaknesses.
 
-The goal of this project is to provide the tools to enable members of a development team to enter and
-maintain the information that is useful to newcomers and existing members alike.
+The goal of this project is to provide the tools to enable members of a development team to enter and maintain the information that is useful to newcomers and existing members alike.  See https://www.youtube.com/watch?v=o-JL-so5Gm8 for a talk that resonates with the goals of this project.
 
-Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions.
-Unfortunately,  it's not available for private groups.
+Another excellent talk is [What nobody tells you about documentation](https://www.youtube.com/watch?v=t4vKPhjcMZg)
 
-In addition, the complex topics that an advanced software project needs to share can be difficult to squeeze
-into a Q&A format.
+Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately, it wasn't available for private groups until 2018 with [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, I'm sure it is amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling the knowledge of private teams.
 
-Long form articles require a skilled writer to clearly and correctly teach a concept or topic.  Long, meandering
-mind-dumps aren't pleasant to read through.  Tools to help manage the process of articles is necessary.
+### Local Setup
 
-And finally, not everyone learns the same way.  Some people are audio/visual learners, and some topics are
-better suited to demonstrating, rather than describing.  Tools to help generate generate non-annoying screencasts
-are badly needed.
+* docker and docker-compose should be installed locally.
 
+build images:
+```
+$ docker-compose build
+```
 
+initialize local database:
+```
+$ docker-compose run tribalknow ./bin/setup
+```
 
-### Setup
+run locally:
+```
+$ docker-compose up
+```
 
-* install mysql
-
-* clone repo, then `bundle install`
-
-* install sphinx.  using brew:
-
-`brew install  sphinx --mysql` to install searchd
+#### Installing without docker:
 
 If you want to use the github omniauth provider (optional, not required):
 * set two environment variables, the client app id ID
@@ -61,8 +61,24 @@ See http://developer.github.com/guides/basics-of-authentication/ for more info.
 * seed the database:
 `rake db:seed`
 
+* launch with foreman:
+`foreman start`
+
+### Convert an existing mysql database to postgres
+
+### Deploy to heroku
+
+* create your heroku application
+* add your heroku push path to the remote
+* git push heroku master
+
+The first time through on a fresh heroku app, you'll want to run `bin/setup-demo` or `bin/setup-heroku` to create and setup the database.
+
+Add postgres addon (see https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres)
+
+
 ### Thanks
-While the work on this project has been done outside of Coupa, special thanks to my employer,
+While the work on this project has been been largely done outside of Coupa, special thanks to my employer,
 Coupa Software, for allowing and encouraging me to do this side-project as open-source.
 
 
