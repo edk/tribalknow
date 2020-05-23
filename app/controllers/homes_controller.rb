@@ -4,7 +4,8 @@ class HomesController < ApplicationController
   def index
     if current_user && Tenant.current_id
 
-      @activities = PublicActivity::Activity.order("created_at DESC").limit(100)
+      max_lookback = 30.days.ago
+      @activities = PublicActivity::Activity.where('created_at > ?', max_lookback).order("created_at DESC")
       cache_key = [ 'public_activities', @activities.pluck(:id), @activities.maximum(:updated_at) ]
       @collapsed_activities = Rails.cache.fetch(cache_key) do
         @activities.inject({}) do |m,o|
@@ -17,7 +18,7 @@ class HomesController < ApplicationController
 
       @top = {}
 
-      @top[:topics] = Ahoy::Event.where(name: 'topics#show').limit(10).top(:properties)
+      @top[:topics] = Ahoy::Event.where(name: 'topics#show').top(:properties, 10)
       cache_key = [ 'top_topics', @top[:topics].map{ |k,v| v } ]
       @top[:topics] = Rails.cache.fetch(cache_key) do
         @top[:topics].map do |props|
@@ -37,7 +38,7 @@ class HomesController < ApplicationController
         end.compact
       end
 
-      @top[:qna] = Ahoy::Event.where(name: 'questions#show').limit(12).top(:properties)
+      @top[:qna] = Ahoy::Event.where(name: 'questions#show').top(:properties, 12)
       cache_key = [ 'top_qna', @top[:qna].map{ |k,v| v } ]
       @top[:qna] = Rails.cache.fetch(cache_key) do
         @top[:qna].map do |props|
@@ -51,7 +52,7 @@ class HomesController < ApplicationController
         end
       end
 
-      @top[:videos] = Ahoy::Event.where(name: 'videos#show').limit(10).top(:properties)
+      @top[:videos] = Ahoy::Event.where(name: 'videos#show').top(:properties, 10)
       cache_key = [ 'top_videos', @top[:videos].map{ |k,v| v } ]
       @top[:videos] = Rails.cache.fetch(cache_key) do
         @top[:videos].map do |props|
