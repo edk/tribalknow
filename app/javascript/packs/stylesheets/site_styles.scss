@@ -1,0 +1,53 @@
+
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import './dark_theme';
+// @import "~bootstrap/scss/mixins";
+
+// // Optional
+// @import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+// @import "~bootstrap/scss/code";
+// @import "~bootstrap/scss/grid";
+
+// // @import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/mixins/_breakpoints';
+// @import '@fortawesome/fontawesome-free/css/all';
+
+// import './theme_custom.css';
+
+// .topic-card-container {
+//   .card {
+//     @extend .bg-light;
+//     @extend .m-2;
+//     @extend .float-left;
+//     @extend .row;
+//     width:20em; height:9em;
+
+//     .topic-image {
+//     }
+    
+//     .topic-body {
+//       width: 14em;
+//       @extend .px-2;
+      
+//       .card-title {
+//         a.delete_topic {position:absolute; top:0; right:0.25em;}
+
+//         h5 {
+//           @extend .border-bottom;
+//           @extend .border-dark;
+
+//           width:10em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+//           position:relative;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .avatar img {
+//   padding-left: .5em;
+//   @extend .rounded-circle;
+// }

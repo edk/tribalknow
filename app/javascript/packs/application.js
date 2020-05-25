@@ -17,10 +17,12 @@ import { } from 'jquery-ujs'
 
 import 'jquery.easing/jquery.easing.js';
 
-import '@fortawesome/fontawesome-free/css/all';
 import '@fortawesome/fontawesome-free/js/all';
 
 import 'bootstrap/dist/js/bootstrap';
 
-// import './theme_custom.css';
-import './site_overrides'
+import './stylesheets/darkly';
+import './stylesheets/lux';
+import './stylesheets/flatly';
+import './stylesheets/cosmo';
+import './stylesheets/lumen';
