@@ -1,9 +1,15 @@
-- if flash.keys.present?
-  - if notice
-    .alert-box.success.radius{"data-alert"=>""}
-      = raw notice
-      %a.close{:href => "#"}
-  - if alert
-    .alert-box.info.radius{"data-alert"=>""}
-      = raw alert
-      %a.close{:href => "#"}
+.row.justify-content-md-center
+  .col.col-lg-2
+  .col-md-auto
+    - if flash.keys.present?
+      - if notice
+        .alert.alert-success.alert-dismissible.fade.show{:role => "alert"}
+          = raw notice
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+      - if alert
+        .alert.alert-info.alert-dismissible.fade.show{:role => "alert"}
+          = raw alert
+          %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+  .col.col-lg-2

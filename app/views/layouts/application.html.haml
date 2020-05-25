@@ -19,9 +19,7 @@
     = javascript_include_tag "application", params[:controller]
     = render 'layouts/top_nav'
     .container-fluid.page-content
-      .row
-        .col
-          = render 'layouts/flash'
+      = render 'layouts/flash'
       = yield
     
     .clearfix
