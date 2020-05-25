@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_10_05_172743) do
+ActiveRecord::Schema.define(version: 2020_05_24_173632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2017_10_05_172743) do
     t.bigint "visit_id"
     t.bigint "user_id"
     t.string "name", limit: 191
-    t.text "properties"
+    t.jsonb "properties"
     t.datetime "time"
     t.index ["name", "time"], name: "idx_31865_index_ahoy_events_on_name_and_time"
     t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2017_10_05_172743) do
     t.bigint "visit_id"
     t.bigint "user_id"
     t.string "name", limit: 191
-    t.text "properties"
+    t.jsonb "properties"
     t.datetime "time"
     t.index ["name", "time"], name: "idx_31865_index_ahoy_events_on_name_and_time"
     t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
