@@ -11,6 +11,7 @@
     "classnames": "^2.2.6",
     "immutable": "^4.0.0-rc.12",
     "jquery": "3.5.1",
+    "jquery-ujs": "1.2.2",
     "jquery-ui": "^1.12.1",
     "jquery.easing": "^1.4.1",
     "keymirror": "^0.1.1",

@@ -10,8 +10,10 @@
 import 'jquery/dist/jquery';
 
 import $ from 'jquery';
-window.jQuery = $;
-window.$ = $;
+global.jQuery = $;
+global.$ = $;
+
+import { } from 'jquery-ujs'
 
 import 'jquery.easing/jquery.easing.js';
 

@@ -4,4 +4,6 @@ class Ahoy::Store < Ahoy::DatabaseStore
   end
 end
 
+Ahoy.cookie_options = { same_site: :lax }
+
 Ahoy.geocode = false
