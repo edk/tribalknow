@@ -101,8 +101,9 @@ class VideoAsset < FileAsset
   end
 
   def s3_credentials(version: nil)
-    unless %w[S3_BUCKET S3_ACCESS_KEY S3_SECRET].all? { |key| ENV[key].present? }
-      raise "Missing S3 Environment variables" 
+    required_vars = %w[S3_BUCKET S3_ACCESS_KEY S3_SECRET S3_REGION]
+    unless required_vars.all? { |key| ENV[key].present? }
+      raise "Missing S3 Environment variables: #{%w[S3_BUCKET S3_ACCESS_KEY S3_SECRET S3_REGION].select {|v| ENV[v].blank? }.compact.inspect }"
     end
     case version
     when 2
