@@ -7,6 +7,8 @@
     %title= content_for?(:title) ? yield(:title) : (@page_title || Tenant.default_title)
     = yield(:head_js)
     = stylesheet_link_tag "application", media: 'all'
+    = javascript_include_tag "https://www.google.com/jsapi"
+    = javascript_include_tag "application", params[:controller]
 
     = javascript_pack_tag "application"
     = stylesheet_pack_tag "#{user_theme}"
@@ -17,15 +19,12 @@
     = csp_meta_tag
     = analytics_init if Rails.env.production?
   %body
-    = javascript_include_tag "https://www.google.com/jsapi"
-    = javascript_include_tag "application", params[:controller]
     = render 'layouts/top_nav'
     .container-fluid.page-content
       = render 'layouts/flash'
       = yield
     
-    .clearfix
-    #footer.page-footer.pt-4
+    #footer.page-footer.mt-5
       .container-fluid.text-center
         = Tenant.default_footer.html_safe if Tenant.default_footer.presence 
         .footer-copyright.py-3 ©#{Time.now.year} TribalKnowNow

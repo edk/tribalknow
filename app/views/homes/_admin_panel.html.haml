@@ -1,9 +1,8 @@
 - unless current_user.settings(:preference).admin_panel == 'closed'
-  .row.mb-3{:'data-alert'=>'', :'data-href'=>settings_path('admin_panel', :value=>'closed')}
-    .col
-      %a{:href=>"#", :class=>"close"}
-      %h3 Links to admin functions
-      %ul
-        %li= link_to "Approve new users.", admin_approve_users_path
-        %li= link_to "Admin users", admin_users_path
-
+  .card.mb-3
+    .card-body.p-0
+      .card-header
+        %h5.card-title #{f_icon 'user-shield', color:'#FFA500', style:'text-shadow: 2px 2px #DDD'} Admin Functions
+        %br
+        %p= link_to "Approve new users", admin_approve_users_path
+        %p= link_to "Admin users", admin_users_path
