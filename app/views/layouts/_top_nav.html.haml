@@ -16,35 +16,29 @@
         %li.nav-item= link_to "Topics", topics_path, class:'nav-link'
         %li.nav-item= link_to "Questions", questions_path, class:'nav-link'
         %li.nav-item= link_to "Videos", videos_path, class:'nav-link'
-        %li.nav-item= link_to "YARD Docs", docs_path, class:'nav-link'
-        - if current_user && current_user.admin?
-          %li.nav-item= link_to "Admin", admin_home_index_path, class:'nav-link'
+        %li.nav-item= link_to "YARD", docs_path, class:'nav-link'
 
 
-      - if current_tenant && !@static_render
-        %nav.navbar-nav.nav-item.ml-auto.px-1
+        - if current_tenant && !@static_render
           - if user_signed_in?
-            = link_to "Sign Out", destroy_user_session_path, {:method=>:delete, :class=>'btn btn-info'}
+            %li.nav-item.dropdown
+              %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"}
+                = render_avatar(current_user, :size=>43)
+              .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdownMenuLink"}
+                %a.dropdown-item{:href => account_path} Your Account
+                -# %a.dropdown-item{:href => "#"} Another action
+                - if current_user && current_user.admin?
+                  = link_to "#{f_icon 'user-shield'} Admin".html_safe, admin_home_index_path, class:'dropdown-item mt-3'
+                = link_to "Sign Out", destroy_user_session_path, {:method=>:delete, :class=>'btn btn-info m-3'}
           - else
             = link_to "Sign in/Sign up", new_user_session_path, {:class=>'btn btn-info '}
-      - if user_signed_in? # no user if generating static docs from site
-        .nav
-          = current_user && link_to(account_path, :class=>'nav_avatar') do
-            .navbar-nav.navbar-right.px-1
-              %li.avatar
-                = render_avatar(current_user, :size=>43)
-
-      - if user_signed_in?
-        %li.nav-item.dropdown
-          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"}
-            = render_avatar(current_user, :size=>43)
-          .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
-            %a.dropdown-item{:href => account_path} Account
-            %a.dropdown-item{:href => "#"} Another action
-            %hr
-            %a.dropdown-item{:href => "#"} Logout
-
-
-
+        
+      -# - if user_signed_in? # no user if generating static docs from site
+      -#   .nav
+      -#     = current_user && link_to(account_path, :class=>'nav_avatar') do
+      -#       .navbar-nav.navbar-right.px-1
+      -#         %li.avatar
+      -#           = render_avatar(current_user, :size=>43)
 
 = javascript_include_tag "autocomplete"
+
