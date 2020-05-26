@@ -20,15 +20,13 @@
           .col-lg-6
             = f.input :name, :hint=>"This is the name used in display"
             = f.input :email, :hint=>"Used for your login and notifications"
-            = f.input :hipchat_mention_name, :input_html=>{:placeholder=>"@mention"}, :hint=>"Used to notify you in Hipchat"
+            =# f.input :hipchat_mention_name, :input_html=>{:placeholder=>"@mention"}, :hint=>"Used to notify you in Hipchat"
             %br
             = f.input :password
             = f.input :password_confirmation
             %br
+            %label.form-control-label Theme
             = f.select :theme, options_for_select(User::THEMES, @user.theme)
-            -# u.settings(:preference).theme   , prompt: 'Select Theme', label: true   , as: :select, collection: User::THEMES
-            %br
-            #{User::THEMES}
 
             %hr
             .text-right
