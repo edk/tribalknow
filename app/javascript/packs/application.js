@@ -21,8 +21,8 @@ import '@fortawesome/fontawesome-free/js/all';
 
 import 'bootstrap/dist/js/bootstrap';
 
-import './stylesheets/darkly';
-import './stylesheets/lux';
-import './stylesheets/flatly';
-import './stylesheets/cosmo';
-import './stylesheets/lumen';
+import 'darkly';
+import 'lux';
+import 'flatly';
+import 'cosmo';
+import 'lumen';

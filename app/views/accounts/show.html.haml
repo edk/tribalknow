@@ -24,7 +24,12 @@
             %br
             = f.input :password
             = f.input :password_confirmation
-        
             %br
-            .right
+            = f.select :theme, options_for_select(User::THEMES, @user.theme)
+            -# u.settings(:preference).theme   , prompt: 'Select Theme', label: true   , as: :select, collection: User::THEMES
+            %br
+            #{User::THEMES}
+
+            %hr
+            .text-right
               = f.submit "Update", :class=>"btn btn-primary"

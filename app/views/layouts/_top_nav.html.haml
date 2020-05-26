@@ -33,4 +33,18 @@
         .navbar-nav.navbar-right.px-1
           %li.avatar
             = render_avatar(current_user, :size=>43)
+
+  - if user_signed_in?
+    %li.nav-item.dropdown
+      %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"}
+        = render_avatar(current_user, :size=>43)
+      .dropdown-menu{"aria-labelledby" => "navbarDropdownMenuLink"}
+        %a.dropdown-item{:href => account_path} Account
+        %a.dropdown-item{:href => "#"} Another action
+        %hr
+        %a.dropdown-item{:href => "#"} Logout
+
+
+
+
 = javascript_include_tag "autocomplete"

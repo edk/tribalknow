@@ -16,6 +16,23 @@ class User < ApplicationRecord
     end
   }
 
+  # themes from bootswatch.com randomly chosen themes
+  THEMES = %w(cosmo darkly flatly lumen lux)
+
+  #attr_accessor :theme
+
+  def theme
+    settings(:preference).theme || "darkly"
+  end
+
+  def theme= val
+    settings(:preference).theme = if THEMES.include?(val)
+      val
+    else
+      THEMES.first
+    end
+  end
+
   has_attached_file :avatar, :styles => { :thumb => "80x80#" }, :default_url => "blank-icon-80x80.gif"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
