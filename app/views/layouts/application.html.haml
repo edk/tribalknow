@@ -28,6 +28,5 @@
       .container-fluid.text-center
         = Tenant.default_footer.html_safe if Tenant.default_footer.presence 
         .footer-copyright.py-3 ©#{Time.now.year} TribalKnowNow
-        %h1 Theme is #{user_theme} DEBUG REMOVE BEFORE PRODUCTION
 
     = yield(:post_body_js)
