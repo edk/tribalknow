@@ -23,6 +23,7 @@ gem 'rollbar' # exception service
 gem 'oj'
 
 gem 'pg'
+gem 'pg_search'
 gem 'devise'
 gem 'omniauth-github'
 gem "octokit"

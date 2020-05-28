@@ -7,7 +7,7 @@
           .search_result_title
             %b Topic:
             #{result.name} - #{result.description}
-        - if (content = result.excerpts.content).present?
+        - if false || (content = result.content).present?
           %p #{content.html_safe}
         - else
           %p #{truncate result.content, :length=>180, :separator=>' '}

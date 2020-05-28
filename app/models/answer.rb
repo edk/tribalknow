@@ -4,6 +4,9 @@ class Answer < ApplicationRecord
   acts_as_votable
   include EventMessage
 
+  include PgSearch::Model
+  multisearchable against: [:text]
+
   belongs_to :question, required: false
   validates  :text, presence: true, length: { minimum: 3 }
   default_scope {

@@ -3,12 +3,15 @@ class SearchesController < ApplicationController
   skip_after_action :track_action
 
   def index
+    @results = PgSearch.multisearch(params[:q])
 
     Searchjoy::Search.create(
       query: params[:q],
-      results_count: @results.size,
+      results_count: @results.count,
       user_id: current_user.id
     ) unless request.xhr?
+
+    @results = @results.paginate(page: (params[:page]||1), per_page: 25)
 
     respond_to do |format|
       format.html #do nothing, defaults to default template

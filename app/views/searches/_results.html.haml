@@ -1,3 +1,3 @@
 
 .panel.radius
-  = render :partial => "#{results.class.to_s.underscore}", :locals=>{:result=>results}
+  = render :partial => "#{results.searchable.class.to_s.underscore}", :locals=>{:result=>results.searchable}

@@ -15,6 +15,9 @@ end
 
 class VideoAsset < FileAsset
 
+  include PgSearch::Model
+  multisearchable against: [:name, :description]
+
   has_many :transcode_jobs, class_name: 'TranscodeRemote', dependent: :destroy
 
   include AASM
