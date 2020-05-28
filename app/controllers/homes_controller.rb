@@ -3,19 +3,6 @@ class HomesController < ApplicationController
 
   def index
     if current_user && Tenant.current_id
-
-      max_lookback = 30.days.ago
-      @activities = PublicActivity::Activity.where('created_at > ?', max_lookback).order("created_at DESC")
-      cache_key = [ 'public_activities', @activities.pluck(:id), @activities.maximum(:updated_at) ]
-      @collapsed_activities = Rails.cache.fetch(cache_key) do
-        @activities.inject({}) do |m,o|
-          k = "#{o.trackable_type}:#{o.trackable_id}"
-          m[k] ||= []
-          m[k] << {:key=>o.key,:at=>o.created_at,:owner=>o.owner, :obj=>o}
-          m
-        end
-      end
-
       @top = {}
 
       @top[:topics] = Ahoy::Event.where(name: 'topics#show').top(:properties, 10)
