@@ -63,9 +63,6 @@ gem 'will_paginate'
 gem 'best_in_place', github: 'edk/best_in_place'
 gem 'render_anywhere', :require => false
 
-# gem 'thinking-sphinx'#, '~> 3.1'
-
-# gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
 gem 'underscore-rails'
 gem 'ledermann-rails-settings', :require => 'rails-settings'

@@ -3,8 +3,6 @@ class SearchesController < ApplicationController
   skip_after_action :track_action
 
   def index
-    @results = get_sphinx_search_results params[:q]
-    @results.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
 
     Searchjoy::Search.create(
       query: params[:q],
@@ -26,14 +24,6 @@ class SearchesController < ApplicationController
   end
 
   private
-
-  def get_sphinx_search_results(term)
-    ThinkingSphinx.search Riddle::Query.escape(term),
-                        :excerpts => { :limit=>255, :around=>50 },
-                        :classes => [Question, Answer, Topic, Note, VideoAttachment],
-                        :with=>{ :tenant_id => Tenant.current_id },
-                        :per_page => per_page, :page=>params[:page]
-  end
 
   def per_page
     25
