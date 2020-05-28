@@ -5,6 +5,9 @@ class HomesController < ApplicationController
     if current_user && Tenant.current_id
       @top = {}
 
+      @collapsed_activities = SiteStat.recent_activity
+      @collapsed_activities = @collapsed_activities&.data
+
       @top[:topics] = Ahoy::Event.where(name: 'topics#show').top(:properties, 10)
       cache_key = [ 'top_topics', @top[:topics].map{ |k,v| v } ]
       @top[:topics] = Rails.cache.fetch(cache_key) do

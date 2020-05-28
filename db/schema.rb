@@ -522,7 +522,7 @@ ActiveRecord::Schema.define(version: 2020_05_28_155544) do
   create_table "site_stats", force: :cascade do |t|
     t.bigint "tenant_id"
     t.string "name"
-    t.hstore "data"
+    t.json "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_site_stats_on_name"

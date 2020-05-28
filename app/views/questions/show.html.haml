@@ -5,7 +5,6 @@
     %h1.title#question_title= best_in_place @question, :title
   .col-lg-2{style: 'position:relative'}
     %div{style:'float: left; padding-top: 1.25em; padding-right: 0.5em;'}= archive_question(@question)
-    %div{style:'float: left; padding-top: 0.5em;'}= link_to image_tag("HipChat.png", :size=>"45x45", :title => "Post to Hipchat"), notify_question_path(@question, :ping=>true), {:class=>'icon_link', :remote=>true, :method=>:post, :confirm=>"Post to Hipchat?"} if NotifyHipchat.hipchat_configured?
 
 .row.question
   .col-lg-8.pl-5#question_body.question_content

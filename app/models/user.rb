@@ -68,14 +68,6 @@ class User < ApplicationRecord
     end
   end
 
-  before_save :normalize_hipchat
-
-  def normalize_hipchat
-    if hipchat_mention_name.present? && hipchat_mention_name !~ /^@/
-      hipchat_mention_name = "@#{hipchat_mention_name}"
-    end
-  end
-
   def requires_admin_approval?
     return false if skip_activation?
     tenant && tenant.email_domain_requires_approval?(email)

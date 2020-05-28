@@ -7,7 +7,7 @@ class CreateSiteStats < ActiveRecord::Migration[5.2]
     create_table :site_stats do |t|
       t.references :tenant, foreign_key: true
       t.string :name
-      t.hstore :data
+      t.json :data
 
       t.timestamps
     end

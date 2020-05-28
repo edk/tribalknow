@@ -1,32 +1,9 @@
 
 - activities.each do |activity|
-  :ruby
-    trackable = activity[1].first[:obj].trackable
-    linked_description = case trackable
-          when Topic
-            link_to trackable.to_s, topic_path(trackable)
-          when Question
-            link_to trackable.to_s, question_path(trackable)
-          when Answer
-            link_to trackable.to_s, question_path(trackable.question)
-          when VideoAsset
-            link_to trackable.name.to_s, video_path(trackable)
-          end
-  - next if trackable.nil?
+  - act_obj = extract_activity activity
   %ul.list-group
     %li.activity_entry.list-group-item.list-group-flush
-      %span.muted= "#{trackable.class.model_name.human}: "
-      = linked_description
-      - act = activity[1].map {|a| { a[:key].split('.').last => a[:owner].try(:name) } }
-      - act = act.inject({}) {|m,o| m[o.keys.first] ||= []; m[o.keys.first] << o.values.first; m}
-
+      %span.muted= "#{activity[1]["human_name"]}: "
+      = link_to(activity[1]["trackable_desc"], activity[1]["trackable_link"])
       .whodunnit.muted
-        - if act["update"]
-          = "Updated by #{act["update"].uniq.join(', ')}"
-        - elsif act["create"]
-          = "Created by #{act["create"].uniq.join(', ')}"
-        - elsif act["delete"]
-          = "Deleted by #{act["delete"].uniq.join(', ')}"
-        - elsif act["uploaded"]
-          = "Uploaded by #{act["uploaded"].uniq.join(', ')}"
-        = trackable && "#{time_ago_in_words trackable.updated_at} ago"
+        = show_whodunnit(activity)

@@ -17,7 +17,6 @@ class AnswersController < ApplicationController
 
   def notify
     @answer = Answer.find(params[:id])
-    NotifyHipchat.call(type: :create, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer]))
 
     respond_to do |format|
       format.js
