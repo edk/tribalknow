@@ -23,8 +23,6 @@ gem 'rollbar' # exception service
 gem 'oj'
 
 gem 'pg'
-# gem 'mysql2'
-#gem 'sqlite3', require: false
 gem 'devise'
 gem 'omniauth-github'
 gem "octokit"
@@ -32,8 +30,6 @@ gem "pundit"
 gem 'paperclip'
 gem 'paperclip-av-transcoder'
 gem 'aws-sdk-s3'
-# gem 'aws-sdk'
-gem 'hipchat'
 gem 'certified'
 gem 'aasm'
 gem 'rails-observers'
@@ -85,9 +81,6 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen'
-  # gem "airbrussh", require: false
-  gem 'guard-livereload', require: false
-  gem 'rack-livereload'
   gem 'sanitize_email'
 end
 
