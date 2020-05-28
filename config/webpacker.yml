@@ -7,7 +7,6 @@ default: &default
   public_output_path: packs
   cache_path: tmp/cache/webpacker
   check_yarn_integrity: false
-  webpack_compile_output: false
 
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
@@ -17,7 +16,7 @@ default: &default
   cache_manifest: false
 
   # Extract and emit a css file
-  extract_css: false
+  extract_css: true
 
   static_assets_extensions:
     - .jpg
@@ -51,6 +50,7 @@ default: &default
 development:
   <<: *default
   compile: true
+  #cache_manifest: true
 
   # Verifies that versions and hashed value of the package contents in the project's package.json
   check_yarn_integrity: false
@@ -61,7 +61,7 @@ development:
     host: localhost
     port: 3035
     public: localhost:3035
-    hmr: true
+    hmr: false # disable hot module reloading to allow stylesheet_pack_tag to be emitted in dev mode
     # Inline should be set to true if using HMR
     inline: true
     overlay: true

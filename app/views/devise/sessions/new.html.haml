@@ -5,34 +5,35 @@
       = text
 
 .row.p-5
-  .col-lg-7
+  .col-sm-12.col-md-12.col-lg-6.offset-lg-3
     - if @use_github_oauth
-      .row
-        .col
-          .card
-            .card-header
-              %h3.card-title Login with Github OAuth
-            .card-body
-              %p If you have access to the Github repo for this organization, use this login method.
-              = link_to "Login with GitHub OAuth", user_github_omniauth_authorize_path, {:class=>'btn btn-lg btn-primary card-link float-right'}
-          %br
-    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-      - if @use_manual_login
-        .row.pt-5
-          .col
-            .card
-              .card-header
-                %h5 Manual Login
-              .card-body
-                .form-group
-                  = f.input :email, :required => false, :autofocus => true
-                  = f.input :password, :required => false
-                  = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-              .card-footer
-                = f.button :submit, "Login", :class=>'btn btn-warning float-right'
+      .card
+        .card-header
+          %h3.card-title Login with Github OAuth
+        .card-body
+          %p If you have access to the Github repo for this organization, use this login method.
+          = link_to "Login with GitHub <i class='fab fa-github'></i>".html_safe, user_github_omniauth_authorize_path, {:class=>'btn btn-lg btn-primary card-link float-right'}
+    .mt-5
+      %a.btn.btn-secondary{"aria-controls" => "collapseExample", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseExample", :role => "button"}
+        Manual Login <i class="fas fa-sign-in-alt"></i>
 
-  .col
-    = render "devise/shared/links"
+    #collapseExample.collapse
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+        - if @use_manual_login
+          .row.pt-5
+            .col
+              .card
+                .card-header
+                  %h5 Manual Login
+                .card-body
+                  .form-group
+                    = f.input :email, :required => false, :autofocus => true
+                    = f.input :password, :required => false
+                    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+                .card-footer
+                  = f.button :submit, "Login", :class=>'btn btn-warning float-right'
+
+      = render "devise/shared/links"
 
 - render_custom_text 'bottom' do |header, text|
   .row

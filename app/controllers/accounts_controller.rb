@@ -55,7 +55,7 @@ class AccountsController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name,:email, :password, :password_confirmation, :hipchat_mention_name)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :theme)
   end
 
 end
