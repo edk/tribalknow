@@ -9,7 +9,7 @@
             Answer to: #{result.question.title}
 
       .columns.large-12      
-        - if content=result.excerpts.text.presence
+        - if false || (content=result.text.presence)
           = raw content
         - else
           = raw HTML_Truncator.truncate(render_md(result.text), 120, {:length_in_chars => true})

@@ -9,6 +9,9 @@ class Question < ApplicationRecord
   extend FriendlyId
   friendly_id :title, :use => [:slugged, :finders]
 
+  include PgSearch::Model
+  multisearchable against: [:title, :text]
+
   has_many   :answers, :dependent => :destroy
   has_many   :uniq_answerers, -> { distinct }, through: :answers, :source=>:creator
   belongs_to :user, required: false

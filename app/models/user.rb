@@ -22,7 +22,7 @@ class User < ApplicationRecord
   #attr_accessor :theme
 
   def theme
-    settings(:preference).theme || "darkly"
+    settings(:preference).theme || "cosmo"
   end
 
   def theme= val
@@ -65,14 +65,6 @@ class User < ApplicationRecord
       AdminMailer.new_user_waiting_for_approval(self).deliver
     else
       approve_and_activate_send_email!
-    end
-  end
-
-  before_save :normalize_hipchat
-
-  def normalize_hipchat
-    if hipchat_mention_name.present? && hipchat_mention_name !~ /^@/
-      hipchat_mention_name = "@#{hipchat_mention_name}"
     end
   end
 

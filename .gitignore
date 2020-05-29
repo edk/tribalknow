@@ -24,6 +24,9 @@ log/*.pid
 #config/database.yml
 config/*-prod
 
+postgres
+mysql
+redis
 solr/data
 solr/pids
 .DS_Store

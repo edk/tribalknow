@@ -9,6 +9,9 @@ class Topic < ApplicationRecord
   extend FriendlyId
   friendly_id :name, :use => :slugged
 
+  include PgSearch::Model
+  multisearchable against: [:name, :description, :content]
+
   has_many   :sub_topics, -> { order 'position, id' }, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:parent_topic
   belongs_to :parent_topic, :class_name=>'Topic', :foreign_key => 'parent_topic_id', :inverse_of=>:sub_topics, touch: true, required: false
   validates  :name, presence: true, length: { minimum: 3 }

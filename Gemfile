@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.8'
+ruby '2.6.5'
 
 gem 'rails', '~> 5.2'
 gem 'puma'
@@ -23,8 +23,7 @@ gem 'rollbar' # exception service
 gem 'oj'
 
 gem 'pg'
-# gem 'mysql2'
-#gem 'sqlite3', require: false
+gem 'pg_search'
 gem 'devise'
 gem 'omniauth-github'
 gem "octokit"
@@ -32,8 +31,6 @@ gem "pundit"
 gem 'paperclip'
 gem 'paperclip-av-transcoder'
 gem 'aws-sdk-s3'
-# gem 'aws-sdk'
-gem 'hipchat'
 gem 'certified'
 gem 'aasm'
 gem 'rails-observers'
@@ -63,9 +60,6 @@ gem 'will_paginate'
 gem 'best_in_place', github: 'edk/best_in_place'
 gem 'render_anywhere', :require => false
 
-# gem 'thinking-sphinx'#, '~> 3.1'
-
-# gem 'jquery-rails' # use version  '2.0.2' to specifically use jquery 1.7.2 (for select2)
 gem 'select2-rails'
 gem 'underscore-rails'
 gem 'ledermann-rails-settings', :require => 'rails-settings'
@@ -88,9 +82,6 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen'
-  # gem "airbrussh", require: false
-  gem 'guard-livereload', require: false
-  gem 'rack-livereload'
   gem 'sanitize_email'
 end
 
