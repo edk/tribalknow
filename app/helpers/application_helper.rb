@@ -204,8 +204,8 @@ module ApplicationHelper
   end
 
   # foundation icon generate
-  def f_icon name, options={}
-    css_class = ["fas fa-#{name}", options[:class]].join(" ").strip
+  def f_icon type, name, options={}
+    css_class = ["#{type} fa-#{name}", options[:class]].join(" ").strip
     if options[:color]
       options[:style] = [ "color:#{options[:color]}", options[:style] ].join(";").strip
       options.delete(:color)

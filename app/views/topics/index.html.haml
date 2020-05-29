@@ -26,7 +26,7 @@
               .icon_drop_target.topic_icon{id: "topic_icon_#{topic.id}", url: set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb), class: "border border-dark rounded"), topic_path(topic)
             .col-md-9
               .card-body.p-1
-                .float-right= link_to "#{f_icon('times-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
+                .float-right= link_to "#{f_icon('far', 'times-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
 
                 %h5.card-title.mb-1= link_to topic.name, topic_path(topic), {style:'', title:topic.name}
                 - if topic.sub_topics.present?
