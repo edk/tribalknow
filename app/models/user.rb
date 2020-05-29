@@ -17,7 +17,7 @@ class User < ApplicationRecord
   }
 
   # themes from bootswatch.com randomly chosen themes
-  THEMES = %w(cosmo darkly flatly lumen lux)
+  THEMES = %w(cosmo darkly flatly lumen lux slate)
 
   #attr_accessor :theme
 

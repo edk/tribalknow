@@ -7,7 +7,7 @@
   - if user_signed_in?
     = form_tag searches_path, :method=>:get, class: 'form-inline' do
       = search_field_tag :q, "", class: 'form-control mr-sm-2'
-      = button_tag class: "btn btn-outline-primary" do
+      = button_tag class: "btn btn-primary" do
         %i.fas.fa-search 
         search
 
