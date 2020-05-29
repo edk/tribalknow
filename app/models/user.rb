@@ -22,7 +22,7 @@ class User < ApplicationRecord
   #attr_accessor :theme
 
   def theme
-    settings(:preference).theme || "darkly"
+    settings(:preference).theme || "cosmo"
   end
 
   def theme= val
