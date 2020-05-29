@@ -21,8 +21,8 @@
 
         - if current_tenant && !@static_render
           - if user_signed_in?
-            %li.nav-item.dropdown
-              %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"}
+            %li.nav-item.dropdown.pl-3
+              %a#navbarDropdownMenuLink.nav-link.dropdown-toggle.avatar{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"}
                 = render_avatar(current_user, :size=>35)
               .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdownMenuLink"}
                 %a.dropdown-item{:href => account_path} #{f_icon 'fas', 'user-circle'} Settings

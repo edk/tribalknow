@@ -2,25 +2,8 @@
 
 .row.mt-3.mb-3
   .col-lg-8
-    %h3{style:"margin-bottom:-8px;"} Questions: 
-    .search_params
-      - if params[:created_by]
-        %span.search_param
-          questions by #{@created_by.try(:name)}
-          = link_to questions_path(params.except(:created_by)) do
-            %span= f_icon "x"
+    %h3{style:"margin-bottom:-8px;"}= "#{@questions.size} questions:"
 
-      - if params[:answered_by]
-        %span.search_param
-          answers by #{@answered_by.try(:name)}
-          = link_to questions_path(params.except(:answered_by)) do
-            %span= f_icon "x"
-
-      - if params[:tag]
-        %span.search_param
-          #{params[:tag]}
-          = link_to questions_path(params.except(:tag)) do
-            %span= f_icon "x"
   .col-lg-4
     / Sort by [ latest | points ]<br/>
 

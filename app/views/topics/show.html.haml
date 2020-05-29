@@ -38,9 +38,9 @@
             = link_to "<i class='fas fa-question-circle'></i> Ask Related Question".html_safe, new_question_path(:topic_id=>@topic.id)
 
       - unless @static_render
-        = link_to "#{f_icon('pencil')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'btn btn-primary btn-sm btn-block'
+        = link_to "#{f_icon('fas','pencil-alt')} Edit Topic".html_safe, edit_topic_path(@topic), :class=>'btn btn-primary btn-sm btn-block'
       
-        = link_to "#{f_icon('x')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-primary btn-sm btn-block btn-warning' if current_user.admin? || @topic.creator == current_user
+        = link_to "#{f_icon('fas','times-circle')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-primary btn-sm btn-block btn-warning' if current_user.admin? || @topic.creator == current_user
 
       .card.topic-card.bg-light.mt-3
         .card-body

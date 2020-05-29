@@ -141,7 +141,7 @@ module ApplicationHelper
       else
         {}
       end
-      image_tag user.avatar.url(:thumb), opts.merge(alt: user.name, title:user.name)
+      image_tag user.avatar.url(:thumb), opts.merge(alt: user.name, title:user.name, class:'rounded-circle')
     else
       render_gravatar user, options
     end

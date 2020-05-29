@@ -12,7 +12,7 @@
         %i.fas.fa-search
         filter
   .col.text-right
-    = link_to 'New Topic', new_topic_path, :class=>'btn btn-primary'
+    = link_to "#{f_icon 'fas', 'plus-circle'} New Topic".html_safe, new_topic_path, :class=>'btn btn-primary'
     -# .text-muted sort by date, popularity, filter by category, by user
     -# Filters go here:
 
