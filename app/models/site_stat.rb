@@ -66,16 +66,136 @@ class SiteStat < ApplicationRecord
       m
     end
 
-    SiteStat.create! name: "recent_activity",
-                    data: collapsed_activities
+    SiteStat.create! name: "recent_activity", data: collapsed_activities
   end
 
+  # a = SiteStat.recent_activity.data
   def self.recent_activity days: 30
     SiteStat.where(name: "recent_activity").last
   end
 
-  def self.top_topics
+  def self.clear_top_topics!(keep_last_one: true)
+    last = SiteStat.where(name: "top_topics").last
+    if keep_last_one && last
+      SiteStat.where(name: "top_topics").where("id < ?", last.id).destroy_all
+    else
+      SiteStat.where(name: "top_topics").destroy_all
+    end
   end
+
+  def self.generate_top_topics!
+    top_topics = Ahoy::Event.where(name: 'topics#show').top(:properties, 10)
+    rv = top_topics.map do |props|
+      begin
+        topic = Topic.friendly.find(props[0]["id"])
+        string =  ActionController::Base.helpers.sanitize([topic.name, topic.description].reject(&:blank?).join(' - '))
+        view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge badge-secondary')
+        {
+          count: props[1],
+          id: props[0]["id"],
+          title: string,
+          view_count: view_count
+        }
+      rescue
+        nil
+      end
+    end.compact
+    SiteStat.create! name: "top_topics", data: rv
+  end
+
+  def self.top_topics
+    SiteStat.where(name: "top_topics").last
+  end
+
+  def self.clear_top_questions!(keep_last_one: true)
+    last = SiteStat.where(name: "top_questions").last
+    if keep_last_one && last
+      SiteStat.where(name: "top_questions").where("id < ?", last.id).destroy_all
+    else
+      SiteStat.where(name: "top_questions").destroy_all
+    end
+  end
+
+  def self.generate_top_questions!
+    top_qna = Ahoy::Event.where(name: 'questions#show').top(:properties, 12)
+    rv = top_qna.map do |props|
+      view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge badge-secondary')
+      {
+        count: props[1],
+        id: props[0]["id"],
+        title: Question.friendly.find(props[0]["id"]).title,
+        view_count: view_count
+      }
+    end.compact
+    SiteStat.create! name: "top_questions", data: rv
+  end
+
+  def self.top_questions
+    SiteStat.where(name: "top_questions").last
+  end
+
+  def self.clear_top_videos!(keep_last_one: true)
+    last = SiteStat.where(name: "top_videos").last
+    if keep_last_one && last
+      SiteStat.where(name: "top_videos").where("id < ?", last.id).destroy_all
+    else
+      SiteStat.where(name: "top_videos").destroy_all
+    end
+  end
+
+  def self.generate_top_videos!
+    top_videos = Ahoy::Event.where(name: 'videos#show').top(:properties, 10)
+    rv = top_videos.map do |props|
+      view_count = ActionController::Base.helpers.content_tag(:span, "#{props[1].to_i}", class:'badge badge-secondary')
+      title = VideoAsset.friendly.find(props[0]["id"]).name rescue ""
+      video_id = props[0]["id"] rescue nil
+      count = props[1] rescue nil
+      {
+        count: count,
+        id: video_id,
+        title: title,
+        view_count: view_count
+      }
+    end.reject { |el| [:count, :id, :title].any? { |k| k.nil? } }.compact
+    SiteStat.create! name: "top_videos", data: rv
+  end
+
+  def self.top_videos
+    SiteStat.where(name: "top_videos").last
+  end
+
+  def self.clear_top_searches!(keep_last_one: true)
+    last = SiteStat.where(name: "top_searches").last
+    if keep_last_one && last
+      SiteStat.where(name: "top_searches").where("id < ?", last.id).destroy_all
+    else
+      SiteStat.where(name: "top_searches").destroy_all
+    end
+  end
+
+  def self.generate_top_searches!
+    time_zone = Searchjoy.time_zone || Time.zone
+    time_range = 8.weeks.ago.in_time_zone(time_zone).beginning_of_week(:sunday)..Time.now
+    searches = Searchjoy::Search.connection.select_all(
+      Searchjoy::Search.select("normalized_query, COUNT(*) as searches_count, COUNT(converted_at) as conversions_count, AVG(results_count) as avg_results_count").
+      where(created_at: time_range).
+      group("normalized_query").
+      order("searches_count desc, normalized_query asc").
+      limit(20).to_sql).to_a
+    top_searches = searches.reject {|el| el['normalized_query'].blank? }.map do |props|
+      view_count = ActionController::Base.helpers.content_tag(:span, "#{props['searches_count'].to_i}", class:'badge badge-secondary')
+      {
+        normalized_query: props['normalized_query'],
+        view_count: view_count
+      }
+    end.compact
+    SiteStat.create! name: "top_searches", data: top_searches
+  end
+
+  def self.top_searches
+    SiteStat.where(name: "top_searches").last
+  end
+
 end
 
 
