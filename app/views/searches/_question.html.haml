@@ -4,7 +4,7 @@
   .card-body
     .row
       .order-2.order-sm-1.col-sm-9.col-md-9.col-lg-10
-        = truncate(result.text.to_s.html_safe, :length=>250, :separator=>' ')
+        = raw sanitize(HTML_Truncator.truncate(render_md(result.text), 1000, {:length_in_chars => true}))
         
         %hr
         - if result.answers.size > 0

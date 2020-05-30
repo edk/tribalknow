@@ -7,17 +7,7 @@
   .card-body
     .row
       .order-2.order-sm-1.col-sm-9.col-md-9.col-lg-10
-        #{result.id} XXXXXXXXXXXX
-        - if false && (content=result.text.presence)
-          = raw content
-        - else
-          = raw HTML_Truncator.truncate(render_md(result.text), 120, {:length_in_chars => true})
-
-        -# - if false || (content = result.text).present?
-        -#   %p #{content.html_safe}
-        -# - else
-        -#   %p #{truncate result.content, :length=>180, :separator=>' '}
-
+        = raw sanitize(HTML_Truncator.truncate(render_md(result.text), 600, {:length_in_chars => true}))
 
       .order-1.order-sm-2.col-sm-3.col-md-3.col-lg-2
         .small_light_title Answered by #{render_avatar(result.creator, size: :small)}

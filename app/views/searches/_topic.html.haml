@@ -11,10 +11,7 @@
         Last updated at #{smart_display(result.updated_at)}
 
   .card-body
-    - if false || (content = result.content).present?
-      %p #{content.html_safe}
-    - else
-      %p #{truncate result.content, :length=>180, :separator=>' '}
+    = raw sanitize(HTML_Truncator.truncate(render_md(result.content), 1000, {:length_in_chars => true}))
 
 
 /-# Additional meta-data about topics needed.  how many subtopics, how many stars, etc
