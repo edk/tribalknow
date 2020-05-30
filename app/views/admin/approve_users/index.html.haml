@@ -1,37 +1,41 @@
-= render :template=>'layouts/admin_sub_nav'
+=# render :template=>'layouts/admin_sub_nav'
 
-%br
+%h1.mb-3.text-warning Admin: User Accounts Requested
 
-%p
-  Here are users that have requested accounts.   Approve the user and they will receive a confirmation email.  Reject and they will get a rejection email.
-%table
-  %thead
-    %tr
-      %th email
-      %th name
-      %th ip
-      %th requested at
-      %th approve
-      %th active?
-      %th Reject
-      %th Reject without email
-  %tbody
-    - if @users.empty?
-      %tr
-        %td
-          No users awaiting approval!
-    - else
-      - @users.each do |user|
+.row.mt-3
+  .col-lg-8
+    %table.table
+      %thead
         %tr
-          %td= user.email
-          %td= user.name
-          %td
-          %td= user.created_at
-          %td
-            = link_to f_icon('check', :style=>'color:green;font-size:2em'), approve_admin_approve_user_path(user), {:title=>'click to approve this user', :method=>:post}
-          %td
-            = user.active? ? f_icon('check') : f_icon('x')
-          %td
-            = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_admin_approve_user_path(user), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user?"}, :method=>:post}
-          %td
-            = link_to f_icon('x', :style=>'color:red; font-size:2em'), reject_admin_approve_user_path(user, :skip_notification=>1), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user without email notification?"}, :method=>:post}
+          %th email
+          %th name
+          %th ip
+          %th requested at
+          %th approve
+          %th active?
+          %th Reject
+          %th Reject without email
+      %tbody
+        - if @users.empty?
+          %tr
+            %td
+              No users awaiting approval!
+        - else
+          - @users.each do |user|
+            %tr
+              %td= user.email
+              %td= user.name
+              %td
+              %td= user.created_at
+              %td
+                = link_to f_icon('fas', 'check', :style=>'color:green;font-size:2em'), approve_admin_approve_user_path(user), {:title=>'click to approve this user', :method=>:post}
+              %td
+                = user.active? ? f_icon('fas', 'check') : f_icon('fas', 'times', :style=>'color:red; font-size:2em')
+              %td
+                = link_to f_icon('fas', 'times', :style=>'color:red; font-size:2em'), reject_admin_approve_user_path(user), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user?"}, :method=>:post}
+              %td
+                = link_to f_icon('fas', 'times', :style=>'color:red; font-size:2em'), reject_admin_approve_user_path(user, :skip_notification=>1), {:title=>'click to reject this user', :data=>{:confirm=>"Are You Sure?  Reject this user without email notification?"}, :method=>:post}
+  .col-lg-4
+    .card
+      .card-body
+        %p Here are users that have requested accounts.   Approve the user and they will receive a confirmation email.  Reject and they will get a rejection email.
