@@ -7,7 +7,7 @@
       - if toc.present?
         = render partial: 'toc', locals: { toc: toc }
       
-      .card.topic-card.bg-light.mb-3
+      .card.topic-card.mb-3
         .card-body.pb-0
           .card-title.pb-0
             %h5 Sub-topics
@@ -18,7 +18,7 @@
           = link_to "<i class='fas fa-plus-circle'></i> Add Sub-topic".html_safe, new_topic_path(:parent_topic_id=>@topic.id) unless @static_render
 
       - unless @static_render
-        .card.topic-card.bg-light.mb-3
+        .card.topic-card.mb-3
           .card-body
             .card-title     
               %h5 Tags
@@ -28,7 +28,7 @@
               - else
                 %p No tags for this topic
 
-        .card.topic-card.bg-light.mb-3
+        .card.topic-card.mb-3
           .card-body
             .card-title 
               %h5 Questions
@@ -42,7 +42,7 @@
       
         = link_to "#{f_icon('fas','times-circle')} Delete Topic".html_safe, topic_path(@topic), method: :delete, data: { confirm: 'Are you sure?' }, :class=>'btn btn-primary btn-sm btn-block btn-warning' if current_user.admin? || @topic.creator == current_user
 
-      .card.topic-card.bg-light.mt-3
+      .card.topic-card.mt-3
         .card-body
           .card-title 
             %h5 History

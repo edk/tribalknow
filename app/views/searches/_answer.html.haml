@@ -1,28 +1,41 @@
 
-.row
+.card.mb-5
+  .card-header.pb-1
+    = link_to question_path(result.question) do
+      %h4.mb-0.pb-0 <b>Answer to:</b> #{result.question.title}
 
-  .columns.large-9
+  .card-body
     .row
-      .columns.large-12
-        .search_result_title
-          = link_to question_path(result.question) do
-            Answer to: #{result.question.title}
-
-      .columns.large-12      
+      .order-2.order-sm-1.col-sm-9.col-md-9.col-lg-10
         - if false || (content=result.text.presence)
-          = raw content
+          = content
+          =# raw content
         - else
           = raw HTML_Truncator.truncate(render_md(result.text), 120, {:length_in_chars => true})
 
-  .columns.large-3
-    .row
-      .columns.large-12.right
-        %div.small_light_title Answered by #{render_avatar(result.creator, size: :small)}<br/>
-        %div.small= smart_display result.created_at
-      .columns.large-12.right
-        %br/
-        %div.small_light_title Last updated:<br/>
-        %div.small= smart_display(result.updated_at)
-    .row
-      = render_tag_links result.tags if result.respond_to?(:tags)
+        -# - if false || (content = result.text).present?
+        -#   %p #{content.html_safe}
+        -# - else
+        -#   %p #{truncate result.content, :length=>180, :separator=>' '}
+
+
+      .order-1.order-sm-2.col-sm-3.col-md-3.col-lg-2
+        .small_light_title Answered by #{render_avatar(result.creator, size: :small)}
+        .small= smart_display result.created_at
+
+        .small_light_title Last updated:
+        .small= smart_display(result.updated_at)
+
+        = render_tag_links result.tags if result.respond_to?(:tags)
+
+
+
+
+/-# Additional meta-data about topics needed.  how many subtopics, how many stars, etc
+/.row
+/  .columns.large-2
+/    /Written by #{result.creator.to_s}
+/  .columns.large-4
+
+// convert below to top
 

@@ -1,22 +1,21 @@
-.row
 
-  .columns.large-9
+.card.mb-5
+  .card-header.pb-1
+    = link_to topic_path(result) do
+      %h4.mb-0.pb-0 <b>Topic:</b> #{result.name} 
+      #{result.description}
     .row
-      .columns.large-12
-        = link_to topic_path(result) do
-          .search_result_title
-            %b Topic:
-            #{result.name} - #{result.description}
-        - if false || (content = result.content).present?
-          %p #{content.html_safe}
-        - else
-          %p #{truncate result.content, :length=>180, :separator=>' '}
+      .col
+        #{render_tag_links result.tags}
+      .col
+        Last updated at #{smart_display(result.updated_at)}
 
-  .columns.large-3.right
-    %p
-      .small_light_title Last updated at
-      .small #{smart_display(result.updated_at)}
-    %p #{render_tag_links result.tags}
+  .card-body
+    - if false || (content = result.content).present?
+      %p #{content.html_safe}
+    - else
+      %p #{truncate result.content, :length=>180, :separator=>' '}
+
 
 /-# Additional meta-data about topics needed.  how many subtopics, how many stars, etc
 /.row

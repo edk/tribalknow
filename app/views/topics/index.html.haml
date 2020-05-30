@@ -6,11 +6,11 @@
   .col
     %h1= (Tenant.current && Tenant.current.settings(:topic).heading) || "Topics"
   .col
-    = form_tag searches_path, :method=>:get, class: 'form-inline' do
-      = search_field_tag :q, "", class: 'form-control mr-sm-2'
-      = button_tag class: "btn btn-secondary" do
-        %i.fas.fa-search
-        filter
+    -# = form_tag searches_path, :method=>:get, class: 'form-inline' do
+    -#   = search_field_tag :q, "", class: 'form-control mr-sm-2'
+    -#   = button_tag class: "btn btn-secondary" do
+    -#     %i.fas.fa-search
+    -#     filter
   .col.text-right
     = link_to "#{f_icon 'fas', 'plus-circle'} New Topic".html_safe, new_topic_path, :class=>'btn btn-primary'
     -# .text-muted sort by date, popularity, filter by category, by user
@@ -20,12 +20,12 @@
   .col-sm-12
     .card-columns
       - @topics.each do |topic|
-        .card{style:"max-width:540px;"}
+        .card
           .row.no-gutters
-            .col-md-3
-              .icon_drop_target.topic_icon{id: "topic_icon_#{topic.id}", url: set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb), class: "border border-dark rounded"), topic_path(topic)
-            .col-md-9
-              .card-body.p-1
+            .col-sm-5.col-md-4.col-lg-3
+              .icon_drop_target.topic_icon{id: "topic_icon_#{topic.id}", url: set_icon_topic_path(topic)}= link_to image_tag(topic.icon.url(:thumb), class: "border border-dark rounded img-fluid"), topic_path(topic)
+            .col-sm-5.col-md-8.col-lg-9
+              .card-body.p-1.pl-3
                 .float-right= link_to "#{f_icon('far', 'times-circle', :color=>'#C66')}".html_safe, topic, :class=>"delete_topic", method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin?) && !@static_render
 
                 %h5.card-title.mb-1= link_to topic.name, topic_path(topic), {style:'', title:topic.name}
