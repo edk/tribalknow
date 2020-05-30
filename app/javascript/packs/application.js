@@ -27,4 +27,3 @@ import 'flatly';
 import 'cosmo';
 import 'lumen';
 
-import './stylesheets/site_styles';
