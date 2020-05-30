@@ -7,9 +7,9 @@
   .card-body
     .row
       .order-2.order-sm-1.col-sm-9.col-md-9.col-lg-10
-        - if false || (content=result.text.presence)
-          = content
-          =# raw content
+        #{result.id} XXXXXXXXXXXX
+        - if false && (content=result.text.presence)
+          = raw content
         - else
           = raw HTML_Truncator.truncate(render_md(result.text), 120, {:length_in_chars => true})
 
