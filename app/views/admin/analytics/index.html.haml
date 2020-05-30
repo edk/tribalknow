@@ -1,13 +1,13 @@
 
-= render :template=>'layouts/admin_sub_nav'
+=# render :template=>'layouts/admin_sub_nav'
 
-.row
-  &nbsp;
+%h1.mb-3.text-warning Admin: Analytics
+
 
 - @stats.each do |stat|
   .row
-    .columns.large-12
-      .panel
+    .col-lg-12
+      .card
         %h2= stat[0]
         = send(stat[2], stat[1], stat[3]||{})
 

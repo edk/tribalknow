@@ -1,21 +1,18 @@
 - set_title "Q: Auto-Generated Documentation"
 
 .row
-  %h2 Auto-Generated Documentation
-%br
-%br
+  .col
+    %h2 Auto-Generated Documentation
+
 .row
-  .columns.small-8
+  .col-sm-8
     - @all_docs.each do |doc_group|
       .row
-        .columns.small-12.doc_group
-          .row
-            .columns.small-6
-              %h3.columns.small-6= doc_group.name
-          .row
-            - doc_group.docs.each do |doc|
-              .columns.small-6
-                .panel.glow
-                  = link_to doc.to_s, doc.basepath
-  .columns.small-4<
+        .col-sm-6
+          %h3.col-sm-6= doc_group.name
+        .col-sm-6
+          - doc_group.docs.each do |doc|
+            = link_to doc.to_s, doc.basepath
+
+  .col-sm-4
     = local_notes

@@ -1,10 +1,10 @@
 - set_title "#{Tenant.default_title}: #{@question.title}"
 
-.row.mt-3.for_header.border-bottom
+.row.my-3.border-bottom
   .col-lg-10
-    %h1.title#question_title= best_in_place @question, :title
+    %h1#question_title Q: #{best_in_place(@question, :title)}
   .col-lg-2{style: 'position:relative'}
-    %div{style:'float: left; padding-top: 1.25em; padding-right: 0.5em;'}= archive_question(@question)
+    = archive_question(@question)
 
 .row.question
   .col-lg-8.pl-5#question_body.question_content

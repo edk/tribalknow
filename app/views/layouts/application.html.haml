@@ -6,7 +6,7 @@
     = favicon_link_tag asset_path('favicon-default/favicon.ico'), rel: 'icon', type: 'image/png'
     %title= content_for?(:title) ? yield(:title) : (@page_title || Tenant.default_title)
     = yield(:head_js)
-    = stylesheet_link_tag "application", media: 'all'
+    =# stylesheet_link_tag "application", media: 'all'
     = javascript_include_tag "https://www.google.com/jsapi"
     = javascript_include_tag "application", params[:controller]
 

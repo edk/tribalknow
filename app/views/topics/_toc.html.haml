@@ -1,8 +1,7 @@
-.card.topic-card.bg-light.mb-3#toc
+.card.topic-card.mb-3#toc
+  .card-header
+    %h5 Contents
   .card-body
-    .card-title
-      %h5 Contents
-    .card-text
-      -# %ul#toc_list
-      = render_toc_tree(toc, :skip_first_ul => true)
+    -# %ul#toc_list
+    = render_toc_tree(toc, :skip_first_ul => true)
 

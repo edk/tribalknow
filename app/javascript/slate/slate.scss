@@ -1,0 +1,12 @@
+@import './_variables';
+@import '~bootstrap/scss/bootstrap';
+@import './_bootswatch.scss';
+@import '../stylesheets/site_styles';
+
+a {
+ text-decoration-line: underline;
+ text-decoration-style: dashed;
+ :hover {
+   text-decoration-style: solid;
+ }
+}

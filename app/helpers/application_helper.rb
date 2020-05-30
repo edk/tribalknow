@@ -141,7 +141,7 @@ module ApplicationHelper
       else
         {}
       end
-      image_tag user.avatar.url(:thumb), opts.merge(alt: user.name, title:user.name)
+      image_tag user.avatar.url(:thumb), opts.merge(alt: user.name, title:user.name, class:'rounded-circle')
     else
       render_gravatar user, options
     end
@@ -172,7 +172,7 @@ module ApplicationHelper
 
   def render_tag_links tags, options={}
     tags.map do |tag|
-      link_to tag, questions_path(:tag=>tag.name), :class=>'badge badge-secondary'
+      link_to tag, questions_path(:tag=>tag.name), :class=>'badge badge-info'
     end.join(' ').html_safe
   end
 
@@ -204,8 +204,8 @@ module ApplicationHelper
   end
 
   # foundation icon generate
-  def f_icon name, options={}
-    css_class = ["fas fa-#{name}", options[:class]].join(" ").strip
+  def f_icon type, name, options={}
+    css_class = ["#{type} fa-#{name}", options[:class]].join(" ").strip
     if options[:color]
       options[:style] = [ "color:#{options[:color]}", options[:style] ].join(";").strip
       options.delete(:color)

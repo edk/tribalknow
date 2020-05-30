@@ -2,18 +2,18 @@
 = simple_form_for(@question) do |f|
   = f.error_notification
   .row
-    .large-10.columns
+    .col-lg-10
       = f.input :title
   .row
-    .large-10.columns
+    .col-lg-10
       = f.text_area :text, style:'height:8em' # 18em is oversized so the rte attached to #in can max out
   - if @question.topic
     .row
-      .large-10.columns
+      .col-lg-10
         = text_field_tag :topic, "For topic: #{@question.topic.name}", :readonly=>''
         = f.hidden_field :topic_id, :value=>@question.topic.try(:id)
   .row
-    .large-10.columns
+    .col-lg-10
       = f.input :tags do
         %span#tags{:style => "display:none;"}
           = Tag.all_tags.to_json
@@ -21,15 +21,15 @@
 
   - if @question.new_record?
     .row
-      .small-8.columns
+      .small-8
         %h3= "Add an answer to this question (if ya gots one)..."
     %br/
     .row
-      .large-10.columns
+      .col-lg-10
         = text_area_tag :answer_text, '', style:'height:8em'
 
   .actions
     .row
-      .columns.large-4
+      .col-lg-4
         = f.submit 'Submit Question', :class => 'button expand'
-      .columns.large-4
+      .col-lg-4

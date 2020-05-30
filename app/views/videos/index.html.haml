@@ -1,23 +1,20 @@
 - set_title "#{Tenant.default_title}-tube"
 
-.row.mt-3
+.row.my-3
   .col
     %h2
       Videos
   - if @draft_videos.present?
-    .columns.large-12
+    .col-lg-10
       %h4 Videos in transcoding process
       = render partial: 'upload_progress', locals: { draft_videos: @draft_videos }
+  .col-lg-2.text-right
+    = link_to "#{f_icon('fas', 'upload')} upload".html_safe, new_video_path, class:"btn btn-secondary btn-block"
 
 
 .row
-  .col-2
-    = link_to "upload video", new_video_path, class:"btn btn-sm btn-secondary btn-block"
-    %hr
-    %p playlists (coming soon)
-
-  .col-10
-    - @published_videos.each_slice(3) do |row|
+  .col
+    - @published_videos.each_slice(5) do |row|
       .card-deck
         - row.each do |vid|
           .card.mb-4
@@ -33,11 +30,11 @@
               .card-text{ title: vid.description }= truncate(vid.description, length: 80)
 
             .card-footer
-              .edit_link.float-right.ml-2= link_to f_icon('pencil-alt'), edit_video_path(vid.id)
+              .edit_link.float-right.ml-2= link_to f_icon('fas', 'pencil-alt'), edit_video_path(vid.id)
               .float-right #{vid.creator}
               .date
                 - if current_user == vid.creator
-                  = link_to f_icon('trash', {class:'text-danger'}), video_path(vid, dom_id: dom_id(vid) ), remote: true, method: :delete, data: { confirm: "Are you sure?" }
+                  = link_to f_icon('fas', 'trash', {class:'text-danger'}), video_path(vid, dom_id: dom_id(vid) ), remote: true, method: :delete, data: { confirm: "Are you sure?" }
                 = time_tag((vid.date || vid.created_at).to_date) 
               / tags, vote, views
 

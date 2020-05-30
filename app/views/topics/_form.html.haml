@@ -2,34 +2,35 @@
 = simple_form_for(@topic) do |f|
   = f.error_notification
   .row
-    .column.large-7
+    .col-lg-7
       .row
-        .columns.large-6
+        .col-lg-6
           = f.input :name, placeholder:'A name for your topic'
-        .columns.large-6
+        .col-lg-6
           = f.input :parent_topic_id, collection: Topic.topic_select, :selected=>@topic.parent_topic_id, :include_blank=>true, :hint=>'Leave blank to make a root topic', input_html: {style:'min-width:100%;', class:'select2'}
       .row
-        .large-12.columns
+        .col-lg-12
           = f.input :description, placeholder: 'A short description'
       .row
-        .large-12.columns
+        .col-lg-12
           = f.input :tags do
             %span{:id=>'tags', :style=>'display:none;'}= Tag.all_tags.to_json
             = f.input :tags, :as=>:hidden, input_html: {class:'select2-with-tags', style:'min-width:100%; height:36px;', value: f.object.tags.empty? ? '' : f.object.tags.join(',')}
-    .column.large-5
+    .col-lg-5
       .row
         = render :file=>'/topic_files/index' unless @topic.new_record?
   .row
-    .large-4.columns.markdown_tip.right
+    .col-lg-4.markdown_tip.right
       = link_to "We use Github flavored markdown.", "https://guides.github.com/features/mastering-markdown/", target: "_blank"
       = link_to "Use native apps", "http://macdown.uranusjr.com/", target: "_blank"
-    .large-12.columns
+    .col-lg-12
       #in{style: "height: 25em; min-height:25em;"}
         = f.text_area :content
       #out{style: "min-height: 20em;"}
   .actions
     .row
-      .columns.large-4
-        = f.submit "Save", :class => 'button expand has-tip', :style=>"color: #EEE", :title=>'Tip: CMD-s saves when in the editor!', :data=>{:tooltip=>""}
-      .columns.large-4
+      .col-lg-4
+        = f.submit "Save", :class => 'btn btn-primary has-tip', :style=>"color: #EEE", :title=>'Tip: CMD-s saves when in the editor!', :data=>{:tooltip=>""}
+      .col-lg-4
+      .col-lg-4
 
