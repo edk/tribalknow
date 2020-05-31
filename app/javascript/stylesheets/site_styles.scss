@@ -5,7 +5,7 @@
 // makes img inside search results stay within the card
 .card {
   img {
-    @extend .img-fluid
+    @extend .img-fluid;
   }
 }
 
@@ -21,5 +21,34 @@
   }
   @include media-breakpoint-only(sm) {
     column-count: 1;
+  }
+}
+
+.question-stats {
+  text-align: center;
+  font-size: .8em;
+
+  .status-votes, .status-answers{
+    strong { font-size: 2em; }
+  }
+  .status-answers {
+  }
+  .count-size {
+  }
+  .count-label {
+  }
+
+}
+
+#question_body {
+  table { @extend .table;}
+}
+
+ul.panel_list.toc_tree {
+  padding-left: 0;
+
+  ul.panel_list.toc_tree {
+    position: relative;
+    margin-left: 1em;
   }
 }

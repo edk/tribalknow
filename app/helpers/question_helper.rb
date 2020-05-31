@@ -4,8 +4,9 @@ module QuestionHelper
   def archive_question(question)
     if question.creator == current_user
       # show deletion element
-      icon = f_icon 'far', 'times-circle', size: '1.5em', style: ''
-      link_to icon, question_path(question), method: :delete, class: 'icon_link', title: 'Delete'
+      # icon = f_icon 'far', 'times-circle', size: '1.5em', style: ''
+      icon = f_icon 'far', 'times-circle'
+      link_to icon, question_path(question), method: :delete, class: 'icon_link', title: 'Delete this question.'
     end
   end
 
