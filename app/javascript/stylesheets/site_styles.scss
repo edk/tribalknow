@@ -31,18 +31,21 @@
   .status-votes, .status-answers{
     strong { font-size: 2em; }
   }
-  .status-answers {
-  }
-  .count-size {
-  }
-  .count-label {
-  }
-
 }
+
+
 
 #question_body {
-  table { @extend .table;}
+  table { 
+    @extend .table;
+    @extend .table-striped;
+
+    border: 1px solid $gray-500;
+    thead { @extend .thead-dark; }
+  }
 }
+
+
 
 ul.panel_list.toc_tree {
   padding-left: 0;
