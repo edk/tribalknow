@@ -34,14 +34,32 @@
 }
 
 
-
-#question_body {
+#question_body, .topic_content {
   table { 
     @extend .table;
     @extend .table-striped;
 
     border: 1px solid $gray-500;
     thead { @extend .thead-dark; }
+  }
+}
+
+.topic_content {
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.8em; }
+  h3 { font-size: 1.5em; }
+  h4, h5, h6 { font-size: 1.2em; }
+}
+
+.topic_content {
+  p {
+    img {
+      @extend .img-fluid;
+      @extend .rounded;
+      max-width: 80%;
+      padding: .5em;
+      border: 2px solid $gray-500;
+    }
   }
 }
 
