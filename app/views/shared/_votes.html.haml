@@ -1,8 +1,25 @@
+-# - if current_user
+-#   = object.get_upvotes.size if object.get_upvotes.size > 0
+-#   = link_to votes_path(:id=>object.id, :type=>local_assigns[:type], :vote=>:upvote), :remote=>true, :method=>:post, :class=>"vote #{"voted" if current_user.voted_up_on?(object) }", :id=>dom_id(object, 'up') do
+-#     = f_icon("fas","thumbs-up")
+-#   \/
+-#   = link_to votes_path(:id=>object.id, :type=>local_assigns[:type], :vote=>:downvote), :remote=>true, :method=>:post, :class=>"vote #{"voted" if current_user.voted_down_on?(object) }", :id=>dom_id(object, 'down') do
+-#     = f_icon("fas", "thumbs-down")
+-#   = object.get_downvotes.size if object.get_downvotes.size > 0
+
 - if current_user
-  = object.get_upvotes.size if object.get_upvotes.size > 0
-  = link_to votes_path(:id=>object.id, :type=>local_assigns[:type], :vote=>:upvote), :remote=>true, :method=>:post, :class=>"vote #{"voted" if current_user.voted_up_on?(object) }", :id=>dom_id(object, 'up') do
-    = f_icon("fas","thumbs-up")
-  \/
-  = link_to votes_path(:id=>object.id, :type=>local_assigns[:type], :vote=>:downvote), :remote=>true, :method=>:post, :class=>"vote #{"voted" if current_user.voted_down_on?(object) }", :id=>dom_id(object, 'down') do
-    = f_icon("fas", "thumbs-down")
+  
+
+  = link_to votes_path(:id=>object.id, :type=>local_assigns[:type], :vote=>:upvote), :remote=>true, :method=>:post, :class=>"vote #{"voted" if current_user.voted_up_on?(object) }", :id=>dom_id(object, 'up'), title:"This question is useful and clear." do
+    .text-center= f_icon("fas","chevron-up", style:"font-size: 3em;")
+    
+  - if object.get_upvotes.size > 0
+    .badge.text-center{style:"font-size: 2em; display: block;"}= object.get_upvotes.size 
+  - else
+    .badge.text-center{style:"font-size: 2em; display: block;"} 0
+
+  
+  = link_to votes_path(:id=>object.id, :type=>local_assigns[:type], :vote=>:downvote), :remote=>true, :method=>:post, :class=>"vote #{"voted" if current_user.voted_down_on?(object) }", :id=>dom_id(object, 'down'), title:"This question is useful and clear." do
+    .text-center= f_icon("fas", "chevron-down", style:"font-size: 3em;")
+  
   = object.get_downvotes.size if object.get_downvotes.size > 0

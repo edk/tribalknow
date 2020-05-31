@@ -1,8 +1,8 @@
-
-.row.answer_content.ml-5{:id=>"answer_#{answer.id}"}
-  .col-sm-8
+.row.answer_content.mb-5{:id=>"answer_#{answer.id}"}
+  .col-sm-1.text-center
+    = render :partial=>'/shared/votes', :locals=>{:type=>'answer', :object=>answer}
     = archive_answer(answer)
+  .col-sm-9
     = find_and_preserve best_in_place_with_edit_icon(answer, :text, {:as=>'textarea', :raw=>true, :display_with=>lambda { |content| render_md(content.to_s)}, :url=>question_answer_url(answer.question, answer) } )
-  .col-sm-3
+  .col-sm-2
     = answered_by(answer)
-  .col-sm-1= render :partial=>'/shared/votes', :locals=>{:type=>'answer', :object=>answer}

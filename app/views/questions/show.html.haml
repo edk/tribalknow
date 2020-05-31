@@ -1,20 +1,19 @@
 - set_title "#{Tenant.default_title}: #{@question.title}"
-
 .row.my-3.border-bottom
   .col-lg-10
-    %h1#question_title Q: #{best_in_place(@question, :title)}
+    %h1#question_title 
+      Q: #{best_in_place(@question, :title)}
+      = archive_question(@question)
   .col-lg-2{style: 'position:relative'}
-    = archive_question(@question)
-
-.row.question
-  .col-lg-8.pl-5#question_body.question_content
-    = find_and_preserve best_in_place_with_edit_icon(@question, :text, {:as=>'textarea', :raw=>true, :display_with=>lambda{ |content| render_md(content.to_s) }})
-  .col-lg-4
-    = render :partial=>'/shared/votes', :locals=>{:type=>'question', :object=>@question}
     = asked_by(@question)
 
-.row.mb-5
-  .col
+.row.question.mb-5
+  .col-lg-1.text-center
+    = render :partial=>'/shared/votes', :locals=>{:type=>'question', :object=>@question}
+  .col-lg-11
+    #question_body.question_content
+      = find_and_preserve best_in_place_with_edit_icon(@question, :text, {:as=>'textarea', :raw=>true, :display_with=>lambda{ |content| render_md(content.to_s) }})
+
     %span.has-tip{:'data-tooltip'=>'', :title=>'click to edit tags'}= link_to "Tags:", "javascript:alert('TODO: need tag editing here')"
     .tags_editor
       - if @question.tags.present?
@@ -22,11 +21,11 @@
         =# link_to tag, questions_path(:tag=>tag), :class=>"tiny button radius round"
         = render_tag_links(@question.tags)
 
-.row.mb-5
-  .col
-    %h4.border-bottom #{pluralize @question.answers.size, "answer"}:
+.row
+  .col-lg-12
+    %h4.border-bottom #{pluralize @question.answers.size, "Answer"}: 
     = render :partial => '/answers/answer', :collection => @question.answers, :spacer_template=>'questions/answer_spacer' if @question && @question.answers.present?
 
 .row
-  .col
-    = render :partial=>'add_answer', :locals=>{:question=>@question} unless @static_render
+  .col-lg-12
+    .card= render :partial=>'add_answer', :locals=>{:question=>@question} unless @static_render

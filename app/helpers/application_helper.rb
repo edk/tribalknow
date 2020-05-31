@@ -172,7 +172,7 @@ module ApplicationHelper
 
   def render_tag_links tags, options={}
     tags.map do |tag|
-      link_to tag, questions_path(:tag=>tag.name), :class=>'badge badge-info'
+      link_to tag, questions_path(:tag=>tag.name), :class=>'badge badge-info p-2'
     end.join(' ').html_safe
   end
 

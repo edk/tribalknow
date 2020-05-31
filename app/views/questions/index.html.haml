@@ -8,45 +8,50 @@
     / Sort by [ latest | points ]<br/>
 
 .row
-  .col-lg-8
+  .col-lg-9
     - if @questions.empty?
       %h3
         Whaaaaaaaa.  nothing found
     - @questions.each do |question|
-      .card.mb-5
-        .card-header
+      .card.mb-2
+        .card-body
           .row
-            .col-lg-10
+            .col-lg-1.px-0
+              .question-stats
+                .status-votes
+                  = question.get_upvotes.size == 0 ? "<strong>0</strong><br/> votes".html_safe : "<strong>#{question.get_upvotes.size}</strong><br/> #{"vote".pluralize question.answers.count}".html_safe
+                  
+                .status-answers
+                  = question.answers.count == 0 ? "<strong>0</strong><br/> answers".html_safe : "<strong>#{question.answers.count}</strong><br/> #{"answer".pluralize question.answers.count}".html_safe
+
+                -# - question.uniq_answerers.each do |user|
+                -#   = render_avatar( user, :size=>:small )
+
+            .col-lg-9
               %h4= link_to "Q: #{question.title}", question_path(question)
               - if question.get_upvotes.size > 0
                 .votebox
                   = "+ #{question.get_upvotes.size}"
 
               = raw HTML_Truncator.truncate( render_md(question.text).html_safe, 120, {:length_in_chars => true})
-            .col-lg-2
-              .text-right asked by #{render_avatar(question.creator, :size=>'28x28')}
-          .row
-            .col-lg-12
-              = render_tag_links question.tags
+              - if question.tags.size > 0
+                %br= render_tag_links question.tags
 
-        .card-body
-          .row
-            .col-lg-7
-              = link_to(question_path(question)) do
-                = question.answers.count == 0 ? "No answers yet" : "#{question.answers.count} #{"answer".pluralize question.answers.count}"
-              - question.uniq_answerers.each do |user|
-                = render_avatar( user, :size=>:small )
-            .col-lg-5.text-right
+            .col-lg-2
+              #{render_avatar(question.creator, :size=>'28x28')}
+              %br
+              = question.creator.name
               .question_last_updated
                 Last updated<br/>
                 #{I18n.l(question.updated_at.to_date, :format => :medium)}
+
 
     .row
       .col
         = will_paginate(@questions,:renderer => WillPaginate::ActionView::BootstrapLinkRenderer) if @questions.respond_to?(:total_pages)
 
   - unless @static_render
-    .col-lg-4
+    .col-lg-3
       = link_to "Ask a New Question".html_safe, new_question_path, class: 'btn btn-primary btn-block'
       %br
 

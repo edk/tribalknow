@@ -1,15 +1,12 @@
-= render :template=>'layouts/admin_sub_nav'
+%h1.mb-3.text-warning Admin: Site Configuration
 
 .row
-  %h3 Configuration:
-
-.row
-  .columns.large-10
-    %table
-      %thead
+  .col-lg-10
+    %table.table.table-striped
+      %thead.thead-dark
         %th Key
         %th Value
-        %th= link_to "Add new", '#', :"data-reveal-id"=>'config_modal', :class=>'button tiny', :style=>'margin-bottom:0;padding: 5px 10px;'
+        %th= link_to "New", '#', :"data-reveal-id"=>'config_modal', :class=>'btn btn-primary'
       %tfoot
         %tr
           %td
