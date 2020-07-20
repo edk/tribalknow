@@ -21,6 +21,7 @@ gem 'redis-rails'
 gem 'rollout'
 gem 'rollbar' # exception service
 gem 'oj'
+gem 'sendgrid-ruby'
 
 gem 'pg'
 gem 'pg_search'

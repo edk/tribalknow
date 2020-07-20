@@ -7,11 +7,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :validatable, :trackable,
          :confirmable, :omniauthable, :omniauth_providers => [:github]
 
-  def send_confirmation_notification?
-    # do nothing
-    puts "XXX skipping confirmation temp"
-  end
-
   belongs_to :tenant
   default_scope {
     if Tenant.current_id
@@ -83,7 +78,7 @@ class User < ApplicationRecord
     if self.respond_to?(:send_confirmation_instructions) && !(AppConfig['disable_confirmation'].to_i == 1 || skip_confirmation?)
       send_confirmation_instructions
     else
-      AdminMailer.you_are_approved(self).deliver rescue nil
+      AdminMailer.you_are_approved(self).deliver
     end
   end
 
