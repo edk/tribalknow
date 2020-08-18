@@ -11,8 +11,8 @@
     "classnames": "^2.2.6",
     "immutable": "^4.0.0-rc.12",
     "jquery": "3.5.1",
-    "jquery-ujs": "1.2.2",
     "jquery-ui": "^1.12.1",
+    "jquery-ujs": "1.2.2",
     "jquery.easing": "^1.4.1",
     "keymirror": "^0.1.1",
     "moment": "^2.26.0",
@@ -30,6 +30,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "resolve-url-loader": "^3.1.0",
+    "serialize-javascript": "^3.1.0",
     "webpack": "^4.43.0"
   },
   "devDependencies": {
