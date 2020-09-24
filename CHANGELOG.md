@@ -1,5 +1,12 @@
 
 
+* added ContentFixup to help with migrating forum to different domains, automatically
+doing a simple regex substitution.  probably not the most bulletproof way to to do it,
+but hopefully acceptable for a PoC
+* fix some issues around the ancient userstamp library and make it work better with rails 6.
+* This userstamp fix allows creating of new records, but much of the js is still broken. TODO
+
+
 v0.0.2
 Major upgrades:
 
