@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
 
+  include Userstamp
   before_action :authenticate_user!
-  # include Userstamp
   around_action :scope_current_tenant
   # include PublicActivity::StoreController
 
