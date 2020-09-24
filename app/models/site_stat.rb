@@ -49,19 +49,19 @@ class SiteStat < ApplicationRecord
         # puts "o.trackable.inspect #{o.trackable.inspect}"
         # puts "o.trackable.class #{o.trackable.class}"
         if o.trackable.nil? && o.trackable_type && o.trackable_id
-          o.trackable_type.constantize.find(o.trackable_id)
+          o.trackable_type.constantize.find_by(id: o.trackable_id)
         end
-        m[k] = {
-          obj: o&.to_global_id.to_s,
-          human_name: o.trackable.class.model_name.human,
-          trackable: o.trackable&.to_global_id.to_s,
-          whodunnit: [{ action: action, who: whodunnit, owner: owner_gid }],
-          trackable_desc: link_desc,
-          trackable_link: link,
-          key: o.key,
-          at: o.created_at,
-          owner: o.owner&.to_global_id.to_s
-        }
+          m[k] = {
+            obj: o&.to_global_id.to_s,
+            human_name: (o&.trackable.class.model_name.human rescue ""),
+            trackable: o&.trackable&.to_global_id.to_s,
+            whodunnit: [{ action: action, who: whodunnit, owner: owner_gid }],
+            trackable_desc: link_desc,
+            trackable_link: link,
+            key: o&.key,
+            at: o&.created_at,
+            owner: o&.owner&.to_global_id.to_s
+          }
       end
       m
     end
