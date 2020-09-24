@@ -43,7 +43,7 @@ gem 'hightop'
 gem 'searchjoy'
 
 gem 'acts-as-taggable-on'
-gem 'userstamp', github: 'kimkong/userstamp', branch: 'fix-for-rails-4-2'
+gem 'userstamp', github: 'kimkong/userstamp', branch: 'rails-6-fix'
 gem 'paper_trail'
 gem 'diffy'
 gem 'public_activity'

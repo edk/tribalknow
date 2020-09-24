@@ -8,8 +8,8 @@ GIT
 
 GIT
   remote: https://github.com/kimkong/userstamp.git
-  revision: 4b986234d916d3701f897d2a21b53af3277ba3f6
-  branch: fix-for-rails-4-2
+  revision: 351c669831a302ed99c5319ad94d8c974bc21206
+  branch: rails-6-fix
   specs:
     userstamp (2.0.2)
 
