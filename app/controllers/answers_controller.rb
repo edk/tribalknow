@@ -32,11 +32,11 @@ class AnswersController < ApplicationController
         note = 'Answer was successfully created.'
 
         if params[:notify][:notify] == '1'
-          NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer]))
+          #NotifyHipchat.call(type: action_name.to_sym, object: @answer, user: current_user, url: polymorphic_url([@answer.question, @answer]))
         else
-          if NotifyHipchat.hipchat_configured?
-            note += view_context.link_to "  Post to Hipchat?", notify_question_answer_path(@question, @answer), :remote=>true, :method=>:post
-          end
+          #if NotifyHipchat.hipchat_configured?
+          #  note += view_context.link_to "  Post to Hipchat?", notify_question_answer_path(@question, @answer), :remote=>true, :method=>:post
+          #end
         end
 
         format.html { redirect_to @question, notice: note }
