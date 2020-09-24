@@ -72,11 +72,11 @@ class QuestionsController < ApplicationController
         @question.answers << @answer if @answer
         note = 'Question was successfully created.'
         if params[:notify][:notify] == '1'
-          NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question))
+          #NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question))
         else
-          if NotifyHipchat.hipchat_configured?
-            note += view_context.link_to "  Post to Hipchat?", notify_question_path(@question), :remote=>true, :method=>:post
-          end
+          #if NotifyHipchat.hipchat_configured?
+          #  note += view_context.link_to "  Post to Hipchat?", notify_question_path(@question), :remote=>true, :method=>:post
+          #end
         end
 
         format.html { redirect_to @question, notice: note }
@@ -91,7 +91,7 @@ class QuestionsController < ApplicationController
   def update
     @question = Question.friendly.find(params[:id])
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question)) if params[:notify] && params[:notify][:notify] == '1'
+    #NotifyHipchat.call(type: action_name.to_sym, object: @question, user: current_user, url: polymorphic_url(@question)) if params[:notify] && params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @question.update(question_params)

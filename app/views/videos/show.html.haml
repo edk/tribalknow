@@ -1,7 +1,7 @@
 
 - content_for(:head_stylesheet) do
   = javascript_include_tag "video-js/video.js"
-  = stylesheet_link_tag "video-js/video-js.css"
+  =# stylesheet_link_tag "video-js/video-js.css"
 
 %h2= @video.name
 
@@ -31,7 +31,7 @@
         %h4 Related files:
         - @video.video_attachments.each do |att|
           %div
-            = link_to att.name.presence || "No name", att.asset.expiring_url(expiry)
+            = link_to (att.name.presence || "No name"), att.asset.expiring_url(expiry) rescue "Internal error"
       - else
         %h5 No related files uploaded yet
 

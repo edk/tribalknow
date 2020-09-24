@@ -18,7 +18,7 @@ class SiteStat < ApplicationRecord
     end
   end
 
-  def self.generate_recent_activity! days: 30
+  def self.generate_recent_activity! days: 60
     activities = PublicActivity::Activity.where('created_at >= ?', days.days.ago).order("created_at DESC")
     collapsed_activities = activities.inject({}) do |m,o|
       k = "#{o.trackable_type}:#{o.trackable_id}"
@@ -70,7 +70,7 @@ class SiteStat < ApplicationRecord
   end
 
   # a = SiteStat.recent_activity.data
-  def self.recent_activity days: 30
+  def self.recent_activity days: 60
     SiteStat.where(name: "recent_activity").last
   end
 

@@ -48,7 +48,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.save
-        NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify][:notify] == '1'
+        # NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify][:notify] == '1'
         format.html { redirect_to topic_redir_to, notice: 'Topic was successfully created.' }
         format.json { render action: 'show', status: :created, location: @topic }
       else
@@ -61,7 +61,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.friendly.find(params[:id])
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify] && params[:notify][:notify] == '1'
+    #NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify] && params[:notify][:notify] == '1'
 
     respond_to do |format|
       if @topic.update(topic_params)
@@ -77,7 +77,7 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.friendly.find(params[:id])
 
-    NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify] && params[:notify][:notify] == '1'
+    #NotifyHipchat.call(type: action_name.to_sym, object: @topic, user: current_user, url: polymorphic_url(@topic)) if params[:notify] && params[:notify][:notify] == '1'
 
     if current_user.admin? || current_user == @topic.creator
       @topic.destroy

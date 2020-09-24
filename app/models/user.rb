@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   has_settings :preference
 
-  devise :database_authenticatable, :registerable, :recoverable, :validatable, :trackable,
+  devise :database_authenticatable, :recoverable, :validatable, :trackable,
          :confirmable, :omniauthable, :omniauth_providers => [:github]
 
   belongs_to :tenant
