@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_155544) do
+ActiveRecord::Schema.define(version: 2020_09_24_200057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(version: 2020_05_28_155544) do
     t.datetime "updated_at"
     t.index ["key"], name: "idx_31885_index_app_configs_on_key"
     t.index ["tenant_id"], name: "idx_31885_index_app_configs_on_tenant_id"
+  end
+
+  create_table "content_fixups", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "from_regex"
+    t.string "to_string"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_content_fixups_on_name", unique: true
   end
 
   create_table "customized_pages", force: :cascade do |t|
