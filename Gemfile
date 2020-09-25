@@ -92,6 +92,7 @@ group :development, :test do
   #gem 'protected_attributes' # only to get seed_dump to work
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
+  gem 'guard-livereload', require: false
   gem 'factory_bot_rails'
   gem 'faker'
 end
