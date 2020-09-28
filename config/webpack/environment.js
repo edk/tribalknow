@@ -13,11 +13,6 @@ environment.plugins.prepend('Provide',
   Popper: ['popper.js', 'default']
 }))
 
-// const aliasConfig = {
-//   'jquery': 'jquery-ui-dist/external/jquery/jquery.js',
-//   'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
-// };
-
 // environment.config.set('resolve.alias', aliasConfig);
 
 // resolve-url-loader must be used before sass-loader

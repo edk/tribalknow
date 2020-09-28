@@ -24,9 +24,18 @@
       = link_to "We use Github flavored markdown.", "https://guides.github.com/features/mastering-markdown/", target: "_blank"
       = link_to "Use native apps", "http://macdown.uranusjr.com/", target: "_blank"
     .col-lg-12
-      #in{style: "height: 25em; min-height:25em;"}
-        = f.text_area :content
-      #out{style: "min-height: 20em;"}
+      /#in{style: "height: 25em; min-height:25em;"}
+      /  = f.text_area :content
+      /#out{style: "min-height: 20em;"}
+      %br
+      <div style="text-align: center">
+      <label style="border-right: 1px solid silver"> Markdown
+      <input type=radio name=inputformat value=markdown checked>&nbsp;</label>
+      <label>&nbsp;<input type=radio name=inputformat value=prosemirror> WYSIWYM</label>
+      </div>
+      #editor.prosemirror-edit-wrapper
+      #content{style: 'display: none'}
+        = @topic.content
   .actions
     .row
       .col-lg-4
