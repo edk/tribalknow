@@ -3,6 +3,12 @@ class SearchesController < ApplicationController
   skip_after_action :track_action
 
   def index
+    PgSearch.multisearch_options = {
+      using: [:tsearch, :trigram],
+      ignoring: :accents
+    }
+    PgSearch.unaccent_function = "unaccent"
+
     @results = PgSearch.multisearch(params[:q])
 
     Searchjoy::Search.create(
