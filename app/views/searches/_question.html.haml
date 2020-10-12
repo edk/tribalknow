@@ -4,8 +4,8 @@
   .card-body
     .row
       .order-2.order-sm-1.col-sm-9.col-md-9.col-lg-10
-        = raw sanitize(HTML_Truncator.truncate(render_md(result.text), 1000, {:length_in_chars => true}))
-        
+        = md_sanitized_snippet(result.text)
+
         %hr
         - if result.answers.size > 0
           #{pluralize(result.answers.size, 'answer')} from

@@ -1,6 +1,17 @@
 
 module ApplicationHelper
 
+  def md_sanitized_snippet content, options: {}
+    allowed_tags = options[:tags] || %w[br p span div pre h1 h2 h3 h4 h5]
+    sanitize(
+      HTML_Truncator.truncate(
+        render_md(content),
+        1000,
+        {:length_in_chars => true}),
+      tags: allowed_tags
+    )
+  end
+
   def render_custom_text position
     location = "#{controller_name}/#{action_name}"
 

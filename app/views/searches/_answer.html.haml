@@ -7,7 +7,7 @@
   .card-body
     .row
       .order-2.order-sm-1.col-sm-9.col-md-9.col-lg-10
-        = raw sanitize(HTML_Truncator.truncate(render_md(result.text), 600, {:length_in_chars => true}))
+        = md_sanitized_snippet(result.text)
 
       .order-1.order-sm-2.col-sm-3.col-md-3.col-lg-2
         .small_light_title Answered by #{render_avatar(result.creator, size: :small)}

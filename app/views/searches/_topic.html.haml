@@ -11,7 +11,7 @@
         Last updated at #{smart_display(result.updated_at)}
 
   .card-body
-    = raw sanitize(HTML_Truncator.truncate(render_md(result.content), 1000, {:length_in_chars => true}))
+    = md_sanitized_snippet(result.content)
 
 
 /-# Additional meta-data about topics needed.  how many subtopics, how many stars, etc
