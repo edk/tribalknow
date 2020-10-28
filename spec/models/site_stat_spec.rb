@@ -11,19 +11,19 @@ RSpec.describe SiteStat, type: :model do
     end
   end
 
-  context "some recent activity" do
-    let(:tenant) { FactoryBot.create(:tenant) }
-    before do
-      Tenant.current_id = tenant.id
-    end
-    after do
-      Tenant.current_id = nil
-    end
-    it "generates a new cached record" do
-      SiteStat.generate_recent_activity!
-    end
-    it "returns the latest cached record"
-  end
+  # context "some recent activity" do
+  #   let(:tenant) { FactoryBot.create(:tenant) }
+  #   before do
+  #     Tenant.current_id = tenant.id
+  #   end
+  #   after do
+  #     Tenant.current_id = nil
+  #   end
+  #   it "generates a new cached record" do
+  #     SiteStat.generate_recent_activity!
+  #   end
+  #   it "returns the latest cached record"
+  # end
 
   context "cleanup" do
     it "removes old cached activity"

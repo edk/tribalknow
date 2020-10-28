@@ -54,7 +54,9 @@ gem "interactor-rails"#, "~> 2.0"
 gem 'newrelic_rpm'
 gem 'exception_notification'
 
-gem 'github-markdown'
+gem 'kramdown'
+gem 'kramdown-parser-gfm'
+# gem 'kramdown-syntax-coderay'
 gem 'html_truncator'
 
 gem 'will_paginate'

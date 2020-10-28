@@ -38,7 +38,7 @@ module ApplicationHelper
 
   def render_md(text, options = {})
     fixed_text = ContentFixup.apply(text: text)
-    html = GitHub::Markdown.render_gfm(fixed_text)
+    html = Kramdown::Document.new(fixed_text, input: 'GFM').to_html
     html = reverse_entity_encoding_inside_code_blocks(html)
     html, toc = add_anchor_links_to_headers(html)
     if options[:with_toc]
