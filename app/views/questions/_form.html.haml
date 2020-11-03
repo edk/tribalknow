@@ -21,15 +21,14 @@
 
   - if @question.new_record?
     .row
-      .small-8
+      .col-lg-8
         %h3= "Add an answer to this question (if ya gots one)..."
     %br/
     .row
       .col-lg-10
-        = text_area_tag :answer_text, '', style:'height:8em'
+        = text_area_tag :answer_text, '', rows: "8", class: "form-control resizeable-textarea"
 
   .actions
     .row
-      .col-lg-4
-        = f.submit 'Submit Question', :class => 'button expand'
-      .col-lg-4
+      .col-lg-4.mt-2
+        = f.submit 'Submit Question', :class => 'button expand btn btn-primary'
