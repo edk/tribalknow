@@ -1,14 +1,13 @@
-- if question.answers.empty?
-  %h5= "No answers yet, be the first to add yours!"
-- else
-  %h5= "Add your answer..."
+%h5.card-title
+  = question.answers.empty? ? "No answers yet, be the first to add yours!" : "Add your answer..."
 
 .row
-  .col-lg-10
+  .col-lg-12
     = simple_form_for [question, Answer.new], :url=>question_answers_path(question) do |f|
       #in.row
-        = f.text_area :text, class: ''
+        .col-lg-12
+          = f.text_area :text, class: "form-control resizeable-textarea", rows: "4"
       #out
       .row
-        .col-lg-2
+        .col-lg-12.mt-2
           = f.submit 'Submit answer', :class => 'btn btn-primary'

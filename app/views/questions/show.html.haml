@@ -28,4 +28,6 @@
 
 .row
   .col-lg-12
-    .card= render :partial=>'add_answer', :locals=>{:question=>@question} unless @static_render
+    .card
+      .card-body
+        = render :partial=>'add_answer', :locals=>{:question=>@question} unless @static_render

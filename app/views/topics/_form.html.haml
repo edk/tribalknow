@@ -1,7 +1,7 @@
 
 = simple_form_for(@topic) do |f|
   = f.error_notification
-  .row
+  .row.mt-4
     .col-lg-7
       .row
         .col-lg-6
@@ -23,14 +23,14 @@
     .col-lg-4.markdown_tip.right
       = link_to "We use Github flavored markdown.", "https://guides.github.com/features/mastering-markdown/", target: "_blank"
       = link_to "Use native apps", "http://macdown.uranusjr.com/", target: "_blank"
-    .col-lg-12
-      #in{style: "height: 25em; min-height:25em;"}
-        = f.text_area :content
-      #out{style: "min-height: 20em;"}
+    .col-lg-10
+      #in
+        = f.text_area :content, class: "form-control resizeable-textarea", rows: "10"
+      #out
   .actions
     .row
-      .col-lg-4
-        = f.submit "Save", :class => 'btn btn-primary has-tip', :style=>"color: #EEE", :title=>'Tip: CMD-s saves when in the editor!', :data=>{:tooltip=>""}
-      .col-lg-4
-      .col-lg-4
+      .col-lg-4.mt-2
+        = f.submit "Save", class: 'btn btn-primary'
+        .form-text
+          Tip: CMD-s saves when in the editor!
 

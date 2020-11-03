@@ -24,6 +24,8 @@ log/*.pid
 #config/database.yml
 config/*-prod
 
+/*.dump
+
 postgres
 mysql
 redis
