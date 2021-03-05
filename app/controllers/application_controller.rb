@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   include Pundit
   protect_from_forgery with: :exception
 
@@ -15,6 +14,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
+
   def current_tenant
     if Tenant.multi_tenant?
       current_tenant ||= Tenant.find_by subdomain: request.subdomain
@@ -40,9 +40,13 @@ class ApplicationController < ActionController::Base
     Tenant.current_id = nil
   end
 
+  def default_fqdn
+    @default_fqdn ||= ENV['DEFAULT_FQDN'].presence || Tenant.default_tenant&.fqdn
+  end
+
   def canonical_landing
-    if ENV['DEFAULT_FQDN'].presence
-      ENV['DEFAULT_FQDN']
+    if default_fqdn.presence
+      default_fqdn
     else
       "#{request.protocol}#{request.host.split('.')[-2..-1].join('.')}"
     end
