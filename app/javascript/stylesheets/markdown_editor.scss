@@ -1,0 +1,62 @@
+.markdown_editor {
+  margin-bottom: 2em;
+}
+
+.markdown_editor__editor {
+  padding: 0.3em;
+  resize: both;
+  min-height: 20em;
+}
+
+.markdown_editor__preview_content {
+  padding: 0.3em;
+  overflow: scroll;
+  max-height: 80vh;
+  min-height: 20em;
+}
+
+@include media-breakpoint-down(md) {
+  .markdown_editor__editor_windows.columns-editor-layout {
+    .markdown_editor__editor {
+      min-height: 20em;
+      width: 100%;
+      margin-bottom: 2em;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .markdown_editor__preview_content {
+    padding: 0.3em;
+    overflow: scroll;
+    max-height: 80vh;
+  }
+
+  .markdown_editor__editor {
+    min-height: 20em;
+    width: 100%;
+  }
+
+  .markdown_editor__editor_windows.columns-editor-layout {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    grid-template-areas: ". .";
+    grid-gap: 0 1em;
+
+    .markdown_editor__editor,
+    .markdown_editor__preview {
+      max-height: 80vh;
+    }
+
+    .markdown_editor__editor {
+      padding: 0.3em;
+      min-height: 20em;
+      overflow: scroll;
+    }
+
+    .markdown_editor__preview {
+      min-width: 0;
+    }
+  }
+}
