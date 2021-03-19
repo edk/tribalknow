@@ -38,7 +38,7 @@ class Tenant < ApplicationRecord
   def email_domain_requires_approval? email
     if self.safe_domains.present?
       domains = self.safe_domains.split(',')
-      !domains.any? { |domain| email =~ /.*@#{domain}/ }
+      !domains.any? { |domain| email.end_with?("@#{domain}") }
     else
       true
     end

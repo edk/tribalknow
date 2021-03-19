@@ -136,6 +136,12 @@ class User < ApplicationRecord
     if user && github_org_required?
       if !is_org_member?(auth['credentials']['token'])
         user.disable_unauthorized!(user.tenant.github_auth_failure_message)
+      else
+        user.skip_activation = true
+        user.skip_confirmation = true
+        user.approved = true
+        user.confirmed = true
+        user.confirmed_at = Time.now
       end
     end
 
