@@ -8,10 +8,8 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- * = require mdedit
  * = require autocomplete
  * = require in_place_edit
- * = require topics
  * = require questions
  * = require drag_n_drop
  * = require alerts_n_errors
@@ -20,8 +18,5 @@
  * = require top_nav
  */
  
-// @import 'tools';
-// @import 'site';
-
 
 // NONE OF THESE FILES ARE BEING USED the scss files are in the javascript/packs/site_styles.css file

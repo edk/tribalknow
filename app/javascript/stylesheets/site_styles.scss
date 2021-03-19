@@ -1,3 +1,8 @@
+// Prevent bootswatch style from adding a text-shadow to active form controls
+.form-control:-moz-focusring{
+  text-shadow: none !important;
+}
+
 .avatar img {
   @extend .rounded-circle;
 }
@@ -63,8 +68,6 @@
   }
 }
 
-
-
 ul.panel_list.toc_tree {
   padding-left: 0;
 
@@ -77,3 +80,10 @@ ul.panel_list.toc_tree {
 .resizeable-textarea{
   resize: both;
 }
+
+.monospace {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 0.9em;
+}
+
+@import "markdown_editor";

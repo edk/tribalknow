@@ -19,10 +19,12 @@
     .col-lg-5
       .row
         = render :file=>'/topic_files/index' unless @topic.new_record?
+
   .row
-    .col-lg-4.markdown_tip.right
-      = link_to "We use Github flavored markdown.", "https://guides.github.com/features/mastering-markdown/", target: "_blank"
-      = link_to "Use native apps", "http://macdown.uranusjr.com/", target: "_blank"
+    .col-lg-12
+      #react-markdown-editor
+
+  .row
     .col-lg-10
       #in
         = f.text_area :content, class: "form-control resizeable-textarea", rows: "10"
@@ -31,6 +33,9 @@
     .row
       .col-lg-4.mt-2
         = f.submit "Save", class: 'btn btn-primary'
-        .form-text
-          Tip: CMD-s saves when in the editor!
+    .row
+      .col-lg-4.markdown_tip.right
+        = link_to "Github flavored markdown.", "https://guides.github.com/features/mastering-markdown/", target: "_blank"
 
+
+= javascript_pack_tag :markdown_editor
