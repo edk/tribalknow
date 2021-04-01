@@ -140,7 +140,7 @@ class User < ApplicationRecord
         user.skip_activation = true
         user.skip_confirmation = true
         user.approved = true
-        user.confirmed = true
+        user.active = true
         user.confirmed_at = Time.now
       end
     end
