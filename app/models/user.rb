@@ -111,6 +111,9 @@ class User < ApplicationRecord
         # update existing user record with additional github info
         user.name = auth.info.nickname
         user.provider, user.uid, user.avatar_url = auth.provider, auth.uid, auth.info.image
+        user.active = true
+        user.approved = true
+        user.confirmed_at = Time.now
         user.save(:validate=>false)
       else
 
@@ -124,7 +127,7 @@ class User < ApplicationRecord
         else
           if github_org_required? && is_org_member?(auth['credentials']['token'])
             Rails.logger.error("DBG: #{__LINE__} fields => #{fields.inspect}  probably need to add active: true to this hash")
-            fields.merge!({skip_confirmation: true, skip_activation: true, active: true})
+            fields.merge!({skip_confirmation: true, skip_activation: true, active: true, approved: true, confirmed_at: Time.now})
           end
           user = User.create!(fields)
           Rails.logger.error("DBG: user.active => #{user.active}")
@@ -136,12 +139,6 @@ class User < ApplicationRecord
     if user && github_org_required?
       if !is_org_member?(auth['credentials']['token'])
         user.disable_unauthorized!(user.tenant.github_auth_failure_message)
-      else
-        user.skip_activation = true
-        user.skip_confirmation = true
-        user.approved = true
-        user.active = true
-        user.confirmed_at = Time.now
       end
     end
 
