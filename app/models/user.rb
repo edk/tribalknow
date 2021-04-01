@@ -61,6 +61,7 @@ class User < ApplicationRecord
 
   after_create :send_admin_email
   def send_admin_email
+    return true if approved? && confirmed_at.present?
     if requires_admin_approval?
       AdminMailer.new_user_waiting_for_approval(self).deliver
     else
