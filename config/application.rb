@@ -33,8 +33,5 @@ module Tribalknow
     config.eager_load_paths << Rails.root.join("lib")
     config.eager_load_paths << Rails.root.join("app/channels")
     config.cache_store = :redis_store, ENV['REDIS_STORE_URL'] || "redis://localhost:6379/0/cache" #, { expires_in: 90.minutes }
-
-    require Rails.root.join("lib/domain_redirector_middleware")
-    config.middleware.use ::DomainRedirectorMiddleware
   end
 end
