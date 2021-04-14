@@ -37,6 +37,7 @@
     "webpack": "^4.43.0"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.6",
     "babel-jest": "^26.0.1",
     "eslint": "^7.1.0",
     "eslint-plugin-react": "^7.20.0",
@@ -52,5 +53,8 @@
     "stylelint-declaration-use-variable": "^1.7.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
