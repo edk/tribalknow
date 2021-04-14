@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 
 const activeButtonClasses = active => {
@@ -82,3 +83,12 @@ export default function Toolbar({ currentView, setCurrentView, fontStyle, setFon
     </div>
   );
 }
+
+Toolbar.propTypes = {
+  currentView: PropTypes.string,
+  setCurrentView: PropTypes.func,
+  fontStyle: PropTypes.string,
+  setFontStyle: PropTypes.func,
+  autoScroll: PropTypes.bool,
+  setAutoScroll: PropTypes.func,
+};

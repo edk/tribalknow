@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import PropTypes from "prop-types";
 import { throttle, debounce } from "lodash";
 import Showdown from "showdown";
 
@@ -32,8 +33,8 @@ const scrollPreview = (e, previewRef) => {
 
 const emptyFn = () => {};
 
-export default function MarkdownEditor() {
-  const [value, setValue] = React.useState(getText());
+export default function MarkdownEditor(props) {
+  const [value, setValue] = React.useState(props.text || getText());
 
   const [currentView, setCurrentView] = React.useState("editor");
   const [fontStyle, setFontStyle] = React.useState("normal");
@@ -87,3 +88,7 @@ export default function MarkdownEditor() {
     </div>
   );
 }
+
+MarkdownEditor.propTypes = {
+  text: PropTypes.string
+};
