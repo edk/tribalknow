@@ -25,7 +25,8 @@ gem 'sendgrid-ruby'
 
 gem 'pg'
 gem 'pg_search'
-gem 'devise'
+#gem 'devise'
+gem "devise", github: "heartcombo/devise", branch: "master"
 gem 'omniauth-github'
 gem "octokit"
 gem "pundit"
