@@ -4,3 +4,10 @@
 require File.expand_path('../config/application', __FILE__)
 
 Tribalknow::Application.load_tasks
+
+Rails.application.load_tasks
+Rake::Task['test'].clear
+
+task :test do
+  Rake::Task['spec'].invoke
+end
