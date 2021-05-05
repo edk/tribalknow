@@ -7,12 +7,12 @@ Features:
   * Q&A - think a private StackOverflow
   * Topics - A structured wiki
   * Video - upload and manage videos
-  * Chat integration
+  * <strike>Chat integration</strike> (hipchat is no more, need to update for the 20s)
 
 Future additions:
   * improved editor(s) and editing workflow with better asset uploading.
   * Tests and quizzes
-  * read-integration from chat applications
+  * read-integration from chat applications to automate or ease knowledge ingestion.
   * import from email by forwarding to application
   * Information "aging" and validation to help keep documentation fresh.
   * Make creation of multimedia easier with "asciinema"-like terminal recording/playback
@@ -20,13 +20,13 @@ Future additions:
 
 ### Motivation
 
-Commonly used tools such as Google Docs or Github wiki make it easy to enter data, a large complex project can quickly become overwhelming due to unstructured and unmaintained form.  Other more focussed tools (e.g. Confluence) also may have their strengths and weaknesses.
+Commonly used tools such as Google Docs or Github wiki make it easy to enter data, a large complex project can quickly become overwhelming due to unstructured and unmaintained form.  Other more focused tools (e.g. Confluence) also may have their strengths and weaknesses.
 
 The goal of this project is to provide the tools to enable members of a development team to enter and maintain the information that is useful to newcomers and existing members alike.  See https://www.youtube.com/watch?v=o-JL-so5Gm8 for a talk that resonates with the goals of this project.
 
 Another excellent talk is [What nobody tells you about documentation](https://www.youtube.com/watch?v=t4vKPhjcMZg)
 
-Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately, it wasn't available for private groups until 2018 with [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, I'm sure it is amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling the knowledge of private teams.
+Q&A sites like StackOverflow are tremendously useful for getting answers to targeted questions. Unfortunately, it wasn't available for private groups until 2018 with [private repos for teams](https://stackoverflow.com/teams).  I haven't tried it yet, I'm sure it is amazing.  However, this project will continue to be open-source and be a testbed for the overall concept of leveling up the knowledge of private teams.
 
 ### Local Setup
 
@@ -39,7 +39,7 @@ $ docker-compose build
 
 initialize local database:
 ```
-$ docker-compose run tribalknow ./bin/setup
+$ docker-compose run web ./bin/setup
 ```
 
 run locally:
@@ -49,7 +49,7 @@ $ docker-compose up
 
 #### Installing without docker:
 
-If you want to use the github omniauth provider (optional, not required):
+If you want to use the github omniauth provider (optional):
 * set two environment variables, the client app id ID
 export GITHUB_KEY=your_key
 
@@ -58,13 +58,16 @@ export GITHUB_SECRET=some_secret
 
 See http://developer.github.com/guides/basics-of-authentication/ for more info.
 
-* seed the database:
-`rake db:seed`
+##### Setup local db
+* `rake db:setup`
+* `rake db:seed`
 
-* launch with foreman:
+##### launch with foreman:
 `foreman start`
 
-### Convert an existing mysql database to postgres
+
+### Running tests
+* `rake test` or `rspec spec`
 
 ### Deploy to heroku
 
