@@ -1,21 +1,19 @@
-FROM ruby:2.5-stretch as build
+FROM ruby:2.6-stretch as build
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -qq -y nodejs yarn --fix-missing --no-install-recommends && \
-    #  mysql-client default-libmysqlclient-dev
     apt-get install -qq -y locales build-essential \
         postgresql-client libpq-dev \
         curl iputils-ping \
         --fix-missing --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-RUN useradd -ms /bin/bash app
-RUN echo -e "app\napp" | passwd app
+RUN groupadd app && useradd -d /app -g app -G sudo -s /bin/bash app
 RUN mkdir -p /build /app && chown -R app:app /build /app
-USER 1000
+USER app
 WORKDIR /build
 
 ENV HOME=/app

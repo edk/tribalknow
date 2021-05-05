@@ -1,20 +1,5 @@
 version: '3.2'
 services:
-  # mysql:
-  #   image: mysql:5.7
-  #   entrypoint: /custom-init/entrypoint-mysql.sh
-  #   # command: mysqld --user=mysql --log_error_verbosity=1
-  #   ports:
-  #     - 8083:3306
-  #   volumes:
-  #     - ./docker/:/custom-init/
-  #     - ./mysql:/var/lib/mysql
-  #   environment:
-  #     USER_ID: ${UID}
-  #     # GROUP_ID: ${GID}
-  #     MYSQL_ROOT_PASSWORD: 
-  #     MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-
   postgres:
     image: postgres:11
     restart: always
@@ -31,9 +16,6 @@ services:
   redis:
     image: redis:2.8
     #command: redis-server --any-opts-you-want-to-pass-in
-
-  # sphinx:
-  #   image: leodido/sphinxsearch:latest
 
   web:
     build:
