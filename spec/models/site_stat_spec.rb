@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SiteStat, type: :model do
   context "empty recent activity" do
     before do
-      SiteStat.stub_chain(:where, :last).and_return([])
+      expect(SiteStat).to receive_message_chain(:where, :last).and_return([])
     end
 
     it "returns none" do
