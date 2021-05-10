@@ -3,9 +3,12 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Tribalknow::Application.load_tasks
+#Tribalknow::Application.load_tasks # will remove later, this causes a double run of specs
+# as long as the rake tasks run properly in heroku without this, this can be removed
 
 Rails.application.load_tasks
+
+# use spec task instead of default rails tests
 Rake::Task['test'].clear
 
 task :test do
