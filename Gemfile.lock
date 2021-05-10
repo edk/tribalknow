@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/edk/best_in_place.git
-  revision: e5736320e7a5905cdaaa075d3ac8eba3962f3d30
-  specs:
-    best_in_place (3.0.0.alpha)
-      actionpack (>= 3.2)
-      railties (>= 3.2)
-
-GIT
   remote: https://github.com/kimkong/userstamp.git
   revision: 351c669831a302ed99c5319ad94d8c974bc21206
   branch: rails-6-fix
@@ -493,7 +485,6 @@ DEPENDENCIES
   ahoy_matey
   awesome_nested_set
   aws-sdk-s3
-  best_in_place!
   bootsnap (>= 1.1.0)
   capybara
   certified
