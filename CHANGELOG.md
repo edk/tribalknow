@@ -1,5 +1,9 @@
 
 
+* get rake task to stop running twice
+* updated various gems, removed best_in_place (in-place editor)
+* added some basic rspec tests
+
 * added ContentFixup to help with migrating forum to different domains, automatically
 doing a simple regex substitution.  probably not the most bulletproof way to to do it,
 but hopefully acceptable for a PoC
