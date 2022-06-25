@@ -140,7 +140,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
-    diffy (3.4.0)
+    diffy (3.4.1)
     dotenv (2.7.6)
     dotenv-deployment (0.0.2)
     dotenv-rails (2.7.6)
