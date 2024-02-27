@@ -1,4 +1,12 @@
 
+# Archiving project
+
+I haven't used this project in a number of years, and it's been unmaintained since then.  I'm going to archive this repo for now to not have to deal with all the security bot notifications.  However, if you're using this or would like to contribute or take over the project, please contact me (create an issue) and we can discuss futher.  This may be resurected at some point. 
+
+**So long, and thanks for all the fish!**
+
+
+
 ## What is this?
 
 An awkward name for a project to explore knowledge sharing and organization in a software development setting.
